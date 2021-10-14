@@ -81,15 +81,13 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   @Action
   [Actions.LOGIN](credentials) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.post("/login", credentials)
+      ApiService.post("login", credentials)
         .then(({ data }) => {
-          console.log(data);
           this.context.commit(Mutations.SET_AUTH, data);
           resolve();
         })
         .catch(({ response }) => {
-          console.log(response);
-          this.context.commit(Mutations.SET_ERROR, response.data.errors);
+          this.context.commit(Mutations.SET_ERROR, [response.data.error]);
           reject();
         });
     });
@@ -140,7 +138,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
           this.context.commit(Mutations.SET_AUTH, data);
         })
         .catch(({ response }) => {
-          this.context.commit(Mutations.SET_ERROR, response.data.errors);
+          this.context.commit(Mutations.SET_ERROR, response.data.error);
         });
     } else {
       this.context.commit(Mutations.PURGE_AUTH);

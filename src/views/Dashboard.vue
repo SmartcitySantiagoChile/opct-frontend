@@ -86,17 +86,6 @@ import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
 export default defineComponent({
   name: "dashboard",
   components: {
-    TableWidget9,
-    TableWidget5,
-    ListWidget1,
-    ListWidget2,
-    ListWidget3,
-    ListWidget5,
-    ListWidget6,
-    MixedWidget2,
-    MixedWidget5,
-    MixedWidget7,
-    MixedWidget10,
   },
   setup() {
     onMounted(() => {
