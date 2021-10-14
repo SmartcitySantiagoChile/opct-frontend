@@ -64,6 +64,12 @@ const messages = {
     customersListing: "Customers Listing",
     customerDetails: "Customers Details",
     calendarApp: "Calendar",
+    continue: "Continue",
+    forgotPassword: "Forgot password?",
+    email: "Email",
+    password: "Password",
+    pleaseWait: "Please wait..."
+
   },
   es: {
     dashboard: "Tablero",
@@ -128,6 +134,11 @@ const messages = {
     customersListing: "Listado De Clientes",
     customerDetails: "Detalles De Los Clientes",
     calendarApp: "Calendario",
+    continue: "Continuar",
+    forgotPassword: "¿Olvidaste la contraseña",
+    email: "Correo electrónico",
+    password: "Contraseña",
+    pleaseWait: "Por favor espere..."
   },
   de: {
     dashboard: "Instrumententafel",
