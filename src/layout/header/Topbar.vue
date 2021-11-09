@@ -38,15 +38,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {computed, defineComponent} from "vue";
 import KTNotificationsMenu from "@/layout/header/partials/NotificationsMenu.vue";
 import KTQuickLinksMenu from "@/layout/header/partials/QuickLinksMenu.vue";
 import KTUserMenu from "@/layout/header/partials/UserMenu.vue";
+import {useStore} from "vuex";
+
 
 export default defineComponent({
   name: "topbar",
   components: {
     KTUserMenu,
   },
+
 });
 </script>

@@ -19,23 +19,18 @@
     <!--begin::Menu item-->
     <div class="menu-item px-3">
       <div class="menu-content d-flex align-items-center px-3">
-        <!--begin::Avatar-->
-        <div class="symbol symbol-50px me-5">
-          <img alt="Logo" src="media/avatars/150-25.jpg" />
-        </div>
-        <!--end::Avatar-->
 
         <!--begin::Username-->
         <div class="d-flex flex-column">
           <div class="fw-bolder d-flex align-items-center fs-5">
-            Max Smith
+            {{ userNameAndSurname }}
             <span
               class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"
               >Pro</span
             >
           </div>
           <a href="#" class="fw-bold text-muted text-hover-primary fs-7"
-            >max@kt.com</a
+            >{{ currentUserEmail }}</a
           >
         </div>
         <!--end::Username-->
@@ -337,7 +332,7 @@ export default defineComponent({
 
     i18n.locale.value = localStorage.getItem("lang")
       ? (localStorage.getItem("lang") as string)
-      : "en";
+      : "es";
 
     const countries = {
       en: {
@@ -381,12 +376,23 @@ export default defineComponent({
       return countries[i18n.locale.value];
     });
 
+    const userNameAndSurname = computed(() => {
+      return store.getters.currentUserNameAndSurname;
+    });
+
+    const currentUserEmail = computed(() => {
+      return store.getters.currentUserEmail;
+    });
+    console.log(currentUserEmail);
+
     return {
       signOut,
       setLang,
       currentLanguage,
       currentLangugeLocale,
       countries,
+      userNameAndSurname,
+      currentUserEmail
     };
   },
 });

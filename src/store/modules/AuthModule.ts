@@ -4,11 +4,14 @@ import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import { Module, Action, Mutation, VuexModule } from "vuex-module-decorators";
 
 export interface User {
-  name: string;
-  surname: string;
+  url: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   token: string;
+  organization: string;
+  role: string;
 }
 
 export interface UserAuthInfo {
@@ -32,6 +35,22 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   /**
+   * Get current user name and surname
+   * @returns string
+   */
+  get currentUserNameAndSurname(): string {
+    return `${this.user.first_name} ${this.user.last_name}`;
+  }
+
+  /**
+   * Get current user email
+   * @returns string
+   */
+  get currentUserEmail(): string {
+    return this.user.email;
+  }
+
+  /**
    * Verify user authentication
    * @returns boolean
    */
@@ -40,7 +59,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   /**
-   * Get authentification errors
+   * Get authentication errors
    * @returns array
    */
   get getErrors(): Array<string> {
