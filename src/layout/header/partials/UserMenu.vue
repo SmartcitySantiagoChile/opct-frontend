@@ -45,7 +45,7 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
-        My Profile
+        {{translate("profile")}}
       </router-link>
     </div>
     <!--end::Menu item-->
@@ -330,6 +330,16 @@ export default defineComponent({
     const i18n = useI18n();
     const store = useStore();
 
+    const { t, te } = useI18n();
+
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+
     i18n.locale.value = localStorage.getItem("lang")
       ? (localStorage.getItem("lang") as string)
       : "es";
@@ -383,7 +393,6 @@ export default defineComponent({
     const currentUserEmail = computed(() => {
       return store.getters.currentUserEmail;
     });
-    console.log(currentUserEmail);
 
     return {
       signOut,
@@ -392,7 +401,8 @@ export default defineComponent({
       currentLangugeLocale,
       countries,
       userNameAndSurname,
-      currentUserEmail
+      currentUserEmail,
+      translate
     };
   },
 });

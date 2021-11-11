@@ -5,28 +5,24 @@
 
       <!--begin::User-->
       <div
-        class="d-flex align-items-center me-n3 ms-1 ms-lg-3"
-        id="kt_header_user_menu_toggle"
+          class="d-flex align-items-center me-n3 ms-1 ms-lg-3"
+          id="kt_header_user_menu_toggle"
       >
         <!--begin::Menu-->
         <div
-          class="
+            class="
             btn btn-icon btn-active-light-primary
-            w-30px
+            w-lg-225px
             h-30px
-            w-md-40px
+            w-md-225px
             h-md-40px
           "
-          data-kt-menu-trigger="click"
-          data-kt-menu-attach="parent"
-          data-kt-menu-placement="bottom-end"
-          data-kt-menu-flip="bottom"
-        >
-          <img
-            src="media/avatars/150-25.jpg"
-            alt="metronic"
-            class="h-25px w-25px rounded"
-          />
+            data-kt-menu-trigger="click"
+            data-kt-menu-attach="parent"
+            data-kt-menu-placement="bottom-end"
+            data-kt-menu-flip="bottom"
+        > {{ userNameAndSurname }}
+
         </div>
         <KTUserMenu></KTUserMenu>
         <!--end::Menu-->
@@ -50,6 +46,12 @@ export default defineComponent({
   components: {
     KTUserMenu,
   },
-
+  setup() {
+    const store = useStore();
+    const userNameAndSurname = computed(() => {
+      return store.getters.currentUserNameAndSurname;
+    });
+    return {userNameAndSurname};
+  }
 });
 </script>

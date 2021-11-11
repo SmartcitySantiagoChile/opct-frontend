@@ -68,7 +68,7 @@ const messages = {
     forgotPassword: "Forgot password?",
     email: "Email",
     password: "Password",
-    pleaseWait: "Please wait..."
+    pleaseWait: "Please wait...",
 
   },
   es: {
