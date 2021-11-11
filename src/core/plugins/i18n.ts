@@ -69,6 +69,8 @@ const messages = {
     email: "Email",
     password: "Password",
     pleaseWait: "Please wait...",
+    changePassword: "Change password",
+    signOut: "Sign out"
 
   },
   es: {
@@ -138,7 +140,9 @@ const messages = {
     forgotPassword: "¿Olvidaste la contraseña",
     email: "Correo electrónico",
     password: "Contraseña",
-    pleaseWait: "Por favor espere..."
+    pleaseWait: "Por favor espere...",
+    changePassword: "Cambiar contraseña",
+    signOut: "Cerrar sesión"
   },
   de: {
     dashboard: "Instrumententafel",
