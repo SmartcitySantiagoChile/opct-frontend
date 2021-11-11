@@ -12,6 +12,9 @@ export interface User {
   token: string;
   organization: string;
   role: string;
+  access_to_ops: boolean;
+  access_to_organizations: boolean;
+  access_to_users: boolean;
 }
 
 export interface UserAuthInfo {
@@ -40,6 +43,30 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    */
   get currentUserNameAndSurname(): string {
     return `${this.user.first_name} ${this.user.last_name}`;
+  }
+
+  /**
+   * Get if current user has access to OPs
+   * @returns string
+   */
+  get currentUserHasOPsAccess(): boolean {
+    return this.user.access_to_ops;
+  }
+
+  /**
+   * Get if current user has access to users
+   * @returns string
+   */
+  get currentUserHasUsersAccess(): boolean {
+    return this.user.access_to_users;
+  }
+
+  /**
+   * Get if current user has access to organizations
+   * @returns string
+   */
+  get currentUserHasOrganizationsAccess(): boolean {
+    return this.user.access_to_organizations;
   }
 
   /**

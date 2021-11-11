@@ -70,7 +70,10 @@ const messages = {
     password: "Password",
     pleaseWait: "Please wait...",
     changePassword: "Change password",
-    signOut: "Sign out"
+    signOut: "Sign out",
+    operationProgramAdmin: "OP Administrator",
+    usersAdmin: "Users Administrator",
+    organizationsAdmin: "Organizations Administrator"
 
   },
   es: {
@@ -142,7 +145,10 @@ const messages = {
     password: "Contraseña",
     pleaseWait: "Por favor espere...",
     changePassword: "Cambiar contraseña",
-    signOut: "Cerrar sesión"
+    signOut: "Cerrar sesión",
+    operationProgramAdmin: "Administrador de PO",
+    usersAdmin: "Administrador de usuarios",
+    organizationsAdmin: "Administrador de organizaciones"
   },
   de: {
     dashboard: "Instrumententafel",
