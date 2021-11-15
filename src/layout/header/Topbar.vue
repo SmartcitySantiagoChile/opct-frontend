@@ -12,16 +12,20 @@
         <div
             class="
             btn btn-icon btn-active-light-primary
-            w-lg-225px
+            w-30px
             h-30px
-            w-md-225px
+            w-md-40px
             h-md-40px
           "
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom-end"
             data-kt-menu-flip="bottom"
-        > {{ userNameAndSurname }}
+        > <img
+            src="media/avatars/150-25.jpg"
+            alt="metronic"
+            class="h-25px w-25px rounded"
+        />
 
         </div>
         <KTUserMenu></KTUserMenu>
