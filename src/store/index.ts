@@ -5,6 +5,8 @@ import AuthModule from "@/store/modules/AuthModule";
 import BodyModule from "@/store/modules/BodyModule";
 import BreadcrumbsModule from "@/store/modules/BreadcrumbsModule";
 import ConfigModule from "@/store/modules/ConfigModule";
+import ChangeOPRequestModule from "@/store/modules/ChangeOPRequestModule";
+import ChangeOPRequestsModule from "@/store/modules/ChangeOPRequestsModule";
 
 config.rawError = true;
 
@@ -14,6 +16,8 @@ const store = createStore({
     BodyModule,
     BreadcrumbsModule,
     ConfigModule,
+    ChangeOPRequestModule,
+    ChangeOPRequestsModule
   },
 });
 

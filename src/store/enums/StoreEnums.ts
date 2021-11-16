@@ -12,6 +12,8 @@ enum Actions {
   UPDATE_USER = "updateUser",
   FORGOT_PASSWORD = "forgotPassword",
   SET_BREADCRUMB_ACTION = "setBreadcrumbAction",
+  GET_CHANGE_OP_REQUEST = "getChangeOPRequest",
+  GET_CHANGE_OP_REQUESTS = "getChangeOPRequests"
 }
 
 enum Mutations {
@@ -27,6 +29,9 @@ enum Mutations {
   RESET_LAYOUT_CONFIG = "resetLayoutConfig",
   OVERRIDE_LAYOUT_CONFIG = "overrideLayoutConfig",
   OVERRIDE_PAGE_LAYOUT_CONFIG = "overridePageLayoutConfig",
+  SET_CHANGE_OP_REQUEST = "setChangeOPRequest",
+  SET_CHANGE_OP_REQUESTS = "setChangeOPRequests",
+  SET_CHANGE_OP_REQUESTS_ERRORS = "setChangeOPRequestsErrors"
 }
 
 export { Actions, Mutations };

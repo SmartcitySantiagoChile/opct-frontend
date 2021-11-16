@@ -270,7 +270,6 @@ export default defineComponent({
       if (store.getters.currentUserHasOPsAccess) {access_list.push("ops")}
       if (store.getters.currentUserHasOrganizationsAccess) {access_list.push("organizations")}
       if (store.getters.currentUserHasUsersAccess) {access_list.push("users")}
-      console.log(access_list);
       return access_list
     })
 

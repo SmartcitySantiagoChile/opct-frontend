@@ -73,8 +73,16 @@ const messages = {
     signOut: "Sign out",
     operationProgramAdmin: "OP Administrator",
     usersAdmin: "Users Administrator",
-    organizationsAdmin: "Organizations Administrator"
-
+    organizationsAdmin: "Organizations Administrator",
+    changeOPRequests: "Change Operation Program Requests",
+    changesNumber: "Requests number",
+    creationDate: "Creation date",
+    operationProgram: "Operation Program",
+    title: "Title",
+    status: "Status",
+    creator: "Creator",
+    counterpart: "Counterpart",
+    filterByOp: "Filter by OP"
   },
   es: {
     dashboard: "Tablero",
@@ -148,7 +156,17 @@ const messages = {
     signOut: "Cerrar sesión",
     operationProgramAdmin: "Administrador de PO",
     usersAdmin: "Administrador de usuarios",
-    organizationsAdmin: "Administrador de organizaciones"
+    organizationsAdmin: "Administrador de organizaciones",
+    changeOPRequests: "Solicitudes de modificación PO",
+    changesNumber: "Número de solicitudes",
+    creationDate: "Fecha de creación",
+    operationProgram: "Programa de Operación",
+    title:"Título",
+    status: "Estado",
+    creator: "Creador",
+    counterpart: "Contraparte",
+    filterByOp: "Filtrar por PO"
+
   },
   de: {
     dashboard: "Instrumententafel",
