@@ -137,6 +137,18 @@
           <!--end::Table body-->
         </table>
         <!--end::Table-->
+        <div class="d-flex align-items-center">
+          <ul class="pagination d-flex align-items-center ">
+            <li class="page-item previous "><button  @click="onPageChange" value="0" class="page-link"><i class="previous"></i></button></li>
+            <template
+                v-for="(item, index) in Array.from({length: Math.ceil(changeOPRequestsCount/10)}, (_, i) => i + 1)"
+                :key="index">
+              <li class="page-item  "><button  @click="onPageChange" :value="item" class="page-link">{{ item }}</button></li>
+            </template>
+            <li class="page-item next"><button :value="Math.ceil(changeOPRequestsCount/10)" @click="onPageChange" class="page-link"><i class="next"></i></button></li>
+
+          </ul>
+        </div>
       </div>
       <!--end::Table container-->
     </div>
@@ -178,11 +190,15 @@ export default defineComponent({
         store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
       }
     };
+    const onPageChange = (event) => {
+      console.log(event.target.value);
+    };
     return {
       changeOPRequests,
       changeOPRequestsCount,
       translate,
-      onFilterChange
+      onFilterChange,
+      onPageChange
     };
   },
 });

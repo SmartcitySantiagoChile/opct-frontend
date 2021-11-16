@@ -46,6 +46,8 @@ export default class ChangeOPRequestsModule extends VuexModule implements Change
 
 
 
+
+
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUESTS](changeOPRequestList) {
         this.changeOPRequests = changeOPRequestList.results;
@@ -56,7 +58,7 @@ export default class ChangeOPRequestsModule extends VuexModule implements Change
 
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUESTS_ERRORS](changeOPRequestList) {
-        this.errors = changeOPRequestList.errors;
+        this.errors = changeOPRequestList;
     }
 
     @Action
@@ -73,6 +75,17 @@ export default class ChangeOPRequestsModule extends VuexModule implements Change
     @Action
     [Actions.GET_CHANGE_OP_REQUESTS_BY_OP](op_data) {
         ApiService.query("change-op-requests", {params: {search: op_data }})
+            .then(({data}) => {
+                this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS, data);
+            })
+            .catch(({response}) => {
+                this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS_ERRORS, [response.data.error]);
+            });
+    }
+
+    @Action
+    [Actions.GET_CHANGE_OP_REQUESTS_BY_PAGE](page) {
+        ApiService.query("change-op-requests", {params: {page: page }})
             .then(({data}) => {
                 this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS, data);
             })
