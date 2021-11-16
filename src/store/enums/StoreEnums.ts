@@ -13,7 +13,8 @@ enum Actions {
   FORGOT_PASSWORD = "forgotPassword",
   SET_BREADCRUMB_ACTION = "setBreadcrumbAction",
   GET_CHANGE_OP_REQUEST = "getChangeOPRequest",
-  GET_CHANGE_OP_REQUESTS = "getChangeOPRequests"
+  GET_CHANGE_OP_REQUESTS = "getChangeOPRequests",
+  GET_CHANGE_OP_REQUESTS_BY_OP = "getChangeOPRequestsByOp"
 }
 
 enum Mutations {

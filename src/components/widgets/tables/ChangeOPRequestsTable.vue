@@ -8,7 +8,7 @@
 
         <span
             class="text-muted mt-1 fw-bold fs-7">{{
-            translate("changesNumber") + ": " + changeOPRequests.length
+            translate("changesNumber") + ": " + changeOPRequestsCount
           }}</span>
       </h3>
       <div class="card-toolbar">
@@ -69,7 +69,7 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.op.start_at}}</a
+                >{{ item.op.start_at }}</a
                 >
               </td>
 
@@ -84,7 +84,7 @@
                       mb-1
                       fs-6
                     "
-                >{{item.title}}</a
+                >{{ item.title }}</a
                 >
               </td>
 
@@ -99,7 +99,7 @@
                       mb-1
                       fs-6
                     "
-                >{{item.creator.first_name + " " + item.creator.last_name}}</a
+                >{{ item.creator.first_name + " " + item.creator.last_name }}</a
                 >
               </td>
 
@@ -114,7 +114,7 @@
                       mb-1
                       fs-6
                     "
-                >{{item.counterpart.name}}</a
+                >{{ item.counterpart.name }}</a
                 >
               </td>
 
@@ -129,7 +129,7 @@
                       mb-1
                       fs-6
                     "
-                >{{item.status.name}}</a>
+                >{{ item.status.name }}</a>
               </td>
             </tr>
           </template>
@@ -149,20 +149,13 @@ import {computed, defineComponent} from "vue";
 import {Actions} from "@/store/enums/StoreEnums";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
+import {mapActions} from 'vuex'
 
 export default defineComponent({
   name: "change-op-requests-table",
   components: {},
   props: {
     widgetClasses: String,
-  },
-  methods: {
-    onFilterChange(event) {
-      const filter = event.target.value;
-      if (filter.length > 3 && filter.length < 11){
-        console.log(event.target.value);
-      }
-    }
   },
   setup() {
     const {t, te} = useI18n();
@@ -176,9 +169,20 @@ export default defineComponent({
     const store = useStore()
     store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
     const changeOPRequests = computed(() => store.getters.getCurrentChangeOPRequests);
+    const changeOPRequestsCount = computed(() => store.getters.getCurrentChangeOPRequestsCount)
+    const onFilterChange = (event) => {
+      const filter = String(event.target.value);
+      if (filter.length > 3 && filter.length < 11) {
+        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_BY_OP, filter);
+      } else if (filter.length === 0) {
+        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
+      }
+    };
     return {
       changeOPRequests,
-      translate
+      changeOPRequestsCount,
+      translate,
+      onFilterChange
     };
   },
 });

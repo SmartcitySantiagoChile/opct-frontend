@@ -36,6 +36,14 @@ export default class ChangeOPRequestsModule extends VuexModule implements Change
         return this.changeOPRequests;
     }
 
+    /**
+     * Get current change op requests count
+     * @returns number
+     */
+    get getCurrentChangeOPRequestsCount(): number{
+        return this.count;
+    }
+
 
 
     @Mutation
@@ -54,6 +62,17 @@ export default class ChangeOPRequestsModule extends VuexModule implements Change
     @Action
     [Actions.GET_CHANGE_OP_REQUESTS]() {
         ApiService.get("change-op-requests")
+            .then(({data}) => {
+                this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS, data);
+            })
+            .catch(({response}) => {
+                this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS_ERRORS, [response.data.error]);
+            });
+    }
+
+    @Action
+    [Actions.GET_CHANGE_OP_REQUESTS_BY_OP](op_data) {
+        ApiService.query("change-op-requests", {params: {search: op_data }})
             .then(({data}) => {
                 this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS, data);
             })
