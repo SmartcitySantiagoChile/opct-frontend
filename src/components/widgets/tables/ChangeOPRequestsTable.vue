@@ -13,7 +13,8 @@
       </h3>
       <div class="card-toolbar">
         <!--begin::Menu-->
-        <input type="text" class="form-control" v-bind:placeholder="translate('filterByOp')" @keyup="onFilterChange"/>
+        <input type="text" class="form-control" name="filter" v-bind:placeholder="translate('filterByOp')"
+               @keyup="onFilterChange"/>
 
         <!--end::Menu-->
       </div>
@@ -139,13 +140,21 @@
         <!--end::Table-->
         <div class="d-flex align-items-center">
           <ul class="pagination d-flex align-items-center ">
-            <li class="page-item previous "><button  @click="onPageChange" value="0" class="page-link"><i class="previous"></i></button></li>
+            <li id="previousItem" class="page-item previous disabled ">
+              <button data-value="-1" @click="onPageChange" class="page-link"><i data-value="1" class="previous"></i>
+              </button>
+            </li>
             <template
                 v-for="(item, index) in Array.from({length: Math.ceil(changeOPRequestsCount/10)}, (_, i) => i + 1)"
                 :key="index">
-              <li class="page-item  "><button  @click="onPageChange" :value="item" class="page-link">{{ item }}</button></li>
+              <li class="page-item  ">
+                <button @click="onPageChange" :data-value="item" class="page-link">{{ item }}</button>
+              </li>
             </template>
-            <li class="page-item next"><button :value="Math.ceil(changeOPRequestsCount/10)" @click="onPageChange" class="page-link"><i class="next"></i></button></li>
+            <li class="page-item next">
+              <button data-value="-1" @click="onPageChange" class="page-link"><i data-value="-1" class="next"></i>
+              </button>
+            </li>
 
           </ul>
         </div>
@@ -161,7 +170,6 @@ import {computed, defineComponent} from "vue";
 import {Actions} from "@/store/enums/StoreEnums";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
-import {mapActions} from 'vuex'
 
 export default defineComponent({
   name: "change-op-requests-table",
@@ -182,17 +190,51 @@ export default defineComponent({
     store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
     const changeOPRequests = computed(() => store.getters.getCurrentChangeOPRequests);
     const changeOPRequestsCount = computed(() => store.getters.getCurrentChangeOPRequestsCount)
+
     const onFilterChange = (event) => {
       const filter = String(event.target.value);
       if (filter.length > 3 && filter.length < 11) {
-        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_BY_OP, filter);
+        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {"search": filter});
       } else if (filter.length === 0) {
         store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
       }
     };
+
     const onPageChange = (event) => {
-      console.log(event.target.value);
+      const filter = document.querySelector<HTMLInputElement>('input[name="filter"]');
+      let params = {};
+      if (filter) {
+        params["search"] = filter.value;
+      }
+      let pageId = event.target.getAttribute("data-value");
+      pageId = pageId === "-1" ? String(Math.ceil(changeOPRequestsCount.value / 10)) : pageId;
+
+      if (pageId === "1") {
+        disablePreviousItem();
+      } else if (pageId > "1") {
+        enablePreviousItem();
+      } else if (pageId === "0"){
+        disablePreviousItem();
+        return
+      }
+      params["page"] = pageId;
+      store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, params);
     };
+
+    const disablePreviousItem = () =>{
+      const previousItem = document.getElementById("previousItem");
+      if (previousItem){
+        previousItem.setAttribute("class", "page-item previous disabled");
+      }
+    }
+
+    const enablePreviousItem = () =>{
+      const previousItem = document.getElementById("previousItem");
+      if (previousItem){
+        previousItem.setAttribute("class", "page-item previous");
+      }
+    }
+
     return {
       changeOPRequests,
       changeOPRequestsCount,

@@ -14,8 +14,7 @@ enum Actions {
   SET_BREADCRUMB_ACTION = "setBreadcrumbAction",
   GET_CHANGE_OP_REQUEST = "getChangeOPRequest",
   GET_CHANGE_OP_REQUESTS = "getChangeOPRequests",
-  GET_CHANGE_OP_REQUESTS_BY_OP = "getChangeOPRequestsByOp",
-  GET_CHANGE_OP_REQUESTS_BY_PAGE = "getChangeOPRequestsBYPage"
+  GET_CHANGE_OP_REQUESTS_WITH_PARAMS = "getChangeOPRequestsWithParams"
 }
 
 enum Mutations {
@@ -33,7 +32,7 @@ enum Mutations {
   OVERRIDE_PAGE_LAYOUT_CONFIG = "overridePageLayoutConfig",
   SET_CHANGE_OP_REQUEST = "setChangeOPRequest",
   SET_CHANGE_OP_REQUESTS = "setChangeOPRequests",
-  SET_CHANGE_OP_REQUESTS_ERRORS = "setChangeOPRequestsErrors"
+  SET_CHANGE_OP_REQUESTS_ERRORS = "setChangeOPRequestsErrors",
 }
 
 export { Actions, Mutations };
