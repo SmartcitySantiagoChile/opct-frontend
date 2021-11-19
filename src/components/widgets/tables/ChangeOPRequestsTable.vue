@@ -51,10 +51,12 @@
               {{ translate("creationDate") }}
             </th>
             <th class="min-w-200px">{{ translate("operationProgram") }}</th>
-            <th class="min-w-125px">{{ translate("title") }}</th>
-            <th class="min-w-125px">{{ translate("creator") }}</th>
-            <th class="min-w-200px">{{ translate("counterpart") }}</th>
-            <th class="min-w-150px">{{ translate("status") }}</th>
+            <th class="min-w-150px">{{ translate("title") }}</th>
+            <th class="min-w-150px">{{ translate("reason")}}</th>
+            <th class="min-w-100px">{{ translate("creator") }}</th>
+            <th class="min-w-100px">{{ translate("counterpart") }}</th>
+            <th class="min-w-80px">{{ translate("status") }}</th>
+            <th class="min-w-80px"></th>
           </tr>
           </thead>
           <!--end::Table head-->
@@ -68,7 +70,7 @@
                   <div class="symbol symbol-10px me-5"></div>
                   <div class="d-flex justify-content-start flex-column">
                     <a
-                       v-bind:href="item.url.split('api')[1]"
+                       href=""
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                     >{{ item.created_at.split("T")[0] }}
                     </a>
@@ -103,6 +105,20 @@
                       fs-6
                     "
                 >{{ item.title }}</a
+                >
+              </td>
+              <td>
+                <a
+                    href="#"
+                    class="
+                      text-dark
+                      fw-bolder
+                      text-hover-primary
+                      d-block
+                      mb-1
+                      fs-6
+                    "
+                >{{ item.reason }}</a
                 >
               </td>
 
@@ -151,6 +167,18 @@
                     "
                 >{{ item.status.name }}</a
                 >
+              </td>
+              <td >
+                <a
+                    v-bind:href="item.url.split('api')[1]"
+                    class="
+                      btn btn-sm btn-icon btn-bg-light btn-active-color-primary
+                    "
+                >
+                    <span class="svg-icon svg-icon-2">
+                      <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
+                    </span>
+                </a>
               </td>
             </tr>
           </template>

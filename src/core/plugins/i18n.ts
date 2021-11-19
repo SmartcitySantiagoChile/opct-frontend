@@ -82,7 +82,8 @@ const messages = {
     status: "Status",
     creator: "Creator",
     counterpart: "Counterpart",
-    filterByOp: "Filter by OP"
+    filterByOp: "Filter by OP",
+    reason: "Reason"
   },
   es: {
     dashboard: "Tablero",
@@ -165,7 +166,8 @@ const messages = {
     status: "Estado",
     creator: "Creador",
     counterpart: "Contraparte",
-    filterByOp: "Filtrar por PO"
+    filterByOp: "Filtrar por PO",
+    reason: "Motivo"
 
   },
   de: {
