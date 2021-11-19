@@ -13,7 +13,7 @@
       <!--begin::Search-->
       <div class="d-flex align-items-center position-relative me-4">
         <span class="svg-icon svg-icon-3 position-absolute ms-3">
-          <inline-svg src="media/icons/duotune/general/gen021.svg" />
+          <inline-svg src="/media/icons/duotune/general/gen021.svg" />
         </span>
         <input
           type="text"

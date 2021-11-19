@@ -8,12 +8,12 @@
       >
         <span class="svg-icon svg-icon-primary position-absolute opacity-15">
           <inline-svg
-            src="media/icons/duotune/abstract/abs051.svg"
+            src="/media/icons/duotune/abstract/abs051.svg"
             class="h-80px w-80px"
           />
         </span>
         <span class="svg-icon svg-icon-3x svg-icon-primary position-absolute">
-          <inline-svg src="media/icons/duotune/coding/cod009.svg" />
+          <inline-svg src="/media/icons/duotune/coding/cod009.svg" />
         </span>
       </div>
       <!--end::Icon-->

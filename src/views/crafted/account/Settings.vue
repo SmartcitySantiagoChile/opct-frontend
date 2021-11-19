@@ -42,7 +42,7 @@
               <div
                 class="image-input image-input-outline"
                 data-kt-image-input="true"
-                style="background-image: url(media/avatars/blank.png)"
+                style="background-image: url(/media/avatars/blank.png)"
               >
                 <!--begin::Preview existing avatar-->
                 <div
@@ -1543,7 +1543,7 @@
           "
         >
           <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
-            <inline-svg src="media/icons/duotune/art/art006.svg" />
+            <inline-svg src="/media/icons/duotune/art/art006.svg" />
           </span>
 
           <!--begin::Wrapper-->
@@ -1567,7 +1567,7 @@
           <div class="d-flex flex-stack">
             <div class="d-flex">
               <img
-                src="media/svg/brand-logos/google-icon.svg"
+                src="/media/svg/brand-logos/google-icon.svg"
                 class="w-30px me-6"
                 alt=""
               />
@@ -1601,7 +1601,7 @@
           <div class="d-flex flex-stack">
             <div class="d-flex">
               <img
-                src="media/svg/brand-logos/github.svg"
+                src="/media/svg/brand-logos/github.svg"
                 class="w-30px me-6"
                 alt=""
               />
@@ -1635,7 +1635,7 @@
           <div class="d-flex flex-stack">
             <div class="d-flex">
               <img
-                src="media/svg/brand-logos/slack-icon.svg"
+                src="/media/svg/brand-logos/slack-icon.svg"
                 class="w-30px me-6"
                 alt=""
               />
@@ -2248,7 +2248,7 @@
             "
           >
             <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-              <inline-svg src="media/icons/duotune/general/gen044.svg" />
+              <inline-svg src="/media/icons/duotune/general/gen044.svg" />
             </span>
             <!--begin::Wrapper-->
             <div class="d-flex flex-stack flex-grow-1">
@@ -2387,7 +2387,7 @@ export default defineComponent({
     });
 
     const profileDetails = ref<ProfileDetails>({
-      avatar: "media/avatars/150-2.jpg",
+      avatar: "/media/avatars/150-2.jpg",
       name: "Max",
       surname: "Smith",
       company: "Keenthemes",
@@ -2510,7 +2510,7 @@ export default defineComponent({
     };
 
     const removeImage = () => {
-      profileDetails.value.avatar = "media/avatars/blank.png";
+      profileDetails.value.avatar = "/media/avatars/blank.png";
     };
 
     onMounted(() => {

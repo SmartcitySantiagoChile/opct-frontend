@@ -22,7 +22,7 @@
           data-kt-menu-flip="bottom"
         >
           <img
-            src="media/avatars/150-25.jpg"
+            src="/media/avatars/150-25.jpg"
             alt="metronic"
             class="h-25px w-25px rounded"
           />

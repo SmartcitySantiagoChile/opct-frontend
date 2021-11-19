@@ -2,7 +2,7 @@
   <KTModalCard
     title="New Address Modal Example"
     description="Click on the below buttons to launch <br/>a new address example."
-    image="media/illustrations/sketchy-1/19.png"
+    image="/media/illustrations/sketchy-1/19.png"
     button-text="Add New Address"
     modal-id="kt_modal_new_address"
   ></KTModalCard>

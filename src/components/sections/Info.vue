@@ -5,7 +5,7 @@
       <!--begin::Icon-->
       <!--begin::Svg Icon | path: '.svg/icons/Code/Info-circle.svg.'-->
       <span class="svg-icon svg-icon-3x svg-icon-warning me-5">
-        <inline-svg src="media/icons/duotune/general/gen044.svg" />
+        <inline-svg src="/media/icons/duotune/general/gen044.svg" />
       </span>
       <!--end::Svg Icon-->
       <!--end::Icon-->

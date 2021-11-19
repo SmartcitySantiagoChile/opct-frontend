@@ -1,5 +1,5 @@
 <template>
-  <!--begin::Menu wrapper-->
+  <!--begin::Menu wrapper-->]
   <div
     class="header-menu align-items-stretch"
     data-kt-drawer="true"
@@ -185,7 +185,7 @@
                   <span class="menu-icon">
                     <span class="svg-icon svg-icon-2">
                       <inline-svg
-                        src="media/icons/duotune/layouts/lay009.svg"
+                        src="/media/icons/duotune/layouts/lay009.svg"
                       />
                     </span>
                   </span>

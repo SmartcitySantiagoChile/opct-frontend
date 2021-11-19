@@ -34,7 +34,7 @@
           {{ t("docsAndComponents") }}
         </span>
         <span class="svg-icon btn-icon svg-icon-2">
-          <inline-svg src="media/icons/duotune/general/gen005.svg" />
+          <inline-svg src="/media/icons/duotune/general/gen005.svg" />
         </span>
       </a>
     </div>

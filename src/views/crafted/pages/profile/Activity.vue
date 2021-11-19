@@ -6,7 +6,7 @@
       <!--begin::Title-->
       <div class="card-title d-flex align-items-center">
         <span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
-          <inline-svg src="media/icons/duotune/general/gen014.svg" />
+          <inline-svg src="/media/icons/duotune/general/gen014.svg" />
         </span>
 
         <h3 class="fw-bolder m-0 text-gray-800">Jan 23, 2021</h3>

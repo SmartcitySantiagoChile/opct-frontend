@@ -105,23 +105,23 @@ export default defineComponent({
 
     const countries = {
       en: {
-        flag: "media/flags/united-states.svg",
+        flag: "/media/flags/united-states.svg",
         name: "English",
       },
       es: {
-        flag: "media/flags/spain.svg",
+        flag: "/media/flags/spain.svg",
         name: "Spanish",
       },
       de: {
-        flag: "media/flags/germany.svg",
+        flag: "/media/flags/germany.svg",
         name: "German",
       },
       ja: {
-        flag: "media/flags/japan.svg",
+        flag: "/media/flags/japan.svg",
         name: "Japanese",
       },
       fr: {
-        flag: "media/flags/france.svg",
+        flag: "/media/flags/france.svg",
         name: "French",
       },
     };

@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import store from "@/store";
 import { Mutations, Actions } from "@/store/enums/StoreEnums";
 
@@ -6,14 +6,23 @@ const routes: Array<RouteRecordRaw> = [
 
   {
     path: "",
-    redirect: "/dashboard",
     component: () => import("@/layout/Layout.vue"),
     children: [
+      {
+        path: "",
+        redirect: "/dashboard"
+      },
       {
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/Dashboard.vue"),
       },
+      {
+        path: "/change-op-requests/:id",
+        name: "changeOPRequest",
+        component: () => import("@/views/ChangeOPRequest.vue"),
+      }
+
     ],
   },
   {
@@ -50,16 +59,13 @@ const routes: Array<RouteRecordRaw> = [
     path: "/:pathMatch(.*)*",
     redirect: "/404",
   },
-  {
-    path: "/change-op-requests/:id",
-    name: "changeOPRequest",
-    component: () => import("@/views/ChangeOPRequest.vue"),
-  }
+
+
 
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 

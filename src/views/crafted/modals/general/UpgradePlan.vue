@@ -2,7 +2,7 @@
   <KTModalCard
     title="Upgrade Plan Modal Example"
     description="Click on the below buttons to launch <br/>a upgrade plan example."
-    image="media/illustrations/sketchy-1/8.png"
+    image="/media/illustrations/sketchy-1/8.png"
     button-text="Upgrade Plan"
     modal-id="kt_modal_upgrade_plan"
   ></KTModalCard>

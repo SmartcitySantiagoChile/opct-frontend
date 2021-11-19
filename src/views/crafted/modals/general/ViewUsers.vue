@@ -2,7 +2,7 @@
   <KTModalCard
     title="View Users Modal Example"
     description="Click on the below buttons to launch <br/>user lists example."
-    image="media/illustrations/sketchy-1/10.png"
+    image="/media/illustrations/sketchy-1/10.png"
     button-text="View Users"
     modal-id="kt_modal_view_users"
   ></KTModalCard>

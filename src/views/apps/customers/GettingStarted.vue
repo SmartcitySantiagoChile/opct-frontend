@@ -2,7 +2,7 @@
   <KTModalCard
     title="Welcome!"
     description="There are no customers added yet. <br/>Kickstart your CRM by adding a your first customer"
-    image="media/illustrations/sketchy-1/2.png"
+    image="/media/illustrations/sketchy-1/2.png"
     button-text="Add Customer"
     modal-id="kt_modal_add_customer"
   ></KTModalCard>

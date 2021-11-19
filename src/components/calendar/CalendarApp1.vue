@@ -12,7 +12,7 @@
           data-bs-target="#kt_modal_add_event"
         >
           <span class="svg-icon svg-icon-2">
-            <inline-svg src="media/icons/duotune/arrows/arr075.svg" />
+            <inline-svg src="/media/icons/duotune/arrows/arr075.svg" />
           </span>
           Add Event
         </button>

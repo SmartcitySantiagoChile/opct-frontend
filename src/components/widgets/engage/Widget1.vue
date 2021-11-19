@@ -46,7 +46,7 @@
             card-rounded-bottom
             h-200px
           "
-          style="background-image: url('media/illustrations/sketchy-1/8.png')"
+          style="background-image: url('/media/illustrations/sketchy-1/8.png')"
         ></div>
         <!--end::Image-->
       </div>

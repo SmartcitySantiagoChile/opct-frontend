@@ -23,7 +23,7 @@
           data-bs-target="#kt_modal_invite_friends"
         >
           <span class="svg-icon svg-icon-3">
-            <inline-svg src="media/icons/duotune/arrows/arr075.svg" />
+            <inline-svg src="/media/icons/duotune/arrows/arr075.svg" />
           </span>
           New Member
         </a>
@@ -148,7 +148,7 @@
                   >
                     <span class="svg-icon svg-icon-3">
                       <inline-svg
-                        src="media/icons/duotune/general/gen019.svg"
+                        src="/media/icons/duotune/general/gen019.svg"
                       />
                     </span>
                   </a>
@@ -161,7 +161,7 @@
                     "
                   >
                     <span class="svg-icon svg-icon-3">
-                      <inline-svg src="media/icons/duotune/art/art005.svg" />
+                      <inline-svg src="/media/icons/duotune/art/art005.svg" />
                     </span>
                   </a>
 
@@ -173,7 +173,7 @@
                   >
                     <span class="svg-icon svg-icon-3">
                       <inline-svg
-                        src="media/icons/duotune/general/gen027.svg"
+                        src="/media/icons/duotune/general/gen027.svg"
                       />
                     </span>
                   </a>
@@ -206,7 +206,7 @@ export default defineComponent({
 
     const list = [
       {
-        image: "media/avatars/150-11.jpg",
+        image: "/media/avatars/150-11.jpg",
         name: "Ana Simmons",
         skills: "HTML, JS, ReactJS",
         companyName: "Intertico",
@@ -215,7 +215,7 @@ export default defineComponent({
         color: "primary",
       },
       {
-        image: "media/avatars/150-3.jpg",
+        image: "/media/avatars/150-3.jpg",
         name: "Jessie Clarcson",
         skills: "C#, ASP.NET, MS SQL",
         companyName: "Agoda",
@@ -224,7 +224,7 @@ export default defineComponent({
         color: "danger",
       },
       {
-        image: "media/avatars/150-4.jpg",
+        image: "/media/avatars/150-4.jpg",
         name: "Lebron Wayde",
         skills: "PHP, Laravel, VueJS",
         companyName: "RoadGee",
@@ -233,7 +233,7 @@ export default defineComponent({
         color: "success",
       },
       {
-        image: "media/avatars/150-5.jpg",
+        image: "/media/avatars/150-5.jpg",
         name: "Natali Goodwin",
         skills: "Python, PostgreSQL, ReactJS",
         companyName: "The Hill",
@@ -242,7 +242,7 @@ export default defineComponent({
         color: "warning",
       },
       {
-        image: "media/avatars/150-6.jpg",
+        image: "/media/avatars/150-6.jpg",
         name: "Kevin Leonard",
         skills: "HTML, JS, ReactJS",
         companyName: "RoadGee",

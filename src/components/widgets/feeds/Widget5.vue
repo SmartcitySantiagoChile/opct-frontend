@@ -9,7 +9,7 @@
         <div class="d-flex align-items-center flex-grow-1">
           <!--begin::Avatar-->
           <div class="symbol symbol-45px me-5">
-            <img src="media/avatars/150-15.jpg" alt="" />
+            <img src="/media/avatars/150-15.jpg" alt="" />
           </div>
           <!--end::Avatar-->
 
@@ -37,7 +37,7 @@
             data-kt-menu-flip="top-end"
           >
             <span class="svg-icon svg-icon-2">
-              <inline-svg src="media/icons/duotune/general/gen024.svg" />
+              <inline-svg src="/media/icons/duotune/general/gen024.svg" />
             </span>
           </button>
 
@@ -52,7 +52,7 @@
         <!--begin::Image-->
         <div
           class="bgi-no-repeat bgi-size-cover rounded min-h-250px mb-5"
-          style="background-image: url('media/stock/900x600/20.jpg')"
+          style="background-image: url('/media/stock/900x600/20.jpg')"
         ></div>
         <!--end::Image-->
 
@@ -76,7 +76,7 @@
             "
           >
             <span class="svg-icon svg-icon-3">
-              <inline-svg src="media/icons/duotune/communication/com012.svg" />
+              <inline-svg src="/media/icons/duotune/communication/com012.svg" />
             </span>
             89
           </a>
@@ -90,7 +90,7 @@
             "
           >
             <span class="svg-icon svg-icon-2">
-              <inline-svg src="media/icons/duotune/general/gen030.svg" />
+              <inline-svg src="/media/icons/duotune/general/gen030.svg" />
             </span>
             29
           </a>
@@ -115,13 +115,13 @@
         <div class="position-absolute top-0 end-0 me-n5">
           <span class="btn btn-icon btn-sm btn-active-color-primary pe-0 me-2">
             <span class="svg-icon svg-icon-3 mb-3">
-              <inline-svg src="media/icons/duotune/communication/com008.svg" />
+              <inline-svg src="/media/icons/duotune/communication/com008.svg" />
             </span>
           </span>
 
           <span class="btn btn-icon btn-sm btn-active-color-primary ps-0">
             <span class="svg-icon svg-icon-2 mb-3">
-              <inline-svg src="media/icons/duotune/general/gen018.svg" />
+              <inline-svg src="/media/icons/duotune/general/gen018.svg" />
             </span>
           </span>
         </div>

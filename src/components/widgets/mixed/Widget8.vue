@@ -41,7 +41,7 @@
             data-kt-menu-flip="top-end"
           >
             <span class="svg-icon svg-icon-2">
-              <inline-svg src="media/icons/duotune/general/gen024.svg" />
+              <inline-svg src="/media/icons/duotune/general/gen024.svg" />
             </span>
           </button>
           <Dropdown2></Dropdown2>
@@ -79,7 +79,7 @@
             data-bs-toggle="tooltip"
             title="Ana Stone"
           >
-            <img src="media/avatars/150-1.jpg" alt="" />
+            <img src="/media/avatars/150-1.jpg" alt="" />
           </a>
 
           <a
@@ -88,7 +88,7 @@
             data-bs-toggle="tooltip"
             title="Mark Larson"
           >
-            <img src="media/avatars/150-4.jpg" alt="" />
+            <img src="/media/avatars/150-4.jpg" alt="" />
           </a>
 
           <a
@@ -97,7 +97,7 @@
             data-bs-toggle="tooltip"
             title="Sam Harris"
           >
-            <img src="media/avatars/150-8.jpg" alt="" />
+            <img src="/media/avatars/150-8.jpg" alt="" />
           </a>
 
           <a
@@ -106,7 +106,7 @@
             data-bs-toggle="tooltip"
             title="Alice Micto"
           >
-            <img src="media/avatars/150-9.jpg" alt="" />
+            <img src="/media/avatars/150-9.jpg" alt="" />
           </a>
         </div>
       </div>

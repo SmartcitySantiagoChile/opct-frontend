@@ -2,7 +2,7 @@
   <KTModalCard
     title="Create API Key Modal Example"
     description="Click on the below buttons to launch <br/>a new API Key creation example."
-    image="media/illustrations/sketchy-1/16.png"
+    image="/media/illustrations/sketchy-1/16.png"
     button-text="Create API Key"
     modal-id="kt_modal_create_api_key"
   ></KTModalCard>

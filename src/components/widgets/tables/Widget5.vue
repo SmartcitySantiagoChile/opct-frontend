@@ -90,7 +90,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/plurk.svg"
+                          src="/media/svg/brand-logos/plurk.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -125,7 +125,7 @@
                       <!--begin::Svg Icon | path: -->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -137,7 +137,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/telegram.svg"
+                          src="/media/svg/brand-logos/telegram.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -172,7 +172,7 @@
                       <!--begin::Svg Icon | path: -->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -184,7 +184,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/vimeo.svg"
+                          src="/media/svg/brand-logos/vimeo.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -219,7 +219,7 @@
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -231,7 +231,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/bebo.svg"
+                          src="/media/svg/brand-logos/bebo.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -266,7 +266,7 @@
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -278,7 +278,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/kickstarter.svg"
+                          src="/media/svg/brand-logos/kickstarter.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -313,7 +313,7 @@
                       <span class="svg-icon svg-icon-2">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                         <!--end::Svg Icon-->
                       </span>
@@ -358,7 +358,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/plurk.svg"
+                          src="/media/svg/brand-logos/plurk.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -393,7 +393,7 @@
                       <span class="svg-icon svg-icon-2">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                         <!--end::Svg Icon-->
                       </span>
@@ -405,7 +405,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/telegram.svg"
+                          src="/media/svg/brand-logos/telegram.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -440,7 +440,7 @@
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -452,7 +452,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/bebo.svg"
+                          src="/media/svg/brand-logos/bebo.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -487,7 +487,7 @@
                       <span class="svg-icon svg-icon-2">
                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                         <!--end::Svg Icon-->
                       </span>
@@ -532,7 +532,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/kickstarter.svg"
+                          src="/media/svg/brand-logos/kickstarter.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -567,7 +567,7 @@
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -579,7 +579,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/bebo.svg"
+                          src="/media/svg/brand-logos/bebo.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -614,7 +614,7 @@
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -626,7 +626,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/vimeo.svg"
+                          src="/media/svg/brand-logos/vimeo.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -661,7 +661,7 @@
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->
@@ -673,7 +673,7 @@
                     <div class="symbol symbol-45px me-2">
                       <span class="symbol-label">
                         <img
-                          src="media/svg/brand-logos/telegram.svg"
+                          src="/media/svg/brand-logos/telegram.svg"
                           class="h-50 align-self-center"
                           alt=""
                         />
@@ -708,7 +708,7 @@
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
                       <span class="svg-icon svg-icon-2">
                         <inline-svg
-                          src="media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                       <!--end::Svg Icon-->

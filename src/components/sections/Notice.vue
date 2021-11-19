@@ -16,11 +16,11 @@
       <span class="svg-icon position-absolute opacity-5">
         <inline-svg
           class="w-80px h-80px"
-          src="media/icons/duotune/abstract/abs051.svg"
+          src="/media/icons/duotune/abstract/abs051.svg"
         />
       </span>
       <span class="svg-icon svg-icon-3x svg-icon-info position-absolute">
-        <inline-svg src="media/icons/duotune/art/art006.svg" />
+        <inline-svg src="/media/icons/duotune/art/art006.svg" />
       </span>
     </div>
     <!--end::Icon-->

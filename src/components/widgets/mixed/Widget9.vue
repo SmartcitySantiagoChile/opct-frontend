@@ -39,7 +39,7 @@
           data-bs-toggle="tooltip"
           title="Ana Stone"
         >
-          <img src="media/avatars/150-1.jpg" alt="" />
+          <img src="/media/avatars/150-1.jpg" alt="" />
         </a>
 
         <a
@@ -48,7 +48,7 @@
           data-bs-toggle="tooltip"
           title="Mark Larson"
         >
-          <img src="media/avatars/150-4.jpg" alt="" />
+          <img src="/media/avatars/150-4.jpg" alt="" />
         </a>
 
         <a
@@ -57,7 +57,7 @@
           data-bs-toggle="tooltip"
           title="Sam Harris"
         >
-          <img src="media/avatars/150-8.jpg" alt="" />
+          <img src="/media/avatars/150-8.jpg" alt="" />
         </a>
       </div>
       <!--end::Team-->

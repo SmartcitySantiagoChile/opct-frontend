@@ -125,7 +125,7 @@
         >
           <img
             alt="Logo"
-            src="media/svg/brand-logos/google-icon.svg"
+            src="/media/svg/brand-logos/google-icon.svg"
             class="h-20px me-3"
           />
           Continue with Google
@@ -141,7 +141,7 @@
         >
           <img
             alt="Logo"
-            src="media/svg/brand-logos/facebook-4.svg"
+            src="/media/svg/brand-logos/facebook-4.svg"
             class="h-20px me-3"
           />
           Continue with Facebook
@@ -154,7 +154,7 @@
         <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
           <img
             alt="Logo"
-            src="media/svg/brand-logos/apple-black.svg"
+            src="/media/svg/brand-logos/apple-black.svg"
             class="h-20px me-3"
           />
           Continue with Apple

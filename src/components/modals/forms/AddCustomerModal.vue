@@ -23,7 +23,7 @@
             class="btn btn-icon btn-sm btn-active-icon-primary"
           >
             <span class="svg-icon svg-icon-1">
-              <inline-svg src="media/icons/duotune/arrows/arr061.svg" />
+              <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>
           </div>
           <!--end::Close-->
@@ -115,7 +115,7 @@
                 Shipping Information
                 <span class="ms-2 rotate-180">
                   <span class="svg-icon svg-icon-3">
-                    <inline-svg src="media/icons/duotune/arrows/arr072.svg" />
+                    <inline-svg src="/media/icons/duotune/arrows/arr072.svg" />
                   </span>
                 </span>
               </div>

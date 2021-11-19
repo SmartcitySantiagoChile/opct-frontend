@@ -2,7 +2,7 @@
   <KTModalCard
     title="New Target Modal Example"
     description="Click on the below buttons to launch <br/>a new target example."
-    image="media/illustrations/sketchy-1/17.png"
+    image="/media/illustrations/sketchy-1/17.png"
     button-text="Add New Target"
     modal-id="kt_modal_new_target"
   ></KTModalCard>

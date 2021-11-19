@@ -19,7 +19,7 @@
             data-bs-dismiss="modal"
           >
             <span class="svg-icon svg-icon-1">
-              <inline-svg src="media/icons/duotune/arrows/arr061.svg" />
+              <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>
           </div>
           <!--end::Close-->
@@ -117,7 +117,7 @@
                     <span class="symbol-label bg-secondary">
                       <span class="svg-icon">
                         <inline-svg
-                          src="media/icons/duotune/general/gen025.svg"
+                          src="/media/icons/duotune/general/gen025.svg"
                         />
                       </span>
                     </span>

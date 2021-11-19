@@ -51,7 +51,7 @@
             id="kt_explore_close"
           >
             <span class="svg-icon svg-icon-2">
-              <inline-svg src="media/icons/duotune/arrows/arr061.svg" />
+              <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>
           </button>
         </div>
@@ -229,7 +229,7 @@
                     >
                       <div class="overlay-wrapper">
                         <img
-                          :src="`media/demos/${item.name}.png`"
+                          :src="`/media/demos/${item.name}.png`"
                           alt="demo"
                           :class="`w-100 ${!item.available && 'opacity-75'}`"
                         />

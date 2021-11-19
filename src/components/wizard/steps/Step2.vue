@@ -176,7 +176,7 @@
             <span class="symbol symbol-50px me-6">
               <span class="symbol-label">
                 <span class="svg-icon svg-icon-1 svg-icon-gray-600">
-                  <inline-svg src="media/icons/duotune/finance/fin001.svg" />
+                  <inline-svg src="/media/icons/duotune/finance/fin001.svg" />
                 </span>
               </span>
             </span>
@@ -216,7 +216,7 @@
             <span class="symbol symbol-50px me-6">
               <span class="symbol-label">
                 <span class="svg-icon svg-icon-1 svg-icon-gray-600">
-                  <inline-svg src="media/icons/duotune/graphs/gra006.svg" />
+                  <inline-svg src="/media/icons/duotune/graphs/gra006.svg" />
                 </span>
               </span>
             </span>
@@ -257,7 +257,7 @@
             <span class="symbol symbol-50px me-6">
               <span class="symbol-label">
                 <span class="svg-icon svg-icon-1 svg-icon-gray-600">
-                  <inline-svg src="media/icons/duotune/graphs/gra008.svg" />
+                  <inline-svg src="/media/icons/duotune/graphs/gra008.svg" />
                 </span>
               </span>
             </span>

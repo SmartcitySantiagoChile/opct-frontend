@@ -45,7 +45,7 @@
         <Card2
           card-classes="h-100"
           title="Twitch Posts"
-          icon="media/svg/brand-logos/twitch.svg"
+          icon="/media/svg/brand-logos/twitch.svg"
           content="$500.00"
           color="success"
           arrow="Up-right"
@@ -61,7 +61,7 @@
         <Card2
           card-classes="h-100"
           title="Twitter Followers"
-          icon="media/svg/brand-logos/twitter.svg"
+          icon="/media/svg/brand-logos/twitter.svg"
           content="807k"
           color="success"
           arrow="Up-right"
@@ -77,7 +77,7 @@
         <Card2
           card-classes="h-100"
           title="Spotify Listeners"
-          icon="media/svg/brand-logos/spotify.svg"
+          icon="/media/svg/brand-logos/spotify.svg"
           content="1,073"
           color="danger"
           arrow="Down-left"
@@ -93,7 +93,7 @@
         <Card2
           card-classes="h-100"
           title="Pinterest Posts"
-          icon="media/svg/brand-logos/pinterest-p.svg"
+          icon="/media/svg/brand-logos/pinterest-p.svg"
           content="97"
           color="success"
           arrow="Up-right"
@@ -109,7 +109,7 @@
         <Card2
           card-classes="h-100"
           title="Github Contributes"
-          icon="media/svg/brand-logos/github.svg"
+          icon="/media/svg/brand-logos/github.svg"
           content="4,109"
           color="danger"
           arrow="Down-left"
@@ -125,7 +125,7 @@
         <Card2
           card-classes="h-100"
           title="Youtube Subscribers"
-          icon="media/svg/brand-logos/youtube-3.svg"
+          icon="/media/svg/brand-logos/youtube-3.svg"
           content="354"
           color="success"
           arrow="Up-right"
@@ -141,7 +141,7 @@
         <Card2
           card-classes="h-100"
           title="Telegram Posts"
-          icon="media/svg/brand-logos/telegram.svg"
+          icon="/media/svg/brand-logos/telegram.svg"
           content="566"
           color="success"
           arrow="Up-right"
@@ -157,7 +157,7 @@
         <Card2
           card-classes="h-100"
           title="Reddit Awards"
-          icon="media/svg/brand-logos/reddit.svg"
+          icon="/media/svg/brand-logos/reddit.svg"
           content="2.1M"
           color="success"
           arrow="Up-right"

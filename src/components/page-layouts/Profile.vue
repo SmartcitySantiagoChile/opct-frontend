@@ -12,7 +12,7 @@
               position-relative
             "
           >
-            <img src="media/avatars/150-2.jpg" alt="image" />
+            <img src="/media/avatars/150-2.jpg" alt="image" />
             <div
               class="
                 position-absolute
@@ -54,7 +54,7 @@
                 >
                 <a href="#">
                   <span class="svg-icon svg-icon-1 svg-icon-primary">
-                    <inline-svg src="media/icons/duotune/general/gen026.svg" />
+                    <inline-svg src="/media/icons/duotune/general/gen026.svg" />
                   </span>
                 </a>
               </div>
@@ -74,7 +74,7 @@
                 >
                   <span class="svg-icon svg-icon-4 me-1">
                     <inline-svg
-                      src="media/icons/duotune/communication/com006.svg"
+                      src="/media/icons/duotune/communication/com006.svg"
                     />
                   </span>
                   Developer
@@ -90,7 +90,7 @@
                   "
                 >
                   <span class="svg-icon svg-icon-4 me-1">
-                    <inline-svg src="media/icons/duotune/general/gen018.svg" />
+                    <inline-svg src="/media/icons/duotune/general/gen018.svg" />
                   </span>
                   SF, Bay Area
                 </a>
@@ -105,7 +105,7 @@
                 >
                   <span class="svg-icon svg-icon-4 me-1">
                     <inline-svg
-                      src="media/icons/duotune/communication/com011.svg"
+                      src="/media/icons/duotune/communication/com011.svg"
                     />
                   </span>
                   max@kt.com
@@ -123,7 +123,7 @@
                 id="kt_user_follow_button"
               >
                 <span class="svg-icon svg-icon-3 d-none">
-                  <inline-svg src="media/icons/duotune/arrows/arr012.svg" />
+                  <inline-svg src="/media/icons/duotune/arrows/arr012.svg" />
                 </span>
                 Follow
               </a>
@@ -177,7 +177,7 @@
                   <!--begin::Number-->
                   <div class="d-flex align-items-center">
                     <span class="svg-icon svg-icon-3 svg-icon-success me-2">
-                      <inline-svg src="media/icons/duotune/arrows/arr066.svg" />
+                      <inline-svg src="/media/icons/duotune/arrows/arr066.svg" />
                     </span>
                     <div
                       class="fs-2 fw-bolder"
@@ -211,7 +211,7 @@
                   <!--begin::Number-->
                   <div class="d-flex align-items-center">
                     <span class="svg-icon svg-icon-3 svg-icon-danger me-2">
-                      <inline-svg src="media/icons/duotune/arrows/arr065.svg" />
+                      <inline-svg src="/media/icons/duotune/arrows/arr065.svg" />
                     </span>
                     <div
                       class="fs-2 fw-bolder"
@@ -244,7 +244,7 @@
                   <!--begin::Number-->
                   <div class="d-flex align-items-center">
                     <span class="svg-icon svg-icon-3 svg-icon-success me-2">
-                      <inline-svg src="media/icons/duotune/arrows/arr066.svg" />
+                      <inline-svg src="/media/icons/duotune/arrows/arr066.svg" />
                     </span>
                     <div
                       class="fs-2 fw-bolder"
