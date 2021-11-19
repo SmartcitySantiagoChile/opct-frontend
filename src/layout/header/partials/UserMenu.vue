@@ -19,7 +19,6 @@
     <!--begin::Menu item-->
     <div class="menu-item px-3">
       <div class="menu-content d-flex align-items-center px-3">
-
         <!--begin::Username-->
 
         <div class="d-flex flex-column">
@@ -31,9 +30,9 @@
               >Pro</span
             >-->
           </div>
-          <a href="#" class="fw-bold text-muted text-hover-primary fs-7"
-            >{{ currentUserEmail }}</a
-          >
+          <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{
+            currentUserEmail
+          }}</a>
         </div>
         <!--end::Username-->
       </div>
@@ -47,18 +46,15 @@
     <!--begin::Menu item-->
     <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
-        {{translate("profile")}}
+        {{ translate("profile") }}
       </router-link>
     </div>
     <!--end::Menu item-->
 
-
-
-
     <!--begin::Menu item-->
     <div class="menu-item px-5 my-1">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
-        {{translate("changePassword")}}
+        {{ translate("changePassword") }}
       </router-link>
     </div>
     <!--end::Menu item-->
@@ -69,7 +65,9 @@
 
     <!--begin::Menu item-->
     <div class="menu-item px-5">
-      <a @click="signOut()" class="menu-link px-5"> {{translate("signOut")}} </a>
+      <a @click="signOut()" class="menu-link px-5">
+        {{ translate("signOut") }}
+      </a>
     </div>
     <!--end::Menu item-->
   </div>
@@ -163,7 +161,7 @@ export default defineComponent({
       countries,
       userNameAndSurname,
       currentUserEmail,
-      translate
+      translate,
     };
   },
 });

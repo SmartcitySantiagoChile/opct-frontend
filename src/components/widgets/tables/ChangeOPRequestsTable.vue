@@ -4,17 +4,23 @@
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
-        <span class="card-label fw-bolder fs-3 mb-1">{{ translate("changeOPRequests") }}</span>
+        <span class="card-label fw-bolder fs-3 mb-1">{{
+            translate("changeOPRequests")
+          }}</span>
 
-        <span
-            class="text-muted mt-1 fw-bold fs-7">{{
+        <span class="text-muted mt-1 fw-bold fs-7">{{
             translate("changesNumber") + ": " + changeOPRequestsCount
           }}</span>
       </h3>
       <div class="card-toolbar">
         <!--begin::Menu-->
-        <input type="text" class="form-control" name="filter" v-bind:placeholder="translate('filterByOp')"
-               @keyup="onFilterChange"/>
+        <input
+            type="text"
+            class="form-control"
+            name="filter"
+            v-bind:placeholder="translate('filterByOp')"
+            @keyup="onFilterChange"
+        />
 
         <!--end::Menu-->
       </div>
@@ -26,13 +32,24 @@
       <!--begin::Table container-->
       <div class="table-responsive">
         <!--begin::Table-->
-        <table class="table align-middle gs-0 gy-4 table-rounded table-striped border">
+        <table
+            class="
+            table
+            align-middle
+            gs-0
+            gy-4
+            table-rounded table-striped
+            border
+          "
+        >
           <!--begin::Table head-->
           <thead>
           <tr
               class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
           >
-            <th class="ps-4 min-w-125px rounded-start">{{ translate("creationDate") }}</th>
+            <th class="ps-4 min-w-125px rounded-start">
+              {{ translate("creationDate") }}
+            </th>
             <th class="min-w-200px">{{ translate("operationProgram") }}</th>
             <th class="min-w-125px">{{ translate("title") }}</th>
             <th class="min-w-125px">{{ translate("creator") }}</th>
@@ -48,13 +65,13 @@
             <tr>
               <td>
                 <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5">
-                  </div>
+                  <div class="symbol symbol-10px me-5"></div>
                   <div class="d-flex justify-content-start flex-column">
                     <a
-                        href="#"
+                       v-bind:href="item.url.split('api')[1]"
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                    >{{ item.created_at.split("T")[0] }}</a>
+                    >{{ item.created_at.split("T")[0] }}
+                    </a>
                   </div>
                 </div>
               </td>
@@ -100,7 +117,9 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.creator.first_name + " " + item.creator.last_name }}</a
+                >{{
+                    item.creator.first_name + " " + item.creator.last_name
+                  }}</a
                 >
               </td>
 
@@ -130,7 +149,8 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.status.name }}</a>
+                >{{ item.status.name }}</a
+                >
               </td>
             </tr>
           </template>
@@ -139,23 +159,34 @@
         </table>
         <!--end::Table-->
         <div class="d-flex align-items-center">
-          <ul class="pagination d-flex align-items-center ">
-            <li id="previousItem" class="page-item previous disabled ">
-              <button data-value="-1" @click="onPageChange" class="page-link"><i data-value="1" class="previous"></i>
+          <ul class="pagination d-flex align-items-center">
+            <li id="previousItem" class="page-item previous disabled">
+              <button data-value="-1" @click="onPageChange" class="page-link">
+                <i data-value="1" class="previous"></i>
               </button>
             </li>
             <template
-                v-for="(item, index) in Array.from({length: Math.ceil(changeOPRequestsCount/10)}, (_, i) => i + 1)"
-                :key="index">
-              <li class="page-item  ">
-                <button @click="onPageChange" :data-value="item" class="page-link">{{ item }}</button>
+                v-for="(item, index) in Array.from(
+                { length: Math.ceil(changeOPRequestsCount / 10) },
+                (_, i) => i + 1
+              )"
+                :key="index"
+            >
+              <li class="page-item">
+                <button
+                    @click="onPageChange"
+                    :data-value="item"
+                    class="page-link"
+                >
+                  {{ item }}
+                </button>
               </li>
             </template>
             <li class="page-item next">
-              <button data-value="-1" @click="onPageChange" class="page-link"><i data-value="-1" class="next"></i>
+              <button data-value="-1" @click="onPageChange" class="page-link">
+                <i data-value="-1" class="next"></i>
               </button>
             </li>
-
           </ul>
         </div>
       </div>
@@ -186,61 +217,72 @@ export default defineComponent({
         return text;
       }
     };
-    const store = useStore()
+    const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
-    const changeOPRequests = computed(() => store.getters.getCurrentChangeOPRequests);
-    const changeOPRequestsCount = computed(() => store.getters.getCurrentChangeOPRequestsCount)
+    const changeOPRequests = computed(
+        () => store.getters.getCurrentChangeOPRequests
+    );
+    const changeOPRequestsCount = computed(
+        () => store.getters.getCurrentChangeOPRequestsCount
+    );
 
     const onFilterChange = (event) => {
       const filter = String(event.target.value);
       if (filter.length > 3 && filter.length < 11) {
-        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {"search": filter});
+        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {
+          search: filter,
+        });
       } else if (filter.length === 0) {
         store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
       }
     };
 
     const onPageChange = (event) => {
-      const filter = document.querySelector<HTMLInputElement>('input[name="filter"]');
+      const filter = document.querySelector<HTMLInputElement>(
+          'input[name="filter"]'
+      );
       let params = {};
       if (filter) {
         params["search"] = filter.value;
       }
       let pageId = event.target.getAttribute("data-value");
-      pageId = pageId === "-1" ? String(Math.ceil(changeOPRequestsCount.value / 10)) : pageId;
+      pageId =
+          pageId === "-1"
+              ? String(Math.ceil(changeOPRequestsCount.value / 10))
+              : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();
       } else if (pageId > "1") {
         enablePreviousItem();
-      } else if (pageId === "0"){
+      } else if (pageId === "0") {
         disablePreviousItem();
-        return
+        return;
       }
       params["page"] = pageId;
       store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, params);
     };
 
-    const disablePreviousItem = () =>{
+    const disablePreviousItem = () => {
       const previousItem = document.getElementById("previousItem");
-      if (previousItem){
+      if (previousItem) {
         previousItem.setAttribute("class", "page-item previous disabled");
       }
-    }
+    };
 
-    const enablePreviousItem = () =>{
+    const enablePreviousItem = () => {
       const previousItem = document.getElementById("previousItem");
-      if (previousItem){
+      if (previousItem) {
         previousItem.setAttribute("class", "page-item previous");
       }
-    }
+    };
 
     return {
       changeOPRequests,
       changeOPRequestsCount,
       translate,
       onFilterChange,
-      onPageChange
+      onPageChange,
     };
   },
 });

@@ -3,8 +3,9 @@ import store from "@/store";
 import { Mutations, Actions } from "@/store/enums/StoreEnums";
 
 const routes: Array<RouteRecordRaw> = [
+
   {
-    path: "/",
+    path: "",
     redirect: "/dashboard",
     component: () => import("@/layout/Layout.vue"),
     children: [
@@ -49,6 +50,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/:pathMatch(.*)*",
     redirect: "/404",
   },
+  {
+    path: "/change-op-requests/:id",
+    name: "changeOPRequest",
+    component: () => import("@/views/ChangeOPRequest.vue"),
+  }
+
 ];
 
 const router = createRouter({

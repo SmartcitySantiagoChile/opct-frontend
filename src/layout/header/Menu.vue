@@ -32,7 +32,9 @@
         <template v-if="!item.heading">
           <template v-for="(menuItem, j) in item.pages" :key="j">
             <div
-              v-if="menuItem.heading && accessList.indexOf(menuItem.access) > -1"
+              v-if="
+                menuItem.heading && accessList.indexOf(menuItem.access) > -1
+              "
               class="menu-item menu-lg-down-accordion me-lg-1"
             >
               <router-link
@@ -235,20 +237,20 @@ body[data-kt-drawer-header-menu="on"] .menu-item > a > .menu-link.active {
 </style>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted} from "vue";
-import {useRoute} from "vue-router";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
-import {MenuComponent} from "@/assets/ts/components";
+import { computed, defineComponent, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import { MenuComponent } from "@/assets/ts/components";
 import MainMenuConfig from "@/core/config/MainMenuConfig";
-import {headerMenuIcons} from "@/core/helpers/config";
-import {version} from "@/core/helpers/documentation";
+import { headerMenuIcons } from "@/core/helpers/config";
+import { version } from "@/core/helpers/documentation";
 
 export default defineComponent({
   name: "KTMenu",
   components: {},
   setup() {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const store = useStore();
     const route = useRoute();
 
@@ -264,14 +266,19 @@ export default defineComponent({
       }
     };
 
-
     const accessList = computed(() => {
       let access_list = new Array("all");
-      if (store.getters.currentUserHasOPsAccess) {access_list.push("ops")}
-      if (store.getters.currentUserHasOrganizationsAccess) {access_list.push("organizations")}
-      if (store.getters.currentUserHasUsersAccess) {access_list.push("users")}
-      return access_list
-    })
+      if (store.getters.currentUserHasOPsAccess) {
+        access_list.push("ops");
+      }
+      if (store.getters.currentUserHasOrganizationsAccess) {
+        access_list.push("organizations");
+      }
+      if (store.getters.currentUserHasUsersAccess) {
+        access_list.push("users");
+      }
+      return access_list;
+    });
 
     onMounted(() => {
       MenuComponent.reinitialization();
@@ -283,7 +290,7 @@ export default defineComponent({
       MainMenuConfig,
       translate,
       version,
-      accessList
+      accessList,
     };
   },
 });
