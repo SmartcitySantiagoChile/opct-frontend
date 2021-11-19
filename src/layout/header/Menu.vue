@@ -1,5 +1,5 @@
 <template>
-  <!--begin::Menu wrapper-->]
+  <!--begin::Menu wrapper-->
   <div
     class="header-menu align-items-stretch"
     data-kt-drawer="true"
