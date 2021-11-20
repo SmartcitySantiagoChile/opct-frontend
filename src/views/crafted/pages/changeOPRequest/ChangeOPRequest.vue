@@ -20,7 +20,8 @@ export default defineComponent({
   setup(props) {
     const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST, props.id);
-    const changeOPRequest = computed(() => store.getters.changeOPRequest);\onMounted(() => {
+    const changeOPRequest = computed(() => store.getters.changeOPRequest);
+    onMounted(() => {
       return setCurrentPageTitle("Solicitud de Cambio de PO");
     });
     return {
