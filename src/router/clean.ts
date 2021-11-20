@@ -20,7 +20,8 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: "/change-op-requests/:id",
                 name: "changeOPRequest",
-                component: () => import("@/views/ChangeOPRequest.vue"),
+                component: () => import("@/views/crafted/pages/changeOPRequest/ChangeOPRequest.vue"),
+                props: true
             }
 
         ],

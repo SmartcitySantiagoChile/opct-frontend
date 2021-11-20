@@ -46,6 +46,14 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
         return this.changeOPRequest;
     }
 
+    /**
+     * Get current change op request title
+     * @returns string
+     */
+    get getCurrentChangeOPRequestTitle(): string {
+        return this.changeOPRequest.title;
+    }
+
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUEST](changeOPRequest) {
         this.changeOPRequest = changeOPRequest[0];
@@ -56,6 +64,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     [Actions.GET_CHANGE_OP_REQUEST](changeOPRequestId) {
         ApiService.get("change-op-requests", changeOPRequestId)
             .then(({data}) => {
+                console.log(data);
                 this.context.commit(Mutations.SET_CHANGE_OP_REQUEST, data);
             })
             .catch(({response}) => {
