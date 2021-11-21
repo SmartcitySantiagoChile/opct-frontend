@@ -8,7 +8,7 @@ import {Dictionary} from "@/store/modules/HelperModule";
 export interface ChangeOPRequest {
     url: string;
     created_at: string;
-    title: string;
+    title: string ;
     message: string;
     updated_at: string;
     reason: string;
@@ -18,6 +18,11 @@ export interface ChangeOPRequest {
     status: Dictionary<string>;
     counterpart: Dictionary<string>;
     contract_type: Dictionary<string>;
+    change_op_request_files: Array<any>;
+    change_op_request_message: Array<any>;
+    op_change_logs: Array<any>;
+    status_logs: Array<any>;
+
 }
 
 export interface ChangeOPRequestInfo {
@@ -56,7 +61,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
 
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUEST](changeOPRequest) {
-        this.changeOPRequest = changeOPRequest[0];
+        this.changeOPRequest = changeOPRequest;
     }
 
 
@@ -64,7 +69,6 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     [Actions.GET_CHANGE_OP_REQUEST](changeOPRequestId) {
         ApiService.get("change-op-requests", changeOPRequestId)
             .then(({data}) => {
-                console.log(data);
                 this.context.commit(Mutations.SET_CHANGE_OP_REQUEST, data);
             })
             .catch(({response}) => {
