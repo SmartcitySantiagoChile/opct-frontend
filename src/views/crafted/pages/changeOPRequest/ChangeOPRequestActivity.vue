@@ -1,21 +1,11 @@
 <template>
+
   <!--begin::Timeline-->
   <div class="card">
-    <!--begin::Card head-->
-    <div class="card-header card-header-stretch">
-      <!--begin::Title-->
-      <div class="card-title d-flex align-items-center">
-        <span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
-          <inline-svg src="/media/icons/duotune/general/gen014.svg"/>
-        </span>
-        <h3 class="fw-bolder m-0 text-gray-800">
-          {{ changeOPRequest.created_at ? changeOPRequest.created_at.split("T")[0] : "" }}</h3>
-      </div>
-      <!--end::Title-->
-      <!--end::Toolbar-->
+    <div class="card-title  align-items-center">
+      <ChangeOPRequestBaseInfo v-bind:changeOpRequestBaseInfo="baseInfo"></ChangeOPRequestBaseInfo>
     </div>
-    <!--end::Card head-->
-
+    <div class="separator "></div>
     <!--begin::Card body-->
     <div class="card-body">
       <!--begin::Tab Content-->
@@ -29,7 +19,7 @@
         >
           <!--begin::Timeline-->
           <div class="timeline">
-            <ChangeOPRequestTimelineHeader v-bind:header-data="changeOPRequest"></ChangeOPRequestTimelineHeader>
+            <ChangeOPRequestTimelineHeader v-bind:header-data="headerInfo"></ChangeOPRequestTimelineHeader>
             <KTActivityItem1></KTActivityItem1>
             <KTActivityItem2></KTActivityItem2>
             <KTActivityItem3></KTActivityItem3>
@@ -64,9 +54,39 @@ import KTActivityItem6 from "@/layout/header/partials/activity-timeline/Item6.vu
 import KTActivityItem7 from "@/layout/header/partials/activity-timeline/Item7.vue";
 import KTActivityItem8 from "@/layout/header/partials/activity-timeline/Item8.vue";
 import ChangeOPRequestTimelineHeader from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestTimelineHeader.vue";
+import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestBaseInfo.vue";
+import {useI18n} from "vue-i18n";
+
 export default defineComponent({
+  inheritAttrs: false,
   name: "changeOPRequestActivity",
   props: ['changeOPRequest', 'id'],
+  data() {
+    const baseInfo = computed(() => {
+      const baseData = {};
+      baseData["created_at"] = this.changeOPRequest["created_at"];
+      baseData["op"] = this.changeOPRequest["op"]
+      baseData["status"] = this.changeOPRequest["status"];
+      baseData["change_op_request_files"] = this.changeOPRequest["change_op_request_files"];
+      baseData["reason"] = this.changeOPRequest["reason"];
+      baseData["creator"] = this.changeOPRequest["creator"];
+      baseData["counterpart"] = this.changeOPRequest["reason"];
+      return baseData;
+    });
+    const headerInfo = computed(() => {
+      const headerData = {};
+      headerData["creator"] = this.changeOPRequest["creator"];
+      headerData["title"] = this.changeOPRequest["title"];
+      headerData["message"] = this.changeOPRequest["message"];
+      headerData["change_op_request_files"] = this.changeOPRequest["change_op_request_files"];
+      return headerData;
+    });
+
+    return {
+      headerInfo: headerInfo,
+      baseInfo: baseInfo,
+    }
+  },
   components: {
     KTActivityItem1,
     KTActivityItem2,
@@ -76,7 +96,21 @@ export default defineComponent({
     KTActivityItem6,
     KTActivityItem7,
     KTActivityItem8,
-    ChangeOPRequestTimelineHeader
+    ChangeOPRequestTimelineHeader,
+    ChangeOPRequestBaseInfo
   },
+  setUp() {
+    const {t, te} = useI18n();
+    const translate = (text) => {
+      if (te(text)) {
+        return t(text);
+      } else {
+        return text;
+      }
+    };
+    return {
+      translate
+    }
+  }
 });
 </script>

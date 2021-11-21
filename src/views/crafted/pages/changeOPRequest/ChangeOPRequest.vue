@@ -11,7 +11,7 @@ import {useStore} from "vuex";
 import {Actions} from "@/store/enums/StoreEnums";
 
 export default defineComponent({
-  name: "changeOPrequest",
+  name: "changeOPRequest",
   props: ['id'],
   components: {
     ChangeOPRequestActivity,
