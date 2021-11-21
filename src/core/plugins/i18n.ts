@@ -83,7 +83,10 @@ const messages = {
     creator: "Creator",
     counterpart: "Counterpart",
     filterByOp: "Filter by OP",
-    reason: "Reason"
+    reason: "Reason",
+    addedAt: "Added",
+    atTime: "at",
+    "by": "by"
   },
   es: {
     dashboard: "Tablero",
@@ -167,7 +170,11 @@ const messages = {
     creator: "Creador",
     counterpart: "Contraparte",
     filterByOp: "Filtrar por PO",
-    reason: "Motivo"
+    reason: "Motivo",
+    addedAt: "Añadido el",
+    atTime: "a las",
+    by: "por"
+
 
   },
   de: {

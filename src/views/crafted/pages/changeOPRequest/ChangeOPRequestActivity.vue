@@ -19,7 +19,7 @@
         >
           <!--begin::Timeline-->
           <div class="timeline">
-            <ChangeOPRequestTimelineHeader v-bind:header-data="headerInfo"></ChangeOPRequestTimelineHeader>
+            <ChangeOPRequestTimelineHeader v-bind:changeOpRequestTimelineHeaderInfo="headerInfo"></ChangeOPRequestTimelineHeader>
             <KTActivityItem1></KTActivityItem1>
             <KTActivityItem2></KTActivityItem2>
             <KTActivityItem3></KTActivityItem3>
@@ -75,8 +75,8 @@ export default defineComponent({
     });
     const headerInfo = computed(() => {
       const headerData = {};
+      headerData["created_at"] = this.changeOPRequest["created_at"];
       headerData["creator"] = this.changeOPRequest["creator"];
-      headerData["title"] = this.changeOPRequest["title"];
       headerData["message"] = this.changeOPRequest["message"];
       headerData["change_op_request_files"] = this.changeOPRequest["change_op_request_files"];
       return headerData;
