@@ -70,7 +70,8 @@ export default defineComponent({
       baseData["change_op_request_files"] = this.changeOPRequest["change_op_request_files"];
       baseData["reason"] = this.changeOPRequest["reason"];
       baseData["creator"] = this.changeOPRequest["creator"];
-      baseData["counterpart"] = this.changeOPRequest["reason"];
+      baseData["counterpart"] = this.changeOPRequest["counterpart"];
+      baseData["title"] = this.changeOPRequest["title"];
       return baseData;
     });
     const headerInfo = computed(() => {
@@ -80,6 +81,10 @@ export default defineComponent({
       headerData["message"] = this.changeOPRequest["message"];
       headerData["change_op_request_files"] = this.changeOPRequest["change_op_request_files"];
       return headerData;
+    });
+
+    const orderedLogs = computed(() => {
+      return []
     });
 
     return {

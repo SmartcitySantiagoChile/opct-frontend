@@ -20,9 +20,8 @@ export default defineComponent({
     const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST, props.id);
     const changeOPRequest = ref(computed(() => store.getters.getCurrentChangeOPRequest));
-    const title = ref(computed(() => store.getters.getCurrentChangeOPRequestTitle));
     onUpdated(() => {
-      return setCurrentPageTitle("Solicitud: " + title.value);
+      return setCurrentPageTitle("Solicitud de cambio de PO");
     });
     return {
       changeOPRequest
