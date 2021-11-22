@@ -25,6 +25,52 @@
         </div>
         <!--end::Title-->
 
+
+      </div>
+      <!--end::Timeline heading-->
+
+      <!--begin::Timeline details-->
+      <div class="overflow-auto pb-5">
+        <!--begin::Files Record-->
+        <template v-if="filesLength > 0">
+          <div
+              class="
+            d-flex
+            align-items-center
+            border border-dashed border-gray-300
+            rounded
+            min-w-750px
+            px-7
+            py-3
+            mb-5
+          "
+          >
+            <template v-for="(item, index) in changeOpRequestTimelineHeaderInfo.change_op_request_files" :key="index">
+              <!--begin::Item-->
+              <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
+                <!--begin::Icon-->
+                <img alt="" class="w-30px me-3" src="/media/svg/files/doc.svg"/>
+                <!--end::Icon-->
+
+                <!--begin::Info-->
+                <div class="ms-1 fw-bold">
+                  <!--begin::Desc-->
+                  <a href="#" class="fs-6 text-hover-primary fw-bolder"
+                  >{{ item.file.split("/media/")[1]}}</a
+                  >
+                  <!--end::Desc-->
+
+                  <!--begin::Number-->
+                  <!-- <div class="text-gray-400">1.9mb</div>-->
+                  <!--end::Number-->
+                </div>
+                <!--begin::Info-->
+              </div>
+              <!--end::Item-->
+            </template>
+            <!--end::Action-->
+          </div>
+        </template>
         <!--begin::Description-->
         <div class="d-flex align-items-center mt-1 fs-6">
           <!--begin::Info-->
@@ -50,48 +96,8 @@
         </div>
         <!--end::User-->
         <!--end::Description-->
-      </div>
-      <!--end::Timeline heading-->
 
-      <!--begin::Timeline details-->
-      <div class="overflow-auto pb-5">
-        <!--begin::Record-->
-        <div
-            class="
-            d-flex
-            align-items-center
-            border border-dashed border-gray-300
-            rounded
-            min-w-750px
-            px-7
-            py-3
-            mb-5
-          "
-        >
-          <!--begin::Item-->
-          <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
-            <!--begin::Icon-->
-            <img alt="" class="w-30px me-3" src="/media/svg/files/folder-document.svg"/>
-            <!--end::Icon-->
-
-            <!--begin::Info-->
-            <div class="ms-1 fw-bold">
-              <!--begin::Desc-->
-              <a href="#" class="fs-6 text-hover-primary fw-bolder"
-              >{{filesLength}} archivos</a
-              >
-              <!--end::Desc-->
-
-              <!--begin::Number-->
-              <div class="text-gray-400">1.9mb</div>
-              <!--end::Number-->
-            </div>
-            <!--begin::Info-->
-          </div>
-          <!--end::Item-->
-          <!--end::Action-->
-        </div>
-        <!--end::Record-->
+        <!--end:: Files Record-->
 
       </div>
       <!--end::Timeline details-->
@@ -111,8 +117,8 @@ export default defineComponent({
   components: {},
   data() {
     const filesLength = computed(() => {
-      if (this.changeOpRequestTimelineHeaderInfo) {
-        return this.changeOpRequestTimelineHeaderInfo.change_op_request_files;
+      if (this.changeOpRequestTimelineHeaderInfo.change_op_request_files) {
+        return this.changeOpRequestTimelineHeaderInfo.change_op_request_files.length;
       }
       return 0;
     });
