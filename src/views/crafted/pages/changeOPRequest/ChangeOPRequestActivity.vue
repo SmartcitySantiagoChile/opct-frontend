@@ -19,7 +19,14 @@
         >
           <!--begin::Timeline-->
           <div class="timeline">
-            <ChangeOPRequestTimelineHeader v-bind:changeOpRequestTimelineHeaderInfo="headerInfo"></ChangeOPRequestTimelineHeader>
+            <ChangeOPRequestTimelineMessage
+                v-bind:changeOpRequestTimelineMessage="headerInfo"></ChangeOPRequestTimelineMessage>
+            <template v-for="(item, index) in orderedLogs" :key="index">
+              <template v-if="item.type ==='changeOPRequestMessage'">
+                <ChangeOPRequestTimelineMessage
+                    v-bind:changeOpRequestTimelineMessage="item.data"></ChangeOPRequestTimelineMessage>
+              </template>
+            </template>
             <KTActivityItem1></KTActivityItem1>
             <KTActivityItem2></KTActivityItem2>
             <KTActivityItem3></KTActivityItem3>
@@ -44,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from "vue";
+import {computed, defineComponent, watch} from "vue";
 import KTActivityItem1 from "@/layout/header/partials/activity-timeline/Item1.vue";
 import KTActivityItem2 from "@/layout/header/partials/activity-timeline/Item2.vue";
 import KTActivityItem3 from "@/layout/header/partials/activity-timeline/Item3.vue";
@@ -53,8 +60,8 @@ import KTActivityItem5 from "@/layout/header/partials/activity-timeline/Item5.vu
 import KTActivityItem6 from "@/layout/header/partials/activity-timeline/Item6.vue";
 import KTActivityItem7 from "@/layout/header/partials/activity-timeline/Item7.vue";
 import KTActivityItem8 from "@/layout/header/partials/activity-timeline/Item8.vue";
-import ChangeOPRequestTimelineHeader from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestTimelineHeader.vue";
 import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestBaseInfo.vue";
+import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestTimelineMessage.vue";
 import {useI18n} from "vue-i18n";
 
 export default defineComponent({
@@ -84,12 +91,52 @@ export default defineComponent({
     });
 
     const orderedLogs = computed(() => {
-      return []
+      let orderedLogsData = [] as any;
+      if (this.changeOPRequest) {
+        if (this.changeOPRequest["change_op_request_messages"]) {
+          this.changeOPRequest["change_op_request_messages"].forEach(message => {
+                let changeOPRequestData = {
+                  dateTime: message["created_at"],
+                  type: "changeOPRequestMessage",
+                  data: message
+                }
+                orderedLogsData.push(changeOPRequestData);
+              }
+          );
+        }
+        if (this.changeOPRequest["op_change_logs"]) {
+          this.changeOPRequest["op_change_logs"].forEach(changeLog => {
+                let opChangeLogData = {
+                  dateTime: changeLog["created_at"],
+                  type: "opChangeLog",
+                  data: changeLog
+                }
+                orderedLogsData.push(opChangeLogData);
+              }
+          );
+        }
+        if (this.changeOPRequest["status_logs"]) {
+          this.changeOPRequest["status_logs"].forEach(statusLog => {
+                let changeOPRequestStatusLofData = {
+                  dateTime: statusLog["created_at"],
+                  type: "statusLog",
+                  data: statusLog
+                }
+                orderedLogsData.push(changeOPRequestStatusLofData);
+              }
+          )
+        }
+      }
+      orderedLogsData.sort(function (a, b) {
+        return a.data - b.data
+      });
+      return orderedLogsData;
     });
 
     return {
       headerInfo: headerInfo,
       baseInfo: baseInfo,
+      orderedLogs: orderedLogs
     }
   },
   components: {
@@ -101,10 +148,10 @@ export default defineComponent({
     KTActivityItem6,
     KTActivityItem7,
     KTActivityItem8,
-    ChangeOPRequestTimelineHeader,
-    ChangeOPRequestBaseInfo
-  },
-  setUp() {
+    ChangeOPRequestBaseInfo, ChangeOPRequestTimelineMessage
+  }
+  ,
+  setUp(props) {
     const {t, te} = useI18n();
     const translate = (text) => {
       if (te(text)) {
@@ -114,8 +161,9 @@ export default defineComponent({
       }
     };
     return {
-      translate
+      translate,
     }
   }
-});
+})
+;
 </script>

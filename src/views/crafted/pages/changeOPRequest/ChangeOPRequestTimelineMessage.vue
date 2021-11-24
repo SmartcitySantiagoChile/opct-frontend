@@ -1,5 +1,5 @@
 <template>
-  <!--begin::ChangeOPRequestTimelineHeader item-->
+  <!--begin::ChangeOPRequestTimelineMessage item-->
   <div class="timeline-item">
     <!--begin::Timeline line-->
     <div class="timeline-line w-40px"></div>
@@ -21,7 +21,7 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
-          {{ changeOpRequestTimelineHeaderInfo.message }}
+          {{ changeOpRequestTimelineMessage.message }}
         </div>
         <!--end::Title-->
 
@@ -45,7 +45,8 @@
             mb-5
           "
           >
-            <template v-for="(item, index) in changeOpRequestTimelineHeaderInfo.change_op_request_files" :key="index">
+            <template v-for="(item, index) in files"
+                      :key="index">
               <!--begin::Item-->
               <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
                 <!--begin::Icon-->
@@ -56,7 +57,7 @@
                 <div class="ms-1 fw-bold">
                   <!--begin::Desc-->
                   <a href="#" class="fs-6 text-hover-primary fw-bolder"
-                  >{{ item.file.split("/media/")[1]}}</a
+                  >{{ item.file.split("/media/")[1] }}</a
                   >
                   <!--end::Desc-->
 
@@ -76,12 +77,12 @@
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">{{ translate("addedAt") }}
             {{
-              changeOpRequestTimelineHeaderInfo.created_at ?
-                  changeOpRequestTimelineHeaderInfo.created_at.split("T")[0] : ""
+              changeOpRequestTimelineMessage.created_at ?
+                  changeOpRequestTimelineMessage.created_at.split("T")[0] : ""
             }} {{ translate("atTime") }}
             {{
-              changeOpRequestTimelineHeaderInfo.created_at ?
-                  changeOpRequestTimelineHeaderInfo.created_at.split("T")[1].split("Z")[0] : ""
+              changeOpRequestTimelineMessage.created_at ?
+                  changeOpRequestTimelineMessage.created_at.split("T")[1].split("Z")[0] : ""
             }} {{ translate("by") }}
           </div>
           <!--end::Info-->
@@ -90,7 +91,7 @@
           <a href="#" class="text-primary fw-bolder me-1">
 
             {{
-              changeOpRequestTimelineHeaderInfo.creator ? changeOpRequestTimelineHeaderInfo.creator.first_name + " " + changeOpRequestTimelineHeaderInfo.creator.last_name : ""
+              changeOpRequestTimelineMessage.creator ? changeOpRequestTimelineMessage.creator.first_name + " " + changeOpRequestTimelineMessage.creator.last_name : ""
             }}
           </a>
         </div>
@@ -112,17 +113,33 @@ import {computed, defineComponent} from "vue";
 import {useI18n} from "vue-i18n";
 
 export default defineComponent({
-  name: "changeOPRequestTimelineHeader",
-  props: ["changeOpRequestTimelineHeaderInfo"],
+  name: "changeOPRequestTimelineMessage",
+  props: ["changeOpRequestTimelineMessage"],
   components: {},
   data() {
+    const files = computed(() => {
+      if (this.changeOpRequestTimelineMessage.change_op_request_files) {
+        return this.changeOpRequestTimelineMessage.change_op_request_files;
+      }
+      if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
+        return this.changeOpRequestTimelineMessage.change_op_request_message_files;
+      }
+      return [];
+
+    });
     const filesLength = computed(() => {
-      if (this.changeOpRequestTimelineHeaderInfo.change_op_request_files) {
-        return this.changeOpRequestTimelineHeaderInfo.change_op_request_files.length;
+      if (this.changeOpRequestTimelineMessage.change_op_request_files) {
+        return this.changeOpRequestTimelineMessage.change_op_request_files.length;
+      }
+      if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
+        return this.changeOpRequestTimelineMessage.change_op_request_message_files.length;
       }
       return 0;
     });
-    return {filesLength};
+    return {
+      filesLength,
+      files
+    };
   },
   setup() {
     const {t, te} = useI18n();
