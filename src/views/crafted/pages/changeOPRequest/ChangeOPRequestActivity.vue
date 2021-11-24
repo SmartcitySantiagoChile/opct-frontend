@@ -26,6 +26,10 @@
                 <ChangeOPRequestTimelineMessage
                     v-bind:changeOpRequestTimelineMessage="item.data"></ChangeOPRequestTimelineMessage>
               </template>
+              <template v-if="item.type ==='statusLog'">
+                <ChangeOPRequestTimelineMilestone
+                    v-bind:changeOPRequestTimelineStatusLog="item.data"></ChangeOPRequestTimelineMilestone>
+              </template>
             </template>
             <KTActivityItem1></KTActivityItem1>
             <KTActivityItem2></KTActivityItem2>
@@ -51,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, watch} from "vue";
+import {computed, defineComponent} from "vue";
 import KTActivityItem1 from "@/layout/header/partials/activity-timeline/Item1.vue";
 import KTActivityItem2 from "@/layout/header/partials/activity-timeline/Item2.vue";
 import KTActivityItem3 from "@/layout/header/partials/activity-timeline/Item3.vue";
@@ -62,6 +66,8 @@ import KTActivityItem7 from "@/layout/header/partials/activity-timeline/Item7.vu
 import KTActivityItem8 from "@/layout/header/partials/activity-timeline/Item8.vue";
 import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestBaseInfo.vue";
 import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestTimelineMessage.vue";
+import ChangeOPRequestTimelineMilestone
+  from "@/views/crafted/pages/changeOPRequest/ChangeOPRequestTimelineMilestone.vue";
 import {useI18n} from "vue-i18n";
 
 export default defineComponent({
@@ -128,7 +134,7 @@ export default defineComponent({
         }
       }
       orderedLogsData.sort(function (a, b) {
-        return a.data - b.data
+        return a.data.created_at - b.data.created_at
       });
       return orderedLogsData;
     });
@@ -148,10 +154,11 @@ export default defineComponent({
     KTActivityItem6,
     KTActivityItem7,
     KTActivityItem8,
-    ChangeOPRequestBaseInfo, ChangeOPRequestTimelineMessage
+    ChangeOPRequestBaseInfo, ChangeOPRequestTimelineMessage,
+    ChangeOPRequestTimelineMilestone
   }
   ,
-  setUp(props) {
+  setUp() {
     const {t, te} = useI18n();
     const translate = (text) => {
       if (te(text)) {

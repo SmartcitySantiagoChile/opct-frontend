@@ -86,7 +86,10 @@ const messages = {
     reason: "Reason",
     addedAt: "Added",
     atTime: "at",
-    "by": "by"
+    by: "by",
+    requestChangeStatus: "Request change status to",
+    to: "to"
+
   },
   es: {
     dashboard: "Tablero",
@@ -173,7 +176,9 @@ const messages = {
     reason: "Motivo",
     addedAt: "Añadido el",
     atTime: "a las",
-    by: "por"
+    by: "por",
+    requestChangeStatus: "Solicitud cambia a estado",
+    to: "a"
 
 
   },
