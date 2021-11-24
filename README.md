@@ -18,7 +18,7 @@ Create virtual environement file at root place with name `.env.development` with
 ```
 NODE_ENV=development
 
-VUE_APP_BASE_URL=http://endpoint_to_api
+VUE_APP_API_BASE_URL=http://endpoint_to_api
 
 VUE_APP_I18N_LOCALE=es
 VUE_APP_I18N_FALLBACK_LOCALE=es
@@ -36,7 +36,7 @@ Before to create production files we need to add `.env.production` file with con
 ```
 NODE_ENV=production
 
-VUE_APP_BASE_URL=http://production_endpoint_to_api
+VUE_APP_API_BASE_URL=http://production_endpoint_to_api
 
 VUE_APP_I18N_LOCALE=es
 VUE_APP_I18N_FALLBACK_LOCALE=es
