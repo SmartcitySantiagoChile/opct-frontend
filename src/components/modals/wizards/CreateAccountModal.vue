@@ -1123,7 +1123,9 @@
                     @click="previousStep()"
                   >
                     <span class="svg-icon svg-icon-3 me-1">
-                      <inline-svg src="/media/icons/duotune/arrows/arr063.svg" />
+                      <inline-svg
+                        src="/media/icons/duotune/arrows/arr063.svg"
+                      />
                     </span>
                     Back
                   </button>
@@ -1159,7 +1161,9 @@
                   <button type="submit" class="btn btn-lg btn-primary" v-else>
                     Continue
                     <span class="svg-icon svg-icon-3 ms-1 me-0">
-                      <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
+                      <inline-svg
+                        src="/media/icons/duotune/arrows/arr064.svg"
+                      />
                     </span>
                   </button>
                 </div>

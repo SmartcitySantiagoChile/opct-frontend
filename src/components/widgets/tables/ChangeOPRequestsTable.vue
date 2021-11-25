@@ -5,21 +5,21 @@
     <div class="card-header border-0 pt-5">
       <h3 class="card-title align-items-start flex-column">
         <span class="card-label fw-bolder fs-3 mb-1">{{
-            translate("changeOPRequests")
-          }}</span>
+          translate("changeOPRequests")
+        }}</span>
 
         <span class="text-muted mt-1 fw-bold fs-7">{{
-            translate("changesNumber") + ": " + changeOPRequestsCount
-          }}</span>
+          translate("changesNumber") + ": " + changeOPRequestsCount
+        }}</span>
       </h3>
       <div class="card-toolbar">
         <!--begin::Menu-->
         <input
-            type="text"
-            class="form-control"
-            name="filter"
-            v-bind:placeholder="translate('filterByOp')"
-            @keyup="onFilterChange"
+          type="text"
+          class="form-control"
+          name="filter"
+          v-bind:placeholder="translate('filterByOp')"
+          @keyup="onFilterChange"
         />
 
         <!--end::Menu-->
@@ -33,7 +33,7 @@
       <div class="table-responsive">
         <!--begin::Table-->
         <table
-            class="
+          class="
             table
             align-middle
             gs-0
@@ -44,42 +44,42 @@
         >
           <!--begin::Table head-->
           <thead>
-          <tr
+            <tr
               class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-          >
-            <th class="ps-4 min-w-125px rounded-start">
-              {{ translate("creationDate") }}
-            </th>
-            <th class="min-w-200px">{{ translate("operationProgram") }}</th>
-            <th class="min-w-150px">{{ translate("title") }}</th>
-            <th class="min-w-150px">{{ translate("reason")}}</th>
-            <th class="min-w-100px">{{ translate("creator") }}</th>
-            <th class="min-w-100px">{{ translate("counterpart") }}</th>
-            <th class="min-w-80px">{{ translate("status") }}</th>
-            <th class="min-w-80px"></th>
-          </tr>
+            >
+              <th class="ps-4 min-w-125px rounded-start">
+                {{ translate("creationDate") }}
+              </th>
+              <th class="min-w-200px">{{ translate("operationProgram") }}</th>
+              <th class="min-w-150px">{{ translate("title") }}</th>
+              <th class="min-w-150px">{{ translate("reason") }}</th>
+              <th class="min-w-100px">{{ translate("creator") }}</th>
+              <th class="min-w-100px">{{ translate("counterpart") }}</th>
+              <th class="min-w-80px">{{ translate("status") }}</th>
+              <th class="min-w-80px"></th>
+            </tr>
           </thead>
           <!--end::Table head-->
 
           <!--begin::Table body-->
           <tbody>
-          <template v-for="(item, index) in changeOPRequests" :key="index">
-            <tr>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5"></div>
-                  <div class="d-flex justify-content-start flex-column">
-                    <a
-                       href=""
+            <template v-for="(item, index) in changeOPRequests" :key="index">
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
+                        href=""
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                    >{{ item.created_at.split("T")[0] }}
-                    </a>
+                        >{{ item.created_at.split("T")[0] }}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     href="#"
                     class="
                       text-dark
@@ -89,12 +89,12 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.op.start_at }}</a
-                >
-              </td>
+                    >{{ item.op.start_at }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     href="#"
                     class="
                       text-dark
@@ -104,11 +104,11 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.title }}</a
-                >
-              </td>
-              <td>
-                <a
+                    >{{ item.title }}</a
+                  >
+                </td>
+                <td>
+                  <a
                     href="#"
                     class="
                       text-dark
@@ -118,12 +118,12 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.reason }}</a
-                >
-              </td>
+                    >{{ item.reason }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     href="#"
                     class="
                       text-dark
@@ -133,14 +133,14 @@
                       mb-1
                       fs-6
                     "
-                >{{
-                    item.creator.first_name + " " + item.creator.last_name
-                  }}</a
-                >
-              </td>
+                    >{{
+                      item.creator.first_name + " " + item.creator.last_name
+                    }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     href="#"
                     class="
                       text-dark
@@ -150,12 +150,12 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.counterpart.name }}</a
-                >
-              </td>
+                    >{{ item.counterpart.name }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     href="#"
                     class="
                       text-dark
@@ -165,23 +165,25 @@
                       mb-1
                       fs-6
                     "
-                >{{ item.status.name }}</a
-                >
-              </td>
-              <td >
-                <a
+                    >{{ item.status.name }}</a
+                  >
+                </td>
+                <td>
+                  <a
                     v-bind:href="item.url.split('api')[1]"
                     class="
                       btn btn-sm btn-icon btn-bg-light btn-active-color-primary
                     "
-                >
+                  >
                     <span class="svg-icon svg-icon-2">
-                      <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
+                      <inline-svg
+                        src="/media/icons/duotune/arrows/arr064.svg"
+                      />
                     </span>
-                </a>
-              </td>
-            </tr>
-          </template>
+                  </a>
+                </td>
+              </tr>
+            </template>
           </tbody>
           <!--end::Table body-->
         </table>
@@ -194,17 +196,17 @@
               </button>
             </li>
             <template
-                v-for="(item, index) in Array.from(
+              v-for="(item, index) in Array.from(
                 { length: Math.ceil(changeOPRequestsCount / 10) },
                 (_, i) => i + 1
               )"
-                :key="index"
+              :key="index"
             >
               <li class="page-item">
                 <button
-                    @click="onPageChange"
-                    :data-value="item"
-                    class="page-link"
+                  @click="onPageChange"
+                  :data-value="item"
+                  class="page-link"
                 >
                   {{ item }}
                 </button>
@@ -225,10 +227,10 @@
   <!--end::Tables Widget 12-->
 </template>
 <script lang="ts">
-import {computed, defineComponent} from "vue";
-import {Actions} from "@/store/enums/StoreEnums";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
+import { computed, defineComponent } from "vue";
+import { Actions } from "@/store/enums/StoreEnums";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "change-op-requests-table",
@@ -237,7 +239,7 @@ export default defineComponent({
     widgetClasses: String,
   },
   setup() {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => {
       if (te(text)) {
         return t(text);
@@ -248,10 +250,10 @@ export default defineComponent({
     const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
     const changeOPRequests = computed(
-        () => store.getters.getCurrentChangeOPRequests
+      () => store.getters.getCurrentChangeOPRequests
     );
     const changeOPRequestsCount = computed(
-        () => store.getters.getCurrentChangeOPRequestsCount
+      () => store.getters.getCurrentChangeOPRequestsCount
     );
 
     const onFilterChange = (event) => {
@@ -267,7 +269,7 @@ export default defineComponent({
 
     const onPageChange = (event) => {
       const filter = document.querySelector<HTMLInputElement>(
-          'input[name="filter"]'
+        'input[name="filter"]'
       );
       let params = {};
       if (filter) {
@@ -275,9 +277,9 @@ export default defineComponent({
       }
       let pageId = event.target.getAttribute("data-value");
       pageId =
-          pageId === "-1"
-              ? String(Math.ceil(changeOPRequestsCount.value / 10))
-              : pageId;
+        pageId === "-1"
+          ? String(Math.ceil(changeOPRequestsCount.value / 10))
+          : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();

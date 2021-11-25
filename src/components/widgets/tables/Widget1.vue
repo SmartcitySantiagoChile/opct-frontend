@@ -103,7 +103,9 @@
                     "
                   >
                     <span class="svg-icon svg-icon-2">
-                      <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
+                      <inline-svg
+                        src="/media/icons/duotune/arrows/arr064.svg"
+                      />
                     </span>
                   </a>
                 </td>

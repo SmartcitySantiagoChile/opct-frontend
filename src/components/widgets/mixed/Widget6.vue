@@ -64,7 +64,9 @@
               <div class="symbol symbol-50px me-3">
                 <div class="symbol-label bg-light-danger">
                   <span class="svg-icon svg-icon-1 svg-icon-danger">
-                    <inline-svg src="/media/icons/duotune/abstract/abs027.svg" />
+                    <inline-svg
+                      src="/media/icons/duotune/abstract/abs027.svg"
+                    />
                   </span>
                 </div>
               </div>

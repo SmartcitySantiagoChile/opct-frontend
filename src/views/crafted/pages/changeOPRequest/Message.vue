@@ -9,7 +9,7 @@
     <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
       <div class="symbol-label bg-light">
         <span class="svg-icon svg-icon-2 svg-icon-gray-500">
-          <inline-svg src="/media/icons/duotune/communication/com003.svg"/>
+          <inline-svg src="/media/icons/duotune/communication/com003.svg" />
         </span>
       </div>
     </div>
@@ -24,8 +24,6 @@
           {{ changeOpRequestTimelineMessage.message }}
         </div>
         <!--end::Title-->
-
-
       </div>
       <!--end::Timeline heading-->
 
@@ -34,31 +32,34 @@
         <!--begin::Files Record-->
         <template v-if="filesLength > 0">
           <div
-              class="
-            d-flex
-            align-items-center
-            border border-dashed border-gray-300
-            rounded
-            min-w-750px
-            px-7
-            py-3
-            mb-5
-          "
+            class="
+              d-flex
+              align-items-center
+              border border-dashed border-gray-300
+              rounded
+              min-w-750px
+              px-7
+              py-3
+              mb-5
+            "
           >
-            <template v-for="(item, index) in files"
-                      :key="index">
+            <template v-for="(item, index) in files" :key="index">
               <!--begin::Item-->
               <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
                 <!--begin::Icon-->
-                <img alt="" class="w-30px me-3" src="/media/svg/files/doc.svg"/>
+                <img
+                  alt=""
+                  class="w-30px me-3"
+                  src="/media/svg/files/doc.svg"
+                />
                 <!--end::Icon-->
 
                 <!--begin::Info-->
                 <div class="ms-1 fw-bold">
                   <!--begin::Desc-->
-                  <a href="#" class="fs-6 text-hover-primary fw-bolder"
-                  >{{ item.file.split("/media/")[1] }}</a
-                  >
+                  <a href="#" class="fs-6 text-hover-primary fw-bolder">{{
+                    item.file.split("/media/")[1]
+                  }}</a>
                   <!--end::Desc-->
 
                   <!--begin::Number-->
@@ -75,23 +76,33 @@
         <!--begin::Description-->
         <div class="d-flex align-items-center mt-1 fs-6">
           <!--begin::Info-->
-          <div class="text-muted me-2 fs-7">{{ translate("addedAt") }}
+          <div class="text-muted me-2 fs-7">
+            {{ translate("addedAt") }}
             {{
-              changeOpRequestTimelineMessage.created_at ?
-                  changeOpRequestTimelineMessage.created_at.split("T")[0] : ""
-            }} {{ translate("atTime") }}
+              changeOpRequestTimelineMessage.created_at
+                ? changeOpRequestTimelineMessage.created_at.split("T")[0]
+                : ""
+            }}
+            {{ translate("atTime") }}
             {{
-              changeOpRequestTimelineMessage.created_at ?
-                  changeOpRequestTimelineMessage.created_at.split("T")[1].split("Z")[0] : ""
-            }} {{ translate("by") }}
+              changeOpRequestTimelineMessage.created_at
+                ? changeOpRequestTimelineMessage.created_at
+                    .split("T")[1]
+                    .split("Z")[0]
+                : ""
+            }}
+            {{ translate("by") }}
           </div>
           <!--end::Info-->
 
           <!--begin::User-->
           <a href="#" class="text-primary fw-bolder me-1">
-
             {{
-              changeOpRequestTimelineMessage.creator ? changeOpRequestTimelineMessage.creator.first_name + " " + changeOpRequestTimelineMessage.creator.last_name : ""
+              changeOpRequestTimelineMessage.creator
+                ? changeOpRequestTimelineMessage.creator.first_name +
+                  " " +
+                  changeOpRequestTimelineMessage.creator.last_name
+                : ""
             }}
           </a>
         </div>
@@ -99,7 +110,6 @@
         <!--end::Description-->
 
         <!--end:: Files Record-->
-
       </div>
       <!--end::Timeline details-->
     </div>
@@ -109,8 +119,8 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from "vue";
-import {useI18n} from "vue-i18n";
+import { computed, defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "changeOPRequestTimelineMessage",
@@ -122,27 +132,29 @@ export default defineComponent({
         return this.changeOpRequestTimelineMessage.change_op_request_files;
       }
       if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
-        return this.changeOpRequestTimelineMessage.change_op_request_message_files;
+        return this.changeOpRequestTimelineMessage
+          .change_op_request_message_files;
       }
       return [];
-
     });
     const filesLength = computed(() => {
       if (this.changeOpRequestTimelineMessage.change_op_request_files) {
-        return this.changeOpRequestTimelineMessage.change_op_request_files.length;
+        return this.changeOpRequestTimelineMessage.change_op_request_files
+          .length;
       }
       if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
-        return this.changeOpRequestTimelineMessage.change_op_request_message_files.length;
+        return this.changeOpRequestTimelineMessage
+          .change_op_request_message_files.length;
       }
       return 0;
     });
     return {
       filesLength,
-      files
+      files,
     };
   },
   setup() {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => {
       if (te(text)) {
         return t(text);
@@ -151,7 +163,7 @@ export default defineComponent({
       }
     };
     return {
-      translate
+      translate,
     };
   },
 });

@@ -89,7 +89,8 @@ const messages = {
     by: "by",
     requestChangeStatus: "Request change status to",
     to: "to",
-    changeOperationProgramTo: "Change Operation Program to"
+    changeOperationProgramTo: "Change Operation Program to",
+    writeReply: "Write a reply..."
 
   },
   es: {
@@ -180,7 +181,8 @@ const messages = {
     by: "por",
     requestChangeStatus: "Solicitud cambia a estado",
     to: "a",
-    changeOperationProgramTo: "Se cambia PO a "
+    changeOperationProgramTo: "Se cambia PO a ",
+    writeReply: "Escriba una respuesta..."
 
 
   },

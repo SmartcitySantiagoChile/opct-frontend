@@ -177,7 +177,9 @@
                   <!--begin::Number-->
                   <div class="d-flex align-items-center">
                     <span class="svg-icon svg-icon-3 svg-icon-success me-2">
-                      <inline-svg src="/media/icons/duotune/arrows/arr066.svg" />
+                      <inline-svg
+                        src="/media/icons/duotune/arrows/arr066.svg"
+                      />
                     </span>
                     <div
                       class="fs-2 fw-bolder"
@@ -211,7 +213,9 @@
                   <!--begin::Number-->
                   <div class="d-flex align-items-center">
                     <span class="svg-icon svg-icon-3 svg-icon-danger me-2">
-                      <inline-svg src="/media/icons/duotune/arrows/arr065.svg" />
+                      <inline-svg
+                        src="/media/icons/duotune/arrows/arr065.svg"
+                      />
                     </span>
                     <div
                       class="fs-2 fw-bolder"
@@ -244,7 +248,9 @@
                   <!--begin::Number-->
                   <div class="d-flex align-items-center">
                     <span class="svg-icon svg-icon-3 svg-icon-success me-2">
-                      <inline-svg src="/media/icons/duotune/arrows/arr066.svg" />
+                      <inline-svg
+                        src="/media/icons/duotune/arrows/arr066.svg"
+                      />
                     </span>
                     <div
                       class="fs-2 fw-bolder"
