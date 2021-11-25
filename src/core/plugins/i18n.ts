@@ -88,7 +88,8 @@ const messages = {
     atTime: "at",
     by: "by",
     requestChangeStatus: "Request change status to",
-    to: "to"
+    to: "to",
+    changeOperationProgramTo: "Change Operation Program to"
 
   },
   es: {
@@ -178,7 +179,8 @@ const messages = {
     atTime: "a las",
     by: "por",
     requestChangeStatus: "Solicitud cambia a estado",
-    to: "a"
+    to: "a",
+    changeOperationProgramTo: "Se cambia PO a "
 
 
   },

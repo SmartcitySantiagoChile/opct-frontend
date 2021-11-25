@@ -25,10 +25,11 @@
               :class="`badge-light-success`"
               class="badge fs-4 fw-bolder"
           >
-          {{
-              translate("requestChangeStatus") + " " +
-              changeOPRequestTimelineStatusLog.new_status.name
-            }}
+          {{changeOPRequestTimelineMilestoneLog.new_status ? translate("requestChangeStatus") : "" + " " }}
+          {{changeOPRequestTimelineMilestoneLog.new_status ? changeOPRequestTimelineMilestoneLog.new_status.name : ""}}
+          {{changeOPRequestTimelineMilestoneLog.new_op ? translate("changeOperationProgramTo") : "" + " " }}
+          {{changeOPRequestTimelineMilestoneLog.new_op ? changeOPRequestTimelineMilestoneLog.new_op.start_at.split("T")[0] : ""}}
+
           </span>
         </div>
         <!--end::Title-->
@@ -45,12 +46,12 @@
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">{{ translate("addedAt") }}
             {{
-              changeOPRequestTimelineStatusLog.created_at ?
-                  changeOPRequestTimelineStatusLog.created_at.split("T")[0] : ""
+              changeOPRequestTimelineMilestoneLog.created_at ?
+                  changeOPRequestTimelineMilestoneLog.created_at.split("T")[0] : ""
             }} {{ translate("atTime") }}
             {{
-              changeOPRequestTimelineStatusLog.created_at ?
-                  changeOPRequestTimelineStatusLog.created_at.split("T")[1].split("Z")[0] : ""
+              changeOPRequestTimelineMilestoneLog.created_at ?
+                  changeOPRequestTimelineMilestoneLog.created_at.split("T")[1].split("Z")[0] : ""
             }} {{ translate("by") }}
           </div>
           <!--end::Info-->
@@ -59,7 +60,10 @@
           <a href="#" class="text-primary fw-bolder me-1">
 
             {{
-              changeOPRequestTimelineStatusLog.user ? changeOPRequestTimelineStatusLog.user.first_name + " " + changeOPRequestTimelineStatusLog.user.last_name : ""
+              changeOPRequestTimelineMilestoneLog.user ? changeOPRequestTimelineMilestoneLog.user.first_name + " " + changeOPRequestTimelineMilestoneLog.user.last_name : ""
+            }}
+            {{
+              changeOPRequestTimelineMilestoneLog.creator ? changeOPRequestTimelineMilestoneLog.creator.first_name + " " + changeOPRequestTimelineMilestoneLog.creator.last_name : ""
             }}
           </a>
         </div>
@@ -82,7 +86,7 @@ import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: "changeOPRequestTimelineMilestone",
-  props: ["changeOPRequestTimelineStatusLog"],
+  props: ["changeOPRequestTimelineMilestoneLog"],
   components: {},
   setup() {
     const {t, te} = useI18n();

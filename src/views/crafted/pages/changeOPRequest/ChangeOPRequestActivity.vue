@@ -26,19 +26,11 @@
                 <ChangeOPRequestTimelineMessage
                     v-bind:changeOpRequestTimelineMessage="item.data"></ChangeOPRequestTimelineMessage>
               </template>
-              <template v-if="item.type ==='statusLog'">
+              <template v-if="item.type ==='statusLog' || item.type === 'opChangeLog' ">
                 <ChangeOPRequestTimelineMilestone
-                    v-bind:changeOPRequestTimelineStatusLog="item.data"></ChangeOPRequestTimelineMilestone>
+                    v-bind:changeOPRequestTimelineMilestoneLog="item.data"></ChangeOPRequestTimelineMilestone>
               </template>
             </template>
-            <KTActivityItem1></KTActivityItem1>
-            <KTActivityItem2></KTActivityItem2>
-            <KTActivityItem3></KTActivityItem3>
-            <KTActivityItem4></KTActivityItem4>
-            <KTActivityItem5></KTActivityItem5>
-            <KTActivityItem6></KTActivityItem6>
-            <KTActivityItem7></KTActivityItem7>
-            <KTActivityItem8></KTActivityItem8>
           </div>
           <!--end::Timeline-->
         </div>
@@ -134,7 +126,9 @@ export default defineComponent({
         }
       }
       orderedLogsData.sort(function (a, b) {
-        return a.data.created_at - b.data.created_at
+        const date_a = Date.parse(a.data.created_at);
+        const date_b = Date.parse(b.data.created_at);
+        return date_a - date_b;
       });
       return orderedLogsData;
     });
@@ -146,14 +140,6 @@ export default defineComponent({
     }
   },
   components: {
-    KTActivityItem1,
-    KTActivityItem2,
-    KTActivityItem3,
-    KTActivityItem4,
-    KTActivityItem5,
-    KTActivityItem6,
-    KTActivityItem7,
-    KTActivityItem8,
     ChangeOPRequestBaseInfo, ChangeOPRequestTimelineMessage,
     ChangeOPRequestTimelineMilestone
   }
