@@ -14,7 +14,8 @@ enum Actions {
   SET_BREADCRUMB_ACTION = "setBreadcrumbAction",
   GET_CHANGE_OP_REQUEST = "getChangeOPRequest",
   GET_CHANGE_OP_REQUESTS = "getChangeOPRequests",
-  GET_CHANGE_OP_REQUESTS_WITH_PARAMS = "getChangeOPRequestsWithParams"
+  GET_CHANGE_OP_REQUESTS_WITH_PARAMS = "getChangeOPRequestsWithParams",
+  SEND_CHANGE_OP_REQUEST_MESSAGE = "sendChangeOPRequestMessage",
 }
 
 enum Mutations {

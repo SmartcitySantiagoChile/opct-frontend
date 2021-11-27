@@ -52,10 +52,14 @@
           <el-upload
               :auto-upload="false"
               :file-list="fileList"
+              :on-change="handleChange"
               action=""
+
           >
-            <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
-            <el-button size="small" type="primary">
+            <template #trigger>
+              <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
+            </template>
+            <el-button size="small" style="margin-left: 10px" type="primary" @click="sendMessage">
               {{ translate("send") }}
             </el-button>
           </el-upload>
@@ -70,21 +74,17 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted} from "vue";
+import {computed, defineComponent, onMounted, ref} from "vue";
 import Quill from "quill/dist/quill.js";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
+import { Actions } from "@/store/enums/StoreEnums";
+
 
 export default defineComponent({
   name: "reply",
   props: {
     widgetClasses: String,
-  },
-  data() {
-    const fileList: Array<any> = [];
-    return {
-      fileList: fileList,
-    };
   },
   setup() {
     const {t, te} = useI18n();
@@ -99,15 +99,21 @@ export default defineComponent({
     const userNameAndSurname = computed(() => {
       return store.getters.currentUserNameAndSurname;
     });
-    const sendMessage = (event) => {
+    let fileList = ref([]);
+    const sendMessage = () => {
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
       const text = quill.getText();
-      console.log(text);
+      let messageFiles = [];
+      const params = {
+        created_at: new Date().getTime(),
+        message: text,
+      }
+      store.dispatch(Actions.SEND_CHANGE_OP_REQUEST_MESSAGE, params);
     };
-    const uploadFile = (event) => {
-      console.log(event);
-    }
+    const handleChange = (file, fileListData) => {
+      fileList = fileListData;
+    };
     onMounted(() => {
       const editorId = "reply_editor";
       // init editor
@@ -122,10 +128,12 @@ export default defineComponent({
       };
 
       // Init editor
-      const quillEditor = new Quill("#" + editorId, options);
+      new Quill("#" + editorId, options);
     });
     return {
       userNameAndSurname,
+      fileList,
+      handleChange,
       sendMessage,
       translate,
     };
