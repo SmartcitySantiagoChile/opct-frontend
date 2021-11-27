@@ -46,34 +46,19 @@
           <!--end::Editor-->
 
           <div class="separator"></div>
-
           <!--begin::Toolbar-->
           <div id="reply_toolbar" class="ql-toolbar d-flex flex-stack py-2">
-            <div class="me-2">
-              <span class="ql-formats ql-size ms-0">
-                <select class="ql-size w-75px"></select>
-              </span>
-
-              <span class="ql-formats">
-                <button class="ql-bold"></button>
-                <button class="ql-italic"></button>
-                <button class="ql-underline"></button>
-                <button class="ql-strike"></button>
-                <span class="btn btn-icon btn-sm btn-active-color-primary pe-0 me-2">
-                  <span class="svg-icon svg-icon-3 mb-3">
-                    <inline-svg
-                      src="/media/icons/duotune/communication/com008.svg"/>
-                  </span>
-                </span>
-                <span class="btn btn-icon btn-sm btn-active-color-primary pe-0 me-2">
-                  <span class="svg-icon svg-icon-2 mb-3">
-                    <inline-svg src="/media/icons/duotune/general/gen016.svg"/>
-                  </span>
-                </span>
-              </span>
-            </div>
-
           </div>
+          <el-upload
+              :auto-upload="false"
+              :file-list="fileList"
+              action=""
+          >
+            <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
+            <el-button size="small" type="primary">
+              {{ translate("send") }}
+            </el-button>
+          </el-upload>
           <!--end::Toolbar-->
         </form>
         <!--end::Form-->
@@ -95,7 +80,12 @@ export default defineComponent({
   props: {
     widgetClasses: String,
   },
-
+  data() {
+    const fileList: Array<any> = [];
+    return {
+      fileList: fileList,
+    };
+  },
   setup() {
     const {t, te} = useI18n();
     const translate = (text) => {
@@ -109,9 +99,17 @@ export default defineComponent({
     const userNameAndSurname = computed(() => {
       return store.getters.currentUserNameAndSurname;
     });
+    const sendMessage = (event) => {
+      const container = document.querySelector("#reply_editor");
+      const quill = Quill.find(container);
+      const text = quill.getText();
+      console.log(text);
+    };
+    const uploadFile = (event) => {
+      console.log(event);
+    }
     onMounted(() => {
       const editorId = "reply_editor";
-
       // init editor
       const options = {
         modules: {
@@ -128,6 +126,7 @@ export default defineComponent({
     });
     return {
       userNameAndSurname,
+      sendMessage,
       translate,
     };
   },

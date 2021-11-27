@@ -90,7 +90,9 @@ const messages = {
     requestChangeStatus: "Request change status to",
     to: "to",
     changeOperationProgramTo: "Change Operation Program to",
-    writeReply: "Write a reply..."
+    writeReply: "Write a reply...",
+    send: "Send",
+    attachFiles: "Attach files"
 
   },
   es: {
@@ -182,9 +184,9 @@ const messages = {
     requestChangeStatus: "Solicitud cambia a estado",
     to: "a",
     changeOperationProgramTo: "Se cambia PO a ",
-    writeReply: "Escriba una respuesta..."
-
-
+    writeReply: "Escriba una respuesta...",
+    send: "Enviar",
+    attachFiles: "Adjuntar archivos"
   },
   de: {
     dashboard: "Instrumententafel",
