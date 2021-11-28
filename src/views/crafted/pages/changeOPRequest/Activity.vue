@@ -3,7 +3,7 @@
   <div class="card">
     <div class="card-title align-items-center">
       <ChangeOPRequestBaseInfo
-        v-bind:changeOpRequestBaseInfo="baseInfo"
+          v-bind:changeOpRequestBaseInfo="baseInfo"
       ></ChangeOPRequestBaseInfo>
     </div>
     <div class="separator"></div>
@@ -13,27 +13,27 @@
       <div class="tab-content">
         <!--begin::Tab panel-->
         <div
-          id="kt_activity_today"
-          class="card-body p-0 tab-pane fade show active"
-          role="tabpanel"
-          aria-labelledby="kt_activity_today_tab"
+            id="kt_activity_today"
+            aria-labelledby="kt_activity_today_tab"
+            class="card-body p-0 tab-pane fade show active"
+            role="tabpanel"
         >
           <!--begin::Timeline-->
           <div class="timeline">
             <ChangeOPRequestTimelineMessage
-              v-bind:changeOpRequestTimelineMessage="headerInfo"
+                v-bind:changeOpRequestTimelineMessage="headerInfo"
             ></ChangeOPRequestTimelineMessage>
             <template v-for="(item, index) in orderedLogs" :key="index">
               <template v-if="item.type === 'changeOPRequestMessage'">
                 <ChangeOPRequestTimelineMessage
-                  v-bind:changeOpRequestTimelineMessage="item.data"
+                    v-bind:changeOpRequestTimelineMessage="item.data"
                 ></ChangeOPRequestTimelineMessage>
               </template>
               <template
-                v-if="item.type === 'statusLog' || item.type === 'opChangeLog'"
+                  v-if="item.type === 'statusLog' || item.type === 'opChangeLog'"
               >
                 <ChangeOPRequestTimelineMilestone
-                  v-bind:changeOPRequestTimelineMilestoneLog="item.data"
+                    v-bind:changeOPRequestTimelineMilestoneLog="item.data"
                 ></ChangeOPRequestTimelineMilestone>
               </template>
             </template>
@@ -46,18 +46,20 @@
     </div>
     <div class="separator"></div>
     <Reply></Reply>
+    {{ hasChangeStatusOption }}
     <!--end::Card body-->
   </div>
   <!--end::Timeline-->
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import {computed, defineComponent} from "vue";
 import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/BaseInfo.vue";
 import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/Message.vue";
 import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/Milestone.vue";
-import { useI18n } from "vue-i18n";
+import {useI18n} from "vue-i18n";
 import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
+import {useStore} from "vuex";
 
 export default defineComponent({
   inheritAttrs: false,
@@ -70,7 +72,7 @@ export default defineComponent({
       baseData["op"] = this.changeOPRequest["op"];
       baseData["status"] = this.changeOPRequest["status"];
       baseData["change_op_request_files"] =
-        this.changeOPRequest["change_op_request_files"];
+          this.changeOPRequest["change_op_request_files"];
       baseData["reason"] = this.changeOPRequest["reason"];
       baseData["creator"] = this.changeOPRequest["creator"];
       baseData["counterpart"] = this.changeOPRequest["counterpart"];
@@ -83,23 +85,22 @@ export default defineComponent({
       headerData["creator"] = this.changeOPRequest["creator"];
       headerData["message"] = this.changeOPRequest["message"];
       headerData["change_op_request_files"] =
-        this.changeOPRequest["change_op_request_files"];
+          this.changeOPRequest["change_op_request_files"];
       return headerData;
     });
-
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
       if (this.changeOPRequest) {
         if (this.changeOPRequest["change_op_request_messages"]) {
           this.changeOPRequest["change_op_request_messages"].forEach(
-            (message) => {
-              let changeOPRequestData = {
-                dateTime: message["created_at"],
-                type: "changeOPRequestMessage",
-                data: message,
-              };
-              orderedLogsData.push(changeOPRequestData);
-            }
+              (message) => {
+                let changeOPRequestData = {
+                  dateTime: message["created_at"],
+                  type: "changeOPRequestMessage",
+                  data: message,
+                };
+                orderedLogsData.push(changeOPRequestData);
+              }
           );
         }
         if (this.changeOPRequest["op_change_logs"]) {
@@ -130,11 +131,10 @@ export default defineComponent({
       });
       return orderedLogsData;
     });
-
     return {
-      headerInfo: headerInfo,
-      baseInfo: baseInfo,
-      orderedLogs: orderedLogs,
+      headerInfo,
+      baseInfo,
+      orderedLogs,
     };
   },
   components: {
@@ -143,8 +143,14 @@ export default defineComponent({
     ChangeOPRequestTimelineMilestone,
     Reply,
   },
+  computed: {
+    hasChangeStatusOption() {
+      const store = useStore();
+      return store.getters.hasChangeStatusOption
+    },
+  },
   setUp() {
-    const { t, te } = useI18n();
+    const {t, te} = useI18n();
     const translate = (text) => {
       if (te(text)) {
         return t(text);
@@ -153,7 +159,7 @@ export default defineComponent({
       }
     };
     return {
-      translate,
+      translate
     };
   },
 });

@@ -10,7 +10,7 @@ export interface User {
   email: string;
   password: string;
   token: string;
-  organization: string;
+  organization: any;
   role: string;
   access_to_ops: boolean;
   access_to_organizations: boolean;
@@ -99,6 +99,14 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    */
   get getErrors(): Array<string> {
     return this.errors;
+  }
+
+  /**
+   * Returns true if organization name is "ADATRAP" todo: change condition
+   * @returns boolean
+   */
+  get hasChangeStatusOption(): boolean {
+    return this.user.organization.name === "ADATRAP";
   }
 
   @Mutation

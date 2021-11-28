@@ -59,7 +59,7 @@
             <template #trigger>
               <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
             </template>
-            <el-button size="small" style="margin-left: 10px" type="primary" @click="sendMessage">
+            <el-button size="small" style="margin-left: 10px" type="primary" @click="createMessage">
               {{ translate("send") }}
             </el-button>
           </el-upload>
@@ -79,7 +79,6 @@ import Quill from "quill/dist/quill.js";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import {Actions} from "@/store/enums/StoreEnums";
-import router from "@/router";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 
 
@@ -102,7 +101,7 @@ export default defineComponent({
       return store.getters.currentUserNameAndSurname;
     });
     let fileList = ref([]);
-    const sendMessage = () => {
+    const createMessage = () => {
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
       const text = quill.getText();
@@ -162,7 +161,7 @@ export default defineComponent({
       userNameAndSurname,
       fileList,
       handleChange,
-      sendMessage,
+      createMessage,
       translate,
     };
   },
