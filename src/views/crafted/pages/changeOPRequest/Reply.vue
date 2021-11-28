@@ -113,7 +113,6 @@ export default defineComponent({
         creator: store.getters.currentUserUrl,
         change_op_request: store.getters.getCurrentChangeOPRequestUrl
       }
-      console.log(params);
       store.dispatch(Actions.CREATE_CHANGE_OP_REQUEST_MESSAGE, params).then(function () {
         Swal.fire({
           text: "Mensaje publicado exitosamente",
