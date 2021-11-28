@@ -15,7 +15,7 @@ enum Actions {
   GET_CHANGE_OP_REQUEST = "getChangeOPRequest",
   GET_CHANGE_OP_REQUESTS = "getChangeOPRequests",
   GET_CHANGE_OP_REQUESTS_WITH_PARAMS = "getChangeOPRequestsWithParams",
-  SEND_CHANGE_OP_REQUEST_MESSAGE = "sendChangeOPRequestMessage",
+  CREATE_CHANGE_OP_REQUEST_MESSAGE = "createChangeOPRequestMessage",
 }
 
 enum Mutations {
@@ -34,6 +34,7 @@ enum Mutations {
   SET_CHANGE_OP_REQUEST = "setChangeOPRequest",
   SET_CHANGE_OP_REQUESTS = "setChangeOPRequests",
   SET_CHANGE_OP_REQUESTS_ERRORS = "setChangeOPRequestsErrors",
+  SET_CHANGE_OP_REQUEST_MESSAGE_ERROR = "setChangeOPRequestMessageError"
 }
 
 export { Actions, Mutations };

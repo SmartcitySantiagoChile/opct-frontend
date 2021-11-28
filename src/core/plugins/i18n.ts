@@ -92,7 +92,9 @@ const messages = {
     changeOperationProgramTo: "Change Operation Program to",
     writeReply: "Write a reply...",
     send: "Send",
-    attachFiles: "Attach files"
+    attachFiles: "Attach files",
+    message: "Message",
+    tryAgain: "Try again"
 
   },
   es: {
@@ -186,7 +188,9 @@ const messages = {
     changeOperationProgramTo: "Se cambia PO a ",
     writeReply: "Escriba una respuesta...",
     send: "Enviar",
-    attachFiles: "Adjuntar archivos"
+    attachFiles: "Adjuntar archivos",
+    message: "Mensaje",
+    tryAgain: "¡Intente nuevamente!"
   },
   de: {
     dashboard: "Instrumententafel",

@@ -52,6 +52,14 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     }
 
     /**
+     * Get current change op request url
+     * @returns String
+     */
+    get getCurrentChangeOPRequestUrl(): String {
+        return this.changeOPRequest.url;
+    }
+
+    /**
      * Get current change op request title
      * @returns string
      */

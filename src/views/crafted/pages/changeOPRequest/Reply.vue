@@ -78,7 +78,9 @@ import {computed, defineComponent, onMounted, ref} from "vue";
 import Quill from "quill/dist/quill.js";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
-import { Actions } from "@/store/enums/StoreEnums";
+import {Actions} from "@/store/enums/StoreEnums";
+import router from "@/router";
+import Swal from "sweetalert2/dist/sweetalert2.min.js";
 
 
 export default defineComponent({
@@ -106,10 +108,37 @@ export default defineComponent({
       const text = quill.getText();
       let messageFiles = [];
       const params = {
-        created_at: new Date().getTime(),
+        created_at: new Date().toISOString(),
         message: text,
+        creator: store.getters.currentUserUrl,
+        change_op_request: store.getters.getCurrentChangeOPRequestUrl
       }
-      store.dispatch(Actions.SEND_CHANGE_OP_REQUEST_MESSAGE, params);
+      console.log(params);
+      store.dispatch(Actions.CREATE_CHANGE_OP_REQUEST_MESSAGE, params).then(function () {
+        Swal.fire({
+          text: "Mensaje publicado exitosamente",
+          icon: "success",
+          buttonsStyling: false,
+          confirmButtonText: translate("continue"),
+          customClass: {
+            confirmButton: "btn fw-bold btn-light-success",
+          },
+          allowOutsideClick: false,
+        }).then(() => location.reload());
+      })
+          .catch(() => {
+            Swal.fire({
+              text: store.getters.getChangeOPRequestMessageErrors.map(error => {
+                return `${translate(error[0])} : ${translate(error[1])}`
+              }),
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: translate("tryAgain"),
+              customClass: {
+                confirmButton: "btn fw-bold btn-light-danger",
+              },
+            });
+          });
     };
     const handleChange = (file, fileListData) => {
       fileList = fileListData;

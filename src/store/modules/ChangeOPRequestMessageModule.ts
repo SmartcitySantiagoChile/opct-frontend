@@ -1,6 +1,6 @@
 import ApiService from "@/core/services/ApiService";
 import {Actions, Mutations} from "@/store/enums/StoreEnums";
-import {Action, Module, VuexModule} from "vuex-module-decorators";
+import {Action, Module, Mutation, VuexModule} from "vuex-module-decorators";
 import {Dictionary} from "@/store/modules/HelperModule";
 
 export interface ChangeOPRequestMessage {
@@ -14,13 +14,13 @@ export interface ChangeOPRequestMessage {
 }
 
 export interface ChangeOPRequestMessageInfo {
-    errors: Array<string>;
+    errors: Array<any>;
     changeOPRequestMessage: ChangeOPRequestMessage;
 }
 
 @Module
 export default class ChangeOPRequestMessageModule extends VuexModule implements ChangeOPRequestMessageInfo {
-    errors = [];
+    errors = [] as Array<any>;
     changeOPRequestMessage = {} as ChangeOPRequestMessage;
 
     /**
@@ -39,16 +39,23 @@ export default class ChangeOPRequestMessageModule extends VuexModule implements 
         return this.changeOPRequestMessage;
     }
 
+    @Mutation
+    [Mutations.SET_CHANGE_OP_REQUEST_MESSAGE_ERROR](error) {
+        this.errors = Object.entries(error);
+    }
+
     @Action
-    [Actions.SEND_CHANGE_OP_REQUEST_MESSAGE](params) {
+    [Actions.CREATE_CHANGE_OP_REQUEST_MESSAGE](params) {
         return new Promise<void>((resolve, reject) => {
-            ApiService.post("change-op-request-messages", params)
+            ApiService.post("change-op-request-messages/", params)
                 .then(({data}) => {
-                    console.log("");
+                    console.log(data);
+                    resolve()
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+                    this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_MESSAGE_ERROR, response.data);
+                    reject()
                 });
         });
     }

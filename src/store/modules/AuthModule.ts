@@ -78,6 +78,14 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   /**
+   * Get current user url
+   * @returns string
+   */
+  get currentUserUrl(): string {
+    return this.user.url;
+  }
+
+  /**
    * Verify user authentication
    * @returns boolean
    */
