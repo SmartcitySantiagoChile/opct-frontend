@@ -46,21 +46,11 @@ export default defineComponent({
   },
   setup() {
     const {t, te} = useI18n();
-    const translate = (text) => {
-      if (te(text)) {
-        return t(text);
-      } else {
-        return text;
-      }
-    };
+    const translate = (text) =>  te(text) ? t(text) : text;
     const store = useStore();
     const currentStatus = computed(() => {
       const status = store.getters.getCurrentChangeOPRequestStatus;
-      if (status) {
-        return status.name
-      } else {
-        return "";
-      }
+      return status ? status.name : "";
     });
     onMounted(() => {
       const contractTypeName = store.getters.getCurrentChangeOPRequestContractTypeName;

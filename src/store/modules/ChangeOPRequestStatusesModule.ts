@@ -36,6 +36,11 @@ export default class ChangeOPRequestStatusesModule extends VuexModule implements
         this.previous = changeOPRequestStatusList.previous;
     }
 
+    @Mutation
+    [Mutations.SET_CHANGE_OP_REQUEST_STATUSES_ERRORS](errors) {
+        this.errors = errors
+    }
+
     @Action
     [Actions.GET_CHANGE_OP_REQUEST_STATUSES]() {
         ApiService.get("change-op-request-statuses")

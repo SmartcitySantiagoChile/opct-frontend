@@ -60,6 +60,14 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     }
 
     /**
+     * Get current change op request op
+     * @returns string
+     */
+    get getCurrentChangeOPRequestOP(): string {
+        return this.changeOPRequest.op ? this.changeOPRequest.op.start_at : "" ;
+    }
+
+    /**
      * Get current change op request id
      * @returns string
      */
@@ -87,11 +95,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
      * @returns string
      */
     get getCurrentChangeOPRequestContractTypeName(): string {
-        let res = ""
-        if (this.changeOPRequest.contract_type) {
-            res = this.changeOPRequest.contract_type.name
-        }
-        return res;
+        return this.changeOPRequest.contract_type ? this.changeOPRequest.contract_type.name : "";
     }
 
     /**

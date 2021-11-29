@@ -46,30 +46,19 @@ export default defineComponent({
   },
   setup() {
     const {t, te} = useI18n();
-    const translate = (text) => {
-      if (te(text)) {
-        return t(text);
-      } else {
-        return text;
-      }
-    };
+    const translate = (text) =>  te(text) ? t(text) : text;
     const store = useStore();
     const currentOP = computed(() => {
-      const status = store.getters.getCurrentChangeOPRequestStatus;
-      if (status) {
-        return status.name
-      } else {
-        return "";
-      }
+      const op = store.getters.getCurrentChangeOPRequestOP;
+      return op ? op : "";
     });
     onMounted(() => {
-      const contractTypeName = store.getters.getCurrentChangeOPRequestContractTypeName;
-      store.dispatch(Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS, contractTypeName);
+      store.dispatch(Actions.GET_OPERATION_PROGRAMS);
     });
     const changeOPOptions = ref(computed(() => {
-      const statuses = store.getters.getCurrentChangeOPRequestStatuses;
-      return statuses.flatMap(status =>
-          (status.name === currentOP.value) ? [] : [{value: status.url, label: status.name}])
+      const operationPrograms = store.getters.getCurrentOperationPrograms;
+      return operationPrograms.flatMap(operationProgram =>
+          (operationProgram.start_At === currentOP.value) ? [] : [{value: operationProgram.url, label: operationProgram.start_at}])
     }));
     const value = ref('');
 
