@@ -1,21 +1,21 @@
 <template>
-  <!--begin::ChangeStatus-->
+  <!--begin::ChangeOP-->
   <div class="border">
     <div :class="widgetClasses" class="card">
       <!--begin::Body-->
       <div class="card-body pb-3">
         <!--begin::Header-->
         <el-header>
-          {{ translate("changeStatus") }}:
-          <el-select v-model="value" :placeholder="currentStatus" style="margin-left: 10px">
+          {{ translate("changeOP") }}:
+          <el-select v-model="value" :placeholder="currentOP" style="margin-left: 10px">
             <el-option
-                v-for="item in changeStatusOptions"
+                v-for="item in changeOPOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
             </el-option>
           </el-select>
-          <el-button size="small" style="margin-left: 10px" type="primary" @click="changeStatus">
+          <el-button size="small" style="margin-left: 10px" type="primary" @click="changeOP">
             {{ translate("send") }}
           </el-button>
         </el-header>
@@ -26,9 +26,9 @@
       </div>
       <!--end::Body-->
     </div>
-    <!--end::Feeds ChangeStatus-->
+    <!--end::Feeds changeOP-->
   </div>
-  <!--end::ChangeStatus-->
+  <!--end::ChangeOP-->
 </template>
 
 <script lang="ts">
@@ -40,7 +40,7 @@ import Swal from "sweetalert2/dist/sweetalert2.min.js";
 
 
 export default defineComponent({
-  name: "changeStatus",
+  name: "changeOP",
   props: {
     widgetClasses: String,
   },
@@ -54,7 +54,7 @@ export default defineComponent({
       }
     };
     const store = useStore();
-    const currentStatus = computed(() => {
+    const currentOP = computed(() => {
       const status = store.getters.getCurrentChangeOPRequestStatus;
       if (status) {
         return status.name
@@ -66,14 +66,14 @@ export default defineComponent({
       const contractTypeName = store.getters.getCurrentChangeOPRequestContractTypeName;
       store.dispatch(Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS, contractTypeName);
     });
-    const changeStatusOptions = ref(computed(() => {
+    const changeOPOptions = ref(computed(() => {
       const statuses = store.getters.getCurrentChangeOPRequestStatuses;
       return statuses.flatMap(status =>
-          (status.name === currentStatus.value) ? [] : [{value: status.url, label: status.name}])
+          (status.name === currentOP.value) ? [] : [{value: status.url, label: status.name}])
     }));
     const value = ref('');
 
-    const changeStatus = () => {
+    const changeOP = () => {
           let status: Array<string> = value.value.split("/");
           status.pop();
           const statusId: number = parseInt(status.pop() as string);
@@ -113,9 +113,9 @@ export default defineComponent({
     return {
       translate,
       value,
-      changeStatusOptions,
-      currentStatus,
-      changeStatus
+      changeOPOptions,
+      currentOP,
+      changeOP
     };
   },
 });

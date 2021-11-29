@@ -49,6 +49,9 @@
     <template v-if="hasChangeStatusOption">
       <ChangeStatus></ChangeStatus>
     </template>
+    <template v-if="hasChangeStatusOption">
+      <ChangeOP></ChangeOP>
+    </template>
     <!--end::Card body-->
   </div>
   <!--end::Timeline-->
@@ -63,6 +66,7 @@ import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPReques
 import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/Milestone.vue";
 import ChangeStatus from "@/views/crafted/pages/changeOPRequest/ChangeStatus.vue";
 import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
+import ChangeOP from  "@/views/crafted/pages/changeOPRequest/ChangeOP.vue";
 
 export default defineComponent({
   inheritAttrs: false,
@@ -145,7 +149,8 @@ export default defineComponent({
     ChangeOPRequestTimelineMessage,
     ChangeOPRequestTimelineMilestone,
     Reply,
-    ChangeStatus
+    ChangeStatus,
+    ChangeOP
   },
   computed: {
     hasChangeStatusOption() {
