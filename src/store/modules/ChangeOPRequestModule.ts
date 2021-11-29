@@ -1,14 +1,14 @@
 import ApiService from "@/core/services/ApiService";
 import {Actions, Mutations} from "@/store/enums/StoreEnums";
-import {Module, Action, Mutation, VuexModule} from "vuex-module-decorators";
+import {Action, Module, Mutation, VuexModule} from "vuex-module-decorators";
 import {Dictionary} from "@/store/modules/HelperModule";
-
+import {AxiosRequestConfig} from "axios";
 
 
 export interface ChangeOPRequest {
     url: string;
     created_at: string;
-    title: string ;
+    title: string;
     message: string;
     updated_at: string;
     reason: string;
@@ -60,6 +60,21 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     }
 
     /**
+     * Get current change op request id
+     * @returns string
+     */
+    get getCurrentChangeOPRequestId(): string {
+        if (this.changeOPRequest.url) {
+            const IdArray: Array<string> = this.changeOPRequest.url.split("/");
+            IdArray.pop();
+            return IdArray.pop() as string;
+        } else {
+            return "";
+        }
+
+    }
+
+    /**
      * Get current change op request title
      * @returns string
      */
@@ -73,10 +88,10 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
      */
     get getCurrentChangeOPRequestContractTypeName(): string {
         let res = ""
-        if (this.changeOPRequest.contract_type){
+        if (this.changeOPRequest.contract_type) {
             res = this.changeOPRequest.contract_type.name
         }
-        return res ;
+        return res;
     }
 
     /**
@@ -103,5 +118,21 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
                 console.log(response);
                 this.context.commit(Mutations.SET_ERROR, [response.data.error]);
             });
+    }
+
+    @Action
+    [Actions.CHANGE_CHANGE_OP_REQUEST_STATUS](data) {
+        return new Promise<void>((resolve, reject) => {
+            ApiService.put(`change-op-requests/${data.resource}/change-status/`, data.params)
+                .then(({data}) => {
+                    this.context.commit(Mutations.SET_CHANGE_OP_REQUEST, data);
+                    resolve()
+                })
+                .catch(({response}) => {
+                    console.log(response);
+                    this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+                    reject();
+                });
+        });
     }
 }

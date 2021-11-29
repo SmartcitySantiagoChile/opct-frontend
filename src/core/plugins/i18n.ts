@@ -95,7 +95,9 @@ const messages = {
     attachFiles: "Attach files",
     message: "Message",
     tryAgain: "Try again",
-    changeStatus: "Change state"
+    changeStatus: "Change state",
+    messageSuccess: "Message posted successfully!",
+    changeStatusSuccess: "Status changed successfully!"
 
   },
   es: {
@@ -192,7 +194,9 @@ const messages = {
     attachFiles: "Adjuntar archivos",
     message: "Mensaje",
     tryAgain: "¡Intente nuevamente!",
-    changeStatus: "Cambiar estado"
+    changeStatus: "Cambiar estado",
+    messageSuccess: "¡Mensaje publicado exitosamente!",
+    changeStatusSuccess: "¡Estado cambiado exitosamente!"
   },
   de: {
     dashboard: "Instrumententafel",

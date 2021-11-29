@@ -15,7 +15,7 @@
                 :value="item.value">
             </el-option>
           </el-select>
-          <el-button size="small" style="margin-left: 10px" type="primary">
+          <el-button size="small" style="margin-left: 10px" type="primary" @click="changeStatus">
             {{ translate("send") }}
           </el-button>
         </el-header>
@@ -31,10 +31,11 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from "vue";
+import {computed, defineComponent, onMounted, ref} from "vue";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import {Actions} from "@/store/enums/StoreEnums";
+import Swal from "sweetalert2/dist/sweetalert2.min.js";
 
 
 export default defineComponent({
@@ -60,21 +61,62 @@ export default defineComponent({
         return "";
       }
     });
-    const changeStatusOptions = ref(computed(() => {
+    onMounted(() => {
       const contractTypeName = store.getters.getCurrentChangeOPRequestContractTypeName;
       store.dispatch(Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS, contractTypeName);
+    });
+    const changeStatusOptions = ref(computed(() => {
       const statuses = store.getters.getCurrentChangeOPRequestStatuses;
       return statuses.flatMap(status =>
           (status.name === currentStatus.value) ? [] : [{value: status.url, label: status.name}])
     }));
-
     const value = ref('');
+
+    const changeStatus = () => {
+          let status: Array<string> = value.value.split("/");
+          status.pop();
+          const statusId: number = parseInt(status.pop() as string);
+          const changeOPRequestId = store.getters.getCurrentChangeOPRequestId;
+          const params = {
+            status: statusId,
+          };
+          if (statusId) {
+            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_STATUS, {
+              resource: changeOPRequestId,
+              params: params
+            }).then(() => {
+              Swal.fire({
+                text: "Estado cambiado exitosamente",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: translate("continue"),
+                customClass: {
+                  confirmButton: "btn fw-bold btn-light-success",
+                },
+                allowOutsideClick: false,
+              }).then(() => location.reload());
+            });
+          } else {
+            Swal.fire({
+              text: "Debe seleccionar un estado",
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: translate("tryAgain"),
+              customClass: {
+                confirmButton: "btn fw-bold btn-light-danger",
+              },
+            });
+          }
+        }
+    ;
     return {
       translate,
       value,
       changeStatusOptions,
-      currentStatus
+      currentStatus,
+      changeStatus
     };
   },
 });
 </script>
+b
