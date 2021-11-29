@@ -99,6 +99,10 @@ const messages = {
     messageSuccess: "Message posted successfully!",
     changeStatusSuccess: "Status changed successfully!",
     changeOP: "Change OP",
+    mustSelectState: "Must select a state",
+    mustSelectOP: "Must select a OP",
+    changeOPSuccess: "Operation Program changed successfully!",
+
 
 
   },
@@ -200,6 +204,11 @@ const messages = {
     messageSuccess: "¡Mensaje publicado exitosamente!",
     changeStatusSuccess: "¡Estado cambiado exitosamente!",
     changeOP: "Cambiar PO",
+    mustSelectState: "Debe seleccionar un estado",
+    mustSelectOP: "Debe seleccionar un Programa de Operación",
+    changeOPSuccess: "¡Programa de Operación cambiado exitosamente!",
+
+
 
   },
   de: {

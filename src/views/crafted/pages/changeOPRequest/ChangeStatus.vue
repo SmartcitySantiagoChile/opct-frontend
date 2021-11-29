@@ -77,7 +77,7 @@ export default defineComponent({
               params: params
             }).then(() => {
               Swal.fire({
-                text: "Estado cambiado exitosamente",
+                text: translate("changeStatusSuccess"),
                 icon: "success",
                 buttonsStyling: false,
                 confirmButtonText: translate("continue"),
@@ -89,7 +89,7 @@ export default defineComponent({
             });
           } else {
             Swal.fire({
-              text: "Debe seleccionar un estado",
+              text:  translate("mustSelectState"),
               icon: "error",
               buttonsStyling: false,
               confirmButtonText: translate("tryAgain"),

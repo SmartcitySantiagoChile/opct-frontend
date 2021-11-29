@@ -58,25 +58,25 @@ export default defineComponent({
     const changeOPOptions = ref(computed(() => {
       const operationPrograms = store.getters.getCurrentOperationPrograms;
       return operationPrograms.flatMap(operationProgram =>
-          (operationProgram.start_At === currentOP.value) ? [] : [{value: operationProgram.url, label: operationProgram.start_at}])
+          (operationProgram.start_at === currentOP.value) ? [] : [{value: operationProgram.url, label: operationProgram.start_at}])
     }));
     const value = ref('');
 
     const changeOP = () => {
-          let status: Array<string> = value.value.split("/");
-          status.pop();
-          const statusId: number = parseInt(status.pop() as string);
+          let op: Array<string> = value.value.split("/");
+          op.pop();
+          const opId: number = parseInt(op.pop() as string);
           const changeOPRequestId = store.getters.getCurrentChangeOPRequestId;
           const params = {
-            status: statusId,
+            op: opId,
           };
-          if (statusId) {
-            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_STATUS, {
+          if (opId) {
+            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
               resource: changeOPRequestId,
               params: params
             }).then(() => {
               Swal.fire({
-                text: "Estado cambiado exitosamente",
+                text: translate("changeOPSuccess"),
                 icon: "success",
                 buttonsStyling: false,
                 confirmButtonText: translate("continue"),
@@ -88,7 +88,7 @@ export default defineComponent({
             });
           } else {
             Swal.fire({
-              text: "Debe seleccionar un estado",
+              text: translate("mustSelectOP"),
               icon: "error",
               buttonsStyling: false,
               confirmButtonText: translate("tryAgain"),
