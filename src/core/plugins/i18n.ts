@@ -102,6 +102,11 @@ const messages = {
     mustSelectState: "Must select a state",
     mustSelectOP: "Must select a OP",
     changeOPSuccess: "Operation Program changed successfully!",
+    update: "Update",
+    notUpdate: "Don't update",
+    wantToUpdateDeadlines: "Do you want to update change op request deadlines?",
+    deadlinesUpdated: "Deadlines updated",
+    deadlinesNotUpdated: "Deadlines not updated"
 
 
 
@@ -207,6 +212,12 @@ const messages = {
     mustSelectState: "Debe seleccionar un estado",
     mustSelectOP: "Debe seleccionar un Programa de Operación",
     changeOPSuccess: "¡Programa de Operación cambiado exitosamente!",
+    update: "Actualizar",
+    notUpdate: "No actualizar",
+    wantToUpdateDeadlines: "¿Desea actualizar los plazos de las estapas de la solicitud?",
+    deadlinesUpdated: "Plazos actualizados",
+    deadlinesNotUpdated: "Plazos no actualizados"
+
 
 
 

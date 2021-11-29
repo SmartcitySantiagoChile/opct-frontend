@@ -46,7 +46,7 @@ export default defineComponent({
   },
   setup() {
     const {t, te} = useI18n();
-    const translate = (text) =>  te(text) ? t(text) : text;
+    const translate = (text) => te(text) ? t(text) : text;
     const store = useStore();
     const currentOP = computed(() => {
       const op = store.getters.getCurrentChangeOPRequestOP;
@@ -58,7 +58,10 @@ export default defineComponent({
     const changeOPOptions = ref(computed(() => {
       const operationPrograms = store.getters.getCurrentOperationPrograms;
       return operationPrograms.flatMap(operationProgram =>
-          (operationProgram.start_at === currentOP.value) ? [] : [{value: operationProgram.url, label: operationProgram.start_at}])
+          (operationProgram.start_at === currentOP.value) ? [] : [{
+            value: operationProgram.url,
+            label: operationProgram.start_at
+          }])
     }));
     const value = ref('');
 
@@ -76,14 +79,23 @@ export default defineComponent({
               params: params
             }).then(() => {
               Swal.fire({
-                text: translate("changeOPSuccess"),
+                text: translate("wantToUpdateDeadlines"),
+                title: translate("changeOPSuccess"),
                 icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: translate("continue"),
+                showCancelButton: true,
+                confirmButtonText: translate("update"),
+                cancelButtonText: translate("notUpdate"),
                 customClass: {
                   confirmButton: "btn fw-bold btn-light-success",
+                  cancelButton: "btn fw-bold btn-light-danger",
                 },
                 allowOutsideClick: false,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire(translate("deadlinesUpdated"), '', 'success')
+                } else {
+                  Swal.fire(translate("deadlinesNotUpdated"), '', 'info')
+                }
               }).then(() => location.reload());
             });
           } else {
