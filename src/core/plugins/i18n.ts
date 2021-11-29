@@ -94,7 +94,8 @@ const messages = {
     send: "Send",
     attachFiles: "Attach files",
     message: "Message",
-    tryAgain: "Try again"
+    tryAgain: "Try again",
+    changeStatus: "Change state"
 
   },
   es: {
@@ -190,7 +191,8 @@ const messages = {
     send: "Enviar",
     attachFiles: "Adjuntar archivos",
     message: "Mensaje",
-    tryAgain: "¡Intente nuevamente!"
+    tryAgain: "¡Intente nuevamente!",
+    changeStatus: "Cambiar estado"
   },
   de: {
     dashboard: "Instrumententafel",

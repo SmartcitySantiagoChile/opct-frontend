@@ -46,7 +46,9 @@
     </div>
     <div class="separator"></div>
     <Reply></Reply>
-    {{ hasChangeStatusOption }}
+    <template v-if="hasChangeStatusOption">
+      <ChangeStatus></ChangeStatus>
+    </template>
     <!--end::Card body-->
   </div>
   <!--end::Timeline-->
@@ -54,12 +56,13 @@
 
 <script lang="ts">
 import {computed, defineComponent} from "vue";
+import {useStore} from "vuex";
+import {useI18n} from "vue-i18n";
 import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/BaseInfo.vue";
 import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/Message.vue";
 import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/Milestone.vue";
-import {useI18n} from "vue-i18n";
+import ChangeStatus from "@/views/crafted/pages/changeOPRequest/ChangeStatus.vue";
 import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
-import {useStore} from "vuex";
 
 export default defineComponent({
   inheritAttrs: false,
@@ -142,6 +145,7 @@ export default defineComponent({
     ChangeOPRequestTimelineMessage,
     ChangeOPRequestTimelineMilestone,
     Reply,
+    ChangeStatus
   },
   computed: {
     hasChangeStatusOption() {

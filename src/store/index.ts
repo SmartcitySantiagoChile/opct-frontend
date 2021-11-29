@@ -8,6 +8,8 @@ import ConfigModule from "@/store/modules/ConfigModule";
 import ChangeOPRequestModule from "@/store/modules/ChangeOPRequestModule";
 import ChangeOPRequestsModule from "@/store/modules/ChangeOPRequestsModule";
 import ChangeOPRequestMessageModule from "@/store/modules/ChangeOPRequestMessageModule";
+import ChangeOPRequestStatusModule from "@/store/modules/ChangeOPRequestStatusModule";
+import ChangeOPRequestStatusesModule from "@/store/modules/ChangeOPRequestStatusesModule";
 
 config.rawError = true;
 
@@ -19,7 +21,9 @@ const store = createStore({
     ConfigModule,
     ChangeOPRequestModule,
     ChangeOPRequestsModule,
-    ChangeOPRequestMessageModule
+    ChangeOPRequestMessageModule,
+    ChangeOPRequestStatusesModule,
+    ChangeOPRequestStatusModule
   },
 });
 

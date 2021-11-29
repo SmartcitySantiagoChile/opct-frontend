@@ -53,9 +53,9 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
 
     /**
      * Get current change op request url
-     * @returns String
+     * @returns string
      */
-    get getCurrentChangeOPRequestUrl(): String {
+    get getCurrentChangeOPRequestUrl(): string {
         return this.changeOPRequest.url;
     }
 
@@ -65,6 +65,26 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
      */
     get getCurrentChangeOPRequestTitle(): string {
         return this.changeOPRequest.title;
+    }
+
+    /**
+     * Get current change op request contract type name
+     * @returns string
+     */
+    get getCurrentChangeOPRequestContractTypeName(): string {
+        let res = ""
+        if (this.changeOPRequest.contract_type){
+            res = this.changeOPRequest.contract_type.name
+        }
+        return res ;
+    }
+
+    /**
+     * Get current change op request contract type name
+     * @returns Dictionary
+     */
+    get getCurrentChangeOPRequestStatus(): Dictionary<string> {
+        return this.changeOPRequest.status;
     }
 
     @Mutation
