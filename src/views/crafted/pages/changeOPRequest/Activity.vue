@@ -72,34 +72,52 @@ export default defineComponent({
   inheritAttrs: false,
   name: "changeOPRequestActivity",
   props: ["changeOPRequest", "id"],
-  data() {
+  components: {
+    ChangeOPRequestBaseInfo,
+    ChangeOPRequestTimelineMessage,
+    ChangeOPRequestTimelineMilestone,
+    Reply,
+    ChangeStatus,
+    ChangeOP
+  },
+  computed: {
+    hasChangeStatusOption() {
+      const store = useStore();
+      return store.getters.hasChangeStatusOption
+    },
+  },
+  setup(props) {
     const baseInfo = computed(() => {
       const baseData = {};
-      baseData["created_at"] = this.changeOPRequest["created_at"];
-      baseData["op"] = this.changeOPRequest["op"];
-      baseData["status"] = this.changeOPRequest["status"];
+      baseData["created_at"] = props.changeOPRequest["created_at"];
+      baseData["op"] = props.changeOPRequest["op"];
+      baseData["status"] = props.changeOPRequest["status"];
       baseData["change_op_request_files"] =
-          this.changeOPRequest["change_op_request_files"];
-      baseData["reason"] = this.changeOPRequest["reason"];
-      baseData["creator"] = this.changeOPRequest["creator"];
-      baseData["counterpart"] = this.changeOPRequest["counterpart"];
-      baseData["title"] = this.changeOPRequest["title"];
+          props.changeOPRequest["change_op_request_files"];
+      baseData["reason"] = props.changeOPRequest["reason"];
+      baseData["creator"] = props.changeOPRequest["creator"];
+      baseData["counterpart"] = props.changeOPRequest["counterpart"];
+      baseData["title"] = props.changeOPRequest["title"];
       return baseData;
     });
+
+
     const headerInfo = computed(() => {
       const headerData = {};
-      headerData["created_at"] = this.changeOPRequest["created_at"];
-      headerData["creator"] = this.changeOPRequest["creator"];
-      headerData["message"] = this.changeOPRequest["message"];
+      headerData["created_at"] = props.changeOPRequest["created_at"];
+      headerData["creator"] = props.changeOPRequest["creator"];
+      headerData["message"] = props.changeOPRequest["message"];
       headerData["change_op_request_files"] =
-          this.changeOPRequest["change_op_request_files"];
+          props.changeOPRequest["change_op_request_files"];
       return headerData;
     });
+
+
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
-      if (this.changeOPRequest) {
-        if (this.changeOPRequest["change_op_request_messages"]) {
-          this.changeOPRequest["change_op_request_messages"].forEach(
+      if (props.changeOPRequest) {
+        if (props.changeOPRequest["change_op_request_messages"]) {
+          props.changeOPRequest["change_op_request_messages"].forEach(
               (message) => {
                 let changeOPRequestData = {
                   dateTime: message["created_at"],
@@ -110,8 +128,8 @@ export default defineComponent({
               }
           );
         }
-        if (this.changeOPRequest["op_change_logs"]) {
-          this.changeOPRequest["op_change_logs"].forEach((changeLog) => {
+        if (props.changeOPRequest["op_change_logs"]) {
+          props.changeOPRequest["op_change_logs"].forEach((changeLog) => {
             let opChangeLogData = {
               dateTime: changeLog["created_at"],
               type: "opChangeLog",
@@ -120,8 +138,8 @@ export default defineComponent({
             orderedLogsData.push(opChangeLogData);
           });
         }
-        if (this.changeOPRequest["status_logs"]) {
-          this.changeOPRequest["status_logs"].forEach((statusLog) => {
+        if (props.changeOPRequest["status_logs"]) {
+          props.changeOPRequest["status_logs"].forEach((statusLog) => {
             let changeOPRequestStatusLofData = {
               dateTime: statusLog["created_at"],
               type: "statusLog",
@@ -138,27 +156,6 @@ export default defineComponent({
       });
       return orderedLogsData;
     });
-    return {
-      headerInfo,
-      baseInfo,
-      orderedLogs,
-    };
-  },
-  components: {
-    ChangeOPRequestBaseInfo,
-    ChangeOPRequestTimelineMessage,
-    ChangeOPRequestTimelineMilestone,
-    Reply,
-    ChangeStatus,
-    ChangeOP
-  },
-  computed: {
-    hasChangeStatusOption() {
-      const store = useStore();
-      return store.getters.hasChangeStatusOption
-    },
-  },
-  setUp() {
     const {t, te} = useI18n();
     const translate = (text) => {
       if (te(text)) {
@@ -168,7 +165,10 @@ export default defineComponent({
       }
     };
     return {
-      translate
+      translate,
+      baseInfo,
+      headerInfo,
+      orderedLogs
     };
   },
 });

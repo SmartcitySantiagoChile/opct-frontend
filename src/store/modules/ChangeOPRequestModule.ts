@@ -106,6 +106,17 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
         return this.changeOPRequest.status;
     }
 
+    /**
+     * Get current change op request release date
+     * @returns string
+     */
+    get getCurrentChangeOPRequestReleaseDate(): string {
+        return this.changeOPRequest.op_release_date;
+    }
+
+
+
+
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUEST](changeOPRequest) {
         this.changeOPRequest = changeOPRequest;

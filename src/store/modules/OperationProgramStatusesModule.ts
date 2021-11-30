@@ -27,6 +27,8 @@ export default class OperationProgramStatusesModule extends VuexModule implement
         return this.operationProgramStatuses;
     }
 
+
+
     @Mutation
     [Mutations.SET_OPERATION_PROGRAM_STATUSES](operationProgramStatusList) {
         this.operationProgramStatuses = operationProgramStatusList.results;
