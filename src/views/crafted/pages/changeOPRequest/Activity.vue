@@ -30,7 +30,7 @@
                 ></ChangeOPRequestTimelineMessage>
               </template>
               <template
-                  v-if="item.type === 'statusLog' || item.type === 'opChangeLog'"
+                  v-if="item.type === 'statusLog' || item.type === 'opChangeLog' || item.type === 'opStatus'"
               >
                 <ChangeOPRequestTimelineMilestone
                     v-bind:changeOPRequestTimelineMilestoneLog="item.data"
@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from "vue";
+import {computed, defineComponent, ref} from "vue";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/BaseInfo.vue";
@@ -89,6 +89,7 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
+    store.dispatch(Actions.GET_OPERATION_PROGRAM_STATUSES);
     const baseInfo = computed(() => {
       const baseData = {};
       baseData["created_at"] = props.changeOPRequest["created_at"];
@@ -114,15 +115,30 @@ export default defineComponent({
           props.changeOPRequest["change_op_request_files"];
       return headerData;
     });
-    store.dispatch(Actions.GET_OPERATION_PROGRAM_STATUSES);
-    const opStatuses = computed(() => {
-      return store.getters.getCurrentOperationProgramStatuses;
-    }) as unknown as Array<string>;
+
+    const opStatuses = ref(computed(() => store.getters.getCurrentOperationProgramStatuses));
 
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
-      if (opStatuses) {
-        console.log(opStatuses);
+      if (opStatuses.value) {
+        opStatuses.value.forEach((opStatus) => {
+          if (props.changeOPRequest["contract_type"]){
+            const releaseDate = new Date(props.changeOPRequest["op_release_date"] + " 00:00");
+            if (opStatus.contract_type.name == props.changeOPRequest["contract_type"]["name"]){
+              let deadLineDate =  new Date(JSON.parse(JSON.stringify(releaseDate)));
+              deadLineDate.setDate(deadLineDate.getDate() - opStatus.time_threshold );
+              const deadLineStringDate = JSON.parse(JSON.stringify(deadLineDate))
+              opStatus["dead_line"] = deadLineStringDate;
+              let opStatusData = {
+                dateTime: JSON.parse(JSON.stringify(deadLineStringDate)),
+                type: "opStatus",
+                data: opStatus,
+              };
+              orderedLogsData.push(opStatusData);
+            }
+          }
+
+        });
       }
       if (props.changeOPRequest) {
         if (props.changeOPRequest["change_op_request_messages"]) {
@@ -159,20 +175,14 @@ export default defineComponent({
         }
       }
       orderedLogsData.sort(function (a, b) {
-        const date_a = Date.parse(a.data.created_at);
-        const date_b = Date.parse(b.data.created_at);
+        const date_a = Date.parse(a.dateTime);
+        const date_b = Date.parse(b.dateTime);
         return date_a - date_b;
       });
       return orderedLogsData;
     });
     const {t, te} = useI18n();
-    const translate = (text) => {
-      if (te(text)) {
-        return t(text);
-      } else {
-        return text;
-      }
-    };
+    const translate = (text) =>  te(text) ? t(text) : text;
     return {
       translate,
       baseInfo,

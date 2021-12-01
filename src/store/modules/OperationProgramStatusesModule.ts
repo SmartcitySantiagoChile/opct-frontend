@@ -46,7 +46,6 @@ export default class OperationProgramStatusesModule extends VuexModule implement
     [Actions.GET_OPERATION_PROGRAM_STATUSES]() {
         ApiService.get("operation-program-statuses")
             .then(({data}) => {
-                console.log(data);
                 this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES, data);
             })
             .catch(({response}) => {
@@ -55,16 +54,14 @@ export default class OperationProgramStatusesModule extends VuexModule implement
             });
     }
 
-
     @Action
-    [Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS](params) {
-        ApiService.query("change-op-request-statuses", {params: params})
+    [Actions.GET_OPERATION_PROGRAM_STATUSES_WITH_PARAMS](params) {
+        ApiService.query("operation-program-statuses", {params: params})
             .then(({data}) => {
-                this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_STATUSES, data);
+                this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES, data);
             })
             .catch(({response}) => {
-                this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_STATUSES_ERRORS, [response.data.error]);
+                this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES_ERRORS, [response.data.error]);
             });
     }
-
 }

@@ -107,7 +107,9 @@ const messages = {
     wantToUpdateDeadlines: "Do you want to update change op request deadlines?",
     deadlinesUpdated: "Deadlines updated",
     deadlinesNotUpdated: "Deadlines not updated",
-    contractType: "Contract type"
+    contractType: "Contract type",
+    endOf: "End of",
+    finishOn: "Finish on"
 
 
 
@@ -218,7 +220,9 @@ const messages = {
     wantToUpdateDeadlines: "¿Desea actualizar los plazos de las etapas de la solicitud?",
     deadlinesUpdated: "Plazos actualizados",
     deadlinesNotUpdated: "Plazos no actualizados",
-    contractType: "Tipo de contrato"
+    contractType: "Tipo de contrato",
+    endOf: "Fin de",
+    finishOn: "Finalizada el"
 
 
 

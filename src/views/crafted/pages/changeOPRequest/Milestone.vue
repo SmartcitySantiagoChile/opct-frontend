@@ -21,30 +21,41 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
-          <span :class="`badge-light-success`" class="badge fs-4 fw-bolder">
+          <template v-if="changeOPRequestTimelineMilestoneLog.new_status">
+            <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
             {{
-              changeOPRequestTimelineMilestoneLog.new_status
-                  ? translate("requestChangeStatus")
-                  : "" + " "
-            }}
+                changeOPRequestTimelineMilestoneLog.new_status
+                    ? changeOPRequestTimelineMilestoneLog.new_status.name
+                    : ""
+              }}
+            </span>
+          </template>
+          <template v-if="changeOPRequestTimelineMilestoneLog.new_op">
+            <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
             {{
-              changeOPRequestTimelineMilestoneLog.new_status
-                  ? changeOPRequestTimelineMilestoneLog.new_status.name
-                  : ""
-            }}
+                changeOPRequestTimelineMilestoneLog.new_op
+                    ? translate("changeOperationProgramTo")
+                    : "" + " "
+              }}
             {{
-              changeOPRequestTimelineMilestoneLog.new_op
-                  ? translate("changeOperationProgramTo")
-                  : "" + " "
-            }}
-            {{
-              changeOPRequestTimelineMilestoneLog.new_op
-                  ? changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
-                      "T"
-                  )[0]
-                  : ""
-            }}
+                changeOPRequestTimelineMilestoneLog.new_op
+                    ? changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
+                        "T"
+                    )[0]
+                    : ""
+              }}
           </span>
+          </template>
+          <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
+            <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
+            {{
+                changeOPRequestTimelineMilestoneLog.time_threshold
+                    ? translate("endOf") + " " + changeOPRequestTimelineMilestoneLog.name
+                    : ""
+              }}
+          </span>
+          </template>
+
         </div>
         <!--end::Title-->
       </div>
@@ -52,52 +63,41 @@
 
       <!--begin::Timeline details-->
       <div class="overflow-auto pb-5">
-        <!--begin::Files Record-->
         <!--begin::Description-->
         <div class="d-flex align-items-center mt-1 fs-6">
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
-            {{ translate("addedAt") }}
-            {{
-              changeOPRequestTimelineMilestoneLog.created_at
-                  ? changeOPRequestTimelineMilestoneLog.created_at.split("T")[0]
-                  : ""
-            }}
-            {{ translate("atTime") }}
-            {{
-              changeOPRequestTimelineMilestoneLog.created_at
-                  ? changeOPRequestTimelineMilestoneLog.created_at
-                      .split("T")[1]
-                      .split("Z")[0]
-                      .split(".")[0]
-                  : ""
-            }}
-            {{ translate("by") }}
+            <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
+              {{ translate("finishOn") }}
+              {{
+                changeOPRequestTimelineMilestoneLog.dead_line
+                    ? changeOPRequestTimelineMilestoneLog.dead_line.split("T")[0]
+                    : ""
+              }}
+            </template>
+            <template
+                v-if="changeOPRequestTimelineMilestoneLog.new_op || changeOPRequestTimelineMilestoneLog.new_status">
+              {{ translate("addedAt") }}
+              {{
+                changeOPRequestTimelineMilestoneLog.created_at
+                    ? changeOPRequestTimelineMilestoneLog.created_at.split("T")[0]
+                    : ""
+              }}
+              {{ translate("atTime") }}
+              {{
+                changeOPRequestTimelineMilestoneLog.created_at
+                    ? changeOPRequestTimelineMilestoneLog.created_at
+                        .split("T")[1]
+                        .split("Z")[0]
+                        .split(".")[0]
+                    : ""
+              }}
+            </template>
           </div>
           <!--end::Info-->
-
-          <!--begin::User-->
-          <a class="text-primary fw-bolder me-1" href="#">
-            {{
-              changeOPRequestTimelineMilestoneLog.user
-                  ? changeOPRequestTimelineMilestoneLog.user.first_name +
-                  " " +
-                  changeOPRequestTimelineMilestoneLog.user.last_name
-                  : ""
-            }}
-            {{
-              changeOPRequestTimelineMilestoneLog.creator
-                  ? changeOPRequestTimelineMilestoneLog.creator.first_name +
-                  " " +
-                  changeOPRequestTimelineMilestoneLog.creator.last_name
-                  : ""
-            }}
-          </a>
         </div>
         <!--end::User-->
         <!--end::Description-->
-
-        <!--end:: Files Record-->
       </div>
       <!--end::Timeline details-->
     </div>
@@ -116,13 +116,7 @@ export default defineComponent({
   components: {},
   setup() {
     const {t, te} = useI18n();
-    const translate = (text) => {
-      if (te(text)) {
-        return t(text);
-      } else {
-        return text;
-      }
-    };
+    const translate = (text) => te(text) ? t(text) : text;
     return {
       translate,
     };
