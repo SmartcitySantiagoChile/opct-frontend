@@ -72,32 +72,44 @@ export default defineComponent({
           const changeOPRequestId = store.getters.getCurrentChangeOPRequestId;
           const params = {
             op: opId,
+            update_deadlines: false
           };
           if (opId) {
-            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
-              resource: changeOPRequestId,
-              params: params
-            }).then(() => {
-              Swal.fire({
-                text: translate("wantToUpdateDeadlines"),
-                title: translate("changeOPSuccess"),
-                icon: "success",
-                showCancelButton: true,
-                confirmButtonText: translate("update"),
-                cancelButtonText: translate("notUpdate"),
-                customClass: {
-                  confirmButton: "btn fw-bold btn-light-success",
-                  cancelButton: "btn fw-bold btn-light-danger",
-                },
-                allowOutsideClick: false,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  Swal.fire(translate("deadlinesUpdated"), '', 'success')
-                } else {
-                  Swal.fire(translate("deadlinesNotUpdated"), '', 'info')
-                }
-              }).then(() => location.reload());
-            });
+            Swal.fire({
+              title: translate("wantToUpdateDeadlines"),
+              icon: "info",
+              showCancelButton: true,
+              confirmButtonText: translate("update"),
+              cancelButtonText: translate("notUpdate"),
+              customClass: {
+                confirmButton: "btn fw-bold btn-light-success",
+                cancelButton: "btn fw-bold btn-light-danger",
+              },
+              allowOutsideClick: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                params["update_deadlines"] = true;
+              }
+              store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
+                resource: changeOPRequestId,
+                params: params
+              });
+              return result;
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire({
+                  title: translate("changeOPSuccess"),
+                  message: translate("deadlinesUpdated"),
+                  icon: "success"
+                });
+              } else {
+                Swal.fire({
+                  title: translate("changeOPSuccess"),
+                  message: translate("deadlinesNotUpdated"),
+                  icon: "success"
+                })
+              }
+            }).then(() => location.reload());
           } else {
             Swal.fire({
               text: translate("mustSelectOP"),
