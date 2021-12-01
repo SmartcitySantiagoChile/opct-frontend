@@ -50,7 +50,8 @@
               <th class="ps-4 min-w-125px rounded-start">
                 {{ translate("creationDate") }}
               </th>
-              <th class="min-w-200px">{{ translate("operationProgram") }}</th>
+              <th class="min-w-150px">{{ translate("operationProgram") }}</th>
+              <th class="min-w-150px">{{ translate("contractType") }}</th>
               <th class="min-w-150px">{{ translate("title") }}</th>
               <th class="min-w-150px">{{ translate("reason") }}</th>
               <th class="min-w-100px">{{ translate("creator") }}</th>
@@ -90,6 +91,21 @@
                       fs-6
                     "
                     >{{ item.op.start_at }}</a
+                  >
+                </td>
+
+                <td>
+                  <a
+                      href="#"
+                      class="
+                      text-dark
+                      fw-bolder
+                      text-hover-primary
+                      d-block
+                      mb-1
+                      fs-6
+                    "
+                  >{{ item.contract_type ? item.contract_type.name : "" }}</a
                   >
                 </td>
 
