@@ -51,6 +51,18 @@
                 </td>
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">
+                    {{ translate("contractType") }}</span
+                  >
+                  <span class="text-dark fw-bolder d-block fs-3">
+                    {{
+                      changeOpRequestBaseInfo.contract_type
+                          ? changeOpRequestBaseInfo.contract_type.name
+                          : ""
+                    }}</span
+                  >
+                </td>
+                <td>
+                  <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("reason") }}</span
                   >
                   <span class="text-dark fw-bolder d-block fs-3">

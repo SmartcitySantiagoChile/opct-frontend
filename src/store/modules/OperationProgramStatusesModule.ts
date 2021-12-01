@@ -46,9 +46,11 @@ export default class OperationProgramStatusesModule extends VuexModule implement
     [Actions.GET_OPERATION_PROGRAM_STATUSES]() {
         ApiService.get("operation-program-statuses")
             .then(({data}) => {
+                console.log(data);
                 this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES, data);
             })
             .catch(({response}) => {
+                console.log(response);
                 this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES_ERRORS, [response.data.error]);
             });
     }

@@ -13,6 +13,7 @@ import ChangeOPRequestStatusesModule from "@/store/modules/ChangeOPRequestStatus
 import OperationProgramModule from "@/store/modules/OperationProgramModule";
 import OperationProgramsModule from "@/store/modules/OperationProgramsModule";
 import OperationProgramStatusModule from "@/store/modules/OperationProgramStatusModule"
+import OperationProgramStatusesModule from "@/store/modules/OperationProgramStatusesModule";
 
 config.rawError = true;
 
@@ -29,7 +30,8 @@ const store = createStore({
     ChangeOPRequestStatusModule,
     OperationProgramModule,
     OperationProgramsModule,
-    OperationProgramStatusModule
+    OperationProgramStatusModule,
+    OperationProgramStatusesModule
   },
 });
 

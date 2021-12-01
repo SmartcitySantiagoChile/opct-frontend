@@ -66,7 +66,8 @@ import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPReques
 import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/Milestone.vue";
 import ChangeStatus from "@/views/crafted/pages/changeOPRequest/ChangeStatus.vue";
 import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
-import ChangeOP from  "@/views/crafted/pages/changeOPRequest/ChangeOP.vue";
+import ChangeOP from "@/views/crafted/pages/changeOPRequest/ChangeOP.vue";
+import {Actions} from "@/store/enums/StoreEnums";
 
 export default defineComponent({
   inheritAttrs: false,
@@ -87,6 +88,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const store = useStore();
     const baseInfo = computed(() => {
       const baseData = {};
       baseData["created_at"] = props.changeOPRequest["created_at"];
@@ -98,6 +100,7 @@ export default defineComponent({
       baseData["creator"] = props.changeOPRequest["creator"];
       baseData["counterpart"] = props.changeOPRequest["counterpart"];
       baseData["title"] = props.changeOPRequest["title"];
+      baseData["contract_type"] = props.changeOPRequest["contract_type"]
       return baseData;
     });
 
@@ -111,10 +114,16 @@ export default defineComponent({
           props.changeOPRequest["change_op_request_files"];
       return headerData;
     });
-
+    store.dispatch(Actions.GET_OPERATION_PROGRAM_STATUSES);
+    const opStatuses = computed(() => {
+      return store.getters.getCurrentOperationProgramStatuses;
+    }) as unknown as Array<string>;
 
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
+      if (opStatuses) {
+        console.log(opStatuses);
+      }
       if (props.changeOPRequest) {
         if (props.changeOPRequest["change_op_request_messages"]) {
           props.changeOPRequest["change_op_request_messages"].forEach(
