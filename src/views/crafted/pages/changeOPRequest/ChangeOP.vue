@@ -90,7 +90,7 @@ export default defineComponent({
             : [
                 {
                   value: operationProgram.url,
-                  label: operationProgram.start_at,
+                  label: operationProgram.start_at + " (" + operationProgram.op_type.name + ")",
                 },
               ]
         );
