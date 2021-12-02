@@ -2,7 +2,7 @@
   <a
       type="button"
       data-bs-toggle="modal"
-      data-bs-target="#kt_modal_1"
+      data-bs-target="#change_status_modal"
       class="
                       btn btn-sm btn-icon btn-bg-light btn-active-color-primary
                     "
@@ -14,7 +14,7 @@
                     </span>
   </a>
   <!--begin::ChangeStatus-->
-  <div class="modal fade" tabindex="-1" id="kt_modal_1">
+  <div class="modal fade" tabindex="-1" id="change_status_modal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

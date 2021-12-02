@@ -1,12 +1,38 @@
 <template>
+  <a
+      class="
+                      btn btn-sm btn-icon btn-bg-light btn-active-color-primary
+                    "
+      data-bs-target="#change_op"
+      data-bs-toggle="modal"
+      type="button"
+  >
+                    <span class="svg-icon svg-icon-2">
+                      <inline-svg
+                          src="/media/icons/duotune/art/art005.svg"
+                      />
+                    </span>
+  </a>
   <!--begin::ChangeOP-->
-  <div class="border">
-    <div :class="widgetClasses" class="card">
-      <!--begin::Body-->
-      <div class="card-body pb-3">
-        <!--begin::Header-->
-        <el-header>
-          {{ translate("changeOP") }}:
+  <div id="change_op" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"> {{ translate("changeOP") }}:
+          </h5>
+
+          <!--begin::Close-->
+          <div
+              aria-label="Close"
+              class="btn btn-icon btn-sm btn-active-light-primary ms-2"
+              data-bs-dismiss="modal"
+          >
+            <span class="svg-icon svg-icon-2x"></span>
+          </div>
+          <!--end::Close-->
+        </div>
+
+        <div class="modal-body">
           <el-select v-model="value" :placeholder="currentOP" style="margin-left: 10px">
             <el-option
                 v-for="item in changeOPOptions"
@@ -15,19 +41,24 @@
                 :value="item.value">
             </el-option>
           </el-select>
-          <el-button size="small" style="margin-left: 10px" type="primary" @click="changeOP">
-            {{ translate("send") }}
-          </el-button>
-        </el-header>
-        <!--end::Header-->
+        </div>
 
-        <!--begin::Form-->
-        <!--end::Form-->
+        <div class="modal-footer">
+          <button
+              class="btn btn-light"
+              data-bs-dismiss="modal"
+              type="button"
+          >
+            {{ translate("cancel") }}
+          </button>
+          <button class="btn btn-primary" type="button" @click="changeOP">
+            {{ translate("send") }}
+          </button>
+        </div>
       </div>
-      <!--end::Body-->
     </div>
-    <!--end::Feeds changeOP-->
   </div>
+
   <!--end::ChangeOP-->
 </template>
 
