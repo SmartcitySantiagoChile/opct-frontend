@@ -43,7 +43,7 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("operationProgram") }}
                     <template v-if="hasChangeStatusOption">
-                      <ChangeStatus></ChangeStatus>
+                      <ChangeOP></ChangeOP>
                     </template>
                   </span>
                   <template v-if="changeOpRequestBaseInfo.op">
@@ -104,7 +104,7 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("status") }}
                     <template v-if="hasChangeStatusOption">
-                      <ChangeOP></ChangeOP>
+                      <ChangeStatus></ChangeStatus>
                     </template>
                   </span>
                   <span
@@ -114,8 +114,7 @@
                       changeOpRequestBaseInfo.status
                         ? changeOpRequestBaseInfo.status.name
                         : ""
-                    }}</span
-                  >
+                    }}</span>
                 </td>
               </tr>
             </tbody>
