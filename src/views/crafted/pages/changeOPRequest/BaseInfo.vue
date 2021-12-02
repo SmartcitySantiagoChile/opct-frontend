@@ -14,12 +14,12 @@
             <!--begin::Table head-->
             <thead>
             <tr>
-              <th class="p-0 mw-auto"></th>
-              <th class="p-0 mw-auto"></th>
-              <th class="p-0 mw-auto"></th>
-              <th class="p-0 mw-auto"></th>
-              <th class="p-0 mw-auto"></th>
-              <th class="p-0 mw-auto"></th>
+              <th class="p-0 min-w-150px "></th>
+              <th class="p-0 min-w-300px"></th>
+              <th class="p-0"></th>
+              <th class="p-0 min-w-150px "></th>
+              <th class="p-0  "></th>
+              <th class="p-0  "></th>
             </tr>
             </thead>
             <!--end::Table head-->
@@ -30,21 +30,27 @@
               <td>
                   <span class="text-muted fw-bold d-block fs-5">{{
                       translate("creationDate")
-                    }}</span>
+                    }}
+                  </span>
                 <span class="text-dark fw-bolder d-block fs-3">{{
                     changeOpRequestBaseInfo.created_at
                         ? changeOpRequestBaseInfo.created_at.split("T")[0]
                         : ""
-                  }}</span>
+                  }}
+                </span>
+
               </td>
               <td>
                   <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("operationProgram") }}</span
-                  >
+                    {{ translate("operationProgram") }}
+                  <template v-if="hasChangeStatusOption">
+                    <ChangeStatus></ChangeStatus>
+                  </template>
+                  </span>
                 <template v-if=" changeOpRequestBaseInfo.op">
                   <span class="text-dark fw-bolder d-block fs-3">
 
-                    {{ changeOpRequestBaseInfo.op.start_at }} ({{changeOpRequestBaseInfo.op.op_type.name}})</span
+                    {{ changeOpRequestBaseInfo.op.start_at }} ({{ changeOpRequestBaseInfo.op.op_type.name }})</span
                   >
                 </template>
 
@@ -97,8 +103,11 @@
               </td>
               <td>
                   <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("status") }}</span
-                  >
+                    {{ translate("status") }}
+                   <template v-if="hasChangeStatusOption">
+                    <ChangeOP></ChangeOP>
+                   </template>
+                  </span>
                 <span
                     :class="`badge-light-success`"
                     class="badge fs-4 fw-bolder"
@@ -124,27 +133,27 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {computed, defineComponent} from "vue";
 import {useI18n} from "vue-i18n";
+import ChangeStatus from "@/views/crafted/pages/changeOPRequest/ChangeStatus.vue";
+import {useStore} from "vuex";
+import ChangeOP from "@/views/crafted/pages/changeOPRequest/ChangeOP.vue";
 
 export default defineComponent({
   name: "changeOPRequestBaseInfo",
-  components: {},
+  components: {ChangeStatus, ChangeOP},
   props: {
     widgetClasses: String,
     changeOpRequestBaseInfo: {},
   },
   setup() {
+    const store = useStore();
     const {t, te} = useI18n();
-    const translate = (text) => {
-      if (te(text)) {
-        return t(text);
-      } else {
-        return text;
-      }
-    };
+    const translate = (text) => te(text) ? t(text) : text;
+    const hasChangeStatusOption = computed(() => store.getters.hasChangeStatusOption);
     return {
       translate,
+      hasChangeStatusOption
     };
   },
 });

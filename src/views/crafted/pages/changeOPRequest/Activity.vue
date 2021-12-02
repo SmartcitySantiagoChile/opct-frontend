@@ -46,12 +46,6 @@
     </div>
     <div class="separator"></div>
     <Reply></Reply>
-    <template v-if="hasChangeStatusOption">
-      <ChangeStatus></ChangeStatus>
-    </template>
-    <template v-if="hasChangeStatusOption">
-      <ChangeOP></ChangeOP>
-    </template>
     <!--end::Card body-->
   </div>
   <!--end::Timeline-->
@@ -64,9 +58,7 @@ import {useI18n} from "vue-i18n";
 import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/BaseInfo.vue";
 import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/Message.vue";
 import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/Milestone.vue";
-import ChangeStatus from "@/views/crafted/pages/changeOPRequest/ChangeStatus.vue";
 import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
-import ChangeOP from "@/views/crafted/pages/changeOPRequest/ChangeOP.vue";
 import {Actions} from "@/store/enums/StoreEnums";
 
 export default defineComponent({
@@ -78,14 +70,6 @@ export default defineComponent({
     ChangeOPRequestTimelineMessage,
     ChangeOPRequestTimelineMilestone,
     Reply,
-    ChangeStatus,
-    ChangeOP
-  },
-  computed: {
-    hasChangeStatusOption() {
-      const store = useStore();
-      return store.getters.hasChangeStatusOption
-    },
   },
   setup(props) {
     const store = useStore();

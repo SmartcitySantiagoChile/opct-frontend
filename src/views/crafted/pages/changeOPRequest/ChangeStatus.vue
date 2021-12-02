@@ -1,12 +1,37 @@
 <template>
+  <a
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#kt_modal_1"
+      class="
+                      btn btn-sm btn-icon btn-bg-light btn-active-color-primary
+                    "
+  >
+                    <span class="svg-icon svg-icon-2">
+                      <inline-svg
+                          src="/media/icons/duotune/art/art005.svg"
+                      />
+                    </span>
+  </a>
   <!--begin::ChangeStatus-->
-  <div class="border">
-    <div :class="widgetClasses" class="card">
-      <!--begin::Body-->
-      <div class="card-body pb-3">
-        <!--begin::Header-->
-        <el-header>
-          {{ translate("changeStatus") }}:
+  <div class="modal fade" tabindex="-1" id="kt_modal_1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ translate("changeStatus") }}</h5>
+
+          <!--begin::Close-->
+          <div
+              class="btn btn-icon btn-sm btn-active-light-primary ms-2"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+          >
+            <span class="svg-icon svg-icon-2x"></span>
+          </div>
+          <!--end::Close-->
+        </div>
+
+        <div class="modal-body">
           <el-select v-model="value" :placeholder="currentStatus" style="margin-left: 10px">
             <el-option
                 v-for="item in changeStatusOptions"
@@ -15,18 +40,22 @@
                 :value="item.value">
             </el-option>
           </el-select>
-          <el-button size="small" style="margin-left: 10px" type="primary" @click="changeStatus">
-            {{ translate("send") }}
-          </el-button>
-        </el-header>
-        <!--end::Header-->
+        </div>
 
-        <!--begin::Form-->
-        <!--end::Form-->
+        <div class="modal-footer">
+          <button
+              type="button"
+              class="btn btn-light"
+              data-bs-dismiss="modal"
+          >
+            {{ translate("cancel") }}
+          </button>
+          <button type="button" class="btn btn-primary" @click="changeStatus">
+            {{ translate("send") }}
+          </button>
+        </div>
       </div>
-      <!--end::Body-->
     </div>
-    <!--end::Feeds ChangeStatus-->
   </div>
   <!--end::ChangeStatus-->
 </template>
