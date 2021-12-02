@@ -13,103 +13,103 @@
           <table class="table align-middle gs-0 gy-3">
             <!--begin::Table head-->
             <thead>
-              <tr>
-                <th class="p-0 mw-auto"></th>
-                <th class="p-0 mw-auto"></th>
-                <th class="p-0 mw-auto"></th>
-                <th class="p-0 mw-auto"></th>
-                <th class="p-0 mw-auto"></th>
-                <th class="p-0 mw-auto"></th>
-              </tr>
+            <tr>
+              <th class="p-0 mw-auto"></th>
+              <th class="p-0 mw-auto"></th>
+              <th class="p-0 mw-auto"></th>
+              <th class="p-0 mw-auto"></th>
+              <th class="p-0 mw-auto"></th>
+              <th class="p-0 mw-auto"></th>
+            </tr>
             </thead>
             <!--end::Table head-->
 
             <!--begin::Table body-->
             <tbody>
-              <tr>
-                <td>
+            <tr>
+              <td>
                   <span class="text-muted fw-bold d-block fs-5">{{
-                    translate("creationDate")
-                  }}</span>
-                  <span class="text-dark fw-bolder d-block fs-3">{{
+                      translate("creationDate")
+                    }}</span>
+                <span class="text-dark fw-bolder d-block fs-3">{{
                     changeOpRequestBaseInfo.created_at
-                      ? changeOpRequestBaseInfo.created_at.split("T")[0]
-                      : ""
+                        ? changeOpRequestBaseInfo.created_at.split("T")[0]
+                        : ""
                   }}</span>
-                </td>
-                <td>
+              </td>
+              <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("operationProgram") }}</span
                   >
+                <template v-if=" changeOpRequestBaseInfo.op">
                   <span class="text-dark fw-bolder d-block fs-3">
-                    {{
-                      changeOpRequestBaseInfo.op
-                        ? changeOpRequestBaseInfo.op.start_at
-                        : ""
-                    }}</span
+
+                    {{ changeOpRequestBaseInfo.op.start_at }} ({{changeOpRequestBaseInfo.op.op_type.name}})</span
                   >
-                </td>
-                <td>
+                </template>
+
+              </td>
+              <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("contractType") }}</span
                   >
-                  <span class="text-dark fw-bolder d-block fs-3">
+                <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOpRequestBaseInfo.contract_type
-                          ? changeOpRequestBaseInfo.contract_type.name
-                          : ""
-                    }}</span
-                  >
-                </td>
-                <td>
+                    changeOpRequestBaseInfo.contract_type
+                        ? changeOpRequestBaseInfo.contract_type.name
+                        : ""
+                  }}</span
+                >
+              </td>
+              <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("reason") }}</span
                   >
-                  <span class="text-dark fw-bolder d-block fs-3">
+                <span class="text-dark fw-bolder d-block fs-3">
                     {{ changeOpRequestBaseInfo.reason }}</span
-                  >
-                </td>
-                <td>
+                >
+              </td>
+              <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("creator") }}</span
                   >
-                  <span class="text-dark fw-bolder d-block fs-3">
+                <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOpRequestBaseInfo.creator
+                    changeOpRequestBaseInfo.creator
                         ? changeOpRequestBaseInfo.creator.first_name +
-                          " " +
-                          changeOpRequestBaseInfo.creator.last_name
+                        " " +
+                        changeOpRequestBaseInfo.creator.last_name
                         : ""
-                    }}</span
-                  >
-                </td>
-                <td>
+                  }}</span
+                >
+              </td>
+              <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("counterpart") }}</span
                   >
-                  <span class="text-dark fw-bolder d-block fs-3">
+                <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOpRequestBaseInfo.counterpart
+                    changeOpRequestBaseInfo.counterpart
                         ? changeOpRequestBaseInfo.counterpart.name
                         : ""
-                    }}</span
-                  >
-                </td>
-                <td>
+                  }}</span
+                >
+              </td>
+              <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("status") }}</span
                   >
-                  <span
+                <span
                     :class="`badge-light-success`"
                     class="badge fs-4 fw-bolder"
-                    >{{
-                      changeOpRequestBaseInfo.status
+                >{{
+                    changeOpRequestBaseInfo.status
                         ? changeOpRequestBaseInfo.status.name
                         : ""
-                    }}</span
-                  >
-                </td>
-              </tr>
+                  }}</span
+                >
+              </td>
+            </tr>
             </tbody>
             <!--end::Table body-->
           </table>
@@ -124,8 +124,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { useI18n } from "vue-i18n";
+import {defineComponent} from "vue";
+import {useI18n} from "vue-i18n";
 
 export default defineComponent({
   name: "changeOPRequestBaseInfo",
@@ -135,7 +135,7 @@ export default defineComponent({
     changeOpRequestBaseInfo: {},
   },
   setup() {
-    const { t, te } = useI18n();
+    const {t, te} = useI18n();
     const translate = (text) => {
       if (te(text)) {
         return t(text);

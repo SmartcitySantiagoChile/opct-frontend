@@ -90,7 +90,7 @@
                       mb-1
                       fs-6
                     "
-                    >{{ item.op.start_at }}</a
+                    >{{ item.op.start_at }} ({{item.op.op_type.name}})</a
                   >
                 </td>
 
