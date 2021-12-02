@@ -230,10 +230,6 @@ const messages = {
     changeStatusInfo: "Cambio de estado:",
     changeOPInfo: "Cambio de PO:"
 
-
-
-
-
   },
   de: {
     dashboard: "Instrumententafel",

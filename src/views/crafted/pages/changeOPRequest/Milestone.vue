@@ -44,7 +44,7 @@
                 )[0]
               }}
             </span>
-            {{translate("to")}}
+            {{ translate("to") }}
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
               {{
                 changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
@@ -106,12 +106,18 @@
               }}
             </template>
           </div>
+          <template v-if="changeOPRequestTimelineMilestoneLog.update_deadlines">
+            <div class="text-muted me-2 fs-7">
+              -
+            {{ changeOPRequestTimelineMilestoneLog.update_deadlines ? translate("deadlinesUpdated") : "" }}
+            </div>
+          </template>
           <!--end::Info-->
           <!--begin::User-->
           <template
               v-if="
                 changeOPRequestTimelineMilestoneLog.new_status">
-            {{ translate("by") + "&nbsp;"}}
+            {{ translate("by") + "&nbsp;" }}
             <a class="text-primary fw-bolder me-1" href="#">
               {{
                 changeOPRequestTimelineMilestoneLog.user
