@@ -9,7 +9,7 @@
     <div class="timeline-icon symbol symbol-circle symbol-40px">
       <div class="symbol-label bg-light">
         <span class="svg-icon svg-icon-2 svg-icon-gray-500">
-          <inline-svg src="/media/icons/duotune/communication/com009.svg"/>
+          <inline-svg src="/media/icons/duotune/communication/com009.svg" />
         </span>
       </div>
     </div>
@@ -23,39 +23,40 @@
         <div class="fs-5 fw-bold mb-2">
           <template v-if="changeOPRequestTimelineMilestoneLog.new_status">
             <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
-            {{
+              {{
                 changeOPRequestTimelineMilestoneLog.new_status
-                    ? changeOPRequestTimelineMilestoneLog.new_status.name
-                    : ""
+                  ? changeOPRequestTimelineMilestoneLog.new_status.name
+                  : ""
               }}
             </span>
           </template>
           <template v-if="changeOPRequestTimelineMilestoneLog.new_op">
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
-            {{
+              {{
                 changeOPRequestTimelineMilestoneLog.new_op
-                    ? translate("changeOperationProgramTo")
-                    : "" + " "
+                  ? translate("changeOperationProgramTo")
+                  : "" + " "
               }}
-            {{
+              {{
                 changeOPRequestTimelineMilestoneLog.new_op
-                    ? changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
-                        "T"
+                  ? changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
+                      "T"
                     )[0]
-                    : ""
+                  : ""
               }}
-          </span>
+            </span>
           </template>
           <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
             <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
-            {{
+              {{
                 changeOPRequestTimelineMilestoneLog.time_threshold
-                    ? translate("endOf") + " " + changeOPRequestTimelineMilestoneLog.name
-                    : ""
+                  ? translate("endOf") +
+                    " " +
+                    changeOPRequestTimelineMilestoneLog.name
+                  : ""
               }}
-          </span>
+            </span>
           </template>
-
         </div>
         <!--end::Title-->
       </div>
@@ -71,26 +72,30 @@
               {{ translate("finishOn") }}
               {{
                 changeOPRequestTimelineMilestoneLog.dead_line
-                    ? changeOPRequestTimelineMilestoneLog.dead_line.split("T")[0]
-                    : ""
+                  ? changeOPRequestTimelineMilestoneLog.dead_line.split("T")[0]
+                  : ""
               }}
             </template>
             <template
-                v-if="changeOPRequestTimelineMilestoneLog.new_op || changeOPRequestTimelineMilestoneLog.new_status">
+              v-if="
+                changeOPRequestTimelineMilestoneLog.new_op ||
+                changeOPRequestTimelineMilestoneLog.new_status
+              "
+            >
               {{ translate("addedAt") }}
               {{
                 changeOPRequestTimelineMilestoneLog.created_at
-                    ? changeOPRequestTimelineMilestoneLog.created_at.split("T")[0]
-                    : ""
+                  ? changeOPRequestTimelineMilestoneLog.created_at.split("T")[0]
+                  : ""
               }}
               {{ translate("atTime") }}
               {{
                 changeOPRequestTimelineMilestoneLog.created_at
-                    ? changeOPRequestTimelineMilestoneLog.created_at
-                        .split("T")[1]
-                        .split("Z")[0]
-                        .split(".")[0]
-                    : ""
+                  ? changeOPRequestTimelineMilestoneLog.created_at
+                      .split("T")[1]
+                      .split("Z")[0]
+                      .split(".")[0]
+                  : ""
               }}
             </template>
           </div>
@@ -107,16 +112,16 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import {useI18n} from "vue-i18n";
+import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "changeOPRequestTimelineMilestone",
   props: ["changeOPRequestTimelineMilestoneLog"],
   components: {},
   setup() {
-    const {t, te} = useI18n();
-    const translate = (text) => te(text) ? t(text) : text;
+    const { t, te } = useI18n();
+    const translate = (text) => (te(text) ? t(text) : text);
     return {
       translate,
     };

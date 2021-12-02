@@ -90,14 +90,14 @@
                       mb-1
                       fs-6
                     "
-                    >{{ item.op.start_at }} ({{item.op.op_type.name}})</a
+                    >{{ item.op.start_at }} ({{ item.op.op_type.name }})</a
                   >
                 </td>
 
                 <td>
                   <a
-                      href="#"
-                      class="
+                    href="#"
+                    class="
                       text-dark
                       fw-bolder
                       text-hover-primary
@@ -105,7 +105,7 @@
                       mb-1
                       fs-6
                     "
-                  >{{ item.contract_type ? item.contract_type.name : "" }}</a
+                    >{{ item.contract_type ? item.contract_type.name : "" }}</a
                   >
                 </td>
 

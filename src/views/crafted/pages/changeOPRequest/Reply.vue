@@ -11,7 +11,7 @@
             <!--begin::Avatar-->
             <div class="symbol symbol-50px">
               <div
-                  class="
+                class="
                   symbol-label
                   fs-2
                   fw-bold
@@ -27,9 +27,9 @@
             <!--begin::Info-->
             <div class="d-flex flex-column">
               <a
-                  class="text-gray-800 text-hover-primary px-3 fs-6 fw-bolder"
-                  href="#"
-              >{{ userNameAndSurname }}</a
+                class="text-gray-800 text-hover-primary px-3 fs-6 fw-bolder"
+                href="#"
+                >{{ userNameAndSurname }}</a
               >
             </div>
             <!--end::Info-->
@@ -47,19 +47,27 @@
 
           <div class="separator"></div>
           <!--begin::Toolbar-->
-          <div id="reply_toolbar" class="ql-toolbar d-flex flex-stack py-2">
-          </div>
+          <div
+            id="reply_toolbar"
+            class="ql-toolbar d-flex flex-stack py-2"
+          ></div>
           <el-upload
-              :auto-upload="false"
-              :file-list="fileList"
-              :on-change="handleChange"
-              action=""
-
+            :auto-upload="false"
+            :file-list="fileList"
+            :on-change="handleChange"
+            action=""
           >
             <template #trigger>
-              <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
+              <el-button size="small" type="primary">{{
+                translate("attachFiles")
+              }}</el-button>
             </template>
-            <el-button size="small" style="margin-left: 10px" type="primary" @click="createMessage">
+            <el-button
+              size="small"
+              style="margin-left: 10px"
+              type="primary"
+              @click="createMessage"
+            >
               {{ translate("send") }}
             </el-button>
           </el-upload>
@@ -74,13 +82,12 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref} from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import Quill from "quill/dist/quill.js";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
-import {Actions} from "@/store/enums/StoreEnums";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
-
 
 export default defineComponent({
   name: "reply",
@@ -88,7 +95,7 @@ export default defineComponent({
     widgetClasses: String,
   },
   setup() {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => {
       if (te(text)) {
         return t(text);
@@ -105,41 +112,41 @@ export default defineComponent({
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
       const text = quill.getText();
-      let files = fileList.value.map(file => {
-        
-      });
+      let files = fileList.value.map((file) => {});
       console.log(fileList);
       const params = {
         created_at: new Date().toISOString(),
         message: text,
         creator: store.getters.currentUserUrl,
-        change_op_request: store.getters.getCurrentChangeOPRequestUrl
-      }
-      store.dispatch(Actions.CREATE_CHANGE_OP_REQUEST_MESSAGE, params).then(function () {
-        Swal.fire({
-          text: translate("messageSuccess"),
-          icon: "success",
-          buttonsStyling: false,
-          confirmButtonText: translate("continue"),
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-success",
-          },
-          allowOutsideClick: false,
-        }).then(() => location.reload());
-      })
-          .catch(() => {
-            Swal.fire({
-              text: store.getters.getChangeOPRequestMessageErrors.map(error => {
-                return `${translate(error[0])} : ${translate(error[1])}`
-              }),
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: translate("tryAgain"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-danger",
-              },
-            });
+        change_op_request: store.getters.getCurrentChangeOPRequestUrl,
+      };
+      store
+        .dispatch(Actions.CREATE_CHANGE_OP_REQUEST_MESSAGE, params)
+        .then(function () {
+          Swal.fire({
+            text: translate("messageSuccess"),
+            icon: "success",
+            buttonsStyling: false,
+            confirmButtonText: translate("continue"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-success",
+            },
+            allowOutsideClick: false,
+          }).then(() => location.reload());
+        })
+        .catch(() => {
+          Swal.fire({
+            text: store.getters.getChangeOPRequestMessageErrors.map((error) => {
+              return `${translate(error[0])} : ${translate(error[1])}`;
+            }),
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: translate("tryAgain"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-danger",
+            },
           });
+        });
     };
     const handleChange = (file, fileListData) => {
       fileList = fileListData;

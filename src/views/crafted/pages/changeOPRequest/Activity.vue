@@ -3,7 +3,7 @@
   <div class="card">
     <div class="card-title align-items-center">
       <ChangeOPRequestBaseInfo
-          v-bind:changeOpRequestBaseInfo="baseInfo"
+        v-bind:changeOpRequestBaseInfo="baseInfo"
       ></ChangeOPRequestBaseInfo>
     </div>
     <div class="separator"></div>
@@ -13,27 +13,31 @@
       <div class="tab-content">
         <!--begin::Tab panel-->
         <div
-            id="kt_activity_today"
-            aria-labelledby="kt_activity_today_tab"
-            class="card-body p-0 tab-pane fade show active"
-            role="tabpanel"
+          id="kt_activity_today"
+          aria-labelledby="kt_activity_today_tab"
+          class="card-body p-0 tab-pane fade show active"
+          role="tabpanel"
         >
           <!--begin::Timeline-->
           <div class="timeline">
             <ChangeOPRequestTimelineMessage
-                v-bind:changeOpRequestTimelineMessage="headerInfo"
+              v-bind:changeOpRequestTimelineMessage="headerInfo"
             ></ChangeOPRequestTimelineMessage>
             <template v-for="(item, index) in orderedLogs" :key="index">
               <template v-if="item.type === 'changeOPRequestMessage'">
                 <ChangeOPRequestTimelineMessage
-                    v-bind:changeOpRequestTimelineMessage="item.data"
+                  v-bind:changeOpRequestTimelineMessage="item.data"
                 ></ChangeOPRequestTimelineMessage>
               </template>
               <template
-                  v-if="item.type === 'statusLog' || item.type === 'opChangeLog' || item.type === 'opStatus'"
+                v-if="
+                  item.type === 'statusLog' ||
+                  item.type === 'opChangeLog' ||
+                  item.type === 'opStatus'
+                "
               >
                 <ChangeOPRequestTimelineMilestone
-                    v-bind:changeOPRequestTimelineMilestoneLog="item.data"
+                  v-bind:changeOPRequestTimelineMilestoneLog="item.data"
                 ></ChangeOPRequestTimelineMilestone>
               </template>
             </template>
@@ -52,14 +56,14 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from "vue";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
+import { computed, defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
 import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/BaseInfo.vue";
 import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/Message.vue";
 import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/Milestone.vue";
 import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
-import {Actions} from "@/store/enums/StoreEnums";
+import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
   inheritAttrs: false,
@@ -80,15 +84,14 @@ export default defineComponent({
       baseData["op"] = props.changeOPRequest["op"];
       baseData["status"] = props.changeOPRequest["status"];
       baseData["change_op_request_files"] =
-          props.changeOPRequest["change_op_request_files"];
+        props.changeOPRequest["change_op_request_files"];
       baseData["reason"] = props.changeOPRequest["reason"];
       baseData["creator"] = props.changeOPRequest["creator"];
       baseData["counterpart"] = props.changeOPRequest["counterpart"];
       baseData["title"] = props.changeOPRequest["title"];
-      baseData["contract_type"] = props.changeOPRequest["contract_type"]
+      baseData["contract_type"] = props.changeOPRequest["contract_type"];
       return baseData;
     });
-
 
     const headerInfo = computed(() => {
       const headerData = {};
@@ -96,22 +99,35 @@ export default defineComponent({
       headerData["creator"] = props.changeOPRequest["creator"];
       headerData["message"] = props.changeOPRequest["message"];
       headerData["change_op_request_files"] =
-          props.changeOPRequest["change_op_request_files"];
+        props.changeOPRequest["change_op_request_files"];
       return headerData;
     });
 
-    const opStatuses = ref(computed(() => store.getters.getCurrentOperationProgramStatuses));
+    const opStatuses = ref(
+      computed(() => store.getters.getCurrentOperationProgramStatuses)
+    );
 
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
       if (opStatuses.value) {
         opStatuses.value.forEach((opStatus) => {
-          if (props.changeOPRequest["contract_type"]){
-            const releaseDate = new Date(props.changeOPRequest["op_release_date"] + " 00:00");
-            if (opStatus.contract_type.name == props.changeOPRequest["contract_type"]["name"]){
-              let deadLineDate =  new Date(JSON.parse(JSON.stringify(releaseDate)));
-              deadLineDate.setDate(deadLineDate.getDate() - opStatus.time_threshold );
-              const deadLineStringDate = JSON.parse(JSON.stringify(deadLineDate))
+          if (props.changeOPRequest["contract_type"]) {
+            const releaseDate = new Date(
+              props.changeOPRequest["op_release_date"] + " 00:00"
+            );
+            if (
+              opStatus.contract_type.name ==
+              props.changeOPRequest["contract_type"]["name"]
+            ) {
+              let deadLineDate = new Date(
+                JSON.parse(JSON.stringify(releaseDate))
+              );
+              deadLineDate.setDate(
+                deadLineDate.getDate() - opStatus.time_threshold
+              );
+              const deadLineStringDate = JSON.parse(
+                JSON.stringify(deadLineDate)
+              );
               opStatus["dead_line"] = deadLineStringDate;
               let opStatusData = {
                 dateTime: JSON.parse(JSON.stringify(deadLineStringDate)),
@@ -121,20 +137,19 @@ export default defineComponent({
               orderedLogsData.push(opStatusData);
             }
           }
-
         });
       }
       if (props.changeOPRequest) {
         if (props.changeOPRequest["change_op_request_messages"]) {
           props.changeOPRequest["change_op_request_messages"].forEach(
-              (message) => {
-                let changeOPRequestData = {
-                  dateTime: message["created_at"],
-                  type: "changeOPRequestMessage",
-                  data: message,
-                };
-                orderedLogsData.push(changeOPRequestData);
-              }
+            (message) => {
+              let changeOPRequestData = {
+                dateTime: message["created_at"],
+                type: "changeOPRequestMessage",
+                data: message,
+              };
+              orderedLogsData.push(changeOPRequestData);
+            }
           );
         }
         if (props.changeOPRequest["op_change_logs"]) {
@@ -165,13 +180,13 @@ export default defineComponent({
       });
       return orderedLogsData;
     });
-    const {t, te} = useI18n();
-    const translate = (text) =>  te(text) ? t(text) : text;
+    const { t, te } = useI18n();
+    const translate = (text) => (te(text) ? t(text) : text);
     return {
       translate,
       baseInfo,
       headerInfo,
-      orderedLogs
+      orderedLogs,
     };
   },
 });
