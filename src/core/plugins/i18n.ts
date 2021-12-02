@@ -110,7 +110,9 @@ const messages = {
     contractType: "Contract type",
     endOf: "End of",
     finishOn: "Finish on",
-    cancel: "Cancel"
+    cancel: "Cancel",
+    changeStatusInfo: "Change status:",
+    changeOPInfo: "Change OP:"
 
 
 
@@ -224,7 +226,9 @@ const messages = {
     contractType: "Tipo de contrato",
     endOf: "Fin de",
     finishOn: "Finalizada el",
-    cancel: "Cancelar"
+    cancel: "Cancelar",
+    changeStatusInfo: "Cambio de estado:",
+    changeOPInfo: "Cambio de PO:"
 
 
 

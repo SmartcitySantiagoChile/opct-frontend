@@ -112,7 +112,7 @@ export default defineComponent({
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
       const text = quill.getText();
-      let files = fileList.value.map((file) => {});
+      //let files = fileList.value.map((file) => {});
       console.log(fileList);
       const params = {
         created_at: new Date().toISOString(),

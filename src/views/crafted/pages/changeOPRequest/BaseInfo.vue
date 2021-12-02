@@ -17,7 +17,7 @@
                 <th class="p-0 min-w-150px"></th>
                 <th class="p-0 min-w-300px"></th>
                 <th class="p-0"></th>
-                <th class="p-0 min-w-150px"></th>
+                <th class="p-0"></th>
                 <th class="p-0"></th>
                 <th class="p-0"></th>
               </tr>
