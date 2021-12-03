@@ -82,6 +82,7 @@
                     ? changeOPRequestTimelineMilestoneLog.dead_line.split("T")[0]
                     : ""
               }}
+              {{ translate("atTime") }} 23:59:59
             </template>
             <template
                 v-if="
