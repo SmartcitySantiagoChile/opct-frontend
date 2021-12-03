@@ -42,7 +42,7 @@
                 changeOPRequestTimelineMilestoneLog.previous_op.start_at.split(
                     "T"
                 )[0]
-              }}
+              }} ({{changeOPRequestTimelineMilestoneLog.previous_op.op_type.name}})
             </span>
             {{ translate("to") }}
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
@@ -50,7 +50,7 @@
                 changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
                     "T"
                 )[0]
-              }}
+              }} ({{changeOPRequestTimelineMilestoneLog.new_op.op_type.name}})
             </span>
           </template>
           <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
