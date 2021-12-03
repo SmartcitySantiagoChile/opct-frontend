@@ -112,9 +112,9 @@ const messages = {
     finishOn: "Finish on",
     cancel: "Cancel",
     changeStatusInfo: "Change status:",
-    changeOPInfo: "Change OP:"
-
-
+    changeOPInfo: "Change OP:",
+    deallocateOP: "Deallocate OP",
+    withoutAssign: "Without assign"
 
   },
   es: {
@@ -228,7 +228,9 @@ const messages = {
     finishOn: "Finalizada el",
     cancel: "Cancelar",
     changeStatusInfo: "Cambio de estado:",
-    changeOPInfo: "Cambio de PO:"
+    changeOPInfo: "Cambio de PO:",
+    deallocateOP: "Desasignar PO",
+    withoutAssign: "Sin asignar"
 
   },
   de: {

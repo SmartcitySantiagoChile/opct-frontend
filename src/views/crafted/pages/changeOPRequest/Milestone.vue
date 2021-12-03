@@ -35,22 +35,33 @@
               }}
             </span>
           </template>
-          <template v-if="changeOPRequestTimelineMilestoneLog.new_op">
+          <template
+              v-if="changeOPRequestTimelineMilestoneLog.previous_op || changeOPRequestTimelineMilestoneLog.new_op">
             {{ translate("changeOPInfo") }}
-            <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
+            <span class="badge badge-light-warning fs-4 fw-bolder">
+              <template v-if="changeOPRequestTimelineMilestoneLog.previous_op ">
               {{
-                changeOPRequestTimelineMilestoneLog.previous_op.start_at.split(
-                    "T"
-                )[0]
-              }} ({{changeOPRequestTimelineMilestoneLog.previous_op.op_type.name}})
+                  changeOPRequestTimelineMilestoneLog.previous_op.start_at.split(
+                      "T"
+                  )[0]
+                }} ({{ changeOPRequestTimelineMilestoneLog.previous_op.op_type.name }})
+                </template>
+              <template v-else>
+                {{ translate("withoutAssign") }}
+              </template>
             </span>
             {{ translate("to") }}
-            <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
-              {{
-                changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
-                    "T"
-                )[0]
-              }} ({{changeOPRequestTimelineMilestoneLog.new_op.op_type.name}})
+            <span class="badge badge-light-warning fs-4 fw-bolder">
+              <template v-if="changeOPRequestTimelineMilestoneLog.new_op">
+                {{
+                  changeOPRequestTimelineMilestoneLog.new_op.start_at.split(
+                      "T"
+                  )[0]
+                }} ({{ changeOPRequestTimelineMilestoneLog.new_op.op_type.name }})
+              </template>
+              <template v-else>
+                {{ translate("withoutAssign") }}
+              </template>
             </span>
           </template>
           <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
@@ -75,6 +86,7 @@
         <div class="d-flex align-items-center mt-1 fs-6">
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
+            <!--begin::OPStatusCase-->
             <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
               {{ translate("finishOn") }}
               {{
@@ -84,9 +96,11 @@
               }}
               {{ translate("atTime") }} 23:59:59
             </template>
+            <!--end::OPStatusCase-->
+            <!--begin::ChangeOPCase and ChangeStatusCase-->
             <template
                 v-if="
-                changeOPRequestTimelineMilestoneLog.new_op ||
+                changeOPRequestTimelineMilestoneLog.new_op || changeOPRequestTimelineMilestoneLog.previous_op ||
                 changeOPRequestTimelineMilestoneLog.new_status
               "
             >
@@ -106,13 +120,16 @@
                     : ""
               }}
             </template>
+            <!--end::ChangeOPCase and ChangeStatusCase-->
           </div>
+          <!--begin::OPStatus Deadline-->
           <template v-if="changeOPRequestTimelineMilestoneLog.update_deadlines">
             <div class="text-muted me-2 fs-7">
               -
-            {{ changeOPRequestTimelineMilestoneLog.update_deadlines ? translate("deadlinesUpdated") : "" }}
+              {{ changeOPRequestTimelineMilestoneLog.update_deadlines ? translate("deadlinesUpdated") : "" }}
             </div>
           </template>
+          <!--begin::OPStatus Deadline-->
           <!--end::Info-->
           <!--begin::User-->
           <template

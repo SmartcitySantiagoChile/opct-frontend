@@ -111,7 +111,7 @@ export default defineComponent({
       let orderedLogsData = [] as any;
       if (opStatuses.value) {
         opStatuses.value.forEach((opStatus) => {
-          if (props.changeOPRequest["contract_type"]) {
+          if (props.changeOPRequest["contract_type"] && props.changeOPRequest["op_release_date"]) {
             const releaseDate = new Date(
               props.changeOPRequest["op_release_date"] + " 00:00"
             );
