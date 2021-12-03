@@ -1,12 +1,12 @@
 <template>
   <a
-      class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
-      data-bs-target="#change_op"
-      data-bs-toggle="modal"
-      type="button"
+    class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
+    data-bs-target="#change_op"
+    data-bs-toggle="modal"
+    type="button"
   >
     <span class="svg-icon svg-icon-2">
-      <inline-svg src="/media/icons/duotune/art/art005.svg"/>
+      <inline-svg src="/media/icons/duotune/art/art005.svg" />
     </span>
   </a>
   <!--begin::ChangeOP-->
@@ -18,9 +18,9 @@
 
           <!--begin::Close-->
           <div
-              aria-label="Close"
-              class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-              data-bs-dismiss="modal"
+            aria-label="Close"
+            class="btn btn-icon btn-sm btn-active-light-primary ms-2"
+            data-bs-dismiss="modal"
           >
             <span class="svg-icon svg-icon-2x"></span>
           </div>
@@ -29,15 +29,15 @@
 
         <div class="modal-body">
           <el-select
-              v-model="value"
-              :placeholder="currentOP"
-              style="margin-left: 10px"
+            v-model="value"
+            :placeholder="currentOP"
+            style="margin-left: 10px"
           >
             <el-option
-                v-for="item in changeOPOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+              v-for="item in changeOPOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
             >
             </el-option>
           </el-select>
@@ -59,10 +59,10 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref} from "vue";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
-import {Actions} from "@/store/enums/StoreEnums";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 
 export default defineComponent({
@@ -71,7 +71,7 @@ export default defineComponent({
     widgetClasses: String,
   },
   setup: function () {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     const currentOP = computed(() => {
@@ -83,23 +83,27 @@ export default defineComponent({
       store.dispatch(Actions.GET_OPERATION_PROGRAMS);
     });
     const changeOPOptions = ref(
-        computed(() => {
-          const operationPrograms = store.getters.getCurrentOperationPrograms;
-          let options = operationPrograms.flatMap((operationProgram) =>
-              operationProgram.start_at === currentOP.value
-                  ? []
-                  : [
-                    {
-                      value: operationProgram.url,
-                      label: operationProgram.start_at + " (" + operationProgram.op_type.name + ")",
-                    },
-                  ]
-          );
-          if (currentOP.value !== translate("withoutAssign")) {
-            options.push({value: "None", label: translate("deallocateOP")})
-          }
-          return options
-        })
+      computed(() => {
+        const operationPrograms = store.getters.getCurrentOperationPrograms;
+        let options = operationPrograms.flatMap((operationProgram) =>
+          operationProgram.start_at === currentOP.value
+            ? []
+            : [
+                {
+                  value: operationProgram.url,
+                  label:
+                    operationProgram.start_at +
+                    " (" +
+                    operationProgram.op_type.name +
+                    ")",
+                },
+              ]
+        );
+        if (currentOP.value !== translate("withoutAssign")) {
+          options.push({ value: "None", label: translate("deallocateOP") });
+        }
+        return options;
+      })
     );
     const value = ref("");
 
@@ -109,7 +113,7 @@ export default defineComponent({
         op = value.value.split("/");
         op.pop();
       } else {
-        op = ["None"]
+        op = ["None"];
       }
       let opId: string = op.pop() as string;
       const changeOPRequestId = store.getters.getCurrentChangeOPRequestId;
@@ -117,7 +121,6 @@ export default defineComponent({
         op: opId === "None" ? null : opId,
         update_deadlines: false,
       };
-      console.log(opId);
       if (opId && opId !== "None") {
         Swal.fire({
           title: translate("wantToUpdateDeadlines"),
@@ -131,42 +134,45 @@ export default defineComponent({
           },
           allowOutsideClick: false,
         })
-            .then((result) => {
-              if (result.isConfirmed) {
-                params["update_deadlines"] = true;
-              }
-              store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
-                resource: changeOPRequestId,
-                params: params,
+          .then((result) => {
+            if (result.isConfirmed) {
+              params["update_deadlines"] = true;
+            }
+            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
+              resource: changeOPRequestId,
+              params: params,
+            });
+            return result;
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: translate("changeOPSuccess"),
+                message: translate("deadlinesUpdated"),
+                icon: "success",
               });
-              return result;
-            })
-            .then((result) => {
-              if (result.isConfirmed) {
-                Swal.fire({
-                  title: translate("changeOPSuccess"),
-                  message: translate("deadlinesUpdated"),
-                  icon: "success",
-                });
-              } else {
-                Swal.fire({
-                  title: translate("changeOPSuccess"),
-                  message: translate("deadlinesNotUpdated"),
-                  icon: "success",
-                });
-              }
-            })
-            .then(() => location.reload());
+            } else {
+              Swal.fire({
+                title: translate("changeOPSuccess"),
+                message: translate("deadlinesNotUpdated"),
+                icon: "success",
+              });
+            }
+          })
+          .then(() => location.reload());
       } else if (opId === "None") {
-        store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
-          resource: changeOPRequestId,
-          params: params,
-        }).then(() => {
-          Swal.fire({
-            title: translate("changeOPSuccess"),
-            icon: "success",
-          });
-        }).then(() => location.reload());
+        store
+          .dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
+            resource: changeOPRequestId,
+            params: params,
+          })
+          .then(() => {
+            Swal.fire({
+              title: translate("changeOPSuccess"),
+              icon: "success",
+            });
+          })
+          .then(() => location.reload());
       } else {
         Swal.fire({
           text: translate("mustSelectOP"),
