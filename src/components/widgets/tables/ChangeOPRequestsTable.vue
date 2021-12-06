@@ -72,7 +72,11 @@
                       <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                        >{{DateTime.fromISO(item.created_at).setLocale(this.$i18n.locale).toLocaleString()}}
+                        >{{
+                          DateTime.fromISO(item.created_at)
+                            .setLocale(this.$i18n.locale)
+                            .toLocaleString()
+                        }}
                       </a>
                     </div>
                   </div>
@@ -91,9 +95,12 @@
                     href="#"
                   >
                     <template v-if="item.op">
-                      {{DateTime.fromISO(item.op.start_at).setLocale(this.$i18n.locale).toLocaleString()}} ({{
-                        item.op.op_type.name
-                      }})
+                      {{
+                        DateTime.fromISO(item.op.start_at)
+                          .setLocale(this.$i18n.locale)
+                          .toLocaleString()
+                      }}
+                      ({{ item.op.op_type.name }})
                     </template>
                     <template v-else>
                       {{ translate("withoutAssign") }}
