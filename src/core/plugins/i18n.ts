@@ -109,12 +109,13 @@ const messages = {
     deadlinesNotUpdated: "Deadlines not updated",
     contractType: "Contract type",
     endOf: "End of",
-    finishOn: "Finish on",
+    finishedOn: "Finished on",
     cancel: "Cancel",
     changeStatusInfo: "Change status:",
     changeOPInfo: "Change OP:",
     deallocateOP: "Deallocate OP",
-    withoutAssign: "Without assign"
+    withoutAssign: "Without assign",
+    finishOn: "Finish on"
 
   },
   es: {
@@ -225,12 +226,13 @@ const messages = {
     deadlinesNotUpdated: "Plazos no actualizados",
     contractType: "Tipo de contrato",
     endOf: "Fin de",
-    finishOn: "Finalizada el",
+    finishedOn: "Finalizada el",
     cancel: "Cancelar",
     changeStatusInfo: "Cambio de estado:",
     changeOPInfo: "Cambio de PO:",
     deallocateOP: "Desasignar PO",
-    withoutAssign: "Sin asignar"
+    withoutAssign: "Sin asignar",
+    finishOn: "Finaliza el"
 
   },
   de: {

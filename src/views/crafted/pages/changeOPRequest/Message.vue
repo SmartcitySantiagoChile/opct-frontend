@@ -160,13 +160,7 @@ export default defineComponent({
   },
   setup() {
     const {t, te} = useI18n();
-    const translate = (text) => {
-      if (te(text)) {
-        return t(text);
-      } else {
-        return text;
-      }
-    };
+    const translate = (text) => (te(text) ? t(text) : text);
     return {
       translate,
       DateTime
