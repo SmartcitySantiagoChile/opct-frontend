@@ -126,7 +126,9 @@ const messages = {
         changeOPRequestTitleLabel: "Request title",
         titleRequired: "Title is required",
         reasonRequired: "Reason is required",
-        writeMessage: "Write a message..."
+        writeMessage: "Write a message...",
+        withoutOP: "Without OP",
+        selectOP: "Seleccione un PO"
 
 
 
@@ -256,7 +258,9 @@ const messages = {
         changeOPRequestTitleLabel: "Título de la solicitud",
         titleRequired: "Se requiere ingresar un título",
         reasonRequired: "Se requiere seleccionar un motivo",
-        writeMessage: "Escriba un mensaje..."
+        writeMessage: "Escriba un mensaje...",
+        withoutOP: "Sin PO",
+        selectOP: "Seleccione un PO"
 
 
 

@@ -102,11 +102,19 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   /**
-   * Returns true if organization name is "ADATRAP" todo: change condition
+   * Returns true if organization name is "DTPM" todo: change condition
    * @returns boolean
    */
   get hasChangeStatusOption(): boolean {
-    return this.user.organization.name === "ADATRAP";
+    return this.user.organization.name === "DTPM";
+  }
+
+  /**
+   * Returns organization name
+   * @returns boolean
+   */
+  get getOrganizationName(): boolean {
+    return this.user.organization.name
   }
 
   @Mutation

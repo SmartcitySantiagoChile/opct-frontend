@@ -1,5 +1,5 @@
 <template>
-  <!--begin::Modal - Create Change OP REquest-->
+  <!--begin::Modal - Create Change OP Request-->
   <div
       id="modal_create_change_op_request"
       ref="createChangeOPRequestModalRef"
@@ -145,28 +145,6 @@
                 </div>
                 <!--end::Step 4-->
 
-                <!--begin::Step 5-->
-                <div class="stepper-item" data-kt-stepper-element="nav">
-                  <!--begin::Line-->
-                  <div class="stepper-line w-40px"></div>
-                  <!--end::Line-->
-
-                  <!--begin::Icon-->
-                  <div class="stepper-icon w-40px h-40px">
-                    <i class="stepper-check fas fa-check"></i>
-                    <span class="stepper-number">5</span>
-                  </div>
-                  <!--end::Icon-->
-
-                  <!--begin::Label-->
-                  <div class="stepper-label">
-                    <h3 class="stepper-title">Release</h3>
-
-                    <div class="stepper-desc">Review and Submit</div>
-                  </div>
-                  <!--end::Label-->
-                </div>
-                <!--end::Step 5-->
               </div>
               <!--end::Nav-->
             </div>
@@ -273,10 +251,10 @@
                             :on-change="handleChange"
                             action=""
                         >
-                            <el-button size="small" type="primary">{{
-                                translate("attachFiles")
-                              }}
-                            </el-button>
+                          <el-button size="small" type="primary">{{
+                              translate("attachFiles")
+                            }}
+                          </el-button>
                         </el-upload>
                         <!--end::Toolbar-->
                         <div class="separator"></div>
@@ -291,176 +269,52 @@
                 <div data-kt-stepper-element="content">
                   <div class="w-100">
                     <!--begin::Input group-->
-                    <div class="fv-row">
-                      <!--begin::Label-->
-                      <label
-                          class="d-flex align-items-center fs-5 fw-bold mb-4"
-                      >
-                        <span class="required">Select Framework</span>
-                        <i
-                            class="fas fa-exclamation-circle ms-2 fs-7"
-                            data-bs-toggle="tooltip"
-                            title="Specify your apps framework"
-                        ></i>
-                      </label>
-                      <!--end::Label-->
-
-                      <!--begin:Option-->
-                      <label class="d-flex flex-stack cursor-pointer mb-5">
-                        <!--begin:Label-->
-                        <span class="d-flex align-items-center me-2">
-                          <!--begin:Icon-->
-                          <span class="symbol symbol-50px me-6">
-                            <span class="symbol-label bg-light-warning">
-                              <i class="fab fa-html5 text-warning fs-2x"></i>
-                            </span>
-                          </span>
-                          <!--end:Icon-->
-
-                          <!--begin:Info-->
-                          <span class="d-flex flex-column">
-                            <span class="fw-bolder fs-6">HTML5</span>
-
-                            <span class="fs-7 text-muted">Base Web Projec</span>
-                          </span>
-                          <!--end:Info-->
-                        </span>
-                        <!--end:Label-->
-
-                        <!--begin:Input-->
-                        <span
-                            class="form-check form-check-custom form-check-solid"
+                    <div class="row mb-10">
+                      <!--begin::Col-->
+                      <div class="col-md-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-bold form-label mb-2"
+                        >{{ translate("counterpart") }}</label
                         >
-                          <Field
-                              checked
-                              class="form-check-input"
-                              name="framework"
-                              type="radio"
-                              value="1"
-                          />
-                        </span>
-                        <!--end:Input-->
-                      </label>
-                      <!--end::Option-->
+                        <!--end::Label-->
 
-                      <!--begin:Option-->
-                      <label class="d-flex flex-stack cursor-pointer mb-5">
-                        <!--begin:Label-->
-                        <span class="d-flex align-items-center me-2">
-                          <!--begin:Icon-->
-                          <span class="symbol symbol-50px me-6">
-                            <span class="symbol-label bg-light-success">
-                              <i class="fab fa-react text-success fs-2x"></i>
-                            </span>
-                          </span>
-                          <!--end:Icon-->
+                        <!--begin::Row-->
+                        <div class="row fv-row">
+                          <!--begin::Col-->
+                          <select
+                              id="counterpart"
+                              class="
+                                form-select form-select-solid
+                                select2-hidden-accessible selected
+                              "
 
-                          <!--begin:Info-->
-                          <span class="d-flex flex-column">
-                            <span class="fw-bolder fs-6">ReactJS</span>
-                            <span class="fs-7 text-muted"
-                            >Robust and flexible app framework</span
-                            >
-                          </span>
-                          <!--end:Info-->
-                        </span>
-                        <!--end:Label-->
+                          >
+                            <template v-if="isAdminOrganization">
+                              <option
+                                  v-for="i in organizationsOptions"
+                                  :key="i.value"
+                                  :label="i.label"
+                                  :value="i.value"
+                                  :data-contracttype="i.contracttype"
+                              ></option>
+                            </template>
+                            <template v-else>
+                              <option
+                                  :key="adminOrganizationOption.value"
+                                  :label="adminOrganizationOption.label"
+                                  :value="adminOrganizationOption.value"
+                                  :data-contracttype="adminOrganizationOption.contracttype"
+                                  disabled
+                                  selected
+                              ></option>
+                            </template>
+                          </select>
+                          <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                      </div>
+                      <!--end::Col-->
 
-                        <!--begin:Input-->
-                        <span
-                            class="form-check form-check-custom form-check-solid"
-                        >
-                          <input
-                              class="form-check-input"
-                              name="framework"
-                              type="radio"
-                              value="2"
-                          />
-                        </span>
-                        <!--end:Input-->
-                      </label>
-                      <!--end::Option-->
-
-                      <!--begin:Option-->
-                      <label class="d-flex flex-stack cursor-pointer mb-5">
-                        <!--begin:Label-->
-                        <span class="d-flex align-items-center me-2">
-                          <!--begin:Icon-->
-                          <span class="symbol symbol-50px me-6">
-                            <span class="symbol-label bg-light-danger">
-                              <i class="fab fa-angular text-danger fs-2x"></i>
-                            </span>
-                          </span>
-                          <!--end:Icon-->
-
-                          <!--begin:Info-->
-                          <span class="d-flex flex-column">
-                            <span class="fw-bolder fs-6">Angular</span>
-                            <span class="fs-7 text-muted"
-                            >Powerful data mangement</span
-                            >
-                          </span>
-                          <!--end:Info-->
-                        </span>
-                        <!--end:Label-->
-
-                        <!--begin:Input-->
-                        <span
-                            class="form-check form-check-custom form-check-solid"
-                        >
-                          <Field
-                              class="form-check-input"
-                              name="framework"
-                              type="radio"
-                              value="3"
-                          />
-                        </span>
-                        <!--end:Input-->
-                      </label>
-                      <!--end::Option-->
-
-                      <!--begin:Option-->
-                      <label class="d-flex flex-stack cursor-pointer">
-                        <!--begin:Label-->
-                        <span class="d-flex align-items-center me-2">
-                          <!--begin:Icon-->
-                          <span class="symbol symbol-50px me-6">
-                            <span class="symbol-label bg-light-primary">
-                              <i class="fab fa-vuejs text-primary fs-2x"></i>
-                            </span>
-                          </span>
-                          <!--end:Icon-->
-
-                          <!--begin:Info-->
-                          <span class="d-flex flex-column">
-                            <span class="fw-bolder fs-6">Vue</span>
-                            <span class="fs-7 text-muted"
-                            >Lightweight and responsive framework</span
-                            >
-                          </span>
-                          <!--end:Info-->
-                        </span>
-                        <!--end:Label-->
-
-                        <!--begin:Input-->
-                        <span
-                            class="form-check form-check-custom form-check-solid"
-                        >
-                          <Field
-                              class="form-check-input"
-                              name="framework"
-                              type="radio"
-                              value="4"
-                          />
-                        </span>
-                        <!--end:Input-->
-                      </label>
-                      <!--end::Option-->
-
-                      <ErrorMessage
-                          class="fv-plugins-message-container invalid-feedback"
-                          name="framework"
-                      />
                     </div>
                     <!--end::Input group-->
                   </div>
@@ -471,442 +325,55 @@
                 <div data-kt-stepper-element="content">
                   <div class="w-100">
                     <!--begin::Input group-->
-                    <div class="fv-row mb-10">
-                      <!--begin::Label-->
-                      <label class="required fs-5 fw-bold mb-2">
-                        Database Name
-                      </label>
-                      <!--end::Label-->
-
-                      <!--begin::Input-->
-                      <Field
-                          class="form-control form-control-lg form-control-solid"
-                          name="dbName"
-                          placeholder=""
-                          type="text"
-                      />
-                      <ErrorMessage
-                          class="fv-plugins-message-container invalid-feedback"
-                          name="dbName"
-                      />
-                      <!--end::Input-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="fv-row">
-                      <!--begin::Label-->
-                      <label
-                          class="d-flex align-items-center fs-5 fw-bold mb-4"
-                      >
-                        <span class="required">Select Database Engine</span>
-
-                        <i
-                            class="fas fa-exclamation-circle ms-2 fs-7"
-                            data-bs-toggle="tooltip"
-                            title="Select your app database engine"
-                        ></i>
-                      </label>
-                      <!--end::Label-->
-
-                      <!--begin:Option-->
-                      <label class="d-flex flex-stack cursor-pointer mb-5">
-                        <!--begin::Label-->
-                        <span class="d-flex align-items-center me-2">
-                          <!--begin::Icon-->
-                          <span class="symbol symbol-50px me-6">
-                            <span class="symbol-label bg-light-success">
-                              <i class="fas fa-database text-success fs-2x"></i>
-                            </span>
-                          </span>
-                          <!--end::Icon-->
-
-                          <!--begin::Info-->
-                          <span class="d-flex flex-column">
-                            <span class="fw-bolder fs-6">MySQL</span>
-
-                            <span class="fs-7 text-muted"
-                            >Basic MySQL database</span
-                            >
-                          </span>
-                          <!--end::Info-->
-                        </span>
-                        <!--end::Label-->
-
-                        <!--begin::Input-->
-                        <span
-                            class="form-check form-check-custom form-check-solid"
-                        >
-                          <Field
-                              class="form-check-input"
-                              name="dbType"
-                              type="radio"
-                              value="1"
-                          />
-                        </span>
-                        <!--end::Input-->
-                      </label>
-                      <!--end::Option-->
-
-                      <!--begin:Option-->
-                      <label class="d-flex flex-stack cursor-pointer mb-5">
-                        <!--begin::Label-->
-                        <span class="d-flex align-items-center me-2">
-                          <!--begin::Icon-->
-                          <span class="symbol symbol-50px me-6">
-                            <span class="symbol-label bg-light-danger">
-                              <i class="fab fa-google text-danger fs-2x"></i>
-                            </span>
-                          </span>
-                          <!--end::Icon-->
-
-                          <!--begin::Info-->
-                          <span class="d-flex flex-column">
-                            <span class="fw-bolder fs-6">Firebase</span>
-
-                            <span class="fs-7 text-muted"
-                            >Google based app data management</span
-                            >
-                          </span>
-                          <!--end::Info-->
-                        </span>
-                        <!--end::Label-->
-
-                        <!--begin::Input-->
-                        <span
-                            class="form-check form-check-custom form-check-solid"
-                        >
-                          <Field
-                              class="form-check-input"
-                              name="dbType"
-                              type="radio"
-                              value="2"
-                          />
-                        </span>
-                        <!--end::Input-->
-                      </label>
-                      <!--end::Option-->
-
-                      <!--begin:Option-->
-                      <label class="d-flex flex-stack cursor-pointer">
-                        <!--begin::Label-->
-                        <span class="d-flex align-items-center me-2">
-                          <!--begin::Icon-->
-                          <span class="symbol symbol-50px me-6">
-                            <span class="symbol-label bg-light-warning">
-                              <i class="fab fa-amazon text-warning fs-2x"></i>
-                            </span>
-                          </span>
-                          <!--end::Icon-->
-
-                          <!--begin::Info-->
-                          <span class="d-flex flex-column">
-                            <span class="fw-bolder fs-6">DynamoDB</span>
-
-                            <span class="fs-7 text-muted"
-                            >Amazon Fast NoSQL Database</span
-                            >
-                          </span>
-                          <!--end::Info-->
-                        </span>
-                        <!--end::Label-->
-
-                        <!--begin::Input-->
-                        <span
-                            class="form-check form-check-custom form-check-solid"
-                        >
-                          <Field
-                              class="form-check-input"
-                              name="dbType"
-                              type="radio"
-                              value="3"
-                          />
-                        </span>
-                        <!--end::Input-->
-                      </label>
-                      <!--end::Option-->
-
-                      <ErrorMessage
-                          class="fv-plugins-message-container invalid-feedback"
-                          name="dbType"
-                      />
-                    </div>
-                    <!--end::Input group-->
-                  </div>
-                </div>
-                <!--end::Step 3-->
-
-                <!--begin::Step 4-->
-                <div data-kt-stepper-element="content">
-                  <div class="w-100">
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-7 fv-row">
-                      <!--begin::Label-->
-                      <label
-                          class="
-                          d-flex
-                          align-items-center
-                          fs-6
-                          fw-bold
-                          form-label
-                          mb-2
-                        "
-                      >
-                        <span class="required">Name On Card</span>
-                        <i
-                            class="fas fa-exclamation-circle ms-2 fs-7"
-                            data-bs-toggle="tooltip"
-                            title="Specify a card holder's name"
-                        ></i>
-                      </label>
-                      <!--end::Label-->
-
-                      <Field
-                          class="form-control form-control-solid"
-                          name="nameOnCard"
-                          placeholder=""
-                          type="text"
-                      />
-                      <ErrorMessage
-                          class="fv-plugins-message-container invalid-feedback"
-                          name="nameOnCard"
-                      />
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-7 fv-row">
-                      <!--begin::Label-->
-                      <label class="required fs-6 fw-bold form-label mb-2"
-                      >Card Number</label
-                      >
-                      <!--end::Label-->
-
-                      <!--begin::Input wrapper-->
-                      <div class="position-relative">
-                        <!--begin::Input-->
-                        <Field
-                            class="form-control form-control-solid"
-                            name="cardNumber"
-                            placeholder="Enter card number"
-                            type="text"
-                        />
-                        <ErrorMessage
-                            class="fv-plugins-message-container invalid-feedback"
-                            name="cardNumber"
-                        />
-                        <!--end::Input-->
-
-                        <!--begin::Card logos-->
-                        <div
-                            class="
-                            position-absolute
-                            translate-middle-y
-                            top-50
-                            end-0
-                            me-5
-                          "
-                        >
-                          <img
-                              alt=""
-                              class="h-25px"
-                              src="/media/svg/card-logos/visa.svg"
-                          />
-                          <img
-                              alt=""
-                              class="h-25px"
-                              src="/media/svg/card-logos/mastercard.svg"
-                          />
-                          <img
-                              alt=""
-                              class="h-25px"
-                              src="/media/svg/card-logos/american-express.svg"
-                          />
-                        </div>
-                        <!--end::Card logos-->
-                      </div>
-                      <!--end::Input wrapper-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
                     <div class="row mb-10">
                       <!--begin::Col-->
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
                         <label class="required fs-6 fw-bold form-label mb-2"
-                        >Expiration Date</label
+                        >{{ translate("operationProgram") }}</label
                         >
                         <!--end::Label-->
 
                         <!--begin::Row-->
                         <div class="row fv-row">
                           <!--begin::Col-->
-                          <div class="col-6">
-                            <Field
-                                as="select"
-                                class="
+                          <Field
+                              as="select"
+                              class="
                                 form-select form-select-solid
                                 select2-hidden-accessible
                               "
-                                name="cardExpiryMonth"
-                                placeholder="Month"
-                            >
-                              <option
-                                  v-for="i in 12"
-                                  :key="i"
-                                  :label="i"
-                                  :value="i"
-                              ></option>
-                            </Field>
-                            <ErrorMessage
-                                class="
-                                fv-plugins-message-container
-                                invalid-feedback
-                              "
-                                name="cardExpiryMonth"
-                            />
-                          </div>
-                          <!--end::Col-->
-
-                          <!--begin::Col-->
-                          <div class="col-6">
-                            <Field
-                                as="select"
-                                class="
-                                form-select form-select-solid
-                                select2-hidden-accessible
-                              "
-                                name="cardExpiryYear"
-                                placeholder="Year"
-                            >
-                              <option
-                                  v-for="i in 10"
-                                  :key="i"
-                                  :label="i + (new Date().getFullYear() - 1)"
-                                  :value="i"
-                              ></option>
-                            </Field>
-                            <ErrorMessage
-                                class="
-                                fv-plugins-message-container
-                                invalid-feedback
-                              "
-                                name="cardExpiryYear"
-                            />
-                          </div>
+                              name="op"
+                              id="op"
+                          >
+                            <option disabled selected value="">{{
+                                translate("selectOP")
+                              }}
+                            </option>
+                            <option
+                                v-for="i in OPOptions"
+                                :key="i.value"
+                                :label="i.label"
+                                :value="i.value"
+                                :data-release="i.release"
+                            ></option>
+                          </Field>
                           <!--end::Col-->
                         </div>
                         <!--end::Row-->
                       </div>
                       <!--end::Col-->
 
-                      <!--begin::Col-->
-                      <div class="col-md-4 fv-row">
-                        <!--begin::Label-->
-                        <label
-                            class="
-                            d-flex
-                            align-items-center
-                            fs-6
-                            fw-bold
-                            form-label
-                            mb-2
-                          "
-                        >
-                          <span class="required">CVV</span>
-                          <i
-                              class="fas fa-exclamation-circle ms-2 fs-7"
-                              data-bs-toggle="tooltip"
-                              title="Enter a card CVV code"
-                          ></i>
-                        </label>
-                        <!--end::Label-->
-
-                        <!--begin::Input wrapper-->
-                        <div class="position-relative">
-                          <!--begin::Input-->
-                          <Field
-                              class="form-control form-control-solid"
-                              maxlength="4"
-                              minlength="3"
-                              name="cardCvv"
-                              placeholder="CVV"
-                              type="text"
-                          />
-                          <ErrorMessage
-                              class="
-                              fv-plugins-message-container
-                              invalid-feedback
-                            "
-                              name="cardCvv"
-                          />
-                          <!--end::Input-->
-
-                          <!--begin::CVV icon-->
-                          <div
-                              class="
-                              position-absolute
-                              translate-middle-y
-                              top-50
-                              end-0
-                              me-3
-                            "
-                          >
-                            <span class="svg-icon svg-icon-2hx">
-                              <inline-svg
-                                  src="/media/icons/duotune/finance/fin002.svg"
-                              />
-                            </span>
-                          </div>
-                          <!--end::CVV icon-->
-                        </div>
-                        <!--end::Input wrapper-->
-                      </div>
-                      <!--end::Col-->
                     </div>
                     <!--end::Input group-->
 
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-stack">
-                      <!--begin::Label-->
-                      <div class="me-5">
-                        <label class="fs-6 fw-bold form-label"
-                        >Save Card for further billing?</label
-                        >
-                        <div class="fs-7 fw-bold text-gray-400">
-                          If you need more info, please check budget planning
-                        </div>
-                      </div>
-                      <!--end::Label-->
 
-                      <!--begin::Switch-->
-                      <label
-                          class="
-                          form-check
-                          form-switch
-                          form-check-custom
-                          form-check-solid
-                        "
-                      >
-                        <Field
-                            class="form-check-input"
-                            name="saveCard"
-                            type="checkbox"
-                            value="1"
-                        />
-                        <span class="form-check-label fw-bold text-gray-400">
-                          Save Card
-                        </span>
-                      </label>
-                      <!--end::Switch-->
-                    </div>
-                    <!--end::Input group-->
                   </div>
                 </div>
-                <!--end::Step 4-->
+                <!--end::Step 3-->
 
-                <!--begin::Step 5-->
+
+                <!--begin::Step 4-->
                 <div data-kt-stepper-element="content">
                   <div class="w-100 text-center">
                     <!--begin::Heading-->
@@ -1034,28 +501,18 @@ import Quill from "quill/dist/quill.js";
 interface Step1 {
   title: string;
   reason: string;
-  category: string;
 }
 
 interface Step2 {
-  framework: string;
+  counterpart: string;
 }
 
 interface Step3 {
-  dbName: string;
-  dbType: string;
+  op: string;
 }
 
-interface Step4 {
-  nameOnCard: string;
-  cardNumber: string;
-  cardExpiryMonth: string;
-  cardExpiryYear: string;
-  cardCvv: string;
-  saveCard: string;
-}
 
-interface KTCreateApp extends Step1, Step2, Step3, Step4 {
+interface KTCreateApp extends Step1, Step2, Step3 {
 }
 
 export default defineComponent({
@@ -1072,8 +529,12 @@ export default defineComponent({
     const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
+    const isAdminOrganization = computed(() => store.getters.hasChangeStatusOption);
+
     let fileList = [];
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
+    store.dispatch(Actions.GET_ORGANIZATIONS);
+    store.dispatch(Actions.GET_OPERATION_PROGRAMS);
 
     const reasonOptions = computed(() => {
       let options: Array<any> = [];
@@ -1092,19 +553,83 @@ export default defineComponent({
       return options;
     });
 
+    const OPOptions =
+        computed(() => {
+          const operationPrograms = store.getters.getCurrentOperationPrograms;
+          let options: Array<any> = [];
+
+          if (operationPrograms.length) {
+            operationPrograms.forEach((operationProgram) => {
+              options.push({
+                value: operationProgram.url,
+                label:
+                    operationProgram.start_at +
+                    " (" +
+                    operationProgram.op_type.name +
+                    ")",
+                release: operationProgram.start_at
+              })
+            })
+            ;
+          }
+          options.push({value: "None", label: translate("withoutOP")});
+          return options;
+        });
+
+    const organizationsOptions =
+        computed(() => {
+          const organizations = store.getters.getAllOrganizations;
+          const currentOrganizationName = store.getters.getOrganizationName;
+          let options: Array<any> = [];
+          if (store.getters.hasChangeStatusOption) {
+            console.log(organizations);
+            options = organizations.flatMap((organization) =>
+                organization.name === currentOrganizationName
+                    ? []
+                    : [
+                      {
+                        value: organization.url,
+                        label: organization.name,
+                        contracttype: organization.contract_type.url
+                      },
+                    ]
+            );
+          } else {
+            options = organizations.flatMap((organization) =>
+                organization.name === "DTPM"
+                    ? [{
+                      value: organization.url,
+                      label: organization.name,
+                      contracttype: organization.contract_type.url
+                    }]
+                    : []
+            );
+          }
+          return options;
+        });
+    const adminOrganizationOption = computed(() => {
+      let option = {};
+      const organizations = store.getters.getCurrentOrganization;
+      if (!store.getters.hasChangeStatusOption) {
+        organizations.forEach((organization) => {
+              if (organization.name === "DTPM") {
+                option = {
+                  value: organization.url,
+                  label: organization.name,
+                  contracttype: organization.contract_type.url
+                }
+              }
+            }
+        );
+      }
+      return option
+    });
+
     const formData = ref<KTCreateApp>({
       title: "",
       reason: "1",
-      category: "1",
-      framework: "1",
-      dbName: "",
-      dbType: "1",
-      nameOnCard: "Max Doe",
-      cardNumber: "4111 1111 1111 1111",
-      cardExpiryMonth: "1",
-      cardExpiryYear: "2",
-      cardCvv: "123",
-      saveCard: "1",
+      counterpart: "1",
+      op: "",
     });
 
     onMounted(() => {
@@ -1132,21 +657,12 @@ export default defineComponent({
       Yup.object({
         title: Yup.string().required(translate("titleRequired")).label("Title"),
         reason: Yup.string().required(translate("reasonRequired")).label("Reason"),
-        category: Yup.string().required().label("Category"),
       }),
       Yup.object({
-        framework: Yup.string().required().label("Framework"),
+        counterpart: Yup.string().required().label("counterpart")
       }),
       Yup.object({
-        dbName: Yup.string().required().label("Database name"),
-        dbType: Yup.string().required().label("Database engine"),
-      }),
-      Yup.object({
-        nameOnCard: Yup.string().required().label("Name"),
-        cardNumber: Yup.string().required().label("Card Number"),
-        cardExpiryMonth: Yup.string().required().label("Expiration Month"),
-        cardExpiryYear: Yup.string().required().label("Expiration Year"),
-        cardCvv: Yup.string().required().label("CVV"),
+        op: Yup.string().required().label("OperationProgram"),
       }),
     ];
 
@@ -1163,7 +679,7 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const {resetForm, handleSubmit} = useForm<Step1 | Step2 | Step3 | Step4>({
+    const {resetForm, handleSubmit} = useForm<Step1 | Step2 | Step3>({
       validationSchema: currentSchema,
     });
 
@@ -1183,6 +699,22 @@ export default defineComponent({
         ...values,
       };
 
+      const counterPartSelector: HTMLSelectElement = document.querySelector("#counterpart") as HTMLSelectElement;
+      if (counterPartSelector){
+        formData.value["counterpart"] = counterPartSelector.value;
+        console.log(1);
+        console.log(counterPartSelector.options[counterPartSelector.selectedIndex]);
+        formData.value["contracttype"] = counterPartSelector.options[counterPartSelector.selectedIndex].dataset.contracttype;
+      }
+      const opSelector: HTMLSelectElement = document.querySelector("#op") as HTMLSelectElement;
+      if (opSelector){
+       formData.value["op_release_date"] = opSelector.options[opSelector.selectedIndex].dataset.release;
+      }
+
+      const container = document.querySelector("#message_editor");
+      const quill = Quill.find(container);
+      formData.value["message"] = quill.getText();
+
       currentStepIndex.value++;
 
       if (!_stepperObj.value) {
@@ -1193,6 +725,8 @@ export default defineComponent({
     });
 
     const formSubmit = () => {
+      formData.value["created_at"] = Date.now();
+      console.log(formData.value);
       Swal.fire({
         text: "All is cool! Now you submit this form",
         icon: "success",
@@ -1216,6 +750,11 @@ export default defineComponent({
       fileList = fileListData;
     };
 
+    const handleChangeOp = (value) => {
+      console.log(value);
+    }
+
+
     return {
       handleStep,
       formSubmit,
@@ -1227,7 +766,12 @@ export default defineComponent({
       reasonOptions,
       translate,
       handleChange,
-      fileList
+      fileList,
+      isAdminOrganization,
+      OPOptions,
+      organizationsOptions,
+      adminOrganizationOption,
+      handleChangeOp
     };
   },
 });
