@@ -1,11 +1,11 @@
 <template>
   <!--begin::Modal - Create Change OP REquest-->
   <div
-      class="modal fade"
       id="modal_create_change_op_request"
       ref="createChangeOPRequestModalRef"
-      tabindex="-1"
       aria-hidden="true"
+      class="modal fade"
+      tabindex="-1"
   >
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-900px">
@@ -14,7 +14,7 @@
         <!--begin::Modal header-->
         <div class="modal-header">
           <!--begin::Modal title-->
-          <h2>{{translate("createChangeOPRequest")}}</h2>
+          <h2>{{ translate("createChangeOPRequest") }}</h2>
           <!--end::Modal title-->
 
           <!--begin::Close-->
@@ -23,7 +23,7 @@
               data-bs-dismiss="modal"
           >
             <span class="svg-icon svg-icon-1">
-              <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
+              <inline-svg src="/media/icons/duotune/arrows/arr061.svg"/>
             </span>
           </div>
           <!--end::Close-->
@@ -34,13 +34,13 @@
         <div class="modal-body py-lg-10 px-lg-10">
           <!--begin::Stepper-->
           <div
+              id="modal_create_change_op_request_stepper"
+              ref="createChangeOPRef"
               class="
               stepper stepper-pills stepper-column
               d-flex
               flex-column flex-xl-row flex-row-fluid
             "
-              id="modal_create_change_op_request_stepper"
-              ref="createChangeOPRef"
           >
             <!--begin::Aside-->
             <div
@@ -68,9 +68,9 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{translate("initialInformation")}}</h3>
+                    <h3 class="stepper-title">{{ translate("initialInformation") }}</h3>
 
-                    <div class="stepper-desc">{{translate("requestDetailInfo")}}</div>
+                    <div class="stepper-desc">{{ translate("requestDetailInfo") }}</div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -91,9 +91,9 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{translate("counterpart")}}</h3>
+                    <h3 class="stepper-title">{{ translate("counterpart") }}</h3>
 
-                    <div class="stepper-desc">{{translate("counterPartInfo")}}</div>
+                    <div class="stepper-desc">{{ translate("counterPartInfo") }}</div>
                   </div>
                   <!--begin::Label-->
                 </div>
@@ -114,9 +114,9 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{translate("operationProgram")}}</h3>
+                    <h3 class="stepper-title">{{ translate("operationProgram") }}</h3>
 
-                    <div class="stepper-desc">{{translate("operationProgramInfo")}}</div>
+                    <div class="stepper-desc">{{ translate("operationProgramInfo") }}</div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -137,9 +137,9 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{translate("confirmation")}}</h3>
+                    <h3 class="stepper-title">{{ translate("confirmation") }}</h3>
 
-                    <div class="stepper-desc">{{translate("confirmationInfo")}}</div>
+                    <div class="stepper-desc">{{ translate("confirmationInfo") }}</div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -176,9 +176,9 @@
             <div class="flex-row-fluid py-lg-5 px-lg-15">
               <!--begin::Form-->
               <form
+                  id="modal_create_change_op_request_form"
                   class="form"
                   novalidate="novalidate"
-                  id="modal_create_change_op_request_form"
                   @submit="handleStep"
               >
                 <!--begin::Step 1-->
@@ -190,21 +190,21 @@
                       <label
                           class="d-flex align-items-center fs-5 fw-bold mb-2"
                       >
-                        <span class="required">{{translate("title")}}</span>
+                        <span class="required">{{ translate("title") }}</span>
                         <i
+                            :title="`${translate('changeOPRequestTitleLabel')}`"
                             class="fas fa-exclamation-circle ms-2 fs-7"
                             data-bs-toggle="tooltip"
-                            :title="`${translate('changeOPRequestTitleLabel')}`"
                         ></i>
                       </label>
                       <!--end::Label-->
 
                       <!--begin::Input-->
                       <Field
-                          type="text"
                           class="form-control form-control-lg form-control-solid"
                           name="title"
                           placeholder=""
+                          type="text"
                       />
                       <ErrorMessage
                           class="fv-plugins-message-container invalid-feedback"
@@ -213,182 +213,59 @@
                       <!--end::Input-->
                     </div>
                     <!--end::Input group-->
-
                     <!--begin::Input group-->
-                    <div class="fv-row">
-                      <!--begin::Label-->
-                      <label
-                          class="d-flex align-items-center fs-5 fw-bold mb-4"
-                      >
-                        <span class="required">Category</span>
+                    <div class="row mb-10">
+                      <!--begin::Col-->
+                      <div class="col-md-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-bold form-label mb-2"
+                        >{{ translate("reason") }}</label
+                        >
+                        <!--end::Label-->
 
-                        <i
-                            class="fas fa-exclamation-circle ms-2 fs-7"
-                            data-bs-toggle="tooltip"
-                            title="Select your app category"
-                        ></i>
-                      </label>
-                      <!--end::Label-->
-
-                      <!--begin:Options-->
-                      <div class="fv-row">
-                        <!--begin:Option-->
-                        <label class="d-flex flex-stack mb-5 cursor-pointer">
-                          <!--begin:Label-->
-                          <span class="d-flex align-items-center me-2">
-                            <!--begin:Icon-->
-                            <span class="symbol symbol-50px me-6">
-                              <span class="symbol-label bg-light-primary">
-                                <span
-                                    class="svg-icon svg-icon-1 svg-icon-primary"
-                                >
-                                  <inline-svg
-                                      src="/media/icons/duotune/maps/map004.svg"
-                                  />
-                                </span>
-                              </span>
-                            </span>
-                            <!--end:Icon-->
-
-                            <!--begin:Info-->
-                            <span class="d-flex flex-column">
-                              <span class="fw-bolder fs-6"
-                              >Quick Online Courses</span
-                              >
-
-                              <span class="fs-7 text-muted"
-                              >Creating a clear text structure is just one
-                                SEO</span
-                              >
-                            </span>
-                            <!--end:Info-->
-                          </span>
-                          <!--end:Label-->
-
-                          <!--begin:Input-->
-                          <span
+                        <!--begin::Row-->
+                        <div class="row fv-row">
+                          <!--begin::Col-->
+                          <Field
+                              as="select"
                               class="
-                              form-check form-check-custom form-check-solid
-                            "
+                                form-select form-select-solid
+                                select2-hidden-accessible
+                              "
+                              name="reason"
                           >
-                            <Field
-                                class="form-check-input"
-                                type="radio"
-                                name="category"
-                                value="1"
-                            />
-                          </span>
-                          <!--end:Input-->
-                        </label>
-                        <!--end::Option-->
-
-                        <!--begin:Option-->
-                        <label class="d-flex flex-stack mb-5 cursor-pointer">
-                          <!--begin:Label-->
-                          <span class="d-flex align-items-center me-2">
-                            <!--begin:Icon-->
-                            <span class="symbol symbol-50px me-6">
-                              <span class="symbol-label bg-light-danger">
-                                <span
-                                    class="svg-icon svg-icon-1 svg-icon-danger"
-                                >
-                                  <inline-svg
-                                      src="/media/icons/duotune/general/gen024.svg"
-                                  />
-                                </span>
-                              </span>
-                            </span>
-                            <!--end:Icon-->
-
-                            <!--begin:Info-->
-                            <span class="d-flex flex-column">
-                              <span class="fw-bolder fs-6"
-                              >Face to Face Discussions</span
-                              >
-
-                              <span class="fs-7 text-muted"
-                              >Creating a clear text structure is just one
-                                aspect</span
-                              >
-                            </span>
-                            <!--end:Info-->
-                          </span>
-                          <!--end:Label-->
-
-                          <!--begin:Input-->
-                          <span
+                            <option
+                                v-for="i in reasonOptions"
+                                :key="i.value"
+                                :label="i.label"
+                                :value="i.value"
+                            ></option>
+                          </Field>
+                          <ErrorMessage
                               class="
-                              form-check form-check-custom form-check-solid
-                            "
-                          >
-                            <Field
-                                class="form-check-input"
-                                type="radio"
-                                name="category"
-                                value="2"
-                            />
-                          </span>
-                          <!--end:Input-->
-                        </label>
-                        <!--end::Option-->
-
-                        <!--begin:Option-->
-                        <label class="d-flex flex-stack cursor-pointer">
-                          <!--begin:Label-->
-                          <span class="d-flex align-items-center me-2">
-                            <!--begin:Icon-->
-                            <span class="symbol symbol-50px me-6">
-                              <span class="symbol-label bg-light-success">
-                                <span
-                                    class="svg-icon svg-icon-1 svg-icon-success"
-                                >
-                                  <inline-svg
-                                      src="/media/icons/duotune/general/gen013.svg"
-                                  />
-                                </span>
-                              </span>
-                            </span>
-                            <!--end:Icon-->
-
-                            <!--begin:Info-->
-                            <span class="d-flex flex-column">
-                              <span class="fw-bolder fs-6"
-                              >Full Intro Training</span
-                              >
-
-                              <span class="fs-7 text-muted"
-                              >Creating a clear text structure
-                                copywriting</span
-                              >
-                            </span>
-                            <!--end:Info-->
-                          </span>
-                          <!--end:Label-->
-
-                          <!--begin:Input-->
-                          <span
-                              class="
-                              form-check form-check-custom form-check-solid
-                            "
-                          >
-                            <Field
-                                class="form-check-input"
-                                type="radio"
-                                name="category"
-                                value="3"
-                            />
-                          </span>
-                          <!--end:Input-->
-                        </label>
-                        <!--end::Option-->
-                        <ErrorMessage
-                            class="fv-plugins-message-container invalid-feedback"
-                            name="category"
-                        />
+                                fv-plugins-message-container
+                                invalid-feedback
+                              "
+                              name="reason"
+                          />
+                          <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
                       </div>
-                      <!--end:Options-->
+                      <!--end::Col-->
+
                     </div>
                     <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-10">
+                      <form id="message_form" class="ql-quil ql-quil-plain pb-3">
+                        <!--begin::Editor-->
+                        <div id="message_editor" class="py-6"></div>
+                        <!--end::Editor-->
+                        <div class="separator"></div>
+                        <!--end::Input group-->
+                      </form>
+                    </div>
                   </div>
                 </div>
                 <!--end::Step 1-->
@@ -438,10 +315,10 @@
                             class="form-check form-check-custom form-check-solid"
                         >
                           <Field
-                              class="form-check-input"
-                              type="radio"
                               checked
+                              class="form-check-input"
                               name="framework"
+                              type="radio"
                               value="1"
                           />
                         </span>
@@ -478,8 +355,8 @@
                         >
                           <input
                               class="form-check-input"
-                              type="radio"
                               name="framework"
+                              type="radio"
                               value="2"
                           />
                         </span>
@@ -516,8 +393,8 @@
                         >
                           <Field
                               class="form-check-input"
-                              type="radio"
                               name="framework"
+                              type="radio"
                               value="3"
                           />
                         </span>
@@ -554,8 +431,8 @@
                         >
                           <Field
                               class="form-check-input"
-                              type="radio"
                               name="framework"
+                              type="radio"
                               value="4"
                           />
                         </span>
@@ -586,10 +463,10 @@
 
                       <!--begin::Input-->
                       <Field
-                          type="text"
                           class="form-control form-control-lg form-control-solid"
                           name="dbName"
                           placeholder=""
+                          type="text"
                       />
                       <ErrorMessage
                           class="fv-plugins-message-container invalid-feedback"
@@ -645,8 +522,8 @@
                         >
                           <Field
                               class="form-check-input"
-                              type="radio"
                               name="dbType"
+                              type="radio"
                               value="1"
                           />
                         </span>
@@ -684,8 +561,8 @@
                         >
                           <Field
                               class="form-check-input"
-                              type="radio"
                               name="dbType"
+                              type="radio"
                               value="2"
                           />
                         </span>
@@ -723,8 +600,8 @@
                         >
                           <Field
                               class="form-check-input"
-                              type="radio"
                               name="dbType"
+                              type="radio"
                               value="3"
                           />
                         </span>
@@ -768,10 +645,10 @@
                       <!--end::Label-->
 
                       <Field
-                          type="text"
                           class="form-control form-control-solid"
-                          placeholder=""
                           name="nameOnCard"
+                          placeholder=""
+                          type="text"
                       />
                       <ErrorMessage
                           class="fv-plugins-message-container invalid-feedback"
@@ -792,10 +669,10 @@
                       <div class="position-relative">
                         <!--begin::Input-->
                         <Field
-                            type="text"
                             class="form-control form-control-solid"
-                            placeholder="Enter card number"
                             name="cardNumber"
+                            placeholder="Enter card number"
+                            type="text"
                         />
                         <ErrorMessage
                             class="fv-plugins-message-container invalid-feedback"
@@ -814,19 +691,19 @@
                           "
                         >
                           <img
+                              alt=""
+                              class="h-25px"
                               src="/media/svg/card-logos/visa.svg"
-                              alt=""
-                              class="h-25px"
                           />
                           <img
+                              alt=""
+                              class="h-25px"
                               src="/media/svg/card-logos/mastercard.svg"
-                              alt=""
-                              class="h-25px"
                           />
                           <img
-                              src="/media/svg/card-logos/american-express.svg"
                               alt=""
                               class="h-25px"
+                              src="/media/svg/card-logos/american-express.svg"
                           />
                         </div>
                         <!--end::Card logos-->
@@ -850,13 +727,13 @@
                           <!--begin::Col-->
                           <div class="col-6">
                             <Field
-                                name="cardExpiryMonth"
+                                as="select"
                                 class="
                                 form-select form-select-solid
                                 select2-hidden-accessible
                               "
+                                name="cardExpiryMonth"
                                 placeholder="Month"
-                                as="select"
                             >
                               <option
                                   v-for="i in 12"
@@ -878,13 +755,13 @@
                           <!--begin::Col-->
                           <div class="col-6">
                             <Field
-                                name="cardExpiryYear"
+                                as="select"
                                 class="
                                 form-select form-select-solid
                                 select2-hidden-accessible
                               "
+                                name="cardExpiryYear"
                                 placeholder="Year"
-                                as="select"
                             >
                               <option
                                   v-for="i in 10"
@@ -933,12 +810,12 @@
                         <div class="position-relative">
                           <!--begin::Input-->
                           <Field
-                              type="text"
                               class="form-control form-control-solid"
-                              minlength="3"
                               maxlength="4"
-                              placeholder="CVV"
+                              minlength="3"
                               name="cardCvv"
+                              placeholder="CVV"
+                              type="text"
                           />
                           <ErrorMessage
                               class="
@@ -996,9 +873,9 @@
                         "
                       >
                         <Field
-                            type="checkbox"
                             class="form-check-input"
                             name="saveCard"
+                            type="checkbox"
                             value="1"
                         />
                         <span class="form-check-label fw-bold text-gray-400">
@@ -1028,9 +905,9 @@
                     <!--begin::Illustration-->
                     <div class="text-center px-4 py-15">
                       <img
-                          src="/media/illustrations/sketchy-1/9.png"
                           alt=""
                           class="w-100 mh-300px"
+                          src="/media/illustrations/sketchy-1/9.png"
                       />
                     </div>
                     <!--end::Illustration-->
@@ -1043,9 +920,9 @@
                   <!--begin::Wrapper-->
                   <div class="me-2">
                     <button
-                        type="button"
                         class="btn btn-lg btn-light-primary me-3"
                         data-kt-stepper-action="previous"
+                        type="button"
                         @click="previousStep()"
                     >
                       <span class="svg-icon svg-icon-3 me-1">
@@ -1061,9 +938,9 @@
                   <!--begin::Wrapper-->
                   <div>
                     <button
-                        type="submit"
-                        class="btn btn-lg btn-primary"
                         v-if="currentStepIndex === totalSteps - 1"
+                        class="btn btn-lg btn-primary"
+                        type="submit"
                         @click="formSubmit()"
                     >
                       <span class="indicator-label">
@@ -1086,7 +963,7 @@
                       </span>
                     </button>
 
-                    <button type="submit" class="btn btn-lg btn-primary" v-else>
+                    <button v-else class="btn btn-lg btn-primary" type="submit">
                       Continue
                       <span class="svg-icon svg-icon-3 ms-1 me-0">
                         <inline-svg
@@ -1125,17 +1002,21 @@
 </style>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, computed } from "vue";
-import { StepperComponent } from "@/assets/ts/components/_StepperComponent";
+import {computed, defineComponent, onMounted, ref} from "vue";
+import {StepperComponent} from "@/assets/ts/components/_StepperComponent";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
-import { useForm } from "vee-validate";
-import { Field, ErrorMessage } from "vee-validate";
+import {ErrorMessage, Field, useForm} from "vee-validate";
 import * as Yup from "yup";
-import { hideModal } from "@/core/helpers/dom";
+import {hideModal} from "@/core/helpers/dom";
 import {useI18n} from "vue-i18n";
+import {Actions} from "@/store/enums/StoreEnums";
+import {useStore} from "vuex";
+import Quill from "quill/dist/quill.js";
+
 
 interface Step1 {
   title: string;
+  reason: string;
   category: string;
 }
 
@@ -1157,7 +1038,8 @@ interface Step4 {
   saveCard: string;
 }
 
-interface KTCreateApp extends Step1, Step2, Step3, Step4 {}
+interface KTCreateApp extends Step1, Step2, Step3, Step4 {
+}
 
 export default defineComponent({
   name: "CreateChangeOpRequest",
@@ -1170,12 +1052,31 @@ export default defineComponent({
     const createChangeOPRef = ref<HTMLElement | null>(null);
     const createAppModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
-    const { t, te } = useI18n();
+    const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
+    const store = useStore();
+    store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
 
+    const reasonOptions = computed(() => {
+      let options: Array<any> = [];
+      const reasons: Array<Array<string>> = store.getters.getChangeOPRequestReason;
+      if (reasons.length) {
+        reasons.forEach(v => {
+          const option: string = v[1];
+          options.push(
+              {
+                value: option,
+                label:
+                option
+              });
+        })
+      }
+      return options;
+    });
 
     const formData = ref<KTCreateApp>({
       title: "",
+      reason: "1",
       category: "1",
       framework: "1",
       dbName: "",
@@ -1192,11 +1093,21 @@ export default defineComponent({
       _stepperObj.value = StepperComponent.createInsance(
           createChangeOPRef.value as HTMLElement
       );
+      const editorId = "message_editor";
+      // init editor
+      const options = {
+        placeholder: translate("writeReply"),
+        theme: "snow",
+      };
+
+      // Init editor
+      new Quill("#" + editorId, options);
     });
 
     const createAppSchema = [
       Yup.object({
         title: Yup.string().required(translate("titleRequired")).label("Title"),
+        reason: Yup.string().required(translate("reasonRequired")).label("Reason"),
         category: Yup.string().required().label("Category"),
       }),
       Yup.object({
@@ -1228,7 +1139,7 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3 | Step4>({
+    const {resetForm, handleSubmit} = useForm<Step1 | Step2 | Step3 | Step4>({
       validationSchema: currentSchema,
     });
 
@@ -1285,6 +1196,7 @@ export default defineComponent({
       currentStepIndex,
       totalSteps,
       createAppModalRef,
+      reasonOptions,
       translate
     };
   },

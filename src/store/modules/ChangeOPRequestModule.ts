@@ -135,7 +135,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
 
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUEST_REASONS](changeOPRequestReasons) {
-        this.changeOPRequest = changeOPRequestReasons.options;
+        this.reasons = changeOPRequestReasons.options;
     }
 
     @Action
@@ -184,7 +184,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
 
     @Action
     [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {
-        ApiService.get("change-op-requests-reasons")
+        ApiService.get("change-op-request-reasons")
             .then(({data}) => {
                 this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_REASONS, data);
             })
