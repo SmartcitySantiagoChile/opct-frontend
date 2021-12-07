@@ -1,9 +1,9 @@
 <template>
-  <!--begin::Modal - Create App-->
+  <!--begin::Modal - Create Change OP REquest-->
   <div
       class="modal fade"
       id="modal_create_change_op_request"
-      ref="createAppModalRef"
+      ref="createChangeOPRequestModalRef"
       tabindex="-1"
       aria-hidden="true"
   >
@@ -39,8 +39,8 @@
               d-flex
               flex-column flex-xl-row flex-row-fluid
             "
-              id="kt_modal_create_app_stepper"
-              ref="createAppRef"
+              id="modal_create_change_op_request_stepper"
+              ref="createChangeOPRef"
           >
             <!--begin::Aside-->
             <div
@@ -68,9 +68,9 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">Details</h3>
+                    <h3 class="stepper-title">{{translate("initialInformation")}}</h3>
 
-                    <div class="stepper-desc">Name your App</div>
+                    <div class="stepper-desc">{{translate("requestDetailInfo")}}</div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -87,13 +87,13 @@
                     <i class="stepper-check fas fa-check"></i>
                     <span class="stepper-number">2</span>
                   </div>
-                  <!--begin::Icon-->
+                  <!--end::Icon-->
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">Frameworks</h3>
+                    <h3 class="stepper-title">{{translate("counterpart")}}</h3>
 
-                    <div class="stepper-desc">Define your app framework</div>
+                    <div class="stepper-desc">{{translate("counterPartInfo")}}</div>
                   </div>
                   <!--begin::Label-->
                 </div>
@@ -114,9 +114,9 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">Database</h3>
+                    <h3 class="stepper-title">{{translate("operationProgram")}}</h3>
 
-                    <div class="stepper-desc">Select the app database type</div>
+                    <div class="stepper-desc">{{translate("operationProgramInfo")}}</div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -137,9 +137,9 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">Billing</h3>
+                    <h3 class="stepper-title">{{translate("confirmation")}}</h3>
 
-                    <div class="stepper-desc">Provide payment details</div>
+                    <div class="stepper-desc">{{translate("confirmationInfo")}}</div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -1135,6 +1135,7 @@ import { hideModal } from "@/core/helpers/dom";
 import {useI18n} from "vue-i18n";
 
 interface Step1 {
+  title: string;
   appName: string;
   category: string;
 }
@@ -1167,7 +1168,7 @@ export default defineComponent({
   },
   setup() {
     const _stepperObj = ref<StepperComponent | null>(null);
-    const createAppRef = ref<HTMLElement | null>(null);
+    const createChangeOPRef = ref<HTMLElement | null>(null);
     const createAppModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
     const { t, te } = useI18n();
@@ -1175,6 +1176,7 @@ export default defineComponent({
 
 
     const formData = ref<KTCreateApp>({
+      title: "",
       appName: "",
       category: "1",
       framework: "1",
@@ -1190,7 +1192,7 @@ export default defineComponent({
 
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(
-          createAppRef.value as HTMLElement
+          createChangeOPRef.value as HTMLElement
       );
     });
 
@@ -1281,7 +1283,7 @@ export default defineComponent({
       handleStep,
       formSubmit,
       previousStep,
-      createAppRef,
+      createChangeOPRef,
       currentStepIndex,
       totalSteps,
       createAppModalRef,
