@@ -122,7 +122,10 @@ const messages = {
         counterPartInfo: "Select the organization",
         operationProgramInfo: "Select the OperationProgram",
         confirmation: "Confirmation",
-        confirmationInfo: "Confirm the data"
+        confirmationInfo: "Confirm the data",
+        changeOPRequestTitleLabel: "Request title",
+        titleRequired: "Title is required"
+
 
 
     },
@@ -247,7 +250,10 @@ const messages = {
         counterPartInfo: "Seleccione la organización",
         operationProgramInfo: "Seleccione el Programa de Operación",
         confirmation: "Confirmación",
-        confirmationInfo: "Confirme los datos"
+        confirmationInfo: "Confirme los datos",
+        changeOPRequestTitleLabel: "Título de la solicitud",
+        titleRequired: "Se requiere ingresar un título"
+
 
 
     },

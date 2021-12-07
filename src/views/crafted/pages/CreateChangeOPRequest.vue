@@ -178,7 +178,7 @@
               <form
                   class="form"
                   novalidate="novalidate"
-                  id="kt_modal_create_app_form"
+                  id="modal_create_change_op_request_form"
                   @submit="handleStep"
               >
                 <!--begin::Step 1-->
@@ -190,11 +190,11 @@
                       <label
                           class="d-flex align-items-center fs-5 fw-bold mb-2"
                       >
-                        <span class="required">App Name</span>
+                        <span class="required">{{translate("title")}}</span>
                         <i
                             class="fas fa-exclamation-circle ms-2 fs-7"
                             data-bs-toggle="tooltip"
-                            title="Specify your unique app name"
+                            :title="`${translate('changeOPRequestTitleLabel')}`"
                         ></i>
                       </label>
                       <!--end::Label-->
@@ -203,12 +203,12 @@
                       <Field
                           type="text"
                           class="form-control form-control-lg form-control-solid"
-                          name="appName"
+                          name="title"
                           placeholder=""
                       />
                       <ErrorMessage
                           class="fv-plugins-message-container invalid-feedback"
-                          name="appName"
+                          name="title"
                       />
                       <!--end::Input-->
                     </div>
@@ -1136,7 +1136,6 @@ import {useI18n} from "vue-i18n";
 
 interface Step1 {
   title: string;
-  appName: string;
   category: string;
 }
 
@@ -1177,7 +1176,6 @@ export default defineComponent({
 
     const formData = ref<KTCreateApp>({
       title: "",
-      appName: "",
       category: "1",
       framework: "1",
       dbName: "",
@@ -1198,7 +1196,7 @@ export default defineComponent({
 
     const createAppSchema = [
       Yup.object({
-        appName: Yup.string().required().label("App name"),
+        title: Yup.string().required(translate("titleRequired")).label("Title"),
         category: Yup.string().required().label("Category"),
       }),
       Yup.object({
