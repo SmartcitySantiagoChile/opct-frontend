@@ -129,9 +129,11 @@ const messages = {
         writeMessage: "Write a message...",
         withoutOP: "Without OP",
         selectOP: "Seleccione un PO",
-        confirm: "Confirmar datos",
+        confirmData: "Confirmar datos",
         back: "Back",
-        create: "Create"
+        create: "Create",
+        createChangeOPRequestSuccess: "¡Solicitud creada exitosamente!",
+        confirm: "Confirm",
 
 
 
@@ -264,9 +266,11 @@ const messages = {
         writeMessage: "Escriba un mensaje...",
         withoutOP: "Sin PO",
         selectOP: "Seleccione un PO",
-        confirm: "Confirmar datos:",
+        confirmData: "Confirmar datos:",
         back: "Atrás",
-        create: "Crear"
+        create: "Crear",
+        createChangeOPRequestSuccess: "¡Solicitud creada exitosamente!",
+        confirm: "Confirmar",
 
 
 

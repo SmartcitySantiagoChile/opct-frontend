@@ -53,7 +53,8 @@ enum Mutations {
   SET_OPERATION_PROGRAM_STATUSES_ERRORS = "setOperationProgramStatusesErrors",
   SET_CHANGE_OP_REQUEST_REASONS = "setChangeOPRequestReasons",
   SET_ORGANIZATIONS = "setOrganizations",
-  SET_ORGANIZATIONS_ERRORS = "setOrganizationsErrors"
+  SET_ORGANIZATIONS_ERRORS = "setOrganizationsErrors",
+  SET_CREATE_CHANGE_OP_REQUEST_ERRORS = "setCreateChangeOPRequestErrors"
 }
 
 export { Actions, Mutations };

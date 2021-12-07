@@ -293,17 +293,17 @@
                               <option
                                   v-for="i in organizationsOptions"
                                   :key="i.value"
+                                  :data-contracttype="i.contracttype"
                                   :label="i.label"
                                   :value="i.value"
-                                  :data-contracttype="i.contracttype"
                               ></option>
                             </template>
                             <template v-else>
                               <option
                                   :key="adminOrganizationOption.value"
+                                  :data-contracttype="adminOrganizationOption.contracttype"
                                   :label="adminOrganizationOption.label"
                                   :value="adminOrganizationOption.value"
-                                  :data-contracttype="adminOrganizationOption.contracttype"
                                   disabled
                                   selected
                               ></option>
@@ -338,13 +338,13 @@
                         <div class="row fv-row">
                           <!--begin::Col-->
                           <Field
+                              id="op"
                               as="select"
                               class="
                                 form-select form-select-solid
                                 select2-hidden-accessible
                               "
                               name="op"
-                              id="op"
                           >
                             <option disabled selected value="">{{
                                 translate("selectOP")
@@ -353,9 +353,9 @@
                             <option
                                 v-for="i in OPOptions"
                                 :key="i.value"
+                                :data-release="i.release"
                                 :label="i.label"
                                 :value="i.value"
-                                :data-release="i.release"
                             ></option>
                           </Field>
                           <!--end::Col-->
@@ -377,7 +377,7 @@
                 <div data-kt-stepper-element="content">
                   <div class="w-100 text-center">
                     <!--begin::Heading-->
-                    <h1 class="fw-bolder text-dark mb-3">{{translate("confirm")}}</h1>
+                    <h1 class="fw-bolder text-dark mb-3">{{ translate("confirmData") }}</h1>
                     <!--end::Heading-->
 
                     <!--begin::Description-->
@@ -413,7 +413,7 @@
                             src="/media/icons/duotune/arrows/arr063.svg"
                         />
                       </span>
-                      {{translate("back")}}
+                      {{ translate("back") }}
                     </button>
                   </div>
                   <!--end::Wrapper-->
@@ -427,7 +427,7 @@
                         @click="formSubmit()"
                     >
                       <span class="indicator-label">
-                        {{translate("create")}}
+                        {{ translate("create") }}
                         <span class="svg-icon svg-icon-3 ms-2 me-0">
                           <inline-svg
                               src="/media/icons/duotune/arrows/arr064.svg"
@@ -435,7 +435,7 @@
                         </span>
                       </span>
                       <span class="indicator-progress">
-                        {{translate("pleaseWait")}}
+                        {{ translate("pleaseWait") }}
                         <span
                             class="
                             spinner-border spinner-border-sm
@@ -581,7 +581,6 @@ export default defineComponent({
           const currentOrganizationName = store.getters.getOrganizationName;
           let options: Array<any> = [];
           if (store.getters.hasChangeStatusOption) {
-            console.log(organizations);
             options = organizations.flatMap((organization) =>
                 organization.name === currentOrganizationName
                     ? []
@@ -699,13 +698,13 @@ export default defineComponent({
       };
 
       const counterPartSelector: HTMLSelectElement = document.querySelector("#counterpart") as HTMLSelectElement;
-      if (counterPartSelector){
+      if (counterPartSelector) {
         formData.value["counterpart"] = counterPartSelector.value;
         formData.value["contract_type"] = counterPartSelector.options[counterPartSelector.selectedIndex].dataset.contracttype;
       }
       const opSelector: HTMLSelectElement = document.querySelector("#op") as HTMLSelectElement;
-      if (opSelector){
-       formData.value["op_release_date"] = opSelector.options[opSelector.selectedIndex].dataset.release;
+      if (opSelector) {
+        formData.value["op_release_date"] = opSelector.options[opSelector.selectedIndex].dataset.release;
       }
 
       const container = document.querySelector("#message_editor");
@@ -724,21 +723,35 @@ export default defineComponent({
     const formSubmit = () => {
       formData.value["created_at"] = new Date().toISOString();
       formData.value["creator"] = store.getters.currentUserUrl;
-      store.dispatch(
-          Actions.CREATE_CHANGE_OP_REQUEST,
-          formData.value
-      ).then(
-      Swal.fire({
-        text: "All is cool! Now you submit this form",
-        icon: "success",
-        buttonsStyling: false,
-        confirmButtonText: "Ok, got it!",
-        customClass: {
-          confirmButton: "btn fw-bold btn-light-primary",
-        },
-      }).then(() => {
-        hideModal(createAppModalRef.value);
-      }));
+      formData.value["op"] = formData.value["op"] !== "None" ? formData.value["op"] : "";
+      store
+          .dispatch(
+              Actions.CREATE_CHANGE_OP_REQUEST,
+              formData.value
+          )
+          .then(
+              Swal.fire({
+                text: translate("createChangeOPRequestSuccess"),
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: translate("confirm"),
+                customClass: {
+                  confirmButton: "btn fw-bold btn-light-primary",
+                },
+              })
+                  .then(() => {
+                    hideModal(createAppModalRef.value);
+                  })
+                  .then(() => location.reload()))
+          .catch(
+              Swal.fire({
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: translate("tryAgain"),
+                customClass: {
+                  confirmButton: "btn fw-bold btn-light-danger",
+                },
+              }));
     };
 
     resetForm({
@@ -750,10 +763,6 @@ export default defineComponent({
     const handleChange = (file, fileListData) => {
       fileList = fileListData;
     };
-
-    const handleChangeOp = (value) => {
-      console.log(value);
-    }
 
 
     return {
@@ -772,7 +781,6 @@ export default defineComponent({
       OPOptions,
       organizationsOptions,
       adminOrganizationOption,
-      handleChangeOp,
       formData
     };
   },

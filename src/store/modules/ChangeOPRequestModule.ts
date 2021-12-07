@@ -4,7 +4,7 @@ import {Action, Module, Mutation, VuexModule} from "vuex-module-decorators";
 import {Dictionary} from "@/store/modules/HelperModule";
 
 
-export interface ChangeOPRequestReasons{
+export interface ChangeOPRequestReasons {
     options: Array<Array<string>>
 }
 
@@ -46,6 +46,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
      * @returns array
      */
     get getChangeOPRequestErrors(): Array<string> {
+        console.log(this.errors);
         return this.errors;
     }
 
@@ -70,7 +71,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
      * @returns string
      */
     get getCurrentChangeOPRequestOP(): string {
-        return this.changeOPRequest.op ? this.changeOPRequest.op.start_at : "" ;
+        return this.changeOPRequest.op ? this.changeOPRequest.op.start_at : "";
     }
 
     /**
@@ -138,6 +139,12 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
         this.reasons = changeOPRequestReasons.options;
     }
 
+    @Mutation
+    [Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS](errors) {
+        this.errors = errors;
+    }
+
+
     @Action
     [Actions.GET_CHANGE_OP_REQUEST](changeOPRequestId) {
         ApiService.get("change-op-requests", changeOPRequestId)
@@ -150,17 +157,19 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
             });
     }
 
-
     @Action
     [Actions.CREATE_CHANGE_OP_REQUEST](params) {
-        ApiService.post("change-op-requests/", params)
-            .then(({data}) => {
-                console.log(data);
-            })
-            .catch(({response}) => {
-                console.log(response);
-                this.context.commit(Mutations.SET_ERROR, [response.data.error]);
-            });
+        return new Promise<void>((resolve, reject) => {
+            ApiService.post("change-op-requests/", params)
+                .then(({data}) => {
+                    resolve()
+                })
+                .catch(({response}) => {
+                    console.log(response);
+                    this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS,[response.data.error]);
+                    reject();
+                });
+        });
     }
 
     @Action
