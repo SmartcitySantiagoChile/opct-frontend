@@ -150,6 +150,19 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
             });
     }
 
+
+    @Action
+    [Actions.CREATE_CHANGE_OP_REQUEST](params) {
+        ApiService.post("change-op-requests/", params)
+            .then(({data}) => {
+                console.log(data);
+            })
+            .catch(({response}) => {
+                console.log(response);
+                this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+            });
+    }
+
     @Action
     [Actions.CHANGE_CHANGE_OP_REQUEST_STATUS](data) {
         return new Promise<void>((resolve, reject) => {

@@ -24,7 +24,8 @@ enum Actions {
   GET_OPERATION_PROGRAM_STATUSES = "getOperationProgramStatuses",
   GET_OPERATION_PROGRAM_STATUSES_WITH_PARAMS = "getOperationProgramStatusesWithParams",
   GET_CHANGE_OP_REQUEST_REASONS = "getChangeOPRequestReasons",
-  GET_ORGANIZATIONS = "getOrganizations"
+  GET_ORGANIZATIONS = "getOrganizations",
+  CREATE_CHANGE_OP_REQUEST = "createChangeOPRequest"
 }
 
 enum Mutations {

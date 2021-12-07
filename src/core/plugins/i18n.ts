@@ -128,7 +128,10 @@ const messages = {
         reasonRequired: "Reason is required",
         writeMessage: "Write a message...",
         withoutOP: "Without OP",
-        selectOP: "Seleccione un PO"
+        selectOP: "Seleccione un PO",
+        confirm: "Confirmar datos",
+        back: "Back",
+        create: "Create"
 
 
 
@@ -260,7 +263,10 @@ const messages = {
         reasonRequired: "Se requiere seleccionar un motivo",
         writeMessage: "Escriba un mensaje...",
         withoutOP: "Sin PO",
-        selectOP: "Seleccione un PO"
+        selectOP: "Seleccione un PO",
+        confirm: "Confirmar datos:",
+        back: "Atrás",
+        create: "Crear"
 
 
 
