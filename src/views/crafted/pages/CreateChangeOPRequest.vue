@@ -262,6 +262,23 @@
                         <!--begin::Editor-->
                         <div id="message_editor" class="py-6"></div>
                         <!--end::Editor-->
+                        <!--begin::Toolbar-->
+                        <div
+                            id="message_toolbar"
+                            class="ql-toolbar d-flex flex-stack py-2"
+                        ></div>
+                        <el-upload
+                            :auto-upload="false"
+                            :file-list="fileList"
+                            :on-change="handleChange"
+                            action=""
+                        >
+                            <el-button size="small" type="primary">{{
+                                translate("attachFiles")
+                              }}
+                            </el-button>
+                        </el-upload>
+                        <!--end::Toolbar-->
                         <div class="separator"></div>
                         <!--end::Input group-->
                       </form>
@@ -1055,6 +1072,7 @@ export default defineComponent({
     const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
+    let fileList = [];
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
 
     const reasonOptions = computed(() => {
@@ -1096,9 +1114,15 @@ export default defineComponent({
       const editorId = "message_editor";
       // init editor
       const options = {
-        placeholder: translate("writeReply"),
+        modules: {
+          toolbar: {
+            container: "#message_toolbar",
+          },
+        },
+        placeholder: translate("writeMessage"),
         theme: "snow",
       };
+
 
       // Init editor
       new Quill("#" + editorId, options);
@@ -1188,6 +1212,10 @@ export default defineComponent({
       },
     });
 
+    const handleChange = (file, fileListData) => {
+      fileList = fileListData;
+    };
+
     return {
       handleStep,
       formSubmit,
@@ -1197,7 +1225,9 @@ export default defineComponent({
       totalSteps,
       createAppModalRef,
       reasonOptions,
-      translate
+      translate,
+      handleChange,
+      fileList
     };
   },
 });

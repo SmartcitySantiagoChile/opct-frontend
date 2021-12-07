@@ -125,7 +125,8 @@ const messages = {
         confirmationInfo: "Confirm the data",
         changeOPRequestTitleLabel: "Request title",
         titleRequired: "Title is required",
-        reasonRequired: "Reason is required"
+        reasonRequired: "Reason is required",
+        writeMessage: "Write a message..."
 
 
 
@@ -254,7 +255,8 @@ const messages = {
         confirmationInfo: "Confirme los datos",
         changeOPRequestTitleLabel: "Título de la solicitud",
         titleRequired: "Se requiere ingresar un título",
-        reasonRequired: "Se requiere seleccionar un motivo"
+        reasonRequired: "Se requiere seleccionar un motivo",
+        writeMessage: "Escriba un mensaje..."
 
 
 
