@@ -2,7 +2,6 @@ import ApiService from "@/core/services/ApiService";
 import {Actions, Mutations} from "@/store/enums/StoreEnums";
 import {Action, Module, Mutation, VuexModule} from "vuex-module-decorators";
 import {Dictionary} from "@/store/modules/HelperModule";
-import axios, {AxiosRequestConfig} from "axios";
 
 export interface ChangeOPRequestMessage {
     url: string;

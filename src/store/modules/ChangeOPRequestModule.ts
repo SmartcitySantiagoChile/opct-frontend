@@ -4,6 +4,10 @@ import {Action, Module, Mutation, VuexModule} from "vuex-module-decorators";
 import {Dictionary} from "@/store/modules/HelperModule";
 
 
+export interface ChangeOPRequestReasons{
+    options: Array<Array<string>>
+}
+
 export interface ChangeOPRequest {
     url: string;
     created_at: string;
@@ -24,15 +28,18 @@ export interface ChangeOPRequest {
 
 }
 
+
 export interface ChangeOPRequestInfo {
     errors: Array<string>;
     changeOPRequest: ChangeOPRequest;
+    reasons: ChangeOPRequestReasons
 }
 
 @Module
 export default class ChangeOPRequestModule extends VuexModule implements ChangeOPRequestInfo {
     errors = [];
     changeOPRequest = {} as ChangeOPRequest;
+    reasons = {} as ChangeOPRequestReasons;
 
     /**
      * Get change op request errors
@@ -113,14 +120,23 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
         return this.changeOPRequest.op_release_date;
     }
 
-
-
+    /**
+     * Get all change op request reasons
+     * @returns string
+     */
+    get getChangeOPRequestReason(): ChangeOPRequestReasons {
+        return this.reasons;
+    }
 
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUEST](changeOPRequest) {
         this.changeOPRequest = changeOPRequest;
     }
 
+    @Mutation
+    [Mutations.SET_CHANGE_OP_REQUEST_REASONS](changeOPRequestReasons) {
+        this.changeOPRequest = changeOPRequestReasons.options;
+    }
 
     @Action
     [Actions.GET_CHANGE_OP_REQUEST](changeOPRequestId) {
@@ -164,5 +180,17 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
                     reject();
                 });
         });
+    }
+
+    @Action
+    [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {
+        ApiService.get("change-op-requests-reasons")
+            .then(({data}) => {
+                this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_REASONS, data);
+            })
+            .catch(({response}) => {
+                console.log(response);
+                this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+            });
     }
 }
