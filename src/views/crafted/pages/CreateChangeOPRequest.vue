@@ -607,8 +607,8 @@ export default defineComponent({
         });
     const adminOrganizationOption = computed(() => {
       let option = {};
-      const organizations = store.getters.getCurrentOrganization;
-      if (!store.getters.hasChangeStatusOption) {
+      const organizations = store.getters.getAllOrganizations;
+      if (!store.getters.hasChangeStatusOption && organizations) {
         organizations.forEach((organization) => {
               if (organization.name === "DTPM") {
                 option = {
@@ -729,29 +729,33 @@ export default defineComponent({
               Actions.CREATE_CHANGE_OP_REQUEST,
               formData.value
           )
-          .then(
-              Swal.fire({
-                text: translate("createChangeOPRequestSuccess"),
-                icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: translate("confirm"),
-                customClass: {
-                  confirmButton: "btn fw-bold btn-light-primary",
-                },
-              })
-                  .then(() => {
-                    hideModal(createAppModalRef.value);
-                  })
-                  .then(() => location.reload()))
-          .catch(
-              Swal.fire({
-                icon: "error",
-                buttonsStyling: false,
-                confirmButtonText: translate("tryAgain"),
-                customClass: {
-                  confirmButton: "btn fw-bold btn-light-danger",
-                },
-              }));
+          .then(() => {
+            Swal.fire({
+              text: translate("createChangeOPRequestSuccess"),
+              icon: "success",
+              buttonsStyling: false,
+              confirmButtonText: translate("confirm"),
+              customClass: {
+                confirmButton: "btn fw-bold btn-light-primary",
+              },
+            })
+                .then(() => {
+                  hideModal(createAppModalRef.value);
+                })
+                .then(() => location.reload())
+
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: translate("tryAgain"),
+              customClass: {
+                confirmButton: "btn fw-bold btn-light-danger",
+              },
+            })
+          });
+
     };
 
     resetForm({
