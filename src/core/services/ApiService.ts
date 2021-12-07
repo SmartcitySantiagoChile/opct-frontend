@@ -77,6 +77,19 @@ class ApiService {
     }
 
     /**
+     * @description set the POST files HTTP request
+     * @param resource: string
+     * @param params: AxiosRequestConfig
+     * @returns Promise<AxiosResponse>
+     */
+    public static postWithFiles(
+        resource: string,
+        params: AxiosRequestConfig
+    ): Promise<AxiosResponse> {
+        return ApiService.vueInstance.axios.post(`${resource}`, params.params, params);
+    }
+
+    /**
      * @description send the UPDATE HTTP request
      * @param resource: string
      * @param slug: string

@@ -2,6 +2,7 @@ import ApiService from "@/core/services/ApiService";
 import {Actions, Mutations} from "@/store/enums/StoreEnums";
 import {Action, Module, Mutation, VuexModule} from "vuex-module-decorators";
 import {Dictionary} from "@/store/modules/HelperModule";
+import axios, {AxiosRequestConfig} from "axios";
 
 export interface ChangeOPRequestMessage {
     url: string;
@@ -47,7 +48,7 @@ export default class ChangeOPRequestMessageModule extends VuexModule implements 
     @Action
     [Actions.CREATE_CHANGE_OP_REQUEST_MESSAGE](params) {
         return new Promise<void>((resolve, reject) => {
-            ApiService.post("change-op-request-messages/", params)
+            ApiService.postWithFiles("change-op-request-messages/", params)
                 .then(({data}) => {
                     console.log(data);
                     resolve()

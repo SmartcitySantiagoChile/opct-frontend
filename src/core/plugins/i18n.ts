@@ -115,7 +115,9 @@ const messages = {
     changeOPInfo: "Change OP:",
     deallocateOP: "Deallocate OP",
     withoutAssign: "Without assign",
-    finishOn: "Finish on"
+    finishOn: "Finish on",
+    createChangeOPRequest: "Create change op request"
+
 
   },
   es: {
@@ -232,7 +234,8 @@ const messages = {
     changeOPInfo: "Cambio de PO:",
     deallocateOP: "Desasignar PO",
     withoutAssign: "Sin asignar",
-    finishOn: "Finaliza el"
+    finishOn: "Finaliza el",
+    createChangeOPRequest: "Crear solicitud de cambio de PO"
 
   },
   de: {

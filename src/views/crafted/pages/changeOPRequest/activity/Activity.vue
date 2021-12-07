@@ -59,9 +59,9 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
-import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/BaseInfo.vue";
-import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/Message.vue";
-import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/Milestone.vue";
+import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/header/BaseInfo.vue";
+import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/activity/Message.vue";
+import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/activity/Milestone.vue";
 import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
 import { Actions } from "@/store/enums/StoreEnums";
 

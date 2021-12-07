@@ -143,9 +143,9 @@
 <script lang="ts">
 import {computed, defineComponent} from "vue";
 import {useI18n} from "vue-i18n";
-import ChangeStatus from "@/views/crafted/pages/changeOPRequest/ChangeStatus.vue";
+import ChangeStatus from "@/views/crafted/pages/changeOPRequest/header/ChangeStatus.vue";
 import {useStore} from "vuex";
-import ChangeOP from "@/views/crafted/pages/changeOPRequest/ChangeOP.vue";
+import ChangeOP from "@/views/crafted/pages/changeOPRequest/header/ChangeOP.vue";
 import {DateTime} from "luxon";
 
 export default defineComponent({

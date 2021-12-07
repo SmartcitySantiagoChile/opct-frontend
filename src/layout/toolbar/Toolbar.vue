@@ -81,10 +81,10 @@
           href="#"
           class="btn btn-bg-white btn-active-color-primary"
           data-bs-toggle="modal"
-          data-bs-target="#kt_modal_create_app"
+          data-bs-target="#modal_create_change_op_request"
           id="kt_toolbar_primary_button"
         >
-          Create
+          {{translate("createChangeOPRequest")}}
         </a>
         <!--end::Button-->
       </div>
@@ -99,6 +99,8 @@
 import { defineComponent } from "vue";
 import Dropdown1 from "@/components/dropdown/Dropdown1.vue";
 import { toolbarWidthFluid } from "@/core/helpers/config";
+import { useI18n } from "vue-i18n";
+
 
 export default defineComponent({
   name: "KToolbar",
@@ -110,8 +112,12 @@ export default defineComponent({
     Dropdown1,
   },
   setup() {
+
+    const { t, te } = useI18n();
+    const translate = (text) => (te(text) ? t(text) : text);
     return {
       toolbarWidthFluid,
+      translate
     };
   },
 });
