@@ -9,7 +9,7 @@
     <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
       <div class="symbol-label bg-light">
         <span class="svg-icon svg-icon-2 svg-icon-gray-500">
-          <inline-svg src="/media/icons/duotune/communication/com003.svg" />
+          <inline-svg src="/media/icons/duotune/communication/com003.svg"/>
         </span>
       </div>
     </div>
@@ -32,7 +32,7 @@
         <!--begin::Files Record-->
         <template v-if="filesLength > 0">
           <div
-            class="
+              class="
               d-flex
               align-items-center
               border border-dashed border-gray-300
@@ -48,18 +48,21 @@
               <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
                 <!--begin::Icon-->
                 <img
-                  alt=""
-                  class="w-30px me-3"
-                  src="/media/svg/files/doc.svg"
+                    alt=""
+                    class="w-30px me-3"
+                    src="/media/svg/files/doc.svg"
                 />
                 <!--end::Icon-->
 
                 <!--begin::Info-->
                 <div class="ms-1 fw-bold">
                   <!--begin::Desc-->
-                  <a class="fs-6 text-hover-primary fw-bolder" href="#">{{
-                    item.file.split("/media/")[1]
-                  }}</a>
+                  <a :download="item.file.split('/media/')[1]" :href="item.file"
+                     class="fs-6 text-hover-primary fw-bolder">{{
+                      item.file.split("/media/")[1]
+                    }}
+
+                  </a>
                   <!--end::Desc-->
 
                   <!--begin::Number-->
@@ -80,18 +83,18 @@
             {{ translate("addedAt") }}
             {{
               changeOpRequestTimelineMessage.created_at
-                ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
-                    .setLocale(this.$i18n.locale)
-                    .toLocaleString()
-                : ""
+                  ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
+                      .setLocale(this.$i18n.locale)
+                      .toLocaleString()
+                  : ""
             }}
             {{ translate("atTime") }}
             {{
               changeOpRequestTimelineMessage.created_at
-                ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
-                    .setLocale(this.$i18n.locale)
-                    .toLocaleString(DateTime.TIME_SIMPLE)
-                : ""
+                  ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
+                      .setLocale(this.$i18n.locale)
+                      .toLocaleString(DateTime.TIME_SIMPLE)
+                  : ""
             }}
             {{ translate("by") }}
           </div>
@@ -101,10 +104,10 @@
           <a class="text-primary fw-bolder me-1" href="#">
             {{
               changeOpRequestTimelineMessage.creator
-                ? changeOpRequestTimelineMessage.creator.first_name +
+                  ? changeOpRequestTimelineMessage.creator.first_name +
                   " " +
                   changeOpRequestTimelineMessage.creator.last_name
-                : ""
+                  : ""
             }}
           </a>
         </div>
@@ -121,9 +124,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useI18n } from "vue-i18n";
-import { DateTime } from "luxon";
+import {computed, defineComponent} from "vue";
+import {useI18n} from "vue-i18n";
+import {DateTime} from "luxon";
 
 export default defineComponent({
   name: "changeOPRequestTimelineMessage",
@@ -136,18 +139,18 @@ export default defineComponent({
       }
       if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
         return this.changeOpRequestTimelineMessage
-          .change_op_request_message_files;
+            .change_op_request_message_files;
       }
       return [];
     });
     const filesLength = computed(() => {
       if (this.changeOpRequestTimelineMessage.change_op_request_files) {
         return this.changeOpRequestTimelineMessage.change_op_request_files
-          .length;
+            .length;
       }
       if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
         return this.changeOpRequestTimelineMessage
-          .change_op_request_message_files.length;
+            .change_op_request_message_files.length;
       }
       return 0;
     });
@@ -157,7 +160,7 @@ export default defineComponent({
     };
   },
   setup() {
-    const { t, te } = useI18n();
+    const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     return {
       translate,
