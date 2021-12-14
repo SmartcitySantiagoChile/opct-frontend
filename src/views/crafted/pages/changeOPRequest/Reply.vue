@@ -101,18 +101,22 @@ export default defineComponent({
     const userNameAndSurname = computed(() => {
       return store.getters.currentUserNameAndSurname;
     });
-    let fileFormData = new FormData()
     let fileList = [];
     const createMessage = () => {
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
       const text = quill.getText();
-      fileFormData.append("created_at", new Date().toISOString());
-      fileFormData.append("message", text);
-      fileFormData.append("creator", store.getters.currentUserUrl);
-      fileFormData.append("change_op_request", store.getters.getCurrentChangeOPRequestUrl);
+      let formData = new FormData();
+      fileList.forEach((file) => {
+        const file_raw = file["raw"];
+        formData.append("files", file_raw, file["name"]);
+      });
+      formData.append("created_at", new Date().toISOString());
+      formData.append("message", text);
+      formData.append("creator", store.getters.currentUserUrl);
+      formData.append("change_op_request", store.getters.getCurrentChangeOPRequestUrl);
       const params = {
-        params: fileFormData,
+        params: formData,
         headers: {
           "content-Type": "multipart/form-data",
         },
@@ -146,7 +150,6 @@ export default defineComponent({
           });
     };
     const handleChange = (file, fileListData) => {
-      fileFormData.append("files", file["raw"]);
       fileList = fileListData;
     };
     onMounted(() => {
