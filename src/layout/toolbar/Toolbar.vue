@@ -84,7 +84,7 @@
           data-bs-target="#modal_create_change_op_request"
           id="kt_toolbar_primary_button"
         >
-          {{translate("createChangeOPRequest")}}
+          {{ translate("createChangeOPRequest") }}
         </a>
         <!--end::Button-->
       </div>
@@ -101,7 +101,6 @@ import Dropdown1 from "@/components/dropdown/Dropdown1.vue";
 import { toolbarWidthFluid } from "@/core/helpers/config";
 import { useI18n } from "vue-i18n";
 
-
 export default defineComponent({
   name: "KToolbar",
   props: {
@@ -112,12 +111,11 @@ export default defineComponent({
     Dropdown1,
   },
   setup() {
-
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     return {
       toolbarWidthFluid,
-      translate
+      translate,
     };
   },
 });

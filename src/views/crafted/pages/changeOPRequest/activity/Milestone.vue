@@ -9,7 +9,7 @@
     <div class="timeline-icon symbol symbol-circle symbol-40px">
       <div class="symbol-label bg-light">
         <span class="svg-icon svg-icon-2 svg-icon-gray-500">
-          <inline-svg src="/media/icons/duotune/communication/com009.svg"/>
+          <inline-svg src="/media/icons/duotune/communication/com009.svg" />
         </span>
       </div>
     </div>
@@ -32,7 +32,7 @@
             </span>
           </template>
           <template
-              v-if="
+            v-if="
               changeOPRequestTimelineMilestoneLog.previous_op ||
               changeOPRequestTimelineMilestoneLog.new_op
             "
@@ -41,9 +41,11 @@
             <span class="badge badge-light-warning fs-4 fw-bolder">
               <template v-if="changeOPRequestTimelineMilestoneLog.previous_op">
                 {{
-                  DateTime.fromISO(changeOPRequestTimelineMilestoneLog.previous_op.start_at)
-                      .setLocale(this.$i18n.locale)
-                      .toLocaleString()
+                  DateTime.fromISO(
+                    changeOPRequestTimelineMilestoneLog.previous_op.start_at
+                  )
+                    .setLocale(this.$i18n.locale)
+                    .toLocaleString()
                 }}
                 ({{
                   changeOPRequestTimelineMilestoneLog.previous_op.op_type.name
@@ -57,9 +59,11 @@
             <span class="badge badge-light-warning fs-4 fw-bolder">
               <template v-if="changeOPRequestTimelineMilestoneLog.new_op">
                 {{
-                  DateTime.fromISO(changeOPRequestTimelineMilestoneLog.new_op.start_at)
-                      .setLocale(this.$i18n.locale)
-                      .toLocaleString()
+                  DateTime.fromISO(
+                    changeOPRequestTimelineMilestoneLog.new_op.start_at
+                  )
+                    .setLocale(this.$i18n.locale)
+                    .toLocaleString()
                 }}
                 ({{ changeOPRequestTimelineMilestoneLog.new_op.op_type.name }})
               </template>
@@ -72,10 +76,10 @@
             <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
               {{
                 changeOPRequestTimelineMilestoneLog.time_threshold
-                    ? translate("endOf") +
+                  ? translate("endOf") +
                     " " +
                     changeOPRequestTimelineMilestoneLog.name
-                    : ""
+                  : ""
               }}
             </span>
           </template>
@@ -93,22 +97,29 @@
             <!--begin::OPStatusCase-->
             <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
               {{
-                DateTime.now().diff(DateTime.fromISO(changeOPRequestTimelineMilestoneLog.dead_line)) > 0 ?
-                    translate("finishedOn") : translate("finishOn")
+                DateTime.now().diff(
+                  DateTime.fromISO(
+                    changeOPRequestTimelineMilestoneLog.dead_line
+                  )
+                ) > 0
+                  ? translate("finishedOn")
+                  : translate("finishOn")
               }}
               {{
                 changeOPRequestTimelineMilestoneLog.dead_line
-                    ? DateTime.fromISO(changeOPRequestTimelineMilestoneLog.dead_line)
-                        .setLocale(this.$i18n.locale)
-                        .toLocaleString()
-                    : ""
+                  ? DateTime.fromISO(
+                      changeOPRequestTimelineMilestoneLog.dead_line
+                    )
+                      .setLocale(this.$i18n.locale)
+                      .toLocaleString()
+                  : ""
               }}
               {{ translate("atTime") }} 23:59
             </template>
             <!--end::OPStatusCase-->
             <!--begin::ChangeOPCase and ChangeStatusCase-->
             <template
-                v-if="
+              v-if="
                 changeOPRequestTimelineMilestoneLog.new_op ||
                 changeOPRequestTimelineMilestoneLog.previous_op ||
                 changeOPRequestTimelineMilestoneLog.new_status
@@ -117,19 +128,22 @@
               {{ translate("addedAt") }}
               {{
                 changeOPRequestTimelineMilestoneLog.created_at
-                    ?  DateTime.fromISO(changeOPRequestTimelineMilestoneLog.created_at)
-                        .setLocale(this.$i18n.locale)
-                        .toLocaleString()
-                    : ""
+                  ? DateTime.fromISO(
+                      changeOPRequestTimelineMilestoneLog.created_at
+                    )
+                      .setLocale(this.$i18n.locale)
+                      .toLocaleString()
+                  : ""
               }}
               {{ translate("atTime") }}
               {{
                 changeOPRequestTimelineMilestoneLog.created_at
-                    ?
-                    DateTime.fromISO(changeOPRequestTimelineMilestoneLog.created_at)
-                        .setLocale(this.$i18n.locale)
-                        .toLocaleString(DateTime.TIME_SIMPLE)
-                    : ""
+                  ? DateTime.fromISO(
+                      changeOPRequestTimelineMilestoneLog.created_at
+                    )
+                      .setLocale(this.$i18n.locale)
+                      .toLocaleString(DateTime.TIME_SIMPLE)
+                  : ""
               }}
             </template>
             <!--end::ChangeOPCase and ChangeStatusCase-->
@@ -140,8 +154,8 @@
               -
               {{
                 changeOPRequestTimelineMilestoneLog.update_deadlines
-                    ? translate("deadlinesUpdated")
-                    : ""
+                  ? translate("deadlinesUpdated")
+                  : ""
               }}
             </div>
           </template>
@@ -153,17 +167,17 @@
             <a class="text-primary fw-bolder me-1" href="#">
               {{
                 changeOPRequestTimelineMilestoneLog.user
-                    ? changeOPRequestTimelineMilestoneLog.user.first_name +
+                  ? changeOPRequestTimelineMilestoneLog.user.first_name +
                     " " +
                     changeOPRequestTimelineMilestoneLog.user.last_name
-                    : ""
+                  : ""
               }}
               {{
                 changeOPRequestTimelineMilestoneLog.creator
-                    ? changeOPRequestTimelineMilestoneLog.creator.first_name +
+                  ? changeOPRequestTimelineMilestoneLog.creator.first_name +
                     " " +
                     changeOPRequestTimelineMilestoneLog.creator.last_name
-                    : ""
+                  : ""
               }}
             </a>
           </template>
@@ -179,21 +193,20 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import {useI18n} from "vue-i18n";
-import {DateTime} from "luxon";
-
+import { defineComponent } from "vue";
+import { useI18n } from "vue-i18n";
+import { DateTime } from "luxon";
 
 export default defineComponent({
   name: "changeOPRequestTimelineMilestone",
   props: ["changeOPRequestTimelineMilestoneLog"],
   components: {},
   setup() {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     return {
       translate,
-      DateTime
+      DateTime,
     };
   },
 });

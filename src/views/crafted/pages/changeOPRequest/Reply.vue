@@ -58,9 +58,8 @@
               action=""
           >
             <template #trigger>
-              <el-button size="small" type="primary">{{
-                  translate("attachFiles")
-                }}
+              <el-button size="small" type="primary"
+              >{{ translate("attachFiles") }}
               </el-button>
             </template>
             <el-button
@@ -102,32 +101,20 @@ export default defineComponent({
     const userNameAndSurname = computed(() => {
       return store.getters.currentUserNameAndSurname;
     });
-
+    let fileFormData = new FormData()
     let fileList = [];
     const createMessage = () => {
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
       const text = quill.getText();
-      let files = [];
-      let formData = new FormData();
-      fileList.forEach((file, i) => {
-        const file_raw = file["raw"];
-        console.log(i);
-        console.log(file);
-        formData.append('files[' + i + ']', file_raw);
-        files.push(file_raw);
-      });
-      console.log(formData);
+      fileFormData.append("created_at", new Date().toISOString());
+      fileFormData.append("message", text);
+      fileFormData.append("creator", store.getters.currentUserUrl);
+      fileFormData.append("change_op_request", store.getters.getCurrentChangeOPRequestUrl);
       const params = {
-        params: {
-          created_at: new Date().toISOString(),
-          message: text,
-          creator: store.getters.currentUserUrl,
-          change_op_request: store.getters.getCurrentChangeOPRequestUrl,
-          files: files,
-        },
+        params: fileFormData,
         headers: {
-          'content-Type': 'multipart/form-data'
+          "content-Type": "multipart/form-data",
         },
       };
       store
@@ -159,6 +146,7 @@ export default defineComponent({
           });
     };
     const handleChange = (file, fileListData) => {
+      fileFormData.append("files", file["raw"]);
       fileList = fileListData;
     };
     onMounted(() => {

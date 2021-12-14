@@ -10,12 +10,11 @@ import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
 import ChangeOPRequestsTable from "@/components/widgets/tables/ChangeOPRequestsTable.vue";
 import CreateChangeOPRequest from "@/views/crafted/pages/CreateChangeOPRequest.vue";
 
-
 export default defineComponent({
   name: "dashboard",
   components: {
     ChangeOPRequestsTable,
-    CreateChangeOPRequest
+    CreateChangeOPRequest,
   },
   setup() {
     onMounted(() => {

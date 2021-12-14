@@ -4,7 +4,6 @@
     v-bind:id="id"
     widget-classes="card-xxl-stretch mb-5 mb-xl-8"
   ></ChangeOPRequestActivity>
-
 </template>
 <script lang="ts">
 import { computed, defineComponent, onUpdated, ref } from "vue";

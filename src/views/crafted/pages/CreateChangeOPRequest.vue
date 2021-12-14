@@ -1,11 +1,11 @@
 <template>
   <!--begin::Modal - Create Change OP Request-->
   <div
-      id="modal_create_change_op_request"
-      ref="createChangeOPRequestModalRef"
-      aria-hidden="true"
-      class="modal fade"
-      tabindex="-1"
+    id="modal_create_change_op_request"
+    ref="createChangeOPRequestModalRef"
+    aria-hidden="true"
+    class="modal fade"
+    tabindex="-1"
   >
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-900px">
@@ -19,11 +19,11 @@
 
           <!--begin::Close-->
           <div
-              class="btn btn-sm btn-icon btn-active-color-primary"
-              data-bs-dismiss="modal"
+            class="btn btn-sm btn-icon btn-active-color-primary"
+            data-bs-dismiss="modal"
           >
             <span class="svg-icon svg-icon-1">
-              <inline-svg src="/media/icons/duotune/arrows/arr061.svg"/>
+              <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>
           </div>
           <!--end::Close-->
@@ -34,9 +34,9 @@
         <div class="modal-body py-lg-10 px-lg-10">
           <!--begin::Stepper-->
           <div
-              id="modal_create_change_op_request_stepper"
-              ref="createChangeOPRef"
-              class="
+            id="modal_create_change_op_request_stepper"
+            ref="createChangeOPRef"
+            class="
               stepper stepper-pills stepper-column
               d-flex
               flex-column flex-xl-row flex-row-fluid
@@ -44,7 +44,7 @@
           >
             <!--begin::Aside-->
             <div
-                class="
+              class="
                 d-flex
                 justify-content-center justify-content-xl-start
                 flex-row-auto
@@ -68,9 +68,13 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{ translate("initialInformation") }}</h3>
+                    <h3 class="stepper-title">
+                      {{ translate("initialInformation") }}
+                    </h3>
 
-                    <div class="stepper-desc">{{ translate("requestDetailInfo") }}</div>
+                    <div class="stepper-desc">
+                      {{ translate("requestDetailInfo") }}
+                    </div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -91,9 +95,13 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{ translate("counterpart") }}</h3>
+                    <h3 class="stepper-title">
+                      {{ translate("counterpart") }}
+                    </h3>
 
-                    <div class="stepper-desc">{{ translate("counterPartInfo") }}</div>
+                    <div class="stepper-desc">
+                      {{ translate("counterPartInfo") }}
+                    </div>
                   </div>
                   <!--begin::Label-->
                 </div>
@@ -114,9 +122,13 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{ translate("operationProgram") }}</h3>
+                    <h3 class="stepper-title">
+                      {{ translate("operationProgram") }}
+                    </h3>
 
-                    <div class="stepper-desc">{{ translate("operationProgramInfo") }}</div>
+                    <div class="stepper-desc">
+                      {{ translate("operationProgramInfo") }}
+                    </div>
                   </div>
                   <!--end::Label-->
                 </div>
@@ -137,14 +149,17 @@
 
                   <!--begin::Label-->
                   <div class="stepper-label">
-                    <h3 class="stepper-title">{{ translate("confirmation") }}</h3>
+                    <h3 class="stepper-title">
+                      {{ translate("confirmation") }}
+                    </h3>
 
-                    <div class="stepper-desc">{{ translate("confirmationInfo") }}</div>
+                    <div class="stepper-desc">
+                      {{ translate("confirmationInfo") }}
+                    </div>
                   </div>
                   <!--end::Label-->
                 </div>
                 <!--end::Step 4-->
-
               </div>
               <!--end::Nav-->
             </div>
@@ -154,10 +169,10 @@
             <div class="flex-row-fluid py-lg-5 px-lg-15">
               <!--begin::Form-->
               <form
-                  id="modal_create_change_op_request_form"
-                  class="form"
-                  novalidate="novalidate"
-                  @submit="handleStep"
+                id="modal_create_change_op_request_form"
+                class="form"
+                novalidate="novalidate"
+                @submit="handleStep"
               >
                 <!--begin::Step 1-->
                 <div class="current" data-kt-stepper-element="content">
@@ -166,27 +181,27 @@
                     <div class="fv-row mb-10">
                       <!--begin::Label-->
                       <label
-                          class="d-flex align-items-center fs-5 fw-bold mb-2"
+                        class="d-flex align-items-center fs-5 fw-bold mb-2"
                       >
                         <span class="required">{{ translate("title") }}</span>
                         <i
-                            :title="`${translate('changeOPRequestTitleLabel')}`"
-                            class="fas fa-exclamation-circle ms-2 fs-7"
-                            data-bs-toggle="tooltip"
+                          :title="`${translate('changeOPRequestTitleLabel')}`"
+                          class="fas fa-exclamation-circle ms-2 fs-7"
+                          data-bs-toggle="tooltip"
                         ></i>
                       </label>
                       <!--end::Label-->
 
                       <!--begin::Input-->
                       <Field
-                          class="form-control form-control-lg form-control-solid"
-                          name="title"
-                          placeholder=""
-                          type="text"
+                        class="form-control form-control-lg form-control-solid"
+                        name="title"
+                        placeholder=""
+                        type="text"
                       />
                       <ErrorMessage
-                          class="fv-plugins-message-container invalid-feedback"
-                          name="title"
+                        class="fv-plugins-message-container invalid-feedback"
+                        name="title"
                       />
                       <!--end::Input-->
                     </div>
@@ -196,64 +211,65 @@
                       <!--begin::Col-->
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
-                        <label class="required fs-6 fw-bold form-label mb-2"
-                        >{{ translate("reason") }}</label
-                        >
+                        <label class="required fs-6 fw-bold form-label mb-2">{{
+                          translate("reason")
+                        }}</label>
                         <!--end::Label-->
 
                         <!--begin::Row-->
                         <div class="row fv-row">
                           <!--begin::Col-->
                           <Field
-                              as="select"
-                              class="
-                                form-select form-select-solid
-                                select2-hidden-accessible
-                              "
-                              name="reason"
+                            as="select"
+                            class="
+                              form-select form-select-solid
+                              select2-hidden-accessible
+                            "
+                            name="reason"
                           >
                             <option
-                                v-for="i in reasonOptions"
-                                :key="i.value"
-                                :label="i.label"
-                                :value="i.value"
+                              v-for="i in reasonOptions"
+                              :key="i.value"
+                              :label="i.label"
+                              :value="i.value"
                             ></option>
                           </Field>
                           <ErrorMessage
-                              class="
-                                fv-plugins-message-container
-                                invalid-feedback
-                              "
-                              name="reason"
+                            class="
+                              fv-plugins-message-container
+                              invalid-feedback
+                            "
+                            name="reason"
                           />
                           <!--end::Col-->
                         </div>
                         <!--end::Row-->
                       </div>
                       <!--end::Col-->
-
                     </div>
                     <!--end::Input group-->
                     <!--begin::Input group-->
                     <div class="fv-row mb-10">
-                      <form id="message_form" class="ql-quil ql-quil-plain pb-3">
+                      <form
+                        id="message_form"
+                        class="ql-quil ql-quil-plain pb-3"
+                      >
                         <!--begin::Editor-->
                         <div id="message_editor" class="py-6"></div>
                         <!--end::Editor-->
                         <!--begin::Toolbar-->
                         <div
-                            id="message_toolbar"
-                            class="ql-toolbar d-flex flex-stack py-2"
+                          id="message_toolbar"
+                          class="ql-toolbar d-flex flex-stack py-2"
                         ></div>
                         <el-upload
-                            :auto-upload="false"
-                            :file-list="fileList"
-                            :on-change="handleChange"
-                            action=""
+                          :auto-upload="false"
+                          :file-list="fileList"
+                          :on-change="handleChange"
+                          action=""
                         >
-                          <el-button size="small" type="primary">{{
-                              translate("attachFiles")
-                            }}
+                          <el-button size="small" type="primary"
+                            >{{ translate("attachFiles") }}
                           </el-button>
                         </el-upload>
                         <!--end::Toolbar-->
@@ -273,39 +289,41 @@
                       <!--begin::Col-->
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
-                        <label class="required fs-6 fw-bold form-label mb-2"
-                        >{{ translate("counterpart") }}</label
-                        >
+                        <label class="required fs-6 fw-bold form-label mb-2">{{
+                          translate("counterpart")
+                        }}</label>
                         <!--end::Label-->
 
                         <!--begin::Row-->
                         <div class="row fv-row">
                           <!--begin::Col-->
                           <select
-                              id="counterpart"
-                              class="
-                                form-select form-select-solid
-                                select2-hidden-accessible selected
-                              "
-
+                            id="counterpart"
+                            class="
+                              form-select form-select-solid
+                              select2-hidden-accessible
+                              selected
+                            "
                           >
                             <template v-if="isAdminOrganization">
                               <option
-                                  v-for="i in organizationsOptions"
-                                  :key="i.value"
-                                  :data-contracttype="i.contracttype"
-                                  :label="i.label"
-                                  :value="i.value"
+                                v-for="i in organizationsOptions"
+                                :key="i.value"
+                                :data-contracttype="i.contracttype"
+                                :label="i.label"
+                                :value="i.value"
                               ></option>
                             </template>
                             <template v-else>
                               <option
-                                  :key="adminOrganizationOption.value"
-                                  :data-contracttype="adminOrganizationOption.contracttype"
-                                  :label="adminOrganizationOption.label"
-                                  :value="adminOrganizationOption.value"
-                                  disabled
-                                  selected
+                                :key="adminOrganizationOption.value"
+                                :data-contracttype="
+                                  adminOrganizationOption.contracttype
+                                "
+                                :label="adminOrganizationOption.label"
+                                :value="adminOrganizationOption.value"
+                                disabled
+                                selected
                               ></option>
                             </template>
                           </select>
@@ -314,7 +332,6 @@
                         <!--end::Row-->
                       </div>
                       <!--end::Col-->
-
                     </div>
                     <!--end::Input group-->
                   </div>
@@ -329,33 +346,32 @@
                       <!--begin::Col-->
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
-                        <label class="required fs-6 fw-bold form-label mb-2"
-                        >{{ translate("operationProgram") }}</label
-                        >
+                        <label class="required fs-6 fw-bold form-label mb-2">{{
+                          translate("operationProgram")
+                        }}</label>
                         <!--end::Label-->
 
                         <!--begin::Row-->
                         <div class="row fv-row">
                           <!--begin::Col-->
                           <Field
-                              id="op"
-                              as="select"
-                              class="
-                                form-select form-select-solid
-                                select2-hidden-accessible
-                              "
-                              name="op"
+                            id="op"
+                            as="select"
+                            class="
+                              form-select form-select-solid
+                              select2-hidden-accessible
+                            "
+                            name="op"
                           >
-                            <option disabled selected value="">{{
-                                translate("selectOP")
-                              }}
+                            <option disabled selected value="">
+                              {{ translate("selectOP") }}
                             </option>
                             <option
-                                v-for="i in OPOptions"
-                                :key="i.value"
-                                :data-release="i.release"
-                                :label="i.label"
-                                :value="i.value"
+                              v-for="i in OPOptions"
+                              :key="i.value"
+                              :data-release="i.release"
+                              :label="i.label"
+                              :value="i.value"
                             ></option>
                           </Field>
                           <!--end::Col-->
@@ -363,34 +379,31 @@
                         <!--end::Row-->
                       </div>
                       <!--end::Col-->
-
                     </div>
                     <!--end::Input group-->
-
-
                   </div>
                 </div>
                 <!--end::Step 3-->
-
 
                 <!--begin::Step 4-->
                 <div data-kt-stepper-element="content">
                   <div class="w-100 text-center">
                     <!--begin::Heading-->
-                    <h1 class="fw-bolder text-dark mb-3">{{ translate("confirmData") }}</h1>
+                    <h1 class="fw-bolder text-dark mb-3">
+                      {{ translate("confirmData") }}
+                    </h1>
                     <!--end::Heading-->
 
                     <!--begin::Description-->
-                    <div class="text-muted fw-bold fs-3">
-                    </div>
+                    <div class="text-muted fw-bold fs-3"></div>
                     <!--end::Description-->
 
                     <!--begin::Illustration-->
                     <div class="text-center px-4 py-15">
                       <img
-                          alt=""
-                          class="w-100 mh-300px"
-                          src="/media/illustrations/sketchy-1/9.png"
+                        alt=""
+                        class="w-100 mh-300px"
+                        src="/media/illustrations/sketchy-1/9.png"
                       />
                     </div>
                     <!--end::Illustration-->
@@ -403,14 +416,14 @@
                   <!--begin::Wrapper-->
                   <div class="me-2">
                     <button
-                        class="btn btn-lg btn-light-primary me-3"
-                        data-kt-stepper-action="previous"
-                        type="button"
-                        @click="previousStep()"
+                      class="btn btn-lg btn-light-primary me-3"
+                      data-kt-stepper-action="previous"
+                      type="button"
+                      @click="previousStep()"
                     >
                       <span class="svg-icon svg-icon-3 me-1">
                         <inline-svg
-                            src="/media/icons/duotune/arrows/arr063.svg"
+                          src="/media/icons/duotune/arrows/arr063.svg"
                         />
                       </span>
                       {{ translate("back") }}
@@ -421,23 +434,23 @@
                   <!--begin::Wrapper-->
                   <div>
                     <button
-                        v-if="currentStepIndex === totalSteps - 1"
-                        class="btn btn-lg btn-primary"
-                        type="submit"
-                        @click="formSubmit()"
+                      v-if="currentStepIndex === totalSteps - 1"
+                      class="btn btn-lg btn-primary"
+                      type="submit"
+                      @click="formSubmit()"
                     >
                       <span class="indicator-label">
                         {{ translate("create") }}
                         <span class="svg-icon svg-icon-3 ms-2 me-0">
                           <inline-svg
-                              src="/media/icons/duotune/arrows/arr064.svg"
+                            src="/media/icons/duotune/arrows/arr064.svg"
                           />
                         </span>
                       </span>
                       <span class="indicator-progress">
                         {{ translate("pleaseWait") }}
                         <span
-                            class="
+                          class="
                             spinner-border spinner-border-sm
                             align-middle
                             ms-2
@@ -450,7 +463,7 @@
                       {{ translate("continue") }}
                       <span class="svg-icon svg-icon-3 ms-1 me-0">
                         <inline-svg
-                            src="/media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                     </button>
@@ -485,17 +498,16 @@
 </style>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref} from "vue";
-import {StepperComponent} from "@/assets/ts/components/_StepperComponent";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import { StepperComponent } from "@/assets/ts/components/_StepperComponent";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
-import {ErrorMessage, Field, useForm} from "vee-validate";
+import { ErrorMessage, Field, useForm } from "vee-validate";
 import * as Yup from "yup";
-import {hideModal} from "@/core/helpers/dom";
-import {useI18n} from "vue-i18n";
-import {Actions} from "@/store/enums/StoreEnums";
-import {useStore} from "vuex";
+import { hideModal } from "@/core/helpers/dom";
+import { useI18n } from "vue-i18n";
+import { Actions } from "@/store/enums/StoreEnums";
+import { useStore } from "vuex";
 import Quill from "quill/dist/quill.js";
-
 
 interface Step1 {
   title: string;
@@ -510,9 +522,7 @@ interface Step3 {
   op: string;
 }
 
-
-interface KTCreateApp extends Step1, Step2, Step3 {
-}
+interface KTCreateApp extends Step1, Step2, Step3 {}
 
 export default defineComponent({
   name: "CreateChangeOpRequest",
@@ -525,10 +535,12 @@ export default defineComponent({
     const createChangeOPRef = ref<HTMLElement | null>(null);
     const createAppModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    const isAdminOrganization = computed(() => store.getters.hasChangeStatusOption);
+    const isAdminOrganization = computed(
+      () => store.getters.hasChangeStatusOption
+    );
 
     let fileList = [];
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
@@ -537,90 +549,87 @@ export default defineComponent({
 
     const reasonOptions = computed(() => {
       let options: Array<any> = [];
-      const reasons: Array<Array<string>> = store.getters.getChangeOPRequestReason;
+      const reasons: Array<Array<string>> =
+        store.getters.getChangeOPRequestReason;
       if (reasons.length) {
-        reasons.forEach(v => {
+        reasons.forEach((v) => {
           const option: string = v[1];
-          options.push(
-              {
-                value: option,
-                label:
-                option
-              });
-        })
+          options.push({
+            value: option,
+            label: option,
+          });
+        });
       }
       return options;
     });
 
-    const OPOptions =
-        computed(() => {
-          const operationPrograms = store.getters.getCurrentOperationPrograms;
-          let options: Array<any> = [];
+    const OPOptions = computed(() => {
+      const operationPrograms = store.getters.getCurrentOperationPrograms;
+      let options: Array<any> = [];
 
-          if (operationPrograms.length) {
-            operationPrograms.forEach((operationProgram) => {
-              options.push({
-                value: operationProgram.url,
-                label:
-                    operationProgram.start_at +
-                    " (" +
-                    operationProgram.op_type.name +
-                    ")",
-                release: operationProgram.start_at
-              })
-            })
-            ;
-          }
-          options.push({value: "None", label: translate("withoutOP")});
-          return options;
+      if (operationPrograms.length) {
+        operationPrograms.forEach((operationProgram) => {
+          options.push({
+            value: operationProgram.url,
+            label:
+              operationProgram.start_at +
+              " (" +
+              operationProgram.op_type.name +
+              ")",
+            release: operationProgram.start_at,
+          });
         });
+      }
+      options.push({ value: "None", label: translate("withoutOP") });
+      return options;
+    });
 
-    const organizationsOptions =
-        computed(() => {
-          const organizations = store.getters.getAllOrganizations;
-          const currentOrganizationName = store.getters.getOrganizationName;
-          let options: Array<any> = [];
-          if (store.getters.hasChangeStatusOption) {
-            options = organizations.flatMap((organization) =>
-                organization.name === currentOrganizationName
-                    ? []
-                    : [
-                      {
-                        value: organization.url,
-                        label: organization.name,
-                        contracttype: organization.contract_type.url
-                      },
-                    ]
-            );
-          } else {
-            options = organizations.flatMap((organization) =>
-                organization.name === "DTPM"
-                    ? [{
-                      value: organization.url,
-                      label: organization.name,
-                      contracttype: organization.contract_type.url
-                    }]
-                    : []
-            );
-          }
-          return options;
-        });
+    const organizationsOptions = computed(() => {
+      const organizations = store.getters.getAllOrganizations;
+      const currentOrganizationName = store.getters.getOrganizationName;
+      let options: Array<any> = [];
+      if (store.getters.hasChangeStatusOption) {
+        options = organizations.flatMap((organization) =>
+          organization.name === currentOrganizationName
+            ? []
+            : [
+                {
+                  value: organization.url,
+                  label: organization.name,
+                  contracttype: organization.contract_type.url,
+                },
+              ]
+        );
+      } else {
+        options = organizations.flatMap((organization) =>
+          organization.name === "DTPM"
+            ? [
+                {
+                  value: organization.url,
+                  label: organization.name,
+                  contracttype: organization.contract_type.url,
+                },
+              ]
+            : []
+        );
+      }
+      return options;
+    });
     const adminOrganizationOption = computed(() => {
       let option = {};
       const organizations = store.getters.getAllOrganizations;
       if (!store.getters.hasChangeStatusOption && organizations) {
         organizations.forEach((organization) => {
-              if (organization.name === "DTPM") {
-                option = {
-                  value: organization.url,
-                  label: organization.name,
-                  contracttype: organization.contract_type.url
-                }
-              }
-            }
-        );
+          if (organization.name === "DTPM") {
+            option = {
+              value: organization.url,
+              label: organization.name,
+              contracttype: organization.contract_type.url,
+            };
+          }
+        });
       }
-      return option
+      return option;
     });
 
     const formData = ref<KTCreateApp>({
@@ -632,7 +641,7 @@ export default defineComponent({
 
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(
-          createChangeOPRef.value as HTMLElement
+        createChangeOPRef.value as HTMLElement
       );
       const editorId = "message_editor";
       // init editor
@@ -646,7 +655,6 @@ export default defineComponent({
         theme: "snow",
       };
 
-
       // Init editor
       new Quill("#" + editorId, options);
     });
@@ -654,10 +662,12 @@ export default defineComponent({
     const createAppSchema = [
       Yup.object({
         title: Yup.string().required(translate("titleRequired")).label("Title"),
-        reason: Yup.string().required(translate("reasonRequired")).label("Reason"),
+        reason: Yup.string()
+          .required(translate("reasonRequired"))
+          .label("Reason"),
       }),
       Yup.object({
-        counterpart: Yup.string().required().label("counterpart")
+        counterpart: Yup.string().required().label("counterpart"),
       }),
       Yup.object({
         op: Yup.string().required().label("OperationProgram"),
@@ -677,7 +687,7 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const {resetForm, handleSubmit} = useForm<Step1 | Step2 | Step3>({
+    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3>({
       validationSchema: currentSchema,
     });
 
@@ -697,14 +707,22 @@ export default defineComponent({
         ...values,
       };
 
-      const counterPartSelector: HTMLSelectElement = document.querySelector("#counterpart") as HTMLSelectElement;
+      const counterPartSelector: HTMLSelectElement = document.querySelector(
+        "#counterpart"
+      ) as HTMLSelectElement;
       if (counterPartSelector) {
         formData.value["counterpart"] = counterPartSelector.value;
-        formData.value["contract_type"] = counterPartSelector.options[counterPartSelector.selectedIndex].dataset.contracttype;
+        formData.value["contract_type"] =
+          counterPartSelector.options[
+            counterPartSelector.selectedIndex
+          ].dataset.contracttype;
       }
-      const opSelector: HTMLSelectElement = document.querySelector("#op") as HTMLSelectElement;
+      const opSelector: HTMLSelectElement = document.querySelector(
+        "#op"
+      ) as HTMLSelectElement;
       if (opSelector) {
-        formData.value["op_release_date"] = opSelector.options[opSelector.selectedIndex].dataset.release;
+        formData.value["op_release_date"] =
+          opSelector.options[opSelector.selectedIndex].dataset.release;
       }
 
       const container = document.querySelector("#message_editor");
@@ -723,39 +741,35 @@ export default defineComponent({
     const formSubmit = () => {
       formData.value["created_at"] = new Date().toISOString();
       formData.value["creator"] = store.getters.currentUserUrl;
-      formData.value["op"] = formData.value["op"] !== "None" ? formData.value["op"] : "";
+      formData.value["op"] =
+        formData.value["op"] !== "None" ? formData.value["op"] : "";
       store
-          .dispatch(
-              Actions.CREATE_CHANGE_OP_REQUEST,
-              formData.value
-          )
-          .then(() => {
-            Swal.fire({
-              text: translate("createChangeOPRequestSuccess"),
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: translate("confirm"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-primary",
-              },
-            })
-                .then(() => {
-                  hideModal(createAppModalRef.value);
-                })
-                .then(() => location.reload())
-
+        .dispatch(Actions.CREATE_CHANGE_OP_REQUEST, formData.value)
+        .then(() => {
+          Swal.fire({
+            text: translate("createChangeOPRequestSuccess"),
+            icon: "success",
+            buttonsStyling: false,
+            confirmButtonText: translate("confirm"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-primary",
+            },
           })
-          .catch(() => {
-            Swal.fire({
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: translate("tryAgain"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-danger",
-              },
+            .then(() => {
+              hideModal(createAppModalRef.value);
             })
+            .then(() => location.reload());
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: translate("tryAgain"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-danger",
+            },
           });
-
+        });
     };
 
     resetForm({
@@ -767,7 +781,6 @@ export default defineComponent({
     const handleChange = (file, fileListData) => {
       fileList = fileListData;
     };
-
 
     return {
       handleStep,
@@ -785,7 +798,7 @@ export default defineComponent({
       OPOptions,
       organizationsOptions,
       adminOrganizationOption,
-      formData
+      formData,
     };
   },
 });
