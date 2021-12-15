@@ -11,7 +11,7 @@ const DocMenuConfig = [
       {
         access: "ops",
         heading: "operationProgramAdmin",
-        route: "/ops",
+        route: "/operation-programs",
         svgIcon: "/media/icons/duotune/general/gen019.svg",
         fontIcon: "bi-layers",
       },

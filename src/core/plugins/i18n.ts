@@ -134,6 +134,9 @@ const messages = {
         create: "Create",
         createChangeOPRequestSuccess: "¡Solicitud creada exitosamente!",
         confirm: "Confirm",
+        operationPrograms: "Operation Programs",
+        operationProgramsNumber: "Programs number",
+        operationProgramType: "Type"
 
 
 
@@ -271,6 +274,9 @@ const messages = {
         create: "Crear",
         createChangeOPRequestSuccess: "¡Solicitud creada exitosamente!",
         confirm: "Confirmar",
+        operationPrograms: "Programas de Operación",
+        operationProgramsNumber: "Número de programas",
+        operationProgramType: "Tipo"
 
 
 

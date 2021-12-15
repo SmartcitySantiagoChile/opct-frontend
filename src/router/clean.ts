@@ -22,6 +22,12 @@ const routes: Array<RouteRecordRaw> = [
                 name: "changeOPRequest",
                 component: () => import("@/views/crafted/pages/changeOPRequest/ChangeOPRequest.vue"),
                 props: true
+            },
+            {
+                path: "/operation-programs",
+                name: "operationPrograms",
+                component: () => import("@/views/crafted/pages/operationProgram/OperationPrograms.vue"),
+                props: true
             }
 
         ],

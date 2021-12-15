@@ -29,6 +29,14 @@ export default class OperationProgramsModule extends VuexModule implements Opera
         return this.operationPrograms;
     }
 
+    /**
+     * Get current operation programs
+     * @returns number
+     */
+    get getCurrentOperationProgramsCount(): number {
+        return this.count;
+    }
+
     @Mutation
     [Mutations.SET_OPERATION_PROGRAMS](operationProgramList) {
         this.operationPrograms = operationProgramList.results;
