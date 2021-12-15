@@ -160,7 +160,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     @Action
     [Actions.CREATE_CHANGE_OP_REQUEST](params) {
         return new Promise<void>((resolve, reject) => {
-            ApiService.post("change-op-requests/", params)
+            ApiService.postWithFiles("change-op-requests/", params)
                 .then(({data}) => {
                     console.log(data);
                     resolve()
