@@ -13,14 +13,8 @@
       </h3>
       <div class="card-toolbar">
         <!--begin::Menu-->
-        <input
-            class="form-control"
-            name="filter"
-            type="text"
-            v-bind:placeholder="translate('filterByOp')"
-            @keyup="onFilterChange"
-        />
 
+        <CreateOperationProgram></CreateOperationProgram>
         <!--end::Menu-->
       </div>
     </div>
@@ -160,10 +154,12 @@ import {Actions} from "@/store/enums/StoreEnums";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import {DateTime} from "luxon";
+import CreateOperationProgram from "@/views/crafted/pages/operationProgram/CreateOperationProgram.vue";
+
 
 export default defineComponent({
   name: "operation-program-table",
-  components: {},
+  components: {CreateOperationProgram},
   props: {
     widgetClasses: String,
   },
@@ -180,17 +176,7 @@ export default defineComponent({
         () => store.getters.getCurrentOperationProgramsCount
     );
 
-    // Events
-    const onFilterChange = (event) => {
-      const filter = String(event.target.value);
-      if (filter.length > 3 && filter.length < 11) {
-        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {
-          search: filter,
-        });
-      } else if (filter.length === 0) {
-        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
-      }
-    };
+
 
     const onPageChange = (event) => {
       const filter = document.querySelector<HTMLInputElement>(
@@ -236,7 +222,6 @@ export default defineComponent({
       operationPrograms,
       operationProgramsCount,
       translate,
-      onFilterChange,
       onPageChange,
       DateTime,
     };
