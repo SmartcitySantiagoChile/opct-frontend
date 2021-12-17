@@ -182,7 +182,7 @@
                           class="form-control form-control-lg form-control-solid"
                           name="title"
                           placeholder=""
-                          type="text"
+                          type="date"
                       />
                       <ErrorMessage
                           class="fv-plugins-message-container invalid-feedback"
@@ -204,7 +204,7 @@
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
                         <label class="required fs-6 fw-bold form-label mb-2">{{
-                            translate("counterpart")
+                            translate("operationProgramType")
                           }}</label>
                         <!--end::Label-->
 
@@ -212,34 +212,19 @@
                         <div class="row fv-row">
                           <!--begin::Col-->
                           <select
-                              id="counterpart"
+                              id="operationProgramType"
                               class="
                               form-select form-select-solid
                               select2-hidden-accessible
                               selected
                             "
                           >
-                            <template v-if="isAdminOrganization">
-                              <option
-                                  v-for="i in organizationsOptions"
-                                  :key="i.value"
-                                  :data-contracttype="i.contracttype"
-                                  :label="i.label"
-                                  :value="i.value"
-                              ></option>
-                            </template>
-                            <template v-else>
-                              <option
-                                  :key="adminOrganizationOption.value"
-                                  :data-contracttype="
-                                  adminOrganizationOption.contracttype
-                                "
-                                  :label="adminOrganizationOption.label"
-                                  :value="adminOrganizationOption.value"
-                                  disabled
-                                  selected
-                              ></option>
-                            </template>
+                            <option
+                                v-for="i in operationProgramTypeOptions"
+                                :key="i.value"
+                                :label="i.label"
+                                :value="i.value"
+                            ></option>
                           </select>
                           <!--end::Col-->
                         </div>
@@ -374,14 +359,13 @@ import {hideModal} from "@/core/helpers/dom";
 import {useI18n} from "vue-i18n";
 import {Actions} from "@/store/enums/StoreEnums";
 import {useStore} from "vuex";
-import Quill from "quill/dist/quill.js";
 
 interface Step1 {
   title: string;
 }
 
 interface Step2 {
-  counterpart: string;
+  operationProgramType: string;
 }
 
 interface KTCreateApp extends Step1, Step2 {
@@ -401,103 +385,27 @@ export default defineComponent({
     const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    const isAdminOrganization = computed(
-        () => store.getters.hasChangeStatusOption
-    );
-    let fileList = [];
-    store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
-    store.dispatch(Actions.GET_ORGANIZATIONS);
-    store.dispatch(Actions.GET_OPERATION_PROGRAMS);
+    store.dispatch(Actions.GET_OPERATION_PROGRAM_TYPES);
 
-    const reasonOptions = computed(() => {
+    const operationProgramTypeOptions = computed(() => {
       let options: Array<any> = [];
-      const reasons: Array<Array<string>> =
-          store.getters.getChangeOPRequestReason;
-      if (reasons.length) {
-        reasons.forEach((v) => {
-          const option: string = v[1];
+      const operationProgramTypes: Array<any> =
+          store.getters.getCurrentOperationProgramTypes;
+      console.log(operationProgramTypes);
+      if (operationProgramTypes.length) {
+        operationProgramTypes.forEach((v) => {
           options.push({
-            value: option,
-            label: option,
+            value: v.url,
+            label: v.name,
           });
         });
       }
       return options;
-    });
-
-    const OPOptions = computed(() => {
-      const operationPrograms = store.getters.getCurrentOperationPrograms;
-      let options: Array<any> = [];
-
-      if (operationPrograms.length) {
-        operationPrograms.forEach((operationProgram) => {
-          options.push({
-            value: operationProgram.url,
-            label:
-                operationProgram.start_at +
-                " (" +
-                operationProgram.op_type.name +
-                ")",
-            release: operationProgram.start_at,
-          });
-        });
-      }
-      options.push({value: "None", label: translate("withoutOP")});
-      return options;
-    });
-
-    const organizationsOptions = computed(() => {
-      const organizations = store.getters.getAllOrganizations;
-      const currentOrganizationName = store.getters.getOrganizationName;
-      let options: Array<any> = [];
-      console.log(organizations);
-      if (store.getters.hasChangeStatusOption) {
-        organizations.forEach((organization) => {
-          if (organization.name !== currentOrganizationName ) {
-            console.log(organization);
-            options.push({
-              value: organization.url,
-              label: organization.name,
-              contracttype: organization.contract_type.url,
-            });
-            console.log(options);
-          }
-        });
-      } else {
-        options = organizations.flatMap((organization) =>
-            organization.name === "DTPM"
-                ? [
-                  {
-                    value: organization.url,
-                    label: organization.name,
-                    contracttype: organization.contract_type.url,
-                  },
-                ]
-                : []
-        );
-      }
-      return options;
-    });
-    const adminOrganizationOption = computed(() => {
-      let option = {};
-      const organizations = store.getters.getAllOrganizations;
-      if (!store.getters.hasChangeStatusOption && organizations) {
-        organizations.forEach((organization) => {
-          if (organization.name === "DTPM") {
-            option = {
-              value: organization.url,
-              label: organization.name,
-              contracttype: organization.contract_type.url,
-            };
-          }
-        });
-      }
-      return option;
     });
 
     const formData = ref<KTCreateApp>({
       title: "",
-      counterpart: "1",
+      operationProgramType: "1",
     });
 
     onMounted(() => {
@@ -511,10 +419,7 @@ export default defineComponent({
         title: Yup.string().required(translate("dateRequired")).label("Title"),
       }),
       Yup.object({
-        counterpart: Yup.string().required().label("counterpart"),
-      }),
-      Yup.object({
-        op: Yup.string().required().label("OperationProgram"),
+        operationProgramType: Yup.string().required().label("operationProgramTYpe"),
       }),
     ];
 
@@ -551,24 +456,12 @@ export default defineComponent({
         ...values,
       };
 
-      const counterPartSelector: HTMLSelectElement = document.querySelector(
-          "#counterpart"
+      const operationProgramTypeSelector: HTMLSelectElement = document.querySelector(
+          "#operationProgramType"
       ) as HTMLSelectElement;
-      if (counterPartSelector) {
-        formData.value["counterpart"] = counterPartSelector.value;
-        formData.value["contract_type"] =
-            counterPartSelector.options[
-                counterPartSelector.selectedIndex
-                ].dataset.contracttype;
+      if (operationProgramTypeSelector) {
+        formData.value["operationProgramType"] = operationProgramTypeSelector.value;
       }
-      const opSelector: HTMLSelectElement = document.querySelector(
-          "#op"
-      ) as HTMLSelectElement;
-      if (opSelector) {
-        formData.value["op_release_date"] =
-            opSelector.options[opSelector.selectedIndex].dataset.release;
-      }
-
       currentStepIndex.value++;
 
       if (!_stepperObj.value) {
@@ -579,29 +472,14 @@ export default defineComponent({
     });
 
     const formSubmit = () => {
-      formData.value["created_at"] = new Date().toISOString();
-      formData.value["creator"] = store.getters.currentUserUrl;
-      formData.value["op"] =
-          formData.value["op"] !== "None" ? formData.value["op"] : "";
-
-      const fileFormData = new FormData();
-      Object.keys(formData.value).forEach(key => {
-        if (typeof formData.value[key] !== 'object') fileFormData.append(key, formData.value[key])
-        else fileFormData.append(key, JSON.stringify(formData.value[key]))
-      });
-      fileList.forEach((file) => {
-        const file_raw = file["raw"];
-        fileFormData.append("files", file_raw, file["name"]);
-      });
+      console.log(formData);
       const params = {
-        params: fileFormData,
-        headers: {
-          "content-Type": "multipart/form-data",
-        },
-      };
+        "start_at": formData.value["title"],
+        "op_type": formData.value["operationProgramType"]
+      }
 
       store
-          .dispatch(Actions.CREATE_CHANGE_OP_REQUEST, params)
+          .dispatch(Actions.CREATE_OPERATION_PROGRAM, params)
           .then(() => {
             Swal.fire({
               text: translate("createOperationProgramSuccess"),
@@ -635,10 +513,6 @@ export default defineComponent({
       },
     });
 
-    const handleChange = (file, fileListData) => {
-      fileList = fileListData;
-    };
-
     return {
       handleStep,
       formSubmit,
@@ -647,15 +521,9 @@ export default defineComponent({
       currentStepIndex,
       totalSteps,
       createAppModalRef,
-      reasonOptions,
       translate,
-      handleChange,
-      fileList,
-      isAdminOrganization,
-      OPOptions,
-      organizationsOptions,
-      adminOrganizationOption,
       formData,
+      operationProgramTypeOptions
     };
   },
 });
