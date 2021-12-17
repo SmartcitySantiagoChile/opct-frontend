@@ -136,7 +136,13 @@ const messages = {
         confirm: "Confirm",
         operationPrograms: "Operation Programs",
         operationProgramsNumber: "Programs number",
-        operationProgramType: "Type"
+        operationProgramType: "Type",
+        createOperationProgram: "Create Operation Program",
+        operationProgramDate: "Operation Program Date",
+        date: "Date",
+        dateRequired: "Date required",
+        createOperationProgramSuccess: "Operation Program successfully created!"
+
 
 
 
@@ -276,7 +282,14 @@ const messages = {
         confirm: "Confirmar",
         operationPrograms: "Programas de Operación",
         operationProgramsNumber: "Número de programas",
-        operationProgramType: "Tipo"
+        operationProgramType: "Tipo",
+        createOperationProgram: "Crear Programa de Operación",
+        operationProgramDate: "Fecha de Programa de Operación",
+        date: "Fecha",
+        dateRequired: "Se require una fecha",
+        createOperationProgramSuccess: "¡Programa de Operación creado exitosamente!"
+
+
 
 
 

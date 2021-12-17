@@ -109,10 +109,6 @@
                     <h3 class="stepper-title">
                       {{ translate("operationProgramType") }}
                     </h3>
-
-                    <div class="stepper-desc">
-                      {{ translate("operationProgramTypeInfo") }}
-                    </div>
                   </div>
                   <!--begin::Label-->
                 </div>
@@ -168,9 +164,9 @@
                       <label
                           class="d-flex align-items-center fs-5 fw-bold mb-2"
                       >
-                        <span class="required">{{ translate("Date") }}</span>
+                        <span class="required">{{ translate("date") }}</span>
                         <i
-                            :title="`${translate('Date')}`"
+                            :title="`${translate('date')}`"
                             class="fas fa-exclamation-circle ms-2 fs-7"
                             data-bs-toggle="tooltip"
                         ></i>
