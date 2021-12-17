@@ -46,6 +46,9 @@
             <tr
               class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
             >
+              <th class="ps-4  rounded-start">
+                Id
+              </th>
               <th class="ps-4 min-w-125px rounded-start">
                 {{ translate("creationDate") }}
               </th>
@@ -65,6 +68,18 @@
           <tbody>
             <template v-for="(item, index) in changeOPRequests" :key="index">
               <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
+                          class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                          href=""
+                      >{{ item.url.split('/change-op-requests/')[1].split("/")[0] }}
+                      </a>
+                    </div>
+                  </div>
+                </td>
                 <td>
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
