@@ -4,6 +4,7 @@ import { Actions, Mutations } from "@/store/enums/StoreEnums";
 interface Breadcrumb {
   title: string;
   pageBreadcrumbPath: Array<string>;
+  createButton: string;
 }
 
 interface StoreInfo {
@@ -36,6 +37,14 @@ export default class BreadcrumbsModule extends VuexModule implements StoreInfo {
    */
   get pageTitle(): string {
     return this.breadcrumbs.title;
+  }
+
+  /**
+   * Get current create Button name
+   * @returns string
+   */
+  get createButton(): string {
+    return this.breadcrumbs.createButton;
   }
 
   @Mutation

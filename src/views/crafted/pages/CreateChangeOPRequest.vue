@@ -1,5 +1,16 @@
 <template>
   <!--begin::Modal - Create Change OP Request-->
+  <span class="card-label fw-bolder fs-3 me-3">
+  <a
+      href="#"
+      class="btn btn-success "
+      data-bs-toggle="modal"
+      data-bs-target="#modal_create_change_op_request"
+      id="kt_toolbar_primary_button"
+  >
+    {{ translate("createChangeOPRequest") }}
+  </a>
+  </span>
   <div
       id="modal_create_change_op_request"
       ref="createChangeOPRequestModalRef"

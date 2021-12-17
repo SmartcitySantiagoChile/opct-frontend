@@ -11,6 +11,7 @@
         v-if="subheaderDisplay"
         :breadcrumbs="breadcrumbs"
         :title="pageTitle"
+        :create-button="createButton"
       />
       <!-- end:: Content Head -->
 
@@ -45,7 +46,6 @@
   <KTExplore></KTExplore>
   <KTDrawerMessenger></KTDrawerMessenger>
   <KTUserMenu></KTUserMenu>
-  <KTCreateApp></KTCreateApp>
 </template>
 
 <script lang="ts">
@@ -60,7 +60,6 @@ import KTToolbar from "@/layout/toolbar/Toolbar.vue";
 import KTScrollTop from "@/layout/extras/ScrollTop.vue";
 import KTUserMenu from "@/layout/header/partials/ActivityDrawer.vue";
 import KTLoader from "@/components/Loader.vue";
-import KTCreateApp from "@/components/modals/wizards/CreateAppModal.vue";
 import KTExplore from "@/layout/extras/Explore.vue";
 import KTDrawerMessenger from "@/layout/extras/DrawerMessenger.vue";
 import { Actions } from "@/store/enums/StoreEnums";
@@ -89,7 +88,6 @@ export default defineComponent({
     KTFooter,
     KTToolbar,
     KTScrollTop,
-    KTCreateApp,
     KTUserMenu,
     KTExplore,
     KTDrawerMessenger,
@@ -114,6 +112,9 @@ export default defineComponent({
       return store.getters.pageBreadcrumbPath;
     });
 
+    const createButton = computed(() => {
+      return store.getters.createButton;
+    });
     onMounted(() => {
       //check if current user is authenticated
       if (!store.getters.isUserAuthenticated) {
@@ -157,6 +158,7 @@ export default defineComponent({
       subheaderDisplay,
       pageTitle,
       breadcrumbs,
+      createButton,
       themeLightLogo,
       themeDarkLogo,
     };

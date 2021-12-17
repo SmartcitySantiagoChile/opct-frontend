@@ -14,7 +14,6 @@
       <div class="page-title d-flex flex-column me-3">
         <!--begin::Title-->
         <h1 class="d-flex text-white fw-bolder my-1 fs-3">
-          {{ title }}
         </h1>
         <!--end::Title-->
 
@@ -38,7 +37,8 @@
             </li>
           </template>
           <li class="breadcrumb-item text-white opacity-75">
-            {{ title }}
+            {{ title}}
+              {{createButton}}
           </li>
         </ul>
         <!--end::Breadcrumb-->
@@ -50,26 +50,6 @@
         <!--begin::Wrapper-->
         <div class="me-4">
           <!--begin::Menu-->
-          <a
-            href="#"
-            class="
-              btn
-              btn-custom
-              btn-active-white
-              btn-flex
-              btn-color-white
-              btn-active-color-primary
-              fw-bolder
-            "
-            data-kt-menu-trigger="click"
-            data-kt-menu-placement="bottom-end"
-            data-kt-menu-flip="top-end"
-          >
-            <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-              <inline-svg src="/media/icons/duotune/general/gen031.svg" />
-            </span>
-            Filter
-          </a>
 
           <Dropdown1></Dropdown1>
           <!--end::Menu-->
@@ -77,15 +57,8 @@
         <!--end::Wrapper-->
 
         <!--begin::Button-->
-        <a
-          href="#"
-          class="btn btn-bg-white btn-active-color-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#modal_create_change_op_request"
-          id="kt_toolbar_primary_button"
-        >
-          {{ translate("createChangeOPRequest") }}
-        </a>
+
+
         <!--end::Button-->
       </div>
       <!--end::Actions-->
@@ -106,6 +79,7 @@ export default defineComponent({
   props: {
     breadcrumbs: Array,
     title: String,
+    createButton: String
   },
   components: {
     Dropdown1,

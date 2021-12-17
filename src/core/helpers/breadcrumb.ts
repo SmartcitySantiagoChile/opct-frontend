@@ -25,3 +25,13 @@ export const setCurrentPageTitle = (title: string): void => {
     title: title,
   });
 };
+
+/**
+ * Sets current page breadcrumbs
+ * @param {string} buttonName Current page create button name
+ */
+export const setCurrentCreateButton = (buttonName: string): void => {
+  store.dispatch(Actions.SET_BREADCRUMB_ACTION, {
+    createButton: buttonName,
+  });
+};
