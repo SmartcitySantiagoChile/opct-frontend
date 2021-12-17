@@ -2,11 +2,11 @@
   <!--begin::Modal - Create Change OP Request-->
   <span class="card-label fw-bolder fs-3 me-3">
   <a
-      href="#"
-      class="btn btn-success "
-      data-bs-toggle="modal"
-      data-bs-target="#modal_create_change_op_request"
       id="kt_toolbar_primary_button"
+      class="btn btn-success "
+      data-bs-target="#modal_create_change_op_request"
+      data-bs-toggle="modal"
+      href="#"
   >
     {{ translate("createChangeOPRequest") }}
   </a>
@@ -553,7 +553,6 @@ export default defineComponent({
     const isAdminOrganization = computed(
         () => store.getters.hasChangeStatusOption
     );
-
     let fileList = [];
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
     store.dispatch(Actions.GET_ORGANIZATIONS);
@@ -600,18 +599,19 @@ export default defineComponent({
       const organizations = store.getters.getAllOrganizations;
       const currentOrganizationName = store.getters.getOrganizationName;
       let options: Array<any> = [];
+      console.log(organizations);
       if (store.getters.hasChangeStatusOption) {
-        options = organizations.flatMap((organization) =>
-            organization.name === currentOrganizationName
-                ? []
-                : [
-                  {
-                    value: organization.url,
-                    label: organization.name,
-                    contracttype: organization.contract_type.url,
-                  },
-                ]
-        );
+        organizations.forEach((organization) => {
+          if (organization.name !== currentOrganizationName ) {
+            console.log(organization);
+            options.push({
+              value: organization.url,
+              label: organization.name,
+              contracttype: organization.contract_type.url,
+            });
+            console.log(options);
+          }
+        });
       } else {
         options = organizations.flatMap((organization) =>
             organization.name === "DTPM"
@@ -722,6 +722,7 @@ export default defineComponent({
       const counterPartSelector: HTMLSelectElement = document.querySelector(
           "#counterpart"
       ) as HTMLSelectElement;
+      console.log(counterPartSelector.value);
       if (counterPartSelector) {
         formData.value["counterpart"] = counterPartSelector.value;
         formData.value["contract_type"] =
@@ -751,7 +752,6 @@ export default defineComponent({
     });
 
     const formSubmit = () => {
-
       formData.value["created_at"] = new Date().toISOString();
       formData.value["creator"] = store.getters.currentUserUrl;
       formData.value["op"] =

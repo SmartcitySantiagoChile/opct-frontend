@@ -281,7 +281,7 @@ import {Actions} from "@/store/enums/StoreEnums";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import {DateTime} from "luxon";
-import CreateChangeOPRequest from "@/views/crafted/pages/CreateChangeOPRequest.vue";
+import CreateChangeOPRequest from "@/views/crafted/pages/changeOPRequest/CreateChangeOPRequest.vue";
 
 
 export default defineComponent({
