@@ -106,7 +106,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    * @returns boolean
    */
   get hasChangeStatusOption(): boolean {
-    return this.user.organization.name === "DTPM";
+    return this.user.organization ? this.user.organization.name === "DTPM" : false;
   }
 
   /**
