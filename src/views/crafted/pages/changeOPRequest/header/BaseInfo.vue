@@ -14,8 +14,9 @@
             <!--begin::Table head-->
             <thead>
               <tr>
-                <th class="p-0 min-w-150px"></th>
-                <th class="p-0 min-w-300px"></th>
+                <th class="p-0"></th>
+                <th class="p-0 "></th>
+                <th class="p-0 "></th>
                 <th class="p-0"></th>
                 <th class="p-0"></th>
                 <th class="p-0"></th>
@@ -27,6 +28,28 @@
             <!--begin::Table body-->
             <tbody>
               <tr>
+                <td>
+                  <span class="text-muted fw-bold d-block fs-5"
+                  >Id
+                  </span>
+                  <span class="text-dark fw-bolder d-block fs-3">
+                    {{id}}
+                  </span>
+                </td>
+                <td>
+                  <span class="text-muted fw-bold d-block fs-5"
+                  >{{ translate("creationDate") }}
+                  </span>
+                  <span class="text-dark fw-bolder d-block fs-3">
+                    {{
+                      changeOpRequestBaseInfo.created_at
+                          ? DateTime.fromISO(changeOpRequestBaseInfo.created_at)
+                              .setLocale(this.$i18n.locale)
+                              .toLocaleString()
+                          : ""
+                    }}
+                  </span>
+                </td>
                 <td>
                   <span class="text-muted fw-bold d-block fs-5"
                     >{{ translate("creationDate") }}
@@ -153,6 +176,7 @@ export default defineComponent({
   props: {
     widgetClasses: String,
     changeOpRequestBaseInfo: {},
+    id: String
   },
   setup() {
     const store = useStore();

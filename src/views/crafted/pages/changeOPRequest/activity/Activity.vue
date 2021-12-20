@@ -4,6 +4,7 @@
     <div class="card-title align-items-center">
       <ChangeOPRequestBaseInfo
         v-bind:changeOpRequestBaseInfo="baseInfo"
+        v-bind:id="id"
       ></ChangeOPRequestBaseInfo>
     </div>
     <div class="separator"></div>
