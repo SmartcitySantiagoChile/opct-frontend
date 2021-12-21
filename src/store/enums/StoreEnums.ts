@@ -28,7 +28,8 @@ enum Actions {
   CREATE_CHANGE_OP_REQUEST = "createChangeOPRequest",
   GET_OPERATION_PROGRAM_TYPES = "getOperationProgramTypes",
   CREATE_OPERATION_PROGRAM = "createOperationProgram",
-  UPDATE_OPERATION_PROGRAM = "updateOperationProgram"
+  UPDATE_OPERATION_PROGRAM = "updateOperationProgram",
+  DELETE_OPERATION_PROGRAM = "deleteOperationProgram"
 }
 
 enum Mutations {

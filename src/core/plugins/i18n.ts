@@ -147,9 +147,14 @@ const messages = {
         changeOpDate: "Edit Date",
         changeOpType: "Edit Type",
         start_at: "Date",
-        noDataEdited: "No data edited"
-
-
+        noDataEdited: "No data edited",
+        secureToDeleteOp: "Are you sure to delete the OP?",
+        cannotRevertOperation: "This operation cannot be reverted",
+        delete: "Delete",
+        deleteOpError: "Delete Operation Program Error",
+        detail: "Detail",
+        deleted: "Deleted",
+        deleteOperationProgramSuccess: "Operation Program successfully deleted!"
 
 
     },
@@ -299,7 +304,15 @@ const messages = {
         changeOpDate: "Modificar fecha",
         changeOpType: "Modificar tipo",
         start_at: "Fecha",
-        noDataEdited: "No hay datos a cambiar"
+        noDataEdited: "No hay datos a cambiar",
+        secureToDeleteOp: "¿Confirma la eliminación del Programa de Operación?",
+        cannotRevertOperation: "Esta operación no puede ser revertida",
+        delete: "Eliminar",
+        deleteOpError: "Error al eliminar el Programa de Operación",
+        deleted: "¡Eliminado!",
+        detail: "Detalle",
+        deleteOperationProgramSuccess: "¡Programa de Operación eliminado exitosamente!"
+
 
     },
     de: {

@@ -65,5 +65,21 @@ export default class OperationProgramModule extends VuexModule implements Operat
                 });
         });
     }
+
+    @Action
+    [Actions.DELETE_OPERATION_PROGRAM](url) {
+        return new Promise<void>((resolve, reject) => {
+            ApiService.delete(url)
+                .then(({data}) => {
+                    console.log(data);
+                    resolve()
+                })
+                .catch(({response}) => {
+                    console.log(response);
+                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,[response.data]);
+                    reject();
+                });
+        });
+    }
 }
 

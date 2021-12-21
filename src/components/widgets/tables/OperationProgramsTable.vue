@@ -15,7 +15,6 @@
       </h3>
       <div class="card-toolbar">
         <!--begin::Menu-->
-
         <CreateOperationProgram></CreateOperationProgram>
         <!--end::Menu-->
       </div>
@@ -28,7 +27,7 @@
       <div class="table-responsive">
         <!--begin::Table-->
         <table
-          class="
+            class="
             table
             align-middle
             gs-0
@@ -39,43 +38,60 @@
         >
           <!--begin::Table head-->
           <thead>
-            <tr
+          <tr
               class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-            >
-              <th class="ps-4 min-w-125px rounded-start">
-                {{ translate("operationProgram") }}
-              </th>
-              <th class="min-w-150px">
-                {{ translate("operationProgramType") }}
-              </th>
-              <th class="min-w-80px"></th>
-            </tr>
+          >
+            <th class="ps-4  rounded-start">
+              {{ translate("Id") }}
+            </th>
+            <th class="ps-4  rounded-start">
+              {{ translate("operationProgram") }}
+            </th>
+            <th class="">
+              {{ translate("operationProgramType") }}
+            </th>
+            <th class="min-w-80px"></th>
+          </tr>
           </thead>
           <!--end::Table head-->
 
           <!--begin::Table body-->
           <tbody>
-            <template v-for="(item, index) in operationPrograms" :key="index">
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <div class="symbol symbol-10px me-5"></div>
-                    <div class="d-flex justify-content-start flex-column">
-                      <a
+          <template v-for="(item, index) in operationPrograms" :key="index">
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="symbol symbol-10px me-5"></div>
+                  <div class="d-flex justify-content-start flex-column">
+                    <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                        >{{
-                          DateTime.fromISO(item.start_at)
+                    >{{
+                        item.url.split('operation-programs/')[1].split('/')[0]
+                      }}
+                    </a>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="symbol symbol-10px me-5"></div>
+                  <div class="d-flex justify-content-start flex-column">
+                    <a
+                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                        href=""
+                    >{{
+                        DateTime.fromISO(item.start_at)
                             .setLocale(this.$i18n.locale)
                             .toLocaleString()
-                        }}
-                      </a>
-                    </div>
+                      }}
+                    </a>
                   </div>
-                </td>
+                </div>
+              </td>
 
-                <td>
-                  <a
+              <td>
+                <a
                     class="
                       text-dark
                       fw-bolder
@@ -85,36 +101,40 @@
                       fs-6
                     "
                     href="#"
-                  >
-                    <template v-if="item.op_type">
-                      {{ item.op_type.name }}
-                    </template>
-                  </a>
-                </td>
+                >
+                  <template v-if="item.op_type">
+                    {{ item.op_type.name }}
+                  </template>
+                </a>
+              </td>
 
-                <td>
-                  <OperationProgramModal
+              <td>
+                <EditOperationProgramModal
                     :id="item.url.split('operation-programs/')[1].split('/')[0]"
                     :opDate="item.start_at"
                     :opTypeName="item.op_type.name"
                     :url="item.url.split('api')[1]"
-                  >
-                  </OperationProgramModal>
-                  <a
+                >
+                </EditOperationProgramModal>
+                <DeleteOperationProgramModal
+                    :url="item.url.split('api')[1]"
+                >
+                </DeleteOperationProgramModal>
+                <a
                     class="
                       btn btn-sm btn-icon btn-bg-light btn-active-color-primary
                     "
                     v-bind:href="item.url.split('api')[1]"
-                  >
+                >
                     <span class="svg-icon svg-icon-2">
                       <inline-svg
-                        src="/media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                       />
                     </span>
-                  </a>
-                </td>
-              </tr>
-            </template>
+                </a>
+              </td>
+            </tr>
+          </template>
           </tbody>
           <!--end::Table body-->
         </table>
@@ -127,17 +147,17 @@
               </button>
             </li>
             <template
-              v-for="(item, index) in Array.from(
+                v-for="(item, index) in Array.from(
                 { length: Math.ceil(operationProgramsCount / 10) },
                 (_, i) => i + 1
               )"
-              :key="index"
+                :key="index"
             >
               <li class="page-item">
                 <button
-                  :data-value="item"
-                  class="page-link"
-                  @click="onPageChange"
+                    :data-value="item"
+                    class="page-link"
+                    @click="onPageChange"
                 >
                   {{ item }}
                 </button>
@@ -158,35 +178,36 @@
   <!--end::Tables Widget 12-->
 </template>
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { Actions } from "@/store/enums/StoreEnums";
-import { useStore } from "vuex";
-import { useI18n } from "vue-i18n";
-import { DateTime } from "luxon";
+import {computed, defineComponent} from "vue";
+import {Actions} from "@/store/enums/StoreEnums";
+import {useStore} from "vuex";
+import {useI18n} from "vue-i18n";
+import {DateTime} from "luxon";
 import CreateOperationProgram from "@/views/crafted/pages/operationProgram/CreateOperationProgram.vue";
-import OperationProgramModal from "@/views/crafted/pages/operationProgram/EditOperationProgram.vue";
+import EditOperationProgramModal from "@/views/crafted/pages/operationProgram/EditOperationProgram.vue";
+import DeleteOperationProgramModal from "@/views/crafted/pages/operationProgram/DeleteOperationProgramModal.vue";
 
 export default defineComponent({
   name: "operation-program-table",
-  components: { CreateOperationProgram, OperationProgramModal },
+  components: {CreateOperationProgram, EditOperationProgramModal, DeleteOperationProgramModal},
   props: {
     widgetClasses: String,
   },
   setup() {
-    const { t, te } = useI18n();
+    const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_OPERATION_PROGRAMS);
     const operationPrograms = computed(
-      () => store.getters.getCurrentOperationPrograms
+        () => store.getters.getCurrentOperationPrograms
     );
     const operationProgramsCount = computed(
-      () => store.getters.getCurrentOperationProgramsCount
+        () => store.getters.getCurrentOperationProgramsCount
     );
 
     const onPageChange = (event) => {
       const filter = document.querySelector<HTMLInputElement>(
-        'input[name="filter"]'
+          'input[name="filter"]'
       );
       let params = {};
       if (filter) {
@@ -194,9 +215,9 @@ export default defineComponent({
       }
       let pageId = event.target.getAttribute("data-value");
       pageId =
-        pageId === "-1"
-          ? String(Math.ceil(operationProgramsCount.value / 10))
-          : pageId;
+          pageId === "-1"
+              ? String(Math.ceil(operationProgramsCount.value / 10))
+              : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();

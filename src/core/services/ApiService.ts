@@ -123,9 +123,7 @@ class ApiService {
      * @returns Promise<AxiosResponse>
      */
     public static delete(resource: string): Promise<AxiosResponse> {
-        return ApiService.vueInstance.axios.delete(resource).catch((error) => {
-            throw new Error(`[RWV] ApiService ${error}`);
-        });
+        return ApiService.vueInstance.axios.delete(resource);
     }
 }
 
