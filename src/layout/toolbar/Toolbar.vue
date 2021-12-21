@@ -13,8 +13,7 @@
       <!--begin::Page title-->
       <div class="page-title d-flex flex-column me-3">
         <!--begin::Title-->
-        <h1 class="d-flex text-white fw-bolder my-1 fs-3">
-        </h1>
+        <h1 class="d-flex text-white fw-bolder my-1 fs-3"></h1>
         <!--end::Title-->
 
         <!--begin::Breadcrumb-->
@@ -37,8 +36,8 @@
             </li>
           </template>
           <li class="breadcrumb-item text-white opacity-75">
-            {{ title}}
-              {{createButton}}
+            {{ title }}
+            {{ createButton }}
           </li>
         </ul>
         <!--end::Breadcrumb-->
@@ -57,7 +56,6 @@
         <!--end::Wrapper-->
 
         <!--begin::Button-->
-
 
         <!--end::Button-->
       </div>
@@ -79,7 +77,7 @@ export default defineComponent({
   props: {
     breadcrumbs: Array,
     title: String,
-    createButton: String
+    createButton: String,
   },
   components: {
     Dropdown1,

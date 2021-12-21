@@ -4,8 +4,11 @@
   ></ChangeOPRequestsTable>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted, onUpdated} from "vue";
-import {setCurrentCreateButton, setCurrentPageTitle} from "@/core/helpers/breadcrumb";
+import { defineComponent, onMounted, onUpdated } from "vue";
+import {
+  setCurrentCreateButton,
+  setCurrentPageTitle,
+} from "@/core/helpers/breadcrumb";
 import ChangeOPRequestsTable from "@/components/widgets/tables/ChangeOPRequestsTable.vue";
 
 export default defineComponent({

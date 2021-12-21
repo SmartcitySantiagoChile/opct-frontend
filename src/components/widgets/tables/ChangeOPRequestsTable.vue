@@ -11,16 +11,16 @@
           {{ translate("changesNumber") + ": " + changeOPRequestsCount }}
         </span>
       </h3>
-      <div class="card-toolbar align-items-start ">
+      <div class="card-toolbar align-items-start">
         <!--begin::Menu-->
         <span class="card-label fw-bolder fs-3 me-3">
-        <input
+          <input
             class="form-control"
             name="filter"
             type="text"
             v-bind:placeholder="translate('filterByOp')"
             @keyup="onFilterChange"
-        />
+          />
         </span>
 
         <CreateChangeOPRequest></CreateChangeOPRequest>
@@ -36,7 +36,7 @@
       <div class="table-responsive">
         <!--begin::Table-->
         <table
-            class="
+          class="
             table
             align-middle
             gs-0
@@ -47,62 +47,64 @@
         >
           <!--begin::Table head-->
           <thead>
-          <tr
+            <tr
               class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-          >
-            <th class="ps-4  rounded-start">
-              Id
-            </th>
-            <th class="ps-4 min-w-125px rounded-start">
-              {{ translate("creationDate") }}
-            </th>
-            <th class="min-w-150px">{{ translate("operationProgram") }}</th>
-            <th class="min-w-150px">{{ translate("contractType") }}</th>
-            <th class="min-w-150px">{{ translate("title") }}</th>
-            <th class="min-w-150px">{{ translate("reason") }}</th>
-            <th class="min-w-100px">{{ translate("creator") }}</th>
-            <th class="min-w-100px">{{ translate("counterpart") }}</th>
-            <th class="min-w-80px">{{ translate("status") }}</th>
-            <th class="min-w-80px"></th>
-          </tr>
+            >
+              <th class="ps-4 rounded-start">Id</th>
+              <th class="ps-4 min-w-125px rounded-start">
+                {{ translate("creationDate") }}
+              </th>
+              <th class="min-w-150px">{{ translate("operationProgram") }}</th>
+              <th class="min-w-150px">{{ translate("contractType") }}</th>
+              <th class="min-w-150px">{{ translate("title") }}</th>
+              <th class="min-w-150px">{{ translate("reason") }}</th>
+              <th class="min-w-100px">{{ translate("creator") }}</th>
+              <th class="min-w-100px">{{ translate("counterpart") }}</th>
+              <th class="min-w-80px">{{ translate("status") }}</th>
+              <th class="min-w-80px"></th>
+            </tr>
           </thead>
           <!--end::Table head-->
 
           <!--begin::Table body-->
           <tbody>
-          <template v-for="(item, index) in changeOPRequests" :key="index">
-            <tr>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5"></div>
-                  <div class="d-flex justify-content-start flex-column">
-                    <a
+            <template v-for="(item, index) in changeOPRequests" :key="index">
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                    >{{ item.url.split('/change-op-requests/')[1].split("/")[0] }}
-                    </a>
+                        >{{
+                          item.url
+                            .split("/change-op-requests/")[1]
+                            .split("/")[0]
+                        }}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5"></div>
-                  <div class="d-flex justify-content-start flex-column">
-                    <a
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                    >{{
-                        DateTime.fromISO(item.created_at)
+                        >{{
+                          DateTime.fromISO(item.created_at)
                             .setLocale(this.$i18n.locale)
                             .toLocaleString()
-                      }}
-                    </a>
+                        }}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -112,23 +114,23 @@
                       fs-6
                     "
                     href="#"
-                >
-                  <template v-if="item.op">
-                    {{
-                      DateTime.fromISO(item.op.start_at)
+                  >
+                    <template v-if="item.op">
+                      {{
+                        DateTime.fromISO(item.op.start_at)
                           .setLocale(this.$i18n.locale)
                           .toLocaleString()
-                    }}
-                    ({{ item.op.op_type.name }})
-                  </template>
-                  <template v-else>
-                    {{ translate("withoutAssign") }}
-                  </template>
-                </a>
-              </td>
+                      }}
+                      ({{ item.op.op_type.name }})
+                    </template>
+                    <template v-else>
+                      {{ translate("withoutAssign") }}
+                    </template>
+                  </a>
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -138,12 +140,12 @@
                       fs-6
                     "
                     href="#"
-                >{{ item.contract_type ? item.contract_type.name : "" }}</a
-                >
-              </td>
+                    >{{ item.contract_type ? item.contract_type.name : "" }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -153,11 +155,11 @@
                       fs-6
                     "
                     href="#"
-                >{{ item.title }}</a
-                >
-              </td>
-              <td>
-                <a
+                    >{{ item.title }}</a
+                  >
+                </td>
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -167,12 +169,12 @@
                       fs-6
                     "
                     href="#"
-                >{{ item.reason }}</a
-                >
-              </td>
+                    >{{ item.reason }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -182,14 +184,14 @@
                       fs-6
                     "
                     href="#"
-                >{{
-                    item.creator.first_name + " " + item.creator.last_name
-                  }}</a
-                >
-              </td>
+                    >{{
+                      item.creator.first_name + " " + item.creator.last_name
+                    }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -199,12 +201,12 @@
                       fs-6
                     "
                     href="#"
-                >{{ item.counterpart.name }}</a
-                >
-              </td>
+                    >{{ item.counterpart.name }}</a
+                  >
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -214,25 +216,25 @@
                       fs-6
                     "
                     href="#"
-                >{{ item.status.name }}</a
-                >
-              </td>
-              <td>
-                <a
+                    >{{ item.status.name }}</a
+                  >
+                </td>
+                <td>
+                  <a
                     class="
                       btn btn-sm btn-icon btn-bg-light btn-active-color-primary
                     "
                     v-bind:href="item.url.split('api')[1]"
-                >
+                  >
                     <span class="svg-icon svg-icon-2">
                       <inline-svg
-                          src="/media/icons/duotune/arrows/arr064.svg"
+                        src="/media/icons/duotune/arrows/arr064.svg"
                       />
                     </span>
-                </a>
-              </td>
-            </tr>
-          </template>
+                  </a>
+                </td>
+              </tr>
+            </template>
           </tbody>
           <!--end::Table body-->
         </table>
@@ -245,17 +247,17 @@
               </button>
             </li>
             <template
-                v-for="(item, index) in Array.from(
+              v-for="(item, index) in Array.from(
                 { length: Math.ceil(changeOPRequestsCount / 10) },
                 (_, i) => i + 1
               )"
-                :key="index"
+              :key="index"
             >
               <li class="page-item">
                 <button
-                    :data-value="item"
-                    class="page-link"
-                    @click="onPageChange"
+                  :data-value="item"
+                  class="page-link"
+                  @click="onPageChange"
                 >
                   {{ item }}
                 </button>
@@ -276,30 +278,29 @@
   <!--end::Tables Widget 12-->
 </template>
 <script lang="ts">
-import {computed, defineComponent} from "vue";
-import {Actions} from "@/store/enums/StoreEnums";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
-import {DateTime} from "luxon";
+import { computed, defineComponent } from "vue";
+import { Actions } from "@/store/enums/StoreEnums";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import { DateTime } from "luxon";
 import CreateChangeOPRequest from "@/views/crafted/pages/changeOPRequest/CreateChangeOPRequest.vue";
-
 
 export default defineComponent({
   name: "change-op-requests-table",
-  components: {CreateChangeOPRequest},
+  components: { CreateChangeOPRequest },
   props: {
     widgetClasses: String,
   },
   setup() {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
     const changeOPRequests = computed(
-        () => store.getters.getCurrentChangeOPRequests
+      () => store.getters.getCurrentChangeOPRequests
     );
     const changeOPRequestsCount = computed(
-        () => store.getters.getCurrentChangeOPRequestsCount
+      () => store.getters.getCurrentChangeOPRequestsCount
     );
 
     // Events
@@ -316,7 +317,7 @@ export default defineComponent({
 
     const onPageChange = (event) => {
       const filter = document.querySelector<HTMLInputElement>(
-          'input[name="filter"]'
+        'input[name="filter"]'
       );
       let params = {};
       if (filter) {
@@ -324,9 +325,9 @@ export default defineComponent({
       }
       let pageId = event.target.getAttribute("data-value");
       pageId =
-          pageId === "-1"
-              ? String(Math.ceil(changeOPRequestsCount.value / 10))
-              : pageId;
+        pageId === "-1"
+          ? String(Math.ceil(changeOPRequestsCount.value / 10))
+          : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();

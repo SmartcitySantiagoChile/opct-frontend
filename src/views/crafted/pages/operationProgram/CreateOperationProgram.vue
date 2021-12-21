@@ -1,22 +1,22 @@
 <template>
   <!--begin::Modal - Create Change OP Request-->
   <span class="card-label fw-bolder fs-3 me-3">
-  <a
+    <a
       id="kt_toolbar_primary_button"
-      class="btn btn-success "
+      class="btn btn-success"
       data-bs-target="#modal_create_change_op_request"
       data-bs-toggle="modal"
       href="#"
-  >
-    {{ translate("createOperationProgram") }}
-  </a>
+    >
+      {{ translate("createOperationProgram") }}
+    </a>
   </span>
   <div
-      id="modal_create_change_op_request"
-      ref="createOperationProgramModalRef"
-      aria-hidden="true"
-      class="modal fade"
-      tabindex="-1"
+    id="modal_create_change_op_request"
+    ref="createOperationProgramModalRef"
+    aria-hidden="true"
+    class="modal fade"
+    tabindex="-1"
   >
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-900px">
@@ -30,11 +30,11 @@
 
           <!--begin::Close-->
           <div
-              class="btn btn-sm btn-icon btn-active-color-primary"
-              data-bs-dismiss="modal"
+            class="btn btn-sm btn-icon btn-active-color-primary"
+            data-bs-dismiss="modal"
           >
             <span class="svg-icon svg-icon-1">
-              <inline-svg src="/media/icons/duotune/arrows/arr061.svg"/>
+              <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>
           </div>
           <!--end::Close-->
@@ -45,9 +45,9 @@
         <div class="modal-body py-lg-10 px-lg-10">
           <!--begin::Stepper-->
           <div
-              id="modal_create_change_op_request_stepper"
-              ref="createChangeOPRef"
-              class="
+            id="modal_create_change_op_request_stepper"
+            ref="createChangeOPRef"
+            class="
               stepper stepper-pills stepper-column
               d-flex
               flex-column flex-xl-row flex-row-fluid
@@ -55,7 +55,7 @@
           >
             <!--begin::Aside-->
             <div
-                class="
+              class="
                 d-flex
                 justify-content-center justify-content-xl-start
                 flex-row-auto
@@ -114,7 +114,6 @@
                 </div>
                 <!--end::Step 2-->
 
-
                 <!--begin::Step 4-->
                 <div class="stepper-item" data-kt-stepper-element="nav">
                   <!--begin::Line-->
@@ -150,10 +149,10 @@
             <div class="flex-row-fluid py-lg-5 px-lg-15">
               <!--begin::Form-->
               <form
-                  id="modal_create_change_op_request_form"
-                  class="form"
-                  novalidate="novalidate"
-                  @submit="handleStep"
+                id="modal_create_change_op_request_form"
+                class="form"
+                novalidate="novalidate"
+                @submit="handleStep"
               >
                 <!--begin::Step 1-->
                 <div class="current" data-kt-stepper-element="content">
@@ -162,27 +161,27 @@
                     <div class="fv-row mb-10">
                       <!--begin::Label-->
                       <label
-                          class="d-flex align-items-center fs-5 fw-bold mb-2"
+                        class="d-flex align-items-center fs-5 fw-bold mb-2"
                       >
                         <span class="required">{{ translate("date") }}</span>
                         <i
-                            :title="`${translate('date')}`"
-                            class="fas fa-exclamation-circle ms-2 fs-7"
-                            data-bs-toggle="tooltip"
+                          :title="`${translate('date')}`"
+                          class="fas fa-exclamation-circle ms-2 fs-7"
+                          data-bs-toggle="tooltip"
                         ></i>
                       </label>
                       <!--end::Label-->
 
                       <!--begin::Input-->
                       <Field
-                          class="form-control form-control-lg form-control-solid"
-                          name="title"
-                          placeholder=""
-                          type="date"
+                        class="form-control form-control-lg form-control-solid"
+                        name="title"
+                        placeholder=""
+                        type="date"
                       />
                       <ErrorMessage
-                          class="fv-plugins-message-container invalid-feedback"
-                          name="title"
+                        class="fv-plugins-message-container invalid-feedback"
+                        name="title"
                       />
                       <!--end::Input-->
                     </div>
@@ -200,26 +199,26 @@
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
                         <label class="required fs-6 fw-bold form-label mb-2">{{
-                            translate("operationProgramType")
-                          }}</label>
+                          translate("operationProgramType")
+                        }}</label>
                         <!--end::Label-->
 
                         <!--begin::Row-->
                         <div class="row fv-row">
                           <!--begin::Col-->
                           <select
-                              id="operationProgramType"
-                              class="
+                            id="operationProgramType"
+                            class="
                               form-select form-select-solid
                               select2-hidden-accessible
                               selected
                             "
                           >
                             <option
-                                v-for="i in operationProgramTypeOptions"
-                                :key="i.value"
-                                :label="i.label"
-                                :value="i.value"
+                              v-for="i in operationProgramTypeOptions"
+                              :key="i.value"
+                              :label="i.label"
+                              :value="i.value"
                             ></option>
                           </select>
                           <!--end::Col-->
@@ -249,9 +248,9 @@
                     <!--begin::Illustration-->
                     <div class="text-center px-4 py-15">
                       <img
-                          alt=""
-                          class="w-100 mh-300px"
-                          src="/media/illustrations/sketchy-1/9.png"
+                        alt=""
+                        class="w-100 mh-300px"
+                        src="/media/illustrations/sketchy-1/9.png"
                       />
                     </div>
                     <!--end::Illustration-->
@@ -264,14 +263,14 @@
                   <!--begin::Wrapper-->
                   <div class="me-2">
                     <button
-                        class="btn btn-lg btn-light-primary me-3"
-                        data-kt-stepper-action="previous"
-                        type="button"
-                        @click="previousStep()"
+                      class="btn btn-lg btn-light-primary me-3"
+                      data-kt-stepper-action="previous"
+                      type="button"
+                      @click="previousStep()"
                     >
                       <span class="svg-icon svg-icon-3 me-1">
                         <inline-svg
-                            src="/media/icons/duotune/arrows/arr063.svg"
+                          src="/media/icons/duotune/arrows/arr063.svg"
                         />
                       </span>
                       {{ translate("back") }}
@@ -282,23 +281,23 @@
                   <!--begin::Wrapper-->
                   <div>
                     <button
-                        v-if="currentStepIndex === totalSteps - 1"
-                        class="btn btn-lg btn-primary"
-                        type="submit"
-                        @click="formSubmit()"
+                      v-if="currentStepIndex === totalSteps - 1"
+                      class="btn btn-lg btn-primary"
+                      type="submit"
+                      @click="formSubmit()"
                     >
                       <span class="indicator-label">
                         {{ translate("create") }}
                         <span class="svg-icon svg-icon-3 ms-2 me-0">
                           <inline-svg
-                              src="/media/icons/duotune/arrows/arr064.svg"
+                            src="/media/icons/duotune/arrows/arr064.svg"
                           />
                         </span>
                       </span>
                       <span class="indicator-progress">
                         {{ translate("pleaseWait") }}
                         <span
-                            class="
+                          class="
                             spinner-border spinner-border-sm
                             align-middle
                             ms-2
@@ -311,7 +310,7 @@
                       {{ translate("continue") }}
                       <span class="svg-icon svg-icon-3 ms-1 me-0">
                         <inline-svg
-                            src="/media/icons/duotune/arrows/arr064.svg"
+                          src="/media/icons/duotune/arrows/arr064.svg"
                         />
                       </span>
                     </button>
@@ -346,15 +345,15 @@
 </style>
 
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref} from "vue";
-import {StepperComponent} from "@/assets/ts/components/_StepperComponent";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import { StepperComponent } from "@/assets/ts/components/_StepperComponent";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
-import {ErrorMessage, Field, useForm} from "vee-validate";
+import { ErrorMessage, Field, useForm } from "vee-validate";
 import * as Yup from "yup";
-import {hideModal} from "@/core/helpers/dom";
-import {useI18n} from "vue-i18n";
-import {Actions} from "@/store/enums/StoreEnums";
-import {useStore} from "vuex";
+import { hideModal } from "@/core/helpers/dom";
+import { useI18n } from "vue-i18n";
+import { Actions } from "@/store/enums/StoreEnums";
+import { useStore } from "vuex";
 
 interface Step1 {
   title: string;
@@ -364,8 +363,7 @@ interface Step2 {
   operationProgramType: string;
 }
 
-interface KTCreateApp extends Step1, Step2 {
-}
+interface KTCreateApp extends Step1, Step2 {}
 
 export default defineComponent({
   name: "CreateOperationProgram",
@@ -378,7 +376,7 @@ export default defineComponent({
     const createChangeOPRef = ref<HTMLElement | null>(null);
     const createAppModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_OPERATION_PROGRAM_TYPES);
@@ -386,7 +384,7 @@ export default defineComponent({
     const operationProgramTypeOptions = computed(() => {
       let options: Array<any> = [];
       const operationProgramTypes: Array<any> =
-          store.getters.getCurrentOperationProgramTypes;
+        store.getters.getCurrentOperationProgramTypes;
       if (operationProgramTypes.length) {
         operationProgramTypes.forEach((v) => {
           options.push({
@@ -405,7 +403,7 @@ export default defineComponent({
 
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(
-          createChangeOPRef.value as HTMLElement
+        createChangeOPRef.value as HTMLElement
       );
     });
 
@@ -414,7 +412,9 @@ export default defineComponent({
         title: Yup.string().required(translate("dateRequired")).label("Title"),
       }),
       Yup.object({
-        operationProgramType: Yup.string().required().label("operationProgramTYpe"),
+        operationProgramType: Yup.string()
+          .required()
+          .label("operationProgramTYpe"),
       }),
     ];
 
@@ -431,7 +431,7 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const {resetForm, handleSubmit} = useForm<Step1 | Step2>({
+    const { resetForm, handleSubmit } = useForm<Step1 | Step2>({
       validationSchema: currentSchema,
     });
 
@@ -451,11 +451,11 @@ export default defineComponent({
         ...values,
       };
 
-      const operationProgramTypeSelector: HTMLSelectElement = document.querySelector(
-          "#operationProgramType"
-      ) as HTMLSelectElement;
+      const operationProgramTypeSelector: HTMLSelectElement =
+        document.querySelector("#operationProgramType") as HTMLSelectElement;
       if (operationProgramTypeSelector) {
-        formData.value["operationProgramType"] = operationProgramTypeSelector.value;
+        formData.value["operationProgramType"] =
+          operationProgramTypeSelector.value;
       }
       currentStepIndex.value++;
 
@@ -468,37 +468,37 @@ export default defineComponent({
 
     const formSubmit = () => {
       const params = {
-        "start_at": formData.value["title"],
-        "op_type": formData.value["operationProgramType"]
-      }
+        start_at: formData.value["title"],
+        op_type: formData.value["operationProgramType"],
+      };
 
       store
-          .dispatch(Actions.CREATE_OPERATION_PROGRAM, params)
-          .then(() => {
-            Swal.fire({
-              text: translate("createOperationProgramSuccess"),
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: translate("confirm"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-primary",
-              },
-            })
-                .then(() => {
-                  hideModal(createAppModalRef.value);
-                })
-                .then(() => location.reload());
+        .dispatch(Actions.CREATE_OPERATION_PROGRAM, params)
+        .then(() => {
+          Swal.fire({
+            text: translate("createOperationProgramSuccess"),
+            icon: "success",
+            buttonsStyling: false,
+            confirmButtonText: translate("confirm"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-primary",
+            },
           })
-          .catch(() => {
-            Swal.fire({
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: translate("tryAgain"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-danger",
-              },
-            });
+            .then(() => {
+              hideModal(createAppModalRef.value);
+            })
+            .then(() => location.reload());
+        })
+        .catch(() => {
+          Swal.fire({
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: translate("tryAgain"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-danger",
+            },
           });
+        });
     };
 
     resetForm({
@@ -517,7 +517,7 @@ export default defineComponent({
       createAppModalRef,
       translate,
       formData,
-      operationProgramTypeOptions
+      operationProgramTypeOptions,
     };
   },
 });
