@@ -387,7 +387,6 @@ export default defineComponent({
       let options: Array<any> = [];
       const operationProgramTypes: Array<any> =
           store.getters.getCurrentOperationProgramTypes;
-      console.log(operationProgramTypes);
       if (operationProgramTypes.length) {
         operationProgramTypes.forEach((v) => {
           options.push({
@@ -468,7 +467,6 @@ export default defineComponent({
     });
 
     const formSubmit = () => {
-      console.log(formData);
       const params = {
         "start_at": formData.value["title"],
         "op_type": formData.value["operationProgramType"]

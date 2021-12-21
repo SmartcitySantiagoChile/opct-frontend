@@ -82,7 +82,7 @@
                     "
                     href="#"
                 >
-                  <template v-if="item.op_type">
+                  <template v-if="item.op_type" >
                     {{
                      item.op_type.name}}
                   </template>
@@ -91,6 +91,9 @@
 
 
               <td>
+                <OperationProgramModal :id="item.url.split('operation-programs/')[1].split('/')[0]" :opDate="item.start_at" :opTypeName="item.op_type.name" :url="item.url.split('api')[1]" >
+
+                </OperationProgramModal>
                 <a
                     class="
                       btn btn-sm btn-icon btn-bg-light btn-active-color-primary
@@ -155,11 +158,13 @@ import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import {DateTime} from "luxon";
 import CreateOperationProgram from "@/views/crafted/pages/operationProgram/CreateOperationProgram.vue";
+import OperationProgramModal from "@/views/crafted/pages/operationProgram/EditOperationProgram.vue";
+
 
 
 export default defineComponent({
   name: "operation-program-table",
-  components: {CreateOperationProgram},
+  components: {CreateOperationProgram, OperationProgramModal},
   props: {
     widgetClasses: String,
   },
@@ -171,7 +176,6 @@ export default defineComponent({
     const operationPrograms = computed(
         () => store.getters.getCurrentOperationPrograms
     );
-    console.log(operationPrograms);
     const operationProgramsCount = computed(
         () => store.getters.getCurrentOperationProgramsCount
     );

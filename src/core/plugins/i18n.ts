@@ -141,7 +141,13 @@ const messages = {
         operationProgramDate: "Operation Program Date",
         date: "Date",
         dateRequired: "Date required",
-        createOperationProgramSuccess: "Operation Program successfully created!"
+        createOperationProgramSuccess: "Operation Program successfully created!",
+        updateOpSuccess: "Operation Program successfully updated!",
+        editOP: "Edit Operation Program",
+        changeOpDate: "Edit Date",
+        changeOpType: "Edit Type",
+        start_at: "Date",
+        noDataEdited: "No data edited"
 
 
 
@@ -287,11 +293,13 @@ const messages = {
         operationProgramDate: "Fecha de Programa de Operación",
         date: "Fecha",
         dateRequired: "Se require una fecha",
-        createOperationProgramSuccess: "¡Programa de Operación creado exitosamente!"
-
-
-
-
+        createOperationProgramSuccess: "¡Programa de Operación creado exitosamente!",
+        updateOpSuccess: "¡Programa de Operación actualizado exitosamente!",
+        editOP: "Modificar Programa de Operación",
+        changeOpDate: "Modificar fecha",
+        changeOpType: "Modificar tipo",
+        start_at: "Fecha",
+        noDataEdited: "No hay datos a cambiar"
 
     },
     de: {

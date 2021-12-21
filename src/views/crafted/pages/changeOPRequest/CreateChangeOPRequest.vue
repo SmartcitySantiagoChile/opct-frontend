@@ -599,17 +599,14 @@ export default defineComponent({
       const organizations = store.getters.getAllOrganizations;
       const currentOrganizationName = store.getters.getOrganizationName;
       let options: Array<any> = [];
-      console.log(organizations);
       if (store.getters.hasChangeStatusOption) {
         organizations.forEach((organization) => {
           if (organization.name !== currentOrganizationName ) {
-            console.log(organization);
             options.push({
               value: organization.url,
               label: organization.name,
               contracttype: organization.contract_type.url,
             });
-            console.log(options);
           }
         });
       } else {
@@ -722,7 +719,6 @@ export default defineComponent({
       const counterPartSelector: HTMLSelectElement = document.querySelector(
           "#counterpart"
       ) as HTMLSelectElement;
-      console.log(counterPartSelector.value);
       if (counterPartSelector) {
         formData.value["counterpart"] = counterPartSelector.value;
         formData.value["contract_type"] =
