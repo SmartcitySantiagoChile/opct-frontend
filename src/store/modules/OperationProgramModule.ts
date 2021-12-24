@@ -7,6 +7,7 @@ export interface OperationProgram {
     url: string;
     start_at: string;
     op_type: Dictionary<string>;
+    op_change_data_logs: Dictionary<string>;
 
 }
 

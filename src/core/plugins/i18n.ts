@@ -154,7 +154,13 @@ const messages = {
         deleteOpError: "Delete Operation Program Error",
         detail: "Detail",
         deleted: "Deleted",
-        deleteOperationProgramSuccess: "Operation Program successfully deleted!"
+        deleteOperationProgramSuccess: "Operation Program successfully deleted!",
+        information: "Information",
+        value: "Value",
+        previousData: "Previous data",
+        newData: "New data",
+        dataChange: "Data change",
+        opLog: "Operation Program Log"
 
 
     },
@@ -311,7 +317,13 @@ const messages = {
         deleteOpError: "Error al eliminar el Programa de Operación",
         deleted: "¡Eliminado!",
         detail: "Detalle",
-        deleteOperationProgramSuccess: "¡Programa de Operación eliminado exitosamente!"
+        deleteOperationProgramSuccess: "¡Programa de Operación eliminado exitosamente!",
+        information: "Información",
+        value: "Valor",
+        previousData: "Datos anteriores",
+        newData: "Datos nuevos",
+        dataChange: "Actualización de datos",
+        opLog: "Log de Programa de Operación"
 
 
     },

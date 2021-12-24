@@ -27,55 +27,6 @@ export default defineComponent({
     const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    /*
-    const editOP = () => {
-
-      if (changeOpTypeValue.value || changeOpDateValue.value) {
-        store
-          .dispatch(Actions.UPDATE_OPERATION_PROGRAM, {
-            url: props.url,
-            params: params,
-          })
-          .then(function () {
-            Swal.fire({
-              text: translate("updateOpSuccess"),
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: translate("continue"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-success",
-              },
-              allowOutsideClick: false,
-            }).then(() => location.reload());
-          })
-          .catch(() => {
-            const errors = store.getters.getCurrentOperationProgramErrors[0];
-            const parsedErrors = Object.entries(errors).map((key) => {
-              return `${translate(key[0])}: ${translate(key[1])}`;
-            });
-            Swal.fire({
-              text: parsedErrors,
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: translate("tryAgain"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-danger",
-              },
-            });
-          });
-      } else {
-        Swal.fire({
-          text: translate("noDataEdited"),
-          icon: "info",
-          buttonsStyling: false,
-          confirmButtonText: translate("tryAgain"),
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-info",
-          },
-        });
-      }
-    };
-       */
     const deleteOP = () => {
       Swal.fire({
         title: translate("secureToDeleteOp"),

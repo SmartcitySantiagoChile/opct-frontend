@@ -9,7 +9,7 @@
       <inline-svg src="/media/icons/duotune/art/art005.svg" />
     </span>
   </a>
-  <!--begin::editOP-->
+  <!--begin::EditOP-->
   <div :id="`editOp${id}`" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -70,8 +70,7 @@
       </div>
     </div>
   </div>
-
-  <!--end::ChangeOP-->
+  <!--end::EditOP-->
 </template>
 
 <script lang="ts">

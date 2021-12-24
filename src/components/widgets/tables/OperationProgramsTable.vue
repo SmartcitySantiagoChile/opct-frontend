@@ -47,10 +47,10 @@
             <th class="ps-4  rounded-start">
               {{ translate("operationProgram") }}
             </th>
-            <th class="">
+            <th class="ps-4 rounded-start">
               {{ translate("operationProgramType") }}
             </th>
-            <th class="min-w-80px"></th>
+            <th class="ps-4 align-right"></th>
           </tr>
           </thead>
           <!--end::Table head-->
@@ -109,6 +109,10 @@
               </td>
 
               <td>
+                <template v-if="item.op_change_data_logs.length">
+                  <OperationProgramLogModal :id="item.url.split('operation-programs/')[1].split('/')[0]"
+                                            :opChangeDataLogs="item.op_change_data_logs"></OperationProgramLogModal>
+                </template>
                 <EditOperationProgramModal
                     :id="item.url.split('operation-programs/')[1].split('/')[0]"
                     :opDate="item.start_at"
@@ -120,18 +124,7 @@
                     :url="item.url.split('api')[1]"
                 >
                 </DeleteOperationProgramModal>
-                <a
-                    class="
-                      btn btn-sm btn-icon btn-bg-light btn-active-color-primary
-                    "
-                    v-bind:href="item.url.split('api')[1]"
-                >
-                    <span class="svg-icon svg-icon-2">
-                      <inline-svg
-                          src="/media/icons/duotune/arrows/arr064.svg"
-                      />
-                    </span>
-                </a>
+
               </td>
             </tr>
           </template>
@@ -183,13 +176,20 @@ import {Actions} from "@/store/enums/StoreEnums";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import {DateTime} from "luxon";
-import CreateOperationProgram from "@/views/crafted/pages/operationProgram/CreateOperationProgram.vue";
-import EditOperationProgramModal from "@/views/crafted/pages/operationProgram/EditOperationProgram.vue";
-import DeleteOperationProgramModal from "@/views/crafted/pages/operationProgram/DeleteOperationProgramModal.vue";
+import CreateOperationProgram from "@/views/crafted/pages/operationProgram/actions/CreateOperationProgram.vue";
+import EditOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/EditOperationProgram.vue";
+import DeleteOperationProgramModal
+  from "@/views/crafted/pages/operationProgram/actions/DeleteOperationProgramModal.vue";
+import OperationProgramLogModal from "@/views/crafted/pages/operationProgram/logs/OperationProgramLogModal.vue"
 
 export default defineComponent({
   name: "operation-program-table",
-  components: {CreateOperationProgram, EditOperationProgramModal, DeleteOperationProgramModal},
+  components: {
+    CreateOperationProgram,
+    EditOperationProgramModal,
+    DeleteOperationProgramModal,
+    OperationProgramLogModal
+  },
   props: {
     widgetClasses: String,
   },
