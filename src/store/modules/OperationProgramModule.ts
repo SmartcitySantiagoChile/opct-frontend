@@ -12,21 +12,21 @@ export interface OperationProgram {
 }
 
 export interface OperationProgramInfo {
-    errors: Array<Dictionary<string>>;
+    errors: Dictionary<string>;
     operationProgram: OperationProgram;
 }
 
 
 @Module
 export default class OperationProgramModule extends VuexModule implements OperationProgramInfo {
-    errors = [{}] as Array<Dictionary<string>>;
+    errors = {} as Dictionary<string>;
     operationProgram = {} as OperationProgram;
 
     /**
      * Get current operation programs
-     * @returns Array<Dictionary<string>>
+     * @returns Dictionary<string>
      */
-    get getCurrentOperationProgramErrors(): Array<Dictionary<string>>{
+    get getCurrentOperationProgramErrors(): Dictionary<string>{
         return this.errors;
     }
 
@@ -45,7 +45,7 @@ export default class OperationProgramModule extends VuexModule implements Operat
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,[response.data]);
+                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS, response.data);
                     reject();
                 });
         });
@@ -54,14 +54,14 @@ export default class OperationProgramModule extends VuexModule implements Operat
     @Action
     [Actions.UPDATE_OPERATION_PROGRAM](params) {
         return new Promise<void>((resolve, reject) => {
-            ApiService.put(params["url"], params["params"])
+            ApiService.patch(params["url"], params["params"])
                 .then(({data}) => {
                     console.log(data);
                     resolve()
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,[response.data]);
+                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,response.data);
                     reject();
                 });
         });
@@ -77,7 +77,7 @@ export default class OperationProgramModule extends VuexModule implements Operat
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,[response.data]);
+                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,response.data);
                     reject();
                 });
         });

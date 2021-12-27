@@ -490,13 +490,13 @@ export default defineComponent({
             .then(() => location.reload());
         })
         .catch(() => {
-          const errors = store.getters.getCurrentOperationProgramErrors[0];
+          const errors = store.getters.getCurrentOperationProgramErrors;
           const parsedErrors = Object.entries(errors).map((key) => {
-            return `${translate(key[0])}: ${translate(key[1])}`;
+            return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
           });
           Swal.fire({
             icon: "error",
-            text: parsedErrors,
+            html: parsedErrors.join(''),
             buttonsStyling: false,
             confirmButtonText: translate("tryAgain"),
             customClass: {

@@ -160,7 +160,8 @@ const messages = {
         previousData: "Previous data",
         newData: "New data",
         dataChange: "Data change",
-        opLog: "Operation Program Log"
+        opLog: "Operation Program Log",
+        op_type: "Operation Program Type"
 
 
     },
@@ -323,7 +324,8 @@ const messages = {
         previousData: "Datos anteriores",
         newData: "Datos nuevos",
         dataChange: "Actualización de datos",
-        opLog: "Log de Programa de Operación"
+        opLog: "Log de Programa de Operación",
+        op_type: "Tipo de PO"
 
 
     },
