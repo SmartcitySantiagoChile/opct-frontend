@@ -69,29 +69,6 @@
         </template>
         <!--begin::Description-->
         <div class="d-flex align-items-center mt-1 fs-6">
-          <!--begin::Info-->
-          <!--
-                    <div class="text-muted me-2 fs-7">
-                      {{ translate("addedAt") }}
-                      {{
-                        changeOpRequestTimelineMessage.created_at
-                          ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
-                              .setLocale(this.$i18n.locale)
-                              .toLocaleString()
-                          : ""
-                      }}
-                      {{ translate("atTime") }}
-                      {{
-                        changeOpRequestTimelineMessage.created_at
-                          ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
-                              .setLocale(this.$i18n.locale)
-                              .toLocaleString(DateTime.TIME_SIMPLE)
-                          : ""
-                      }}
-                      {{ translate("by") }}
-                    </div>-->
-          <!--end::Info-->
-
           <!--begin::User-->
           <div class="text-muted me-2 fs-7">
             {{ translate("addedAt") }}

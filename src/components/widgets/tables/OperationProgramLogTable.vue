@@ -53,7 +53,7 @@
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
                     >{{
-                        index
+                        translate(index)
                       }}
                     </a>
                   </div>
@@ -66,7 +66,7 @@
                     <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                    >{{item}}
+                    >{{translate(item)}}
                     </a>
                   </div>
                 </div>
