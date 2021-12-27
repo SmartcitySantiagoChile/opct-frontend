@@ -20,7 +20,6 @@
                 <th class="p-0"></th>
                 <th class="p-0"></th>
                 <th class="p-0"></th>
-                <th class="p-0"></th>
               </tr>
             </thead>
             <!--end::Table head-->
@@ -32,20 +31,6 @@
                   <span class="text-muted fw-bold d-block fs-5">Id </span>
                   <span class="text-dark fw-bolder d-block fs-3">
                     {{ id }}
-                  </span>
-                </td>
-                <td>
-                  <span class="text-muted fw-bold d-block fs-5"
-                    >{{ translate("creationDate") }}
-                  </span>
-                  <span class="text-dark fw-bolder d-block fs-3">
-                    {{
-                      changeOpRequestBaseInfo.created_at
-                        ? DateTime.fromISO(changeOpRequestBaseInfo.created_at)
-                            .setLocale(this.$i18n.locale)
-                            .toLocaleString()
-                        : ""
-                    }}
                   </span>
                 </td>
                 <td>
