@@ -45,7 +45,7 @@ export default class OperationProgramModule extends VuexModule implements Operat
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,[response.data.error]);
+                    this.context.commit(Mutations.SET_OPERATION_PROGRAM_ERRORS,[response.data]);
                     reject();
                 });
         });
