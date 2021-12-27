@@ -787,8 +787,13 @@ export default defineComponent({
             .then(() => location.reload());
         })
         .catch(() => {
+          const errors = store.getters.getChangeOPRequestErrors;
+          const parsedErrors = Object.entries(errors).map((key) => {
+            return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
+          });
           Swal.fire({
             icon: "error",
+            html: parsedErrors.join(''),
             buttonsStyling: false,
             confirmButtonText: translate("tryAgain"),
             customClass: {

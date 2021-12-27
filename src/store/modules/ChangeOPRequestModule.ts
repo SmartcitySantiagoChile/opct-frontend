@@ -30,23 +30,22 @@ export interface ChangeOPRequest {
 
 
 export interface ChangeOPRequestInfo {
-    errors: Array<string>;
+    errors: Dictionary<string>;
     changeOPRequest: ChangeOPRequest;
     reasons: ChangeOPRequestReasons
 }
 
 @Module
 export default class ChangeOPRequestModule extends VuexModule implements ChangeOPRequestInfo {
-    errors = [];
+    errors = {};
     changeOPRequest = {} as ChangeOPRequest;
     reasons = {} as ChangeOPRequestReasons;
 
     /**
      * Get change op request errors
-     * @returns array
+     * @returns di
      */
-    get getChangeOPRequestErrors(): Array<string> {
-        console.log(this.errors);
+    get getChangeOPRequestErrors(): Dictionary<string> {
         return this.errors;
     }
 
@@ -153,7 +152,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
             })
             .catch(({response}) => {
                 console.log(response);
-                this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+                this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
             });
     }
 
@@ -167,7 +166,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS,[response.data.error]);
+                    this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS,response.data);
                     reject();
                 });
         });
@@ -183,7 +182,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+                    this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
                     reject();
                 });
         });
@@ -199,7 +198,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
                 })
                 .catch(({response}) => {
                     console.log(response);
-                    this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+                    this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
                     reject();
                 });
         });
@@ -213,7 +212,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
             })
             .catch(({response}) => {
                 console.log(response);
-                this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+                this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
             });
     }
 }
