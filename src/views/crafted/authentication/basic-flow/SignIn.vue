@@ -190,7 +190,8 @@ export default defineComponent({
     const store = useStore();
     const router = useRouter();
     const submitButton = ref<HTMLElement | null>(null);
-    const { t } = useI18n();
+    const { t, te } = useI18n();
+    const translate = (text) => (te(text) ? t(text) : text);
 
     //Create form validation object
     const login = Yup.object().shape({
@@ -218,8 +219,12 @@ export default defineComponent({
             router.push({ name: "dashboard" });
           })
           .catch(() => {
+            const errors =store.getters.getErrors;
+            const parsedErrors = Object.entries(errors).map((key) => {
+              return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
+            });
             Swal.fire({
-              text: store.getters.getErrors[0],
+              html: parsedErrors.join(''),
               icon: "error",
               buttonsStyling: false,
               confirmButtonText: "¡Intente nuevamente!",

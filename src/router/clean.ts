@@ -1,6 +1,14 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 import store from "@/store";
-import {Mutations, Actions} from "@/store/enums/StoreEnums";
+import {Actions, Mutations} from "@/store/enums/StoreEnums";
+
+const ifHasChangeStatusOption = (to, from, next) => {
+    if (store.getters.hasChangeStatusOption) {
+        next();
+    } else {
+        next("/")
+    }
+}
 
 const routes: Array<RouteRecordRaw> = [
 
@@ -27,7 +35,8 @@ const routes: Array<RouteRecordRaw> = [
                 path: "/operation-programs",
                 name: "operationPrograms",
                 component: () => import("@/views/crafted/pages/operationProgram/OperationPrograms.vue"),
-                props: true
+                props: true,
+                beforeEnter: ifHasChangeStatusOption
             }
 
         ],
@@ -74,6 +83,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
 
 router.beforeEach(() => {
     // reset config to initial state

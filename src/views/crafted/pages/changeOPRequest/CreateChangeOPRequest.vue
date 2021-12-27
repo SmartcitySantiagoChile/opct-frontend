@@ -577,7 +577,7 @@ export default defineComponent({
       const operationPrograms = store.getters.getCurrentOperationPrograms;
       let options: Array<any> = [];
 
-      if (operationPrograms.length) {
+      if (operationPrograms.length && store.getters.hasChangeStatusOption) {
         operationPrograms.forEach((operationProgram) => {
           options.push({
             value: operationProgram.url,
