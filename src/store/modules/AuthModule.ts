@@ -2,6 +2,7 @@ import ApiService from "@/core/services/ApiService";
 import JwtService from "@/core/services/JwtService";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import { Module, Action, Mutation, VuexModule } from "vuex-module-decorators";
+import {Dictionary} from "@/store/modules/HelperModule";
 
 export interface User {
   url: string;
@@ -18,14 +19,14 @@ export interface User {
 }
 
 export interface UserAuthInfo {
-  errors: Array<string>;
+  errors: Dictionary<string>;
   user: User;
   isAuthenticated: boolean;
 }
 
 @Module
 export default class AuthModule extends VuexModule implements UserAuthInfo {
-  errors = [];
+  errors = {};
   user = {} as User;
   isAuthenticated = !!JwtService.getToken();
 
@@ -95,9 +96,9 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
 
   /**
    * Get authentication errors
-   * @returns array
+   * @returns Dictionary
    */
-  get getErrors(): Array<string> {
+  get getErrors(): Dictionary<string> {
     return this.errors;
   }
 
@@ -106,6 +107,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    * @returns boolean
    */
   get hasChangeStatusOption(): boolean {
+    console.log( this.user.organization ? this.user.organization.name === "DTPM" : false);
     return this.user.organization ? this.user.organization.name === "DTPM" : false;
   }
 
@@ -151,14 +153,13 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   @Action
   [Actions.LOGIN](credentials) {
     return new Promise<void>((resolve, reject) => {
-      console.log(credentials);
       ApiService.post("login", credentials)
         .then(({ data }) => {
           this.context.commit(Mutations.SET_AUTH, data);
           resolve();
         })
         .catch(({ response }) => {
-          this.context.commit(Mutations.SET_ERROR, [response.data.error]);
+          this.context.commit(Mutations.SET_ERROR, response.data);
           reject();
         });
     });
@@ -178,7 +179,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
           resolve();
         })
         .catch(({ response }) => {
-          this.context.commit(Mutations.SET_ERROR, response.data.errors);
+          this.context.commit(Mutations.SET_ERROR, response.data);
           reject();
         });
     });
@@ -193,7 +194,6 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
           resolve();
         })
         .catch(({ response }) => {
-          console.log(response.data.errors);
           this.context.commit(Mutations.SET_ERROR, response.data.errors);
           reject();
         });
