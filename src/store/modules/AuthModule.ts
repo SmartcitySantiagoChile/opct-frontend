@@ -112,7 +112,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   /**
-   * Returns organization name
+   * Returns organization name  1Q
    * @returns boolean
    */
   get getOrganizationName(): boolean {

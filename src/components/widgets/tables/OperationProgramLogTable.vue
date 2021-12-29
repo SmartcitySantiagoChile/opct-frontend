@@ -17,7 +17,7 @@
       <div class="table-responsive">
         <!--begin::Table-->
         <table
-            class="
+          class="
             table
             align-middle
             gs-0
@@ -28,51 +28,49 @@
         >
           <!--begin::Table head-->
           <thead>
-          <tr
+            <tr
               class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-          >
-            <th class="ps-4  rounded-start">
-              {{ translate("information") }}
-            </th>
-            <th class="ps-4  min-w-150px rounded-start">
-              {{ translate("value") }}
-            </th>
-          </tr>
+            >
+              <th class="ps-4 rounded-start">
+                {{ translate("information") }}
+              </th>
+              <th class="ps-4 min-w-150px rounded-start">
+                {{ translate("value") }}
+              </th>
+            </tr>
           </thead>
           <!--end::Table head-->
 
           <!--begin::Table body-->
           <tbody>
-          <template v-for="(item, index) in opData" :key="index">
-            <tr>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5"></div>
-                  <div class="d-flex justify-content-start flex-column">
-                    <a
+            <template v-for="(item, index) in opData" :key="index">
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                    >{{
-                        translate(index)
-                      }}
-                    </a>
+                        >{{ translate(index) }}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5"></div>
-                  <div class="d-flex justify-content-start flex-column">
-                    <a
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                    >{{translate(item)}}
-                    </a>
+                        >{{ translate(item) }}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-          </template>
+                </td>
+              </tr>
+            </template>
           </tbody>
           <!--end::Table body-->
         </table>
@@ -85,26 +83,25 @@
   <!--end::Tables OperationProgramLogTable-->
 </template>
 <script lang="ts">
-import {computed, defineComponent} from "vue";
-import {Actions} from "@/store/enums/StoreEnums";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
-import {DateTime} from "luxon";
+import { computed, defineComponent } from "vue";
+import { Actions } from "@/store/enums/StoreEnums";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import { DateTime } from "luxon";
 import CreateOperationProgram from "@/views/crafted/pages/operationProgram/actions/CreateOperationProgram.vue";
 import EditOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/EditOperationProgram.vue";
-import DeleteOperationProgramModal
-  from "@/views/crafted/pages/operationProgram/actions/DeleteOperationProgramModal.vue";
-import OperationProgramLogModal from "@/views/crafted/pages/operationProgram/logs/OperationProgramLogModal.vue"
+import DeleteOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/DeleteOperationProgramModal.vue";
+import OperationProgramLogModal from "@/views/crafted/pages/operationProgram/logs/OperationProgramLogModal.vue";
 
 export default defineComponent({
   name: "operation-program-log-table",
   props: {
     widgetClasses: String,
     opData: Object,
-    dataName: String
+    dataName: String,
   },
   setup(props) {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
 
     return {

@@ -242,24 +242,28 @@
                     <!--end::Heading-->
 
                     <!--begin::Description-->
-                    <table class="table
-            align-middle
-            table-rounded table-striped
-            border">
-
+                    <table
+                      class="
+                        table
+                        align-middle
+                        table-rounded table-striped
+                        border
+                      "
+                    >
                       <tbody>
-                      <template v-for="(item, index) in formDataInfo" :key="index">
-                        <tr>
-
-                          <th>
-                            <b>{{ translate(index) }}</b>
-                          </th>
-                          <th>
+                        <template
+                          v-for="(item, index) in formDataInfo"
+                          :key="index"
+                        >
+                          <tr>
+                            <th>
+                              <b>{{ translate(index) }}</b>
+                            </th>
+                            <th>
                               {{ item }}
-                          </th>
-                        </tr>
-
-                      </template>
+                            </th>
+                          </tr>
+                        </template>
                       </tbody>
                     </table>
                     <!--end::Description-->
@@ -481,8 +485,10 @@ export default defineComponent({
       if (operationProgramTypeSelector) {
         formData.value["operationProgramType"] =
           operationProgramTypeSelector.value;
-        formDataInfo.value["operationProgramType"] = operationProgramTypeSelector.options[operationProgramTypeSelector.selectedIndex].label;
-
+        formDataInfo.value["operationProgramType"] =
+          operationProgramTypeSelector.options[
+            operationProgramTypeSelector.selectedIndex
+          ].label;
       }
       currentStepIndex.value++;
 
@@ -523,7 +529,7 @@ export default defineComponent({
           });
           Swal.fire({
             icon: "error",
-            html: parsedErrors.join(''),
+            html: parsedErrors.join(""),
             buttonsStyling: false,
             confirmButtonText: translate("tryAgain"),
             customClass: {
@@ -550,7 +556,7 @@ export default defineComponent({
       translate,
       formData,
       operationProgramTypeOptions,
-      formDataInfo
+      formDataInfo,
     };
   },
 });

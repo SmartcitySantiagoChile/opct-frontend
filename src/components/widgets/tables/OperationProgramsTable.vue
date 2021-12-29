@@ -27,7 +27,7 @@
       <div class="table-responsive">
         <!--begin::Table-->
         <table
-            class="
+          class="
             table
             align-middle
             gs-0
@@ -38,60 +38,60 @@
         >
           <!--begin::Table head-->
           <thead>
-          <tr
+            <tr
               class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-          >
-            <th class="ps-4  rounded-start">
-              {{ translate("Id") }}
-            </th>
-            <th class="ps-4  rounded-start">
-              {{ translate("operationProgram") }}
-            </th>
-            <th class="ps-4 rounded-start">
-              {{ translate("operationProgramType") }}
-            </th>
-            <th class="ps-4 align-right"></th>
-          </tr>
+            >
+              <th class="ps-4 rounded-start">
+                {{ translate("Id") }}
+              </th>
+              <th class="ps-4 rounded-start">
+                {{ translate("operationProgram") }}
+              </th>
+              <th class="ps-4 rounded-start">
+                {{ translate("operationProgramType") }}
+              </th>
+              <th class="ps-4 align-right"></th>
+            </tr>
           </thead>
           <!--end::Table head-->
 
           <!--begin::Table body-->
           <tbody>
-          <template v-for="(item, index) in operationPrograms" :key="index">
-            <tr>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5"></div>
-                  <div class="d-flex justify-content-start flex-column">
-                    <a
+            <template v-for="(item, index) in operationPrograms" :key="index">
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                    >{{
-                        item.url.split('operation-programs/')[1].split('/')[0]
-                      }}
-                    </a>
+                        >{{
+                          item.url.split("operation-programs/")[1].split("/")[0]
+                        }}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex align-items-center">
-                  <div class="symbol symbol-10px me-5"></div>
-                  <div class="d-flex justify-content-start flex-column">
-                    <a
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="symbol symbol-10px me-5"></div>
+                    <div class="d-flex justify-content-start flex-column">
+                      <a
                         class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                         href=""
-                    >{{
-                        DateTime.fromISO(item.start_at)
+                        >{{
+                          DateTime.fromISO(item.start_at)
                             .setLocale(this.$i18n.locale)
                             .toLocaleString()
-                      }}
-                    </a>
+                        }}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </td>
+                </td>
 
-              <td>
-                <a
+                <td>
+                  <a
                     class="
                       text-dark
                       fw-bolder
@@ -101,33 +101,34 @@
                       fs-6
                     "
                     href="#"
-                >
-                  <template v-if="item.op_type">
-                    {{ item.op_type.name }}
-                  </template>
-                </a>
-              </td>
+                  >
+                    <template v-if="item.op_type">
+                      {{ item.op_type.name }}
+                    </template>
+                  </a>
+                </td>
 
-              <td>
-                <template v-if="item.op_change_data_logs.length">
-                  <OperationProgramLogModal :id="item.url.split('operation-programs/')[1].split('/')[0]"
-                                            :opChangeDataLogs="item.op_change_data_logs"></OperationProgramLogModal>
-                </template>
-                <EditOperationProgramModal
+                <td>
+                  <template v-if="item.op_change_data_logs.length">
+                    <OperationProgramLogModal
+                      :id="
+                        item.url.split('operation-programs/')[1].split('/')[0]
+                      "
+                      :opChangeDataLogs="item.op_change_data_logs"
+                    ></OperationProgramLogModal>
+                  </template>
+                  <EditOperationProgramModal
                     :id="item.url.split('operation-programs/')[1].split('/')[0]"
                     :opDate="item.start_at"
                     :opTypeName="item.op_type.name"
                     :url="item.url.split('api')[1]"
-                >
-                </EditOperationProgramModal>
-                <DeleteOperationProgramModal
-                    :url="item.url.split('api')[1]"
-                >
-                </DeleteOperationProgramModal>
-
-              </td>
-            </tr>
-          </template>
+                  >
+                  </EditOperationProgramModal>
+                  <DeleteOperationProgramModal :url="item.url.split('api')[1]">
+                  </DeleteOperationProgramModal>
+                </td>
+              </tr>
+            </template>
           </tbody>
           <!--end::Table body-->
         </table>
@@ -140,17 +141,17 @@
               </button>
             </li>
             <template
-                v-for="(item, index) in Array.from(
+              v-for="(item, index) in Array.from(
                 { length: Math.ceil(operationProgramsCount / 10) },
                 (_, i) => i + 1
               )"
-                :key="index"
+              :key="index"
             >
               <li class="page-item">
                 <button
-                    :data-value="item"
-                    class="page-link"
-                    @click="onPageChange"
+                  :data-value="item"
+                  class="page-link"
+                  @click="onPageChange"
                 >
                   {{ item }}
                 </button>
@@ -171,16 +172,15 @@
   <!--end::Tables Widget 12-->
 </template>
 <script lang="ts">
-import {computed, defineComponent} from "vue";
-import {Actions} from "@/store/enums/StoreEnums";
-import {useStore} from "vuex";
-import {useI18n} from "vue-i18n";
-import {DateTime} from "luxon";
+import { computed, defineComponent } from "vue";
+import { Actions } from "@/store/enums/StoreEnums";
+import { useStore } from "vuex";
+import { useI18n } from "vue-i18n";
+import { DateTime } from "luxon";
 import CreateOperationProgram from "@/views/crafted/pages/operationProgram/actions/CreateOperationProgram.vue";
 import EditOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/EditOperationProgram.vue";
-import DeleteOperationProgramModal
-  from "@/views/crafted/pages/operationProgram/actions/DeleteOperationProgramModal.vue";
-import OperationProgramLogModal from "@/views/crafted/pages/operationProgram/logs/OperationProgramLogModal.vue"
+import DeleteOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/DeleteOperationProgramModal.vue";
+import OperationProgramLogModal from "@/views/crafted/pages/operationProgram/logs/OperationProgramLogModal.vue";
 
 export default defineComponent({
   name: "operation-program-table",
@@ -188,26 +188,26 @@ export default defineComponent({
     CreateOperationProgram,
     EditOperationProgramModal,
     DeleteOperationProgramModal,
-    OperationProgramLogModal
+    OperationProgramLogModal,
   },
   props: {
     widgetClasses: String,
   },
   setup() {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_OPERATION_PROGRAMS);
     const operationPrograms = computed(
-        () => store.getters.getCurrentOperationPrograms
+      () => store.getters.getCurrentOperationPrograms
     );
     const operationProgramsCount = computed(
-        () => store.getters.getCurrentOperationProgramsCount
+      () => store.getters.getCurrentOperationProgramsCount
     );
 
     const onPageChange = (event) => {
       const filter = document.querySelector<HTMLInputElement>(
-          'input[name="filter"]'
+        'input[name="filter"]'
       );
       let params = {};
       if (filter) {
@@ -215,9 +215,9 @@ export default defineComponent({
       }
       let pageId = event.target.getAttribute("data-value");
       pageId =
-          pageId === "-1"
-              ? String(Math.ceil(operationProgramsCount.value / 10))
-              : pageId;
+        pageId === "-1"
+          ? String(Math.ceil(operationProgramsCount.value / 10))
+          : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();

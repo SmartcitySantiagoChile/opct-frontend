@@ -219,12 +219,14 @@ export default defineComponent({
             router.push({ name: "dashboard" });
           })
           .catch(() => {
-            const errors =store.getters.getErrors;
+            const errors = store.getters.getErrors;
             const parsedErrors = Object.entries(errors).map((key) => {
-              return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
+              return `<b>${translate(key[0])}</b>: ${translate(
+                key[1]
+              )}<br><br>`;
             });
             Swal.fire({
-              html: parsedErrors.join(''),
+              html: parsedErrors.join(""),
               icon: "error",
               buttonsStyling: false,
               confirmButtonText: "¡Intente nuevamente!",
