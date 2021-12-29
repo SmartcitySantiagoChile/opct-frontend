@@ -161,7 +161,9 @@ const messages = {
         newData: "New data",
         dataChange: "Data change",
         opLog: "Operation Program Log",
-        op_type: "Operation Program Type"
+        op_type: "Operation Program Type",
+        op: "OP",
+        files: "Files"
 
 
     },
@@ -325,7 +327,9 @@ const messages = {
         newData: "Datos nuevos",
         dataChange: "Actualización de datos",
         opLog: "Log de Programa de Operación",
-        op_type: "Tipo de PO"
+        op_type: "Tipo de PO",
+        op: "PO",
+        files: "Archivos"
 
 
     },
