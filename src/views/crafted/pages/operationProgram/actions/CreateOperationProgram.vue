@@ -175,13 +175,13 @@
                       <!--begin::Input-->
                       <Field
                         class="form-control form-control-lg form-control-solid"
-                        name="title"
+                        name="date"
                         placeholder=""
                         type="date"
                       />
                       <ErrorMessage
                         class="fv-plugins-message-container invalid-feedback"
-                        name="title"
+                        name="date"
                       />
                       <!--end::Input-->
                     </div>
@@ -242,7 +242,26 @@
                     <!--end::Heading-->
 
                     <!--begin::Description-->
-                    <div class="text-muted fw-bold fs-3"></div>
+                    <table class="table
+            align-middle
+            table-rounded table-striped
+            border">
+
+                      <tbody>
+                      <template v-for="(item, index) in formDataInfo" :key="index">
+                        <tr>
+
+                          <th>
+                            <b>{{ translate(index) }}</b>
+                          </th>
+                          <th>
+                              {{ item }}
+                          </th>
+                        </tr>
+
+                      </template>
+                      </tbody>
+                    </table>
                     <!--end::Description-->
 
                     <!--begin::Illustration-->
@@ -356,7 +375,7 @@ import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 
 interface Step1 {
-  title: string;
+  date: string;
 }
 
 interface Step2 {
@@ -397,7 +416,11 @@ export default defineComponent({
     });
 
     const formData = ref<KTCreateApp>({
-      title: "",
+      date: "",
+      operationProgramType: "1",
+    });
+    const formDataInfo = ref<KTCreateApp>({
+      date: "",
       operationProgramType: "1",
     });
 
@@ -409,7 +432,7 @@ export default defineComponent({
 
     const createAppSchema = [
       Yup.object({
-        title: Yup.string().required(translate("dateRequired")).label("Title"),
+        date: Yup.string().required(translate("dateRequired")).label("Date"),
       }),
       Yup.object({
         operationProgramType: Yup.string()
@@ -451,11 +474,15 @@ export default defineComponent({
         ...values,
       };
 
+      formDataInfo.value["date"] = formData.value["date"];
+
       const operationProgramTypeSelector: HTMLSelectElement =
         document.querySelector("#operationProgramType") as HTMLSelectElement;
       if (operationProgramTypeSelector) {
         formData.value["operationProgramType"] =
           operationProgramTypeSelector.value;
+        formDataInfo.value["operationProgramType"] = operationProgramTypeSelector.options[operationProgramTypeSelector.selectedIndex].label;
+
       }
       currentStepIndex.value++;
 
@@ -468,7 +495,7 @@ export default defineComponent({
 
     const formSubmit = () => {
       const params = {
-        start_at: formData.value["title"],
+        start_at: formData.value["date"],
         op_type: formData.value["operationProgramType"],
       };
 
@@ -523,6 +550,7 @@ export default defineComponent({
       translate,
       formData,
       operationProgramTypeOptions,
+      formDataInfo
     };
   },
 });
