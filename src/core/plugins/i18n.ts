@@ -163,7 +163,13 @@ const messages = {
         opLog: "Operation Program Log",
         op_type: "Operation Program Type",
         op: "OP",
-        files: "Files"
+        files: "Files",
+        selectChangeOPRequest: "Select Change OP Request",
+        selectedChangeOPRequests: "Selected Change OP Requests",
+        save: "Save",
+        assignChangeOPRequests: "Assign change op requests",
+        filter: "Filter"
+
 
 
     },
@@ -329,7 +335,13 @@ const messages = {
         opLog: "Log de Programa de Operación",
         op_type: "Tipo de PO",
         op: "PO",
-        files: "Archivos"
+        files: "Archivos",
+        selectChangeOPRequest: "Seleccione Solicitud de Cambio de PO",
+        selectedChangeOPRequests: "Solicitudes seleccionadas",
+        save: "Guardar",
+        assignChangeOPRequests: "Asignar solicitudes de cambio de PO",
+        filter: "Filtrar"
+
 
 
     },

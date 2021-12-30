@@ -217,33 +217,6 @@
                       <!--end::Input-->
                     </div>
                     <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <template v-if="isAdminOrganization">
-                      <div class="row mb-10">
-                        <!--begin::Col-->
-                        <div class="col-md-8 fv-row">
-                          <!--begin::Label-->
-                          <label
-                            class="required fs-6 fw-bold form-label mb-2"
-                            >{{ translate("relatedChangeOpRequests") }}</label
-                          >
-                          <!--end::Label-->
-
-                          <!--begin::Row-->
-                          <div class="row fv-row">
-                            <!--begin::Col-->
-                            <div class="col-md-8 fv-row">
-                              <ChangeOPRequestsInputTable>
-                              </ChangeOPRequestsInputTable>
-                            </div>
-                            <!--end::Col-->
-                          </div>
-                          <!--end::Row-->
-                        </div>
-                        <!--end::Col-->
-                      </div>
-                    </template>
-                    <!--end::Input group-->
 
                     <!--begin::Input group-->
                     <div class="row mb-10">
@@ -288,6 +261,7 @@
                       <!--end::Col-->
                     </div>
                     <!--end::Input group-->
+
                     <!--begin::Input group-->
                     <div class="fv-row mb-10">
                       <form
@@ -317,6 +291,34 @@
                         <!--end::Input group-->
                       </form>
                     </div>
+
+                    <!--begin::Input group-->
+                    <template v-if="isAdminOrganization">
+                      <div class="row mb-10">
+                        <!--begin::Col-->
+                        <div class="col-md-8 fv-row">
+                          <!--begin::Row-->
+                          <div class="row fv-row">
+                            <!--begin::Col-->
+                            <div class="col-md-8 fv-row">
+                              <a
+                                  class="btn btn-bg-light btn-active-color-primary"
+                                  data-bs-target="#selectChangeOPRequest"
+                                  data-bs-toggle="modal"
+                                  type="button"
+                              >
+                                {{translate("assignChangeOPRequests")}}
+                              </a>
+
+                            </div>
+                            <!--end::Col-->
+                          </div>
+                          <!--end::Row-->
+                        </div>
+                        <!--end::Col-->
+                      </div>
+                    </template>
+                    <!--end::Input group-->
                   </div>
                 </div>
                 <!--end::Step 1-->
@@ -558,6 +560,8 @@
     <!--end::Modal dialog-->
   </div>
   <!--end::Modal - Create App-->
+  <ChangeOPRequestsInputTable @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests">
+  </ChangeOPRequestsInputTable>
 </template>
 
 <style lang="scss" scoped>
@@ -927,6 +931,9 @@ export default defineComponent({
       formDataInfo.value["files"] = fileListData;
     };
 
+    const onChangeSelectedChangeOPRequests = (changeOPRequests) => {
+      console.log(changeOPRequests);
+    }
     return {
       handleStep,
       formSubmit,
@@ -947,6 +954,7 @@ export default defineComponent({
       formDataInfo,
       changeOpRequestsOptions,
       searchChangeOpRequest,
+      onChangeSelectedChangeOPRequests
     };
   },
 });
