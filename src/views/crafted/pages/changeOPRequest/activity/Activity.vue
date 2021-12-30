@@ -91,6 +91,7 @@ export default defineComponent({
       baseData["counterpart"] = props.changeOPRequest["counterpart"];
       baseData["title"] = props.changeOPRequest["title"];
       baseData["contract_type"] = props.changeOPRequest["contract_type"];
+      baseData["related_requests"] = props.changeOPRequest["related_requests"];
       return baseData;
     });
 

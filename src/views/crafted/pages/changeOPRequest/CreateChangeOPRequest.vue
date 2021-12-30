@@ -309,7 +309,6 @@
                               >
                                 {{ translate("assignChangeOPRequests") }}
                               </a>
-
                             </div>
                             <!--end::Col-->
                           </div>
@@ -811,7 +810,6 @@ export default defineComponent({
 
       formDataInfo.value["title"] = formData.value["title"];
       formDataInfo.value["relatedChangeOPRequests"] = relatedChangeOPRequestsInfo;
-      //formData.value["related_requests"] = relatedChangeOPRequests;
       const reasonSelector: HTMLSelectElement = document.querySelector(
           "#reason"
       ) as HTMLSelectElement;
@@ -962,7 +960,8 @@ export default defineComponent({
       formData,
       formDataInfo,
       searchChangeOpRequest,
-      onChangeSelectedChangeOPRequests
+      onChangeSelectedChangeOPRequests,
+      relatedChangeOPRequestsInfo
     };
   },
 });
