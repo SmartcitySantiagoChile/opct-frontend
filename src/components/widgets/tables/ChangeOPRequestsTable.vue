@@ -55,12 +55,13 @@
                 {{ translate("creationDate") }}
               </th>
               <th class="min-w-150px">{{ translate("operationProgram") }}</th>
-              <th class="min-w-150px">{{ translate("contractType") }}</th>
-              <th class="min-w-150px">{{ translate("title") }}</th>
+              <th class="min-w-100px">{{ translate("contractType") }}</th>
+              <th class="min-w-100px">{{ translate("title") }}</th>
               <th class="min-w-150px">{{ translate("reason") }}</th>
               <th class="min-w-100px">{{ translate("creator") }}</th>
-              <th class="min-w-100px">{{ translate("counterpart") }}</th>
+              <th class="max-w-100px">{{ translate("counterpart") }}</th>
               <th class="min-w-80px">{{ translate("status") }}</th>
+              <th class="max-w-80px">{{ translate("relatedRequests") }}</th>
               <th class="min-w-80px"></th>
             </tr>
           </thead>
@@ -102,7 +103,6 @@
                     </div>
                   </div>
                 </td>
-
                 <td>
                   <a
                     class="
@@ -128,7 +128,6 @@
                     </template>
                   </a>
                 </td>
-
                 <td>
                   <a
                     class="
@@ -143,7 +142,6 @@
                     >{{ item.contract_type ? item.contract_type.name : "" }}</a
                   >
                 </td>
-
                 <td>
                   <a
                     class="
@@ -172,7 +170,6 @@
                     >{{ item.reason }}</a
                   >
                 </td>
-
                 <td>
                   <a
                     class="
@@ -189,7 +186,6 @@
                     }}</a
                   >
                 </td>
-
                 <td>
                   <a
                     class="
@@ -204,7 +200,6 @@
                     >{{ item.counterpart.name }}</a
                   >
                 </td>
-
                 <td>
                   <a
                     class="
@@ -218,6 +213,22 @@
                     href="#"
                     >{{ item.status.name }}</a
                   >
+                </td>
+                <td>
+                  <template v-for="(subItem, subIndex) in item.related_requests" :key="subIndex" >
+                  <a
+                      class="
+                      text-dark
+                      fw-bolder
+                      text-hover-primary
+                      mb-1
+                      fs-6
+                    "
+                      :href="subItem.url.split('api')[1]"
+                  >{{subItem.url.split("/change-op-requests/")[1]
+                      .split("/")[0]}}</a
+                  >
+                  </template>
                 </td>
                 <td>
                   <a
