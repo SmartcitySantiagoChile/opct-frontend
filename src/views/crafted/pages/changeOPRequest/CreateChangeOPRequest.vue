@@ -455,12 +455,20 @@
                             <b>{{ translate(index) }}</b>
                           </th>
                           <th>
-                            <template v-if="index === 'files'">
+                            <template v-if="index === 'files' ">
                               <template
                                   v-for="(subitem, subindex) in item"
                                   :key="subindex"
                               >
                                 {{ subitem.name }}<br/>
+                              </template>
+                            </template>
+                            <template v-else-if="index === 'relatedChangeOPRequests'">
+                              <template
+                                  v-for="(subitem, subindex) in item"
+                                  :key="subindex"
+                              >
+                                {{ subitem}}<br/>
                               </template>
                             </template>
                             <template v-else>

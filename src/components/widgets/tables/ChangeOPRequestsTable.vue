@@ -227,7 +227,7 @@
                       :href="subItem.url.split('api')[1]"
                   >{{subItem.url.split("/change-op-requests/")[1]
                       .split("/")[0]}}</a
-                  >
+                  >&nbsp;
                   </template>
                 </td>
                 <td>
