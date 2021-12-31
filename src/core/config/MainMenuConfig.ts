@@ -3,7 +3,7 @@ const DocMenuConfig = [
     pages: [
       {
         access: "all",
-        heading: "dashboard",
+        heading: "requests",
         route: "/dashboard",
         svgIcon: "/media/icons/duotune/art/art002.svg",
         fontIcon: "bi-app-indicator",

@@ -170,7 +170,8 @@ const messages = {
         assignChangeOPRequests: "Assign change op requests",
         filter: "Filter",
         relatedRequests: "Related requests",
-        relatedChangeOPRequests: "Related requests"
+        relatedChangeOPRequests: "Related requests",
+        requests: "Requests"
 
 
 
@@ -344,7 +345,8 @@ const messages = {
         assignChangeOPRequests: "Asignar solicitudes de cambio de PO",
         filter: "Filtrar",
         relatedRequests: "Solicitudes relacionadas",
-        relatedChangeOPRequests: "Solicitudes relacionadas"
+        relatedChangeOPRequests: "Solicitudes relacionadas",
+        requests: "Solicitudes"
 
 
 
