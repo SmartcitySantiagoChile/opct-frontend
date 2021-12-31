@@ -43,7 +43,6 @@
   </div>
   <!-- end:: Body -->
   <KTScrollTop></KTScrollTop>
-  <KTExplore></KTExplore>
   <KTDrawerMessenger></KTDrawerMessenger>
   <KTUserMenu></KTUserMenu>
 </template>
@@ -89,7 +88,6 @@ export default defineComponent({
     KTToolbar,
     KTScrollTop,
     KTUserMenu,
-    KTExplore,
     KTDrawerMessenger,
     KTLoader,
   },

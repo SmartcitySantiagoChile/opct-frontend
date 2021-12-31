@@ -271,12 +271,13 @@ export default defineComponent({
       if (store.getters.currentUserHasOPsAccess) {
         access_list.push("ops");
       }
-      if (store.getters.currentUserHasOrganizationsAccess) {
-        access_list.push("organizations");
-      }
-      if (store.getters.currentUserHasUsersAccess) {
-        access_list.push("users");
-      }
+      // TODO: Uncomment to add organizations admin and users organizations
+      // if (store.getters.currentUserHasOrganizationsAccess) {
+      //   access_list.push("organizations");
+      // }
+      // if (store.getters.currentUserHasUsersAccess) {
+      //   access_list.push("users");
+      // }
       return access_list;
     });
 
