@@ -136,8 +136,9 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("relatedRequests") }}
                     <template v-if="hasChangeStatusOption">
-                      <ChangeOPRequestsInputTable @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests">
-                      </ChangeOPRequestsInputTable>
+                      <ChangeOPRequestsEditInputTable :id="id"
+                                                  @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests">
+                      </ChangeOPRequestsEditInputTable>
                     </template>
                   </span>
                 <a
@@ -182,23 +183,24 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from "vue";
+import {computed, defineComponent, ref} from "vue";
 import {useI18n} from "vue-i18n";
 import ChangeStatus from "@/views/crafted/pages/changeOPRequest/header/ChangeStatus.vue";
 import {useStore} from "vuex";
 import ChangeOP from "@/views/crafted/pages/changeOPRequest/header/ChangeOP.vue";
 import {DateTime} from "luxon";
-import ChangeOPRequestsInputTable from "@/components/widgets/tables/ChangeOPRequestsInputTable.vue";
+import ChangeOPRequestsEditInputTable from "@/components/widgets/tables/ChangeOPRequestsEditInputTable.vue";
+import {Actions} from "@/store/enums/StoreEnums";
 
 export default defineComponent({
   name: "changeOPRequestBaseInfo",
-  components: {ChangeStatus, ChangeOP, ChangeOPRequestsInputTable},
+  components: {ChangeStatus, ChangeOP, ChangeOPRequestsEditInputTable},
   props: {
     widgetClasses: String,
-    changeOpRequestBaseInfo: {},
+    changeOpRequestBaseInfo: Object,
     id: String,
   },
-  setup() {
+  setup(props) {
     const store = useStore();
     const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
