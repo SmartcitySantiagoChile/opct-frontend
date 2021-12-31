@@ -567,7 +567,7 @@
     <!--end::Modal dialog-->
   </div>
   <!--end::Modal - Create App-->
-  <ChangeOPRequestsInputTable @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests">
+  <ChangeOPRequestsInputTable  @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests">
   </ChangeOPRequestsInputTable>
 </template>
 

@@ -125,7 +125,7 @@ export default defineComponent({
           });
       } else {
         Swal.fire({
-          text: translate("changeStatusSuccess"),
+          text: translate("changeStatusError"),
           icon: "error",
           buttonsStyling: false,
           confirmButtonText: translate("tryAgain"),

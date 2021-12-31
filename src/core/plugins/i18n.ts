@@ -171,7 +171,9 @@ const messages = {
         filter: "Filter",
         relatedRequests: "Related requests",
         relatedChangeOPRequests: "Related requests",
-        requests: "Requests"
+        requests: "Requests",
+        changeRelatedRequestSuccess: "Change related requests successfully",
+        changeRelatedRequestError: "Error changing related requests"
 
 
 
@@ -346,7 +348,9 @@ const messages = {
         filter: "Filtrar",
         relatedRequests: "Solicitudes relacionadas",
         relatedChangeOPRequests: "Solicitudes relacionadas",
-        requests: "Solicitudes"
+        requests: "Solicitudes",
+        changeRelatedRequestSuccess: "¡Solicitudes relacionadas cambiadas exitosamente!",
+        changeRelatedRequestError: "¡Error al modificar solicitudes!"
 
 
 

@@ -25,6 +25,7 @@ export interface ChangeOPRequest {
     change_op_request_message: Array<any>;
     op_change_logs: Array<any>;
     status_logs: Array<any>;
+    related_requests: Array<any>;
 
 }
 
@@ -128,6 +129,14 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
         return this.reasons;
     }
 
+    /**
+     * Get all change op request related requests
+     * @returns Array<any>
+     */
+    get getChangeOPRequestRelatedRequests(): Array<any> {
+        return this.changeOPRequest.related_requests;
+    }
+
     @Mutation
     [Mutations.SET_CHANGE_OP_REQUEST](changeOPRequest) {
         this.changeOPRequest = changeOPRequest;
@@ -215,4 +224,21 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
                 this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
             });
     }
+
+    @Action
+    [Actions.CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS](data) {
+        return new Promise<void>((resolve, reject) => {
+            ApiService.put(`change-op-requests/${data.resource}/change-related-requests/`, data.params)
+                .then(({data}) => {
+                    console.log(data);
+                    resolve()
+                })
+                .catch(({response}) => {
+                    console.log(response);
+                    this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
+                    reject();
+                });
+        });
+    }
+
 }

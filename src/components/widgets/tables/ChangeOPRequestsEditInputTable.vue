@@ -278,11 +278,14 @@ import {Actions} from "@/store/enums/StoreEnums";
 import {useStore} from "vuex";
 import {useI18n} from "vue-i18n";
 import {DateTime} from "luxon";
+import Swal from "sweetalert2/dist/sweetalert2.min.js";
+
 
 export default defineComponent({
-  name: "change-op-requests-input-table",
+  name: "change-op-requests-edit-input-table",
   props: {
     widgetClasses: String,
+    id: String
   },
   emits: ['onChangeSelectedChangeOPRequests'],
   setup: function (props, context) {
@@ -290,6 +293,7 @@ export default defineComponent({
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
+    store.dispatch(Actions.GET_CHANGE_OP_REQUEST, props.id);
     const changeOPRequests = computed(
         () => store.getters.getCurrentChangeOPRequests
     );
@@ -367,8 +371,34 @@ export default defineComponent({
     }
 
     const saveSelectedChangeOPRequests = () => {
-      context.emit('onChangeSelectedChangeOPRequests', mutableSelectedChangeOPRequests);
-    }
+      store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS, {
+        resource: props.id,
+        params: {
+          "related_requests": mutableSelectedChangeOPRequests.value
+        },
+      }).then(() => {
+        Swal.fire({
+          text: translate("changeRelatedRequestSuccess"),
+          icon: "success",
+          buttonsStyling: false,
+          confirmButtonText: translate("continue"),
+          customClass: {
+            confirmButton: "btn fw-bold btn-light-success",
+          },
+          allowOutsideClick: false,
+        }).then(() => location.reload());
+      }).catch((error) => {
+        Swal.fire({
+          text: translate("changeRelatedRequestsError"),
+          icon: "error",
+          buttonsStyling: false,
+          confirmButtonText: translate("tryAgain"),
+          customClass: {
+            confirmButton: "btn fw-bold btn-light-danger",
+          },
+        });
+      });
+    };
 
     return {
       changeOPRequests,
