@@ -28,7 +28,7 @@
                   <template v-for="(requestItem, requestIndex) in mutableSelectedChangeOPRequests" :key="requestIndex">
                   #{{ requestIndex }}: {{ requestItem.title }}, {{
                       requestItem.reason
-                    }}, {{ requestItem.op ? requestItem.start_at : "" }} <br>
+                    }}, {{ requestItem.op ? requestItem.op.start_at : "" }} <br>
                   </template>
                 </span>
               </h3>
