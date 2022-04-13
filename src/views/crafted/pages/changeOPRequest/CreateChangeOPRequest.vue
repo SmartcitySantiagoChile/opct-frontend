@@ -467,7 +467,7 @@
                                   v-for="(subitem, subindex) in item"
                                   :key="subindex"
                               >
-                                {{ subitem}}<br/>
+                                {{ subitem }}<br/>
                               </template>
                             </template>
                             <template v-else>
@@ -567,7 +567,7 @@
     <!--end::Modal dialog-->
   </div>
   <!--end::Modal - Create App-->
-  <ChangeOPRequestsInputTable  @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests">
+  <ChangeOPRequestsInputTable @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests">
   </ChangeOPRequestsInputTable>
 </template>
 
@@ -668,7 +668,7 @@ export default defineComponent({
           });
         });
       }
-      options.push({value: "None", label: translate("withoutOP")});
+      options.push({value: "None", label: translate("withoutOP"), release: ""});
       return options;
     });
 
@@ -864,8 +864,7 @@ export default defineComponent({
       Object.keys(formData.value).forEach((key) => {
         if (typeof formData.value[key] !== "object") {
           fileFormData.append(key, formData.value[key]);
-        }
-        else fileFormData.append(key, JSON.stringify(formData.value[key]));
+        } else fileFormData.append(key, JSON.stringify(formData.value[key]));
       });
       fileList.forEach((file) => {
         const file_raw = file["raw"];
