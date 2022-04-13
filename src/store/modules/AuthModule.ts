@@ -2,7 +2,7 @@ import ApiService from "@/core/services/ApiService";
 import JwtService from "@/core/services/JwtService";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import { Module, Action, Mutation, VuexModule } from "vuex-module-decorators";
-import {Dictionary} from "@/store/modules/HelperModule";
+import { Dictionary } from "@/store/modules/HelperModule";
 
 export interface User {
   url: string;
@@ -107,7 +107,9 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    * @returns boolean
    */
   get hasChangeStatusOption(): boolean {
-    return this.user.organization ? this.user.organization.name === "DTPM" : false;
+    return this.user.organization
+      ? this.user.organization.name === "DTPM"
+      : false;
   }
 
   /**
@@ -115,7 +117,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    * @returns boolean
    */
   get getOrganizationName(): boolean {
-    return this.user.organization.name
+    return this.user.organization.name;
   }
 
   @Mutation

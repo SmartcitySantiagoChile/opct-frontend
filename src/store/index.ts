@@ -12,7 +12,7 @@ import ChangeOPRequestStatusModule from "@/store/modules/ChangeOPRequestStatusMo
 import ChangeOPRequestStatusesModule from "@/store/modules/ChangeOPRequestStatusesModule";
 import OperationProgramModule from "@/store/modules/OperationProgramModule";
 import OperationProgramsModule from "@/store/modules/OperationProgramsModule";
-import OperationProgramStatusModule from "@/store/modules/OperationProgramStatusModule"
+import OperationProgramStatusModule from "@/store/modules/OperationProgramStatusModule";
 import OperationProgramStatusesModule from "@/store/modules/OperationProgramStatusesModule";
 import OrganizationModule from "@/store/modules/OrganizationModule";
 import OrganizationsModule from "@/store/modules/OrganizationsModule";
@@ -39,7 +39,7 @@ const store = createStore({
     OrganizationModule,
     OrganizationsModule,
     OperationProgramTypeModule,
-    OperationProgramTypesModule
+    OperationProgramTypesModule,
   },
 });
 

@@ -25,7 +25,6 @@
         >
       </div>
       <!--end::Copyright-->
-
     </div>
     <!--end::Container-->
   </div>

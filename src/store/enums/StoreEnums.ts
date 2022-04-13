@@ -30,7 +30,7 @@ enum Actions {
   CREATE_OPERATION_PROGRAM = "createOperationProgram",
   UPDATE_OPERATION_PROGRAM = "updateOperationProgram",
   DELETE_OPERATION_PROGRAM = "deleteOperationProgram",
-  CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS = "changeChangeOPRequestRelatedRequests"
+  CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS = "changeChangeOPRequestRelatedRequests",
 }
 
 enum Mutations {
@@ -62,7 +62,7 @@ enum Mutations {
   SET_CREATE_CHANGE_OP_REQUEST_ERRORS = "setCreateChangeOPRequestErrors",
   SET_OPERATION_PROGRAM_TYPES = "setOperationProgramTypes",
   SET_OPERATION_PROGRAM_TYPES_ERRORS = "setOperationProgramTypesErrors",
-  SET_OPERATION_PROGRAM_ERRORS = "setOperationProgramErrors"
+  SET_OPERATION_PROGRAM_ERRORS = "setOperationProgramErrors",
 }
 
 export { Actions, Mutations };

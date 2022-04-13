@@ -215,19 +215,19 @@
                   >
                 </td>
                 <td>
-                  <template v-for="(subItem, subIndex) in item.related_requests" :key="subIndex" >
-                  <a
-                      class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      mb-1
-                      fs-6
-                    "
+                  <template
+                    v-for="(subItem, subIndex) in item.related_requests"
+                    :key="subIndex"
+                  >
+                    <a
+                      class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                       :href="subItem.url.split('api')[1]"
-                  >{{subItem.url.split("/change-op-requests/")[1]
-                      .split("/")[0]}}</a
-                  >&nbsp;
+                      >{{
+                        subItem.url
+                          .split("/change-op-requests/")[1]
+                          .split("/")[0]
+                      }}</a
+                    >&nbsp;
                   </template>
                 </td>
                 <td>
