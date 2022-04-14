@@ -1,7 +1,7 @@
 <template>
-  <ChangeOPRequestsTable
+  <ChangeOPProcessesTable
     widget-classes="card-xxl-stretch mb-5 mb-xl-8"
-  ></ChangeOPRequestsTable>
+  ></ChangeOPProcessesTable>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, onUpdated } from "vue";
@@ -9,12 +9,12 @@ import {
   setCurrentCreateButton,
   setCurrentPageTitle,
 } from "@/core/helpers/breadcrumb";
-import ChangeOPRequestsTable from "@/components/widgets/tables/ChangeOPRequestsTable.vue";
+import ChangeOPProcessesTable from "@/components/widgets/tables/ChangeOPProcessesTable.vue";
 
 export default defineComponent({
   name: "dashboard",
   components: {
-    ChangeOPRequestsTable,
+    ChangeOPProcessesTable,
   },
   setup() {
     onMounted(() => {

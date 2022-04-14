@@ -75,7 +75,7 @@ const messages = {
     usersAdmin: "Users Administrator",
     organizationsAdmin: "Organizations Administrator",
     changeOPRequests: "Change Operation Program Requests",
-    changesNumber: "Requests number",
+    changesNumber: "Processes number",
     creationDate: "Creation date",
     operationProgram: "Operation Program",
     title: "Title",
@@ -174,6 +174,7 @@ const messages = {
     requests: "Requests",
     changeRelatedRequestSuccess: "Change related requests successfully",
     changeRelatedRequestError: "Error changing related requests",
+    changeOPProcesses: "Change OP Processes",
   },
   es: {
     dashboard: "Tablero",
@@ -249,7 +250,7 @@ const messages = {
     usersAdmin: "Administrador de usuarios",
     organizationsAdmin: "Administrador de organizaciones",
     changeOPRequests: "Solicitudes de modificación PO",
-    changesNumber: "Número de solicitudes",
+    changesNumber: "Número de procesos",
     creationDate: "Fecha de creación",
     operationProgram: "Programa de Operación",
     title: "Título",
@@ -352,6 +353,7 @@ const messages = {
     changeRelatedRequestSuccess:
       "¡Solicitudes relacionadas cambiadas exitosamente!",
     changeRelatedRequestError: "¡Error al modificar solicitudes!",
+    changeOPProcesses: "Procesos de cambio de PO",
   },
   de: {
     dashboard: "Instrumententafel",
