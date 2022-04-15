@@ -18,6 +18,7 @@ import OrganizationModule from "@/store/modules/OrganizationModule";
 import OrganizationsModule from "@/store/modules/OrganizationsModule";
 import OperationProgramTypeModule from "@/store/modules/OperationProgramTypeModule";
 import OperationProgramTypesModule from "@/store/modules/OperationProgramTypesModule";
+import ChangeOPProcessModule from "@/store/modules/ChangeOPProcessModule";
 
 config.rawError = true;
 
@@ -40,6 +41,7 @@ const store = createStore({
     OrganizationsModule,
     OperationProgramTypeModule,
     OperationProgramTypesModule,
+    ChangeOPProcessModule,
   },
 });
 
