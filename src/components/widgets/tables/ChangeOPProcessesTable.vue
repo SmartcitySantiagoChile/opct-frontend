@@ -1,5 +1,5 @@
 <template>
-  <!--begin::Tables ChangeOPRequests -->
+  <!--begin::Tables ChangeOPProcesses -->
   <div :class="widgetClasses" class="card">
     <!--begin::Header-->
     <div class="card-header border-0 pt-5">
@@ -8,7 +8,7 @@
           {{ translate("changeOPProcesses") }}
         </span>
         <span class="text-muted mt-1 fw-bold fs-7">
-          {{ translate("changesNumber") + ": " + changeOPRequestsCount }}
+          {{ translate("changesNumber") + ": " + changeOPProcessesCount }}
         </span>
       </h3>
       <div class="card-toolbar align-items-start">
@@ -23,7 +23,7 @@
           />
         </span>
 
-        <CreateChangeOPRequest></CreateChangeOPRequest>
+        <!--<CreateChangeOPRequest></CreateChangeOPRequest>-->
 
         <!--end::Menu-->
       </div>
@@ -57,7 +57,6 @@
               <th class="min-w-150px">{{ translate("operationProgram") }}</th>
               <th class="min-w-100px">{{ translate("contractType") }}</th>
               <th class="min-w-100px">{{ translate("title") }}</th>
-              <th class="min-w-150px">{{ translate("reason") }}</th>
               <th class="min-w-100px">{{ translate("creator") }}</th>
               <th class="max-w-100px">{{ translate("counterpart") }}</th>
               <th class="min-w-80px">{{ translate("status") }}</th>
@@ -69,7 +68,7 @@
 
           <!--begin::Table body-->
           <tbody>
-            <template v-for="(item, index) in changeOPRequests" :key="index">
+            <template v-for="(item, index) in changeOPProcesses" :key="index">
               <tr>
                 <td>
                   <div class="d-flex align-items-center">
@@ -80,7 +79,7 @@
                         href=""
                         >{{
                           item.url
-                            .split("/change-op-requests/")[1]
+                            .split("/change-op-processes/")[1]
                             .split("/")[0]
                         }}
                       </a>
@@ -167,20 +166,6 @@
                       fs-6
                     "
                     href="#"
-                    >{{ item.reason }}</a
-                  >
-                </td>
-                <td>
-                  <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
-                    href="#"
                     >{{
                       item.creator.first_name + " " + item.creator.last_name
                     }}</a
@@ -224,7 +209,7 @@
                       :href="subItem.url.split('api')[1]"
                       >{{
                         subItem.url
-                          .split("/change-op-requests/")[1]
+                          .split("/change-op-processes/")[1]
                           .split("/")[0]
                       }}</a
                     >&nbsp;
@@ -259,7 +244,7 @@
             </li>
             <template
               v-for="(item, index) in Array.from(
-                { length: Math.ceil(changeOPRequestsCount / 10) },
+                { length: Math.ceil(changeOPProcessesCount / 10) },
                 (_, i) => i + 1
               )"
               :key="index"
@@ -297,8 +282,8 @@ import { DateTime } from "luxon";
 import CreateChangeOPRequest from "@/views/crafted/pages/changeOPRequest/CreateChangeOPRequest.vue";
 
 export default defineComponent({
-  name: "change-op-requests-table",
-  components: { CreateChangeOPRequest },
+  name: "change-op-processes-table",
+  //components: { CreateChangeOPRequest },
   props: {
     widgetClasses: String,
   },
@@ -306,23 +291,23 @@ export default defineComponent({
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
-    const changeOPRequests = computed(
-      () => store.getters.getCurrentChangeOPRequests
+    store.dispatch(Actions.GET_CHANGE_OP_PROCESSES);
+    const changeOPProcesses = computed(
+      () => store.getters.getCurrentChangeOPProcesses
     );
-    const changeOPRequestsCount = computed(
-      () => store.getters.getCurrentChangeOPRequestsCount
+    const changeOPProcessesCount = computed(
+      () => store.getters.getCurrentChangeOPProcessesCount
     );
 
     // Events
     const onFilterChange = (event) => {
       const filter = String(event.target.value);
       if (filter.length > 3 && filter.length < 11) {
-        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {
+        store.dispatch(Actions.GET_CHANGE_OP_PROCESSES_WITH_PARAMS, {
           search: filter,
         });
       } else if (filter.length === 0) {
-        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
+        store.dispatch(Actions.GET_CHANGE_OP_PROCESSES);
       }
     };
 
@@ -337,7 +322,7 @@ export default defineComponent({
       let pageId = event.target.getAttribute("data-value");
       pageId =
         pageId === "-1"
-          ? String(Math.ceil(changeOPRequestsCount.value / 10))
+          ? String(Math.ceil(changeOPProcessesCount.value / 10))
           : pageId;
 
       if (pageId === "1") {
@@ -349,7 +334,7 @@ export default defineComponent({
         return;
       }
       params["page"] = pageId;
-      store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, params);
+      store.dispatch(Actions.GET_CHANGE_OP_PROCESSES_WITH_PARAMS, params);
     };
 
     // Pagination
@@ -367,8 +352,8 @@ export default defineComponent({
       }
     };
     return {
-      changeOPRequests,
-      changeOPRequestsCount,
+      changeOPProcesses,
+      changeOPProcessesCount,
       translate,
       onFilterChange,
       onPageChange,
