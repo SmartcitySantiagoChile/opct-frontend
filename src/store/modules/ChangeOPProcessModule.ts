@@ -18,6 +18,7 @@ export interface ChangeOPProcess {
   change_op_process_message: Array<any>;
   op_change_logs: Array<any>;
   status_logs: Array<any>;
+  change_op_requests: Dictionary<string>;
 }
 
 export interface ChangeOPProcessInfo {

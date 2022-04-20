@@ -114,13 +114,13 @@
                     "
                     href="#"
                   >
-                    <template v-if="item.op">
+                    <template v-if="item.base_op">
                       {{
-                        DateTime.fromISO(item.op.start_at)
+                        DateTime.fromISO(item.base_op.start_at)
                           .setLocale(this.$i18n.locale)
                           .toLocaleString()
                       }}
-                      ({{ item.op.op_type.name }})
+                      ({{ item.base_op.op_type.name }})
                     </template>
                     <template v-else>
                       {{ translate("withoutAssign") }}

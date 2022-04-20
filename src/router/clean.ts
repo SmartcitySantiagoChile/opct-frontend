@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Dashboard.vue"),
       },
       {
-        path: "/change-op-requests/:id",
+        path: "/change-op-processes/:id",
         name: "changeOPRequest",
         component: () =>
           import("@/views/crafted/pages/changeOPRequest/ChangeOPRequest.vue"),
