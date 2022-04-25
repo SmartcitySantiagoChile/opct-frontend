@@ -60,7 +60,7 @@
               <th class="min-w-100px">{{ translate("creator") }}</th>
               <th class="max-w-100px">{{ translate("counterpart") }}</th>
               <th class="min-w-80px">{{ translate("status") }}</th>
-              <th class="max-w-80px">{{ translate("relatedRequests") }}</th>
+              <th class="max-w-80px">{{ translate("requests") }}</th>
               <th class="min-w-80px"></th>
             </tr>
           </thead>
@@ -201,18 +201,15 @@
                 </td>
                 <td>
                   <template
-                    v-for="(subItem, subIndex) in item.related_requests"
+                    v-for="(subItem, subIndex) in item.change_op_requests"
                     :key="subIndex"
                   >
                     <a
                       class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                      :href="subItem.url.split('api')[1]"
                       >{{
-                        subItem.url
-                          .split("/change-op-processes/")[1]
-                          .split("/")[0]
-                      }}</a
-                    >&nbsp;
+                        subItem.title
+                      }}
+                    </a>
                   </template>
                 </td>
                 <td>

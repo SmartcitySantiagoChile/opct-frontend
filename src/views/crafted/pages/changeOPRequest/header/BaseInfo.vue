@@ -31,7 +31,7 @@
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">Id </span>
                   <span class="text-dark fw-bolder d-block fs-3">
-                    {{ id }}
+                    {{ changeOpProcessId }}
                   </span>
                 </td>
                 <td>
@@ -83,14 +83,6 @@
                 </td>
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("reason") }}</span
-                  >
-                  <span class="text-dark fw-bolder d-block fs-3">
-                    {{ changeOpRequestBaseInfo.reason }}</span
-                  >
-                </td>
-                <td>
-                  <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("creator") }}</span
                   >
                   <span class="text-dark fw-bolder d-block fs-3">
@@ -134,7 +126,7 @@
                 </td>
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("relatedRequests") }}
+                    {{ translate("requests") }}
                     <template v-if="hasChangeStatusOption">
                       <ChangeOPRequestsEditInputTable
                         :id="id"
@@ -160,16 +152,13 @@
                   <template
                     v-for="(
                       subItem, subIndex
-                    ) in changeOpRequestBaseInfo.related_requests"
+                    ) in changeOpRequestBaseInfo.change_op_requests"
                     :key="subIndex"
                   >
                     <a
-                      :href="subItem.url.split('api')[1]"
                       class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
                       >{{
-                        subItem.url
-                          .split("/change-op-requests/")[1]
-                          .split("/")[0]
+                        subItem.title
                       }}</a
                     >&nbsp;
                   </template>
@@ -204,9 +193,9 @@ export default defineComponent({
   props: {
     widgetClasses: String,
     changeOpRequestBaseInfo: Object,
-    id: String,
+    changeOpProcessId: String
   },
-  setup(props) {
+  setup() {
     const store = useStore();
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
