@@ -175,6 +175,8 @@ const messages = {
     changeRelatedRequestSuccess: "Change related requests successfully",
     changeRelatedRequestError: "Error changing related requests",
     changeOPProcesses: "Change OP Processes",
+    changeRequestOPInfo: "OP change on ",
+
   },
   es: {
     dashboard: "Tablero",
@@ -354,6 +356,8 @@ const messages = {
       "¡Solicitudes relacionadas cambiadas exitosamente!",
     changeRelatedRequestError: "¡Error al modificar solicitudes!",
     changeOPProcesses: "Procesos de cambio de PO",
+    changeRequestOPInfo: "Cambio de PO en ",
+
   },
   de: {
     dashboard: "Instrumententafel",

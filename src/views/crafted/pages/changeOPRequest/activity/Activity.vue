@@ -128,15 +128,21 @@ export default defineComponent({
             }
           );
         }
-        if (props.changeOPProcess["op_change_logs"]) {
-          props.changeOPProcess["op_change_logs"].forEach((changeLog) => {
-            let opChangeLogData = {
-              dateTime: changeLog["created_at"],
-              type: "opChangeLog",
-              data: changeLog,
-            };
-            orderedLogsData.push(opChangeLogData);
-          });
+        if (props.changeOPProcess["change_op_requests"]) {
+          props.changeOPProcess["change_op_requests"].forEach(
+            (change_op_request) => {
+              if (change_op_request["op_change_logs"]) {
+                change_op_request["op_change_logs"].forEach((changeLog) => {
+                  let opChangeLogData = {
+                    dateTime: changeLog["created_at"],
+                    type: "opChangeLog",
+                    data: changeLog,
+                  };
+                  orderedLogsData.push(opChangeLogData);
+                });
+              }
+            }
+          );
         }
         if (props.changeOPProcess["change_op_process_status_logs"]) {
           props.changeOPProcess["change_op_process_status_logs"].forEach(

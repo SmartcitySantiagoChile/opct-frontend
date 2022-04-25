@@ -56,13 +56,13 @@
                     </template>
                   </span>
                   <span class="text-dark fw-bolder d-block fs-3">
-                    <template v-if="changeOPProcessBaseInfo.op">
+                    <template v-if="changeOPProcessBaseInfo.base_op">
                       {{
-                        DateTime.fromISO(changeOPProcessBaseInfo.op.start_at)
+                        DateTime.fromISO(changeOPProcessBaseInfo.base_op.start_at)
                           .setLocale(this.$i18n.locale)
                           .toLocaleString()
                       }}
-                      ({{ changeOPProcessBaseInfo.op.op_type.name }})
+                      ({{ changeOPProcessBaseInfo.base_op.op_type.name }})
                     </template>
                     <template v-else>
                       {{ translate("withoutAssign") }}
