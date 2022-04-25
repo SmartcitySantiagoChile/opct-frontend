@@ -21,34 +21,34 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
-          <template v-if="changeOPRequestTimelineMilestoneLog.new_status">
+          <template v-if="changeOPProcessTimelineMilestone.new_status">
             {{ translate("changeStatusInfo") }}
             <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
-              {{ changeOPRequestTimelineMilestoneLog.previous_status.name }}
+              {{ changeOPProcessTimelineMilestone.previous_status.name }}
             </span>
             {{ translate("to") }}
             <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
-              {{ changeOPRequestTimelineMilestoneLog.new_status.name }}
+              {{ changeOPProcessTimelineMilestone.new_status.name }}
             </span>
           </template>
           <template
             v-if="
-              changeOPRequestTimelineMilestoneLog.previous_op ||
-              changeOPRequestTimelineMilestoneLog.new_op
+              changeOPProcessTimelineMilestone.previous_op ||
+              changeOPProcessTimelineMilestone.new_op
             "
           >
             {{ translate("changeOPInfo") }}
             <span class="badge badge-light-warning fs-4 fw-bolder">
-              <template v-if="changeOPRequestTimelineMilestoneLog.previous_op">
+              <template v-if="changeOPProcessTimelineMilestone.previous_op">
                 {{
                   DateTime.fromISO(
-                    changeOPRequestTimelineMilestoneLog.previous_op.start_at
+                      changeOPProcessTimelineMilestone.previous_op.start_at
                   )
                     .setLocale(this.$i18n.locale)
                     .toLocaleString()
                 }}
                 ({{
-                  changeOPRequestTimelineMilestoneLog.previous_op.op_type.name
+                  changeOPProcessTimelineMilestone.previous_op.op_type.name
                 }})
               </template>
               <template v-else>
@@ -57,28 +57,28 @@
             </span>
             {{ translate("to") }}
             <span class="badge badge-light-warning fs-4 fw-bolder">
-              <template v-if="changeOPRequestTimelineMilestoneLog.new_op">
+              <template v-if="changeOPProcessTimelineMilestone.new_op">
                 {{
                   DateTime.fromISO(
-                    changeOPRequestTimelineMilestoneLog.new_op.start_at
+                      changeOPProcessTimelineMilestone.new_op.start_at
                   )
                     .setLocale(this.$i18n.locale)
                     .toLocaleString()
                 }}
-                ({{ changeOPRequestTimelineMilestoneLog.new_op.op_type.name }})
+                ({{ changeOPProcessTimelineMilestone.new_op.op_type.name }})
               </template>
               <template v-else>
                 {{ translate("withoutAssign") }}
               </template>
             </span>
           </template>
-          <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
+          <template v-if="changeOPProcessTimelineMilestone.time_threshold">
             <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
               {{
-                changeOPRequestTimelineMilestoneLog.time_threshold
+                changeOPProcessTimelineMilestone.time_threshold
                   ? translate("endOf") +
                     " " +
-                    changeOPRequestTimelineMilestoneLog.name
+                    changeOPProcessTimelineMilestone.name
                   : ""
               }}
             </span>
@@ -95,20 +95,20 @@
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
             <!--begin::OPStatusCase-->
-            <template v-if="changeOPRequestTimelineMilestoneLog.time_threshold">
+            <template v-if="changeOPProcessTimelineMilestone.time_threshold">
               {{
                 DateTime.now().diff(
                   DateTime.fromISO(
-                    changeOPRequestTimelineMilestoneLog.dead_line
+                      changeOPProcessTimelineMilestone.dead_line
                   )
                 ) > 0
                   ? translate("finishedOn")
                   : translate("finishOn")
               }}
               {{
-                changeOPRequestTimelineMilestoneLog.dead_line
+                changeOPProcessTimelineMilestone.dead_line
                   ? DateTime.fromISO(
-                      changeOPRequestTimelineMilestoneLog.dead_line
+                        changeOPProcessTimelineMilestone.dead_line
                     )
                       .setLocale(this.$i18n.locale)
                       .toLocaleString()
@@ -120,16 +120,16 @@
             <!--begin::ChangeOPCase and ChangeStatusCase-->
             <template
               v-if="
-                changeOPRequestTimelineMilestoneLog.new_op ||
-                changeOPRequestTimelineMilestoneLog.previous_op ||
-                changeOPRequestTimelineMilestoneLog.new_status
+                changeOPProcessTimelineMilestone.new_op ||
+                changeOPProcessTimelineMilestone.previous_op ||
+                changeOPProcessTimelineMilestone.new_status
               "
             >
               {{ translate("addedAt") }}
               {{
-                changeOPRequestTimelineMilestoneLog.created_at
+                changeOPProcessTimelineMilestone.created_at
                   ? DateTime.fromISO(
-                      changeOPRequestTimelineMilestoneLog.created_at
+                      changeOPProcessTimelineMilestone.created_at
                     )
                       .setLocale(this.$i18n.locale)
                       .toLocaleString()
@@ -137,9 +137,9 @@
               }}
               {{ translate("atTime") }}
               {{
-                changeOPRequestTimelineMilestoneLog.created_at
+                changeOPProcessTimelineMilestone.created_at
                   ? DateTime.fromISO(
-                      changeOPRequestTimelineMilestoneLog.created_at
+                        changeOPProcessTimelineMilestone.created_at
                     )
                       .setLocale(this.$i18n.locale)
                       .toLocaleString(DateTime.TIME_SIMPLE)
@@ -149,11 +149,11 @@
             <!--end::ChangeOPCase and ChangeStatusCase-->
           </div>
           <!--begin::OPStatus Deadline-->
-          <template v-if="changeOPRequestTimelineMilestoneLog.update_deadlines">
+          <template v-if="changeOPProcessTimelineMilestone.update_deadlines">
             <div class="text-muted me-2 fs-7">
               -
               {{
-                changeOPRequestTimelineMilestoneLog.update_deadlines
+                changeOPProcessTimelineMilestone.update_deadlines
                   ? translate("deadlinesUpdated")
                   : ""
               }}
@@ -162,21 +162,21 @@
           <!--begin::OPStatus Deadline-->
           <!--end::Info-->
           <!--begin::User-->
-          <template v-if="changeOPRequestTimelineMilestoneLog.new_status">
+          <template v-if="changeOPProcessTimelineMilestone.new_status">
             {{ translate("by") + "&nbsp;" }}
             <a class="text-primary fw-bolder me-1" href="#">
               {{
-                changeOPRequestTimelineMilestoneLog.user
-                  ? changeOPRequestTimelineMilestoneLog.user.first_name +
+                changeOPProcessTimelineMilestone.user
+                  ? changeOPProcessTimelineMilestone.user.first_name +
                     " " +
-                    changeOPRequestTimelineMilestoneLog.user.last_name
+                    changeOPProcessTimelineMilestone.user.last_name
                   : ""
               }}
               {{
-                changeOPRequestTimelineMilestoneLog.creator
-                  ? changeOPRequestTimelineMilestoneLog.creator.first_name +
+                changeOPProcessTimelineMilestone.creator
+                  ? changeOPProcessTimelineMilestone.creator.first_name +
                     " " +
-                    changeOPRequestTimelineMilestoneLog.creator.last_name
+                    changeOPProcessTimelineMilestone.creator.last_name
                   : ""
               }}
             </a>
@@ -198,8 +198,8 @@ import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
 
 export default defineComponent({
-  name: "changeOPRequestTimelineMilestone",
-  props: ["changeOPRequestTimelineMilestoneLog"],
+  name: "ChangeOPProcessTimelineMilestone",
+  props: ["changeOPProcessTimelineMilestone"],
   components: {},
   setup() {
     const { t, te } = useI18n();

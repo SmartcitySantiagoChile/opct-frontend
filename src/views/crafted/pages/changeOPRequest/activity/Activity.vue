@@ -20,26 +20,30 @@
               v-bind:changeOPProcessTimelineMessage="changeOPProcess"
             ></ChangeOPProcessTimelineMessage>
             <!--end::ChangeOPProcessTimelineMessage - First message-->
-            <!--begin::ChangeOPProcessTimelineMessages-->
+            <!--begin::Ordered Logs-->
             <template v-for="(item, index) in orderedLogs" :key="index">
+              <!--begin::ChangeOPProcessTimelineMessages-->
               <template v-if="item.type === 'changeOPProcessMessage'">
                 <ChangeOPProcessTimelineMessage
                   v-bind:changeOPProcessTimelineMessage="item.data"
                 ></ChangeOPProcessTimelineMessage>
               </template>
-<!--              <template-->
-<!--                v-if="-->
-<!--                  item.type === 'statusLog' ||-->
-<!--                  item.type === 'opChangeLog' ||-->
-<!--                  item.type === 'opStatus'-->
-<!--                "-->
-<!--              >-->
-<!--                <ChangeOPRequestTimelineMilestone-->
-<!--                  v-bind:changeOPRequestTimelineMilestoneLog="item.data"-->
-<!--                ></ChangeOPRequestTimelineMilestone>-->
-<!--              </template>-->
+              <!--end::ChangeOPProcessTimelineMessages-->
+              <!--begin::ChangeOPProcessTimelineMilestones-->
+              <template
+                v-if="
+                  item.type === 'statusLog' ||
+                  item.type === 'opChangeLog' ||
+                  item.type === 'opStatus'
+                "
+              >
+                <ChangeOPProcessTimelineMilestone
+                  v-bind:changeOPProcessTimelineMilestone="item.data"
+                ></ChangeOPProcessTimelineMilestone>
+              </template>
+              <!--end::ChangeOPProcessTimelineMilestones-->
             </template>
-            <!--end::ChangeOPProcessTimelineMessages-->
+            <!--end::Ordered Logs-->
           </div>
           <!--end::Timeline-->
         </div>
@@ -57,7 +61,7 @@ import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import ChangeOPProcessTimelineMessage from "@/views/crafted/pages/changeOPRequest/activity/Message.vue";
-import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/activity/Milestone.vue";
+import ChangeOPProcessTimelineMilestone from "@/views/crafted/pages/changeOPRequest/activity/Milestone.vue";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
@@ -66,7 +70,7 @@ export default defineComponent({
   props: ["changeOPProcess", "id"],
   components: {
     ChangeOPProcessTimelineMessage,
-   // ChangeOPRequestTimelineMilestone,
+    ChangeOPProcessTimelineMilestone,
   },
   setup(props) {
     const store = useStore();
@@ -134,15 +138,17 @@ export default defineComponent({
             orderedLogsData.push(opChangeLogData);
           });
         }
-        if (props.changeOPProcess["status_logs"]) {
-          props.changeOPProcess["status_logs"].forEach((statusLog) => {
-            let changeOPProcessStatusLogData = {
-              dateTime: statusLog["created_at"],
-              type: "statusLog",
-              data: statusLog,
-            };
-            orderedLogsData.push(changeOPProcessStatusLogData);
-          });
+        if (props.changeOPProcess["change_op_process_status_logs"]) {
+          props.changeOPProcess["change_op_process_status_logs"].forEach(
+            (statusLog) => {
+              let changeOPProcessStatusLogData = {
+                dateTime: statusLog["created_at"],
+                type: "statusLog",
+                data: statusLog,
+              };
+              orderedLogsData.push(changeOPProcessStatusLogData);
+            }
+          );
         }
       }
       orderedLogsData.sort(function (a, b) {
