@@ -1,12 +1,6 @@
 <template>
   <!--begin::Timeline-->
   <div class="card">
-    <div class="card-title align-items-center">
-      <ChangeOPRequestBaseInfo
-        v-bind:changeOpRequestBaseInfo="baseInfo"
-        v-bind:id="id"
-      ></ChangeOPRequestBaseInfo>
-    </div>
     <div class="separator"></div>
     <!--begin::Card body-->
     <div class="card-body">
@@ -21,27 +15,29 @@
         >
           <!--begin::Timeline-->
           <div class="timeline">
-            <ChangeOPRequestTimelineMessage
-              v-bind:changeOpRequestTimelineMessage="headerInfo"
-            ></ChangeOPRequestTimelineMessage>
-            <template v-for="(item, index) in orderedLogs" :key="index">
-              <template v-if="item.type === 'changeOPRequestMessage'">
-                <ChangeOPRequestTimelineMessage
-                  v-bind:changeOpRequestTimelineMessage="item.data"
-                ></ChangeOPRequestTimelineMessage>
-              </template>
-              <template
-                v-if="
-                  item.type === 'statusLog' ||
-                  item.type === 'opChangeLog' ||
-                  item.type === 'opStatus'
-                "
-              >
-                <ChangeOPRequestTimelineMilestone
-                  v-bind:changeOPRequestTimelineMilestoneLog="item.data"
-                ></ChangeOPRequestTimelineMilestone>
-              </template>
-            </template>
+            <!--begin::ChangeOPProcessTimelineMessage - First message-->
+            <ChangeOPProcessTimelineMessage
+              v-bind:changeOPProcessTimelineMessage="changeOPProcess"
+            ></ChangeOPProcessTimelineMessage>
+            <!--end::ChangeOPProcessTimelineMessage - First message-->
+<!--            <template v-for="(item, index) in orderedLogs" :key="index">-->
+<!--              <template v-if="item.type === 'changeOPRequestMessage'">-->
+<!--                <ChangeOPRequestTimelineMessage-->
+<!--                  v-bind:changeOpRequestTimelineMessage="item.data"-->
+<!--                ></ChangeOPRequestTimelineMessage>-->
+<!--              </template>-->
+<!--              <template-->
+<!--                v-if="-->
+<!--                  item.type === 'statusLog' ||-->
+<!--                  item.type === 'opChangeLog' ||-->
+<!--                  item.type === 'opStatus'-->
+<!--                "-->
+<!--              >-->
+<!--                <ChangeOPRequestTimelineMilestone-->
+<!--                  v-bind:changeOPRequestTimelineMilestoneLog="item.data"-->
+<!--                ></ChangeOPRequestTimelineMilestone>-->
+<!--              </template>-->
+<!--            </template>-->
           </div>
           <!--end::Timeline-->
         </div>
@@ -49,8 +45,6 @@
       </div>
       <!--end::Tab Content-->
     </div>
-    <div class="separator"></div>
-    <Reply></Reply>
     <!--end::Card body-->
   </div>
   <!--end::Timeline-->
@@ -60,50 +54,21 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
-import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/header/BaseInfo.vue";
-import ChangeOPRequestTimelineMessage from "@/views/crafted/pages/changeOPRequest/activity/Message.vue";
+import ChangeOPProcessTimelineMessage from "@/views/crafted/pages/changeOPRequest/activity/Message.vue";
 import ChangeOPRequestTimelineMilestone from "@/views/crafted/pages/changeOPRequest/activity/Milestone.vue";
-import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
   inheritAttrs: false,
-  name: "changeOPRequestActivity",
-  props: ["changeOPRequest", "id"],
+  name: "ChangeOPProcessActivity",
+  props: ["changeOPProcess", "id"],
   components: {
-    ChangeOPRequestBaseInfo,
-    ChangeOPRequestTimelineMessage,
-    ChangeOPRequestTimelineMilestone,
-    Reply,
+    ChangeOPProcessTimelineMessage,
+   // ChangeOPRequestTimelineMilestone,
   },
   setup(props) {
     const store = useStore();
     store.dispatch(Actions.GET_OPERATION_PROGRAM_STATUSES);
-    const baseInfo = computed(() => {
-      const baseData = {};
-      baseData["created_at"] = props.changeOPRequest["created_at"];
-      baseData["op"] = props.changeOPRequest["op"];
-      baseData["status"] = props.changeOPRequest["status"];
-      baseData["change_op_request_files"] =
-        props.changeOPRequest["change_op_request_files"];
-      baseData["reason"] = props.changeOPRequest["reason"];
-      baseData["creator"] = props.changeOPRequest["creator"];
-      baseData["counterpart"] = props.changeOPRequest["counterpart"];
-      baseData["title"] = props.changeOPRequest["title"];
-      baseData["contract_type"] = props.changeOPRequest["contract_type"];
-      baseData["related_requests"] = props.changeOPRequest["related_requests"];
-      return baseData;
-    });
-
-    const headerInfo = computed(() => {
-      const headerData = {};
-      headerData["created_at"] = props.changeOPRequest["created_at"];
-      headerData["creator"] = props.changeOPRequest["creator"];
-      headerData["message"] = props.changeOPRequest["message"];
-      headerData["change_op_request_files"] =
-        props.changeOPRequest["change_op_request_files"];
-      return headerData;
-    });
 
     const opStatuses = ref(
       computed(() => store.getters.getCurrentOperationProgramStatuses)
@@ -114,15 +79,15 @@ export default defineComponent({
       if (opStatuses.value) {
         opStatuses.value.forEach((opStatus) => {
           if (
-            props.changeOPRequest["contract_type"] &&
-            props.changeOPRequest["op_release_date"]
+            props.changeOPProcess["contract_type"] &&
+            props.changeOPProcess["op_release_date"]
           ) {
             const releaseDate = new Date(
-              props.changeOPRequest["op_release_date"] + " 00:00"
+              props.changeOPProcess["op_release_date"] + " 00:00"
             );
             if (
               opStatus.contract_type.name ==
-              props.changeOPRequest["contract_type"]["name"]
+              props.changeOPProcess["contract_type"]["name"]
             ) {
               let deadLineDate = new Date(
                 JSON.parse(JSON.stringify(releaseDate))
@@ -144,9 +109,9 @@ export default defineComponent({
           }
         });
       }
-      if (props.changeOPRequest) {
-        if (props.changeOPRequest["change_op_request_messages"]) {
-          props.changeOPRequest["change_op_request_messages"].forEach(
+      if (props.changeOPProcess) {
+        if (props.changeOPProcess["change_op_request_messages"]) {
+          props.changeOPProcess["change_op_request_messages"].forEach(
             (message) => {
               let changeOPRequestData = {
                 dateTime: message["created_at"],
@@ -157,8 +122,8 @@ export default defineComponent({
             }
           );
         }
-        if (props.changeOPRequest["op_change_logs"]) {
-          props.changeOPRequest["op_change_logs"].forEach((changeLog) => {
+        if (props.changeOPProcess["op_change_logs"]) {
+          props.changeOPProcess["op_change_logs"].forEach((changeLog) => {
             let opChangeLogData = {
               dateTime: changeLog["created_at"],
               type: "opChangeLog",
@@ -167,8 +132,8 @@ export default defineComponent({
             orderedLogsData.push(opChangeLogData);
           });
         }
-        if (props.changeOPRequest["status_logs"]) {
-          props.changeOPRequest["status_logs"].forEach((statusLog) => {
+        if (props.changeOPProcess["status_logs"]) {
+          props.changeOPProcess["status_logs"].forEach((statusLog) => {
             let changeOPRequestStatusLofData = {
               dateTime: statusLog["created_at"],
               type: "statusLog",
@@ -189,8 +154,6 @@ export default defineComponent({
     const translate = (text) => (te(text) ? t(text) : text);
     return {
       translate,
-      baseInfo,
-      headerInfo,
       orderedLogs,
     };
   },

@@ -1,13 +1,21 @@
 <template>
   <!--begin::Timeline-->
   <div class="card">
+    <!--begin::Base Info-->
     <div class="card-title align-items-center">
-      <ChangeOPRequestBaseInfo
-        v-bind:changeOpRequestBaseInfo="changeOPProcess"
+      <changeOPProcessBaseInfo
+        v-bind:changeOPProcessBaseInfo="changeOPProcess"
         v-bind:changeOpProcessId="id"
-      ></ChangeOPRequestBaseInfo>
+      ></changeOPProcessBaseInfo>
     </div>
+    <!--end::Base Info-->
     <div class="separator"></div>
+    <ChangeOPProcessActivity
+      v-bind:changeOPProcess="changeOPProcess"
+      v-bind:id="id"
+      widget-classes="card-xxl-stretch mb-5 mb-xl-8"
+    ></ChangeOPProcessActivity>
+    <Reply></Reply>
     <!--end::Card body-->
   </div>
   <!--end::Timeline-->
@@ -20,17 +28,20 @@
 <script lang="ts">
 import { computed, defineComponent, onUpdated, ref } from "vue";
 import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
-import ChangeOPRequestActivity from "@/views/crafted/pages/changeOPRequest/activity/Activity.vue";
+import ChangeOPProcessActivity from "@/views/crafted/pages/changeOPRequest/activity/Activity.vue";
 import { useStore } from "vuex";
 import { Actions } from "@/store/enums/StoreEnums";
-import ChangeOPRequestBaseInfo from "@/views/crafted/pages/changeOPRequest/header/BaseInfo.vue";
+import ChangeOPProcessBaseInfo from "@/views/crafted/pages/changeOPRequest/header/BaseInfo.vue";
+import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
+
 
 export default defineComponent({
   name: "changeOPRequest",
   props: ["id"],
   components: {
-    ChangeOPRequestBaseInfo,
-    // ChangeOPRequestActivity,
+    ChangeOPProcessBaseInfo,
+    ChangeOPProcessActivity,
+    Reply,
   },
   setup(props) {
     const store = useStore();

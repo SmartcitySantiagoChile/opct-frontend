@@ -1,5 +1,5 @@
 <template>
-  <!--begin::ChangeOPRequestTimelineMessage item-->
+  <!--begin::ChangeOPProcessTimelineMessage item-->
   <div class="timeline-item">
     <!--begin::Timeline line-->
     <div class="timeline-line w-40px"></div>
@@ -21,7 +21,7 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
-          {{ changeOpRequestTimelineMessage.message }}
+          {{ changeOPProcessTimelineMessage.message }}
         </div>
         <!--end::Title-->
       </div>
@@ -82,16 +82,16 @@
           <div class="text-muted me-2 fs-7">
             {{ translate("addedAt") }}
             {{
-              changeOpRequestTimelineMessage.created_at
-                ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
+              changeOPProcessTimelineMessage.created_at
+                ? DateTime.fromISO(changeOPProcessTimelineMessage.created_at)
                     .setLocale(this.$i18n.locale)
                     .toLocaleString()
                 : ""
             }}
             {{ translate("atTime") }}
             {{
-              changeOpRequestTimelineMessage.created_at
-                ? DateTime.fromISO(changeOpRequestTimelineMessage.created_at)
+              changeOPProcessTimelineMessage.created_at
+                ? DateTime.fromISO(changeOPProcessTimelineMessage.created_at)
                     .setLocale(this.$i18n.locale)
                     .toLocaleString(DateTime.TIME_SIMPLE)
                 : ""
@@ -103,10 +103,10 @@
           <!--begin::User-->
           <a class="text-primary fw-bolder me-1" href="#">
             {{
-              changeOpRequestTimelineMessage.creator
-                ? changeOpRequestTimelineMessage.creator.first_name +
+              changeOPProcessTimelineMessage.creator
+                ? changeOPProcessTimelineMessage.creator.first_name +
                   " " +
-                  changeOpRequestTimelineMessage.creator.last_name
+                  changeOPProcessTimelineMessage.creator.last_name
                 : ""
             }}
           </a>
@@ -120,7 +120,8 @@
     </div>
     <!--end::Timeline content-->
   </div>
-  <!--end::Timeline item-->
+  <!--end::ChangeOPProcessTimelineMessage item-->
+
 </template>
 
 <script lang="ts">
@@ -129,28 +130,28 @@ import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
 
 export default defineComponent({
-  name: "changeOPRequestTimelineMessage",
-  props: ["changeOpRequestTimelineMessage"],
+  name: "ChangeOPProcessTimelineMessage",
+  props: ["changeOPProcessTimelineMessage"],
   components: {},
   data() {
     const files = computed(() => {
-      if (this.changeOpRequestTimelineMessage.change_op_request_files) {
-        return this.changeOpRequestTimelineMessage.change_op_request_files;
+      if (this.changeOPProcessTimelineMessage.change_op_process_files) {
+        return this.changeOPProcessTimelineMessage.change_op_process_files;
       }
-      if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
-        return this.changeOpRequestTimelineMessage
-          .change_op_request_message_files;
+      if (this.changeOPProcessTimelineMessage.change_op_process_message_files) {
+        return this.changeOPProcessTimelineMessage
+          .change_op_process_message_files;
       }
       return [];
     });
     const filesLength = computed(() => {
-      if (this.changeOpRequestTimelineMessage.change_op_request_files) {
-        return this.changeOpRequestTimelineMessage.change_op_request_files
+      if (this.changeOPProcessTimelineMessage.change_op_process_files) {
+        return this.changeOPProcessTimelineMessage.change_op_process_files
           .length;
       }
-      if (this.changeOpRequestTimelineMessage.change_op_request_message_files) {
-        return this.changeOpRequestTimelineMessage
-          .change_op_request_message_files.length;
+      if (this.changeOPProcessTimelineMessage.change_op_process_message_files) {
+        return this.changeOPProcessTimelineMessage
+          .change_op_process_message_files.length;
       }
       return 0;
     });

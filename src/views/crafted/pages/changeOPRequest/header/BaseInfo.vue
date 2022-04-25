@@ -7,7 +7,7 @@
         <!--begin::Tap pane-->
 
         <!--begin::Table container-->
-        <h2>{{ changeOpRequestBaseInfo.title }}</h2>
+        <h2>{{ changeOPProcessBaseInfo.title }}</h2>
         <div class="table-responsive">
           <!--begin::Table-->
           <table class="table align-middle gs-0 gy-3">
@@ -40,8 +40,8 @@
                   </span>
                   <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOpRequestBaseInfo.created_at
-                        ? DateTime.fromISO(changeOpRequestBaseInfo.created_at)
+                      changeOPProcessBaseInfo.created_at
+                        ? DateTime.fromISO(changeOPProcessBaseInfo.created_at)
                             .setLocale(this.$i18n.locale)
                             .toLocaleString()
                         : ""
@@ -56,13 +56,13 @@
                     </template>
                   </span>
                   <span class="text-dark fw-bolder d-block fs-3">
-                    <template v-if="changeOpRequestBaseInfo.op">
+                    <template v-if="changeOPProcessBaseInfo.op">
                       {{
-                        DateTime.fromISO(changeOpRequestBaseInfo.op.start_at)
+                        DateTime.fromISO(changeOPProcessBaseInfo.op.start_at)
                           .setLocale(this.$i18n.locale)
                           .toLocaleString()
                       }}
-                      ({{ changeOpRequestBaseInfo.op.op_type.name }})
+                      ({{ changeOPProcessBaseInfo.op.op_type.name }})
                     </template>
                     <template v-else>
                       {{ translate("withoutAssign") }}
@@ -75,8 +75,8 @@
                   >
                   <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOpRequestBaseInfo.contract_type
-                        ? changeOpRequestBaseInfo.contract_type.name
+                      changeOPProcessBaseInfo.contract_type
+                        ? changeOPProcessBaseInfo.contract_type.name
                         : ""
                     }}</span
                   >
@@ -87,10 +87,10 @@
                   >
                   <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOpRequestBaseInfo.creator
-                        ? changeOpRequestBaseInfo.creator.first_name +
+                      changeOPProcessBaseInfo.creator
+                        ? changeOPProcessBaseInfo.creator.first_name +
                           " " +
-                          changeOpRequestBaseInfo.creator.last_name
+                          changeOPProcessBaseInfo.creator.last_name
                         : ""
                     }}</span
                   >
@@ -101,8 +101,8 @@
                   >
                   <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOpRequestBaseInfo.counterpart
-                        ? changeOpRequestBaseInfo.counterpart.name
+                      changeOPProcessBaseInfo.counterpart
+                        ? changeOPProcessBaseInfo.counterpart.name
                         : ""
                     }}</span
                   >
@@ -118,8 +118,8 @@
                     :class="`badge-light-success`"
                     class="badge fs-4 fw-bolder"
                     >{{
-                      changeOpRequestBaseInfo.status
-                        ? changeOpRequestBaseInfo.status.name
+                      changeOPProcessBaseInfo.status
+                        ? changeOPProcessBaseInfo.status.name
                         : ""
                     }}</span
                   >
@@ -152,7 +152,7 @@
                   <template
                     v-for="(
                       subItem, subIndex
-                    ) in changeOpRequestBaseInfo.change_op_requests"
+                    ) in changeOPProcessBaseInfo.change_op_requests"
                     :key="subIndex"
                   >
                     <a
@@ -188,12 +188,12 @@ import ChangeOPRequestsEditInputTable from "@/components/widgets/tables/ChangeOP
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
-  name: "changeOPRequestBaseInfo",
+  name: "ChangeOPProcessBaseInfo",
   components: { ChangeStatus, ChangeOP, ChangeOPRequestsEditInputTable },
   props: {
     widgetClasses: String,
-    changeOpRequestBaseInfo: Object,
-    changeOpProcessId: String
+    changeOPProcessBaseInfo: Object,
+    changeOpProcessId: String,
   },
   setup() {
     const store = useStore();
