@@ -15,7 +15,7 @@ export interface ChangeOPProcess {
   counterpart: Dictionary<string>;
   contract_type: Dictionary<string>;
   change_op_process_files: Array<any>;
-  change_op_process_message: Array<any>;
+  change_op_process_messages: Array<any>;
   op_change_logs: Array<any>;
   status_logs: Array<any>;
   change_op_requests: Dictionary<string>;

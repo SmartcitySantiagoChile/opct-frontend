@@ -20,12 +20,13 @@
               v-bind:changeOPProcessTimelineMessage="changeOPProcess"
             ></ChangeOPProcessTimelineMessage>
             <!--end::ChangeOPProcessTimelineMessage - First message-->
-<!--            <template v-for="(item, index) in orderedLogs" :key="index">-->
-<!--              <template v-if="item.type === 'changeOPRequestMessage'">-->
-<!--                <ChangeOPRequestTimelineMessage-->
-<!--                  v-bind:changeOpRequestTimelineMessage="item.data"-->
-<!--                ></ChangeOPRequestTimelineMessage>-->
-<!--              </template>-->
+            <!--begin::ChangeOPProcessTimelineMessages-->
+            <template v-for="(item, index) in orderedLogs" :key="index">
+              <template v-if="item.type === 'changeOPProcessMessage'">
+                <ChangeOPProcessTimelineMessage
+                  v-bind:changeOPProcessTimelineMessage="item.data"
+                ></ChangeOPProcessTimelineMessage>
+              </template>
 <!--              <template-->
 <!--                v-if="-->
 <!--                  item.type === 'statusLog' ||-->
@@ -37,7 +38,8 @@
 <!--                  v-bind:changeOPRequestTimelineMilestoneLog="item.data"-->
 <!--                ></ChangeOPRequestTimelineMilestone>-->
 <!--              </template>-->
-<!--            </template>-->
+            </template>
+            <!--end::ChangeOPProcessTimelineMessages-->
           </div>
           <!--end::Timeline-->
         </div>
@@ -110,15 +112,15 @@ export default defineComponent({
         });
       }
       if (props.changeOPProcess) {
-        if (props.changeOPProcess["change_op_request_messages"]) {
-          props.changeOPProcess["change_op_request_messages"].forEach(
+        if (props.changeOPProcess["change_op_process_messages"]) {
+          props.changeOPProcess["change_op_process_messages"].forEach(
             (message) => {
-              let changeOPRequestData = {
+              let changeOPProcessData = {
                 dateTime: message["created_at"],
-                type: "changeOPRequestMessage",
+                type: "changeOPProcessMessage",
                 data: message,
               };
-              orderedLogsData.push(changeOPRequestData);
+              orderedLogsData.push(changeOPProcessData);
             }
           );
         }
@@ -134,12 +136,12 @@ export default defineComponent({
         }
         if (props.changeOPProcess["status_logs"]) {
           props.changeOPProcess["status_logs"].forEach((statusLog) => {
-            let changeOPRequestStatusLofData = {
+            let changeOPProcessStatusLogData = {
               dateTime: statusLog["created_at"],
               type: "statusLog",
               data: statusLog,
             };
-            orderedLogsData.push(changeOPRequestStatusLofData);
+            orderedLogsData.push(changeOPProcessStatusLogData);
           });
         }
       }
