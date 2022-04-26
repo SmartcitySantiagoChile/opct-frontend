@@ -21,8 +21,15 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
+          <!--begin:: Change OP Process and Request Status Case-->
           <template v-if="changeOPProcessTimelineMilestone.new_status">
+            <template v-if="changeOPProcessTimelineMilestone.change_op_process">
             {{ translate("changeStatusInfo") }}
+            </template>
+            <template v-if="changeOPProcessTimelineMilestone.change_op_request">
+              {{ translate("changeStatusRequestInfo") }}
+              {{changeOPProcessTimelineMilestone.change_op_request.title}}:
+            </template>
             <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
               {{ changeOPProcessTimelineMilestone.previous_status.name }}
             </span>
@@ -31,6 +38,8 @@
               {{ changeOPProcessTimelineMilestone.new_status.name }}
             </span>
           </template>
+          <!--end:: Change OP Process and Request Status Case-->
+          <!--begin:: Change OP Case-->
           <template
             v-if="
               changeOPProcessTimelineMilestone.previous_op ||
@@ -38,12 +47,12 @@
             "
           >
             {{ translate("changeRequestOPInfo") }}
-            {{ changeOPProcessTimelineMilestone.change_op_request.title}}:
+            {{ changeOPProcessTimelineMilestone.change_op_request.title }}:
             <span class="badge badge-light-warning fs-4 fw-bolder">
               <template v-if="changeOPProcessTimelineMilestone.previous_op">
                 {{
                   DateTime.fromISO(
-                      changeOPProcessTimelineMilestone.previous_op.start_at
+                    changeOPProcessTimelineMilestone.previous_op.start_at
                   )
                     .setLocale(this.$i18n.locale)
                     .toLocaleString()
@@ -73,6 +82,8 @@
               </template>
             </span>
           </template>
+          <!--end:: Change OP Case-->
+          <!--begin:: Time Threshold Case-->
           <template v-if="changeOPProcessTimelineMilestone.time_threshold">
             <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
               {{
@@ -84,6 +95,7 @@
               }}
             </span>
           </template>
+          <!--end:: Time Threshold Case-->
         </div>
         <!--end::Title-->
       </div>
@@ -95,7 +107,7 @@
         <div class="d-flex align-items-center mt-1 fs-6">
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
-            <!--begin::OPStatusCase-->
+            <!--begin::Change OP Process Status Detail Case -->
             <template v-if="changeOPProcessTimelineMilestone.time_threshold">
               {{
                 DateTime.now().diff(
@@ -117,7 +129,7 @@
               }}
               {{ translate("atTime") }} 23:59
             </template>
-            <!--end::OPStatusCase-->
+            <!--end::Change OP Process Status Detail Case -->
             <!--begin::ChangeOPCase and ChangeStatusCase-->
             <template
               v-if="
@@ -160,7 +172,7 @@
               }}
             </div>
           </template>
-          <!--begin::OPStatus Deadline-->
+          <!--end::OPStatus Deadline-->
           <!--end::Info-->
           <!--begin::User-->
           <template v-if="changeOPProcessTimelineMilestone.new_status">

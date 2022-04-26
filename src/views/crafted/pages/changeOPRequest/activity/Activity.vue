@@ -79,7 +79,7 @@ export default defineComponent({
     const opStatuses = ref(
       computed(() => store.getters.getCurrentOperationProgramStatuses)
     );
-
+    console.log(opStatuses.value);
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
       if (opStatuses.value) {
@@ -131,6 +131,16 @@ export default defineComponent({
         if (props.changeOPProcess["change_op_requests"]) {
           props.changeOPProcess["change_op_requests"].forEach(
             (change_op_request) => {
+              if (change_op_request["status_logs"]) {
+                change_op_request["status_logs"].forEach((status_log) => {
+                  let statusLogData = {
+                    dateTime: status_log["created_at"],
+                    type: "opChangeLog",
+                    data: status_log,
+                  };
+                  orderedLogsData.push(statusLogData);
+                });
+              }
               if (change_op_request["op_change_logs"]) {
                 change_op_request["op_change_logs"].forEach((changeLog) => {
                   let opChangeLogData = {

@@ -176,6 +176,7 @@ const messages = {
     changeRelatedRequestError: "Error changing related requests",
     changeOPProcesses: "Change OP Processes",
     changeRequestOPInfo: "OP change on ",
+    changeStatusRequestInfo: "Change status on "
 
   },
   es: {
@@ -357,6 +358,7 @@ const messages = {
     changeRelatedRequestError: "¡Error al modificar solicitudes!",
     changeOPProcesses: "Procesos de cambio de PO",
     changeRequestOPInfo: "Cambio de PO en ",
+    changeStatusRequestInfo: "Cambio de estado en "
 
   },
   de: {
