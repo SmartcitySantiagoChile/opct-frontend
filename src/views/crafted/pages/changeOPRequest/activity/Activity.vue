@@ -67,7 +67,7 @@ import { Actions } from "@/store/enums/StoreEnums";
 export default defineComponent({
   inheritAttrs: false,
   name: "ChangeOPProcessActivity",
-  props: ["changeOPProcess", "id"],
+  props: ["changeOPProcess"],
   components: {
     ChangeOPProcessTimelineMessage,
     ChangeOPProcessTimelineMilestone,
@@ -79,7 +79,6 @@ export default defineComponent({
     const opStatuses = ref(
       computed(() => store.getters.getCurrentOperationProgramStatuses)
     );
-    console.log(opStatuses.value);
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
       if (opStatuses.value) {

@@ -129,7 +129,7 @@
                     {{ translate("requests") }}
                     <template v-if="hasChangeStatusOption">
                       <ChangeOPRequestsEditInputTable
-                        :id="id"
+                        :id="changeOpProcessId"
                         @onChangeSelectedChangeOPRequests="
                           onChangeSelectedChangeOPRequests
                         "

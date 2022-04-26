@@ -12,7 +12,6 @@
     <div class="separator"></div>
     <ChangeOPProcessActivity
       v-bind:changeOPProcess="changeOPProcess"
-      v-bind:id="id"
       widget-classes="card-xxl-stretch mb-5 mb-xl-8"
     ></ChangeOPProcessActivity>
     <Reply></Reply>
