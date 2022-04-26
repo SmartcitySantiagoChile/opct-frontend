@@ -35,6 +35,8 @@ enum Actions {
   GET_CHANGE_OP_PROCESSES = "getChangeOPProcesses",
   GET_CHANGE_OP_PROCESSES_WITH_PARAMS = "getChangeOPProcessesWithParams",
   CHANGE_CHANGE_OP_PROCESS_STATUS = "changeChangeOPProcessStatus",
+  GET_CHANGE_OP_PROCESS_STATUSES = "getChangeOPProcessStatuses",
+  GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS = "getChangeOPProcessStatusesWithParams",
 }
 
 enum Mutations {
@@ -71,6 +73,8 @@ enum Mutations {
   SET_CHANGE_OP_PROCESS_ERRORS = "setChangeOPProcessErrors",
   SET_CHANGE_OP_PROCESSES = "setChangeOPProcesses",
   SET_CHANGE_OP_PROCESSES_ERRORS = "setChangeOPProcessesErrors",
+  SET_CHANGE_OP_PROCESS_STATUSES = "setChangeOPProcessStatuses",
+  SET_CHANGE_OP_PROCESS_STATUSES_ERRORS = "setChangeOPProcessStatusesErrors"
 }
 
 export { Actions, Mutations };
