@@ -81,13 +81,13 @@ export default defineComponent({
       const contractTypeName =
         store.getters.getCurrentChangeOPProcessContractTypeName;
       store.dispatch(
-        Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS,
+        Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS,
         contractTypeName
       );
     });
     const changeStatusOptions = ref(
       computed(() => {
-        const statuses = store.getters.getCurrentChangeOPRequestStatuses;
+        const statuses = store.getters.getCurrentChangeOPProcessStatuses;
         return statuses.flatMap((status) =>
           status.name === currentStatus.value
             ? []
@@ -101,14 +101,14 @@ export default defineComponent({
       let status: Array<string> = value.value.split("/");
       status.pop();
       const statusId: number = parseInt(status.pop() as string);
-      const changeOPRequestId = store.getters.getCurrentChangeOPRequestId;
+      const changeOPProcessId = store.getters.getCurrentChangeOPProcessId;
       const params = {
         status: statusId,
-      };
+      }
       if (statusId) {
         store
-          .dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_STATUS, {
-            resource: changeOPRequestId,
+          .dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_STATUS, {
+            resource: changeOPProcessId,
             params: params,
           })
           .then(() => {

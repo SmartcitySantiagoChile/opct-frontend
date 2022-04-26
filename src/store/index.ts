@@ -20,6 +20,8 @@ import OperationProgramTypeModule from "@/store/modules/OperationProgramTypeModu
 import OperationProgramTypesModule from "@/store/modules/OperationProgramTypesModule";
 import ChangeOPProcessModule from "@/store/modules/ChangeOPProcessModule";
 import ChangeOPProcessesModule from "@/store/modules/ChangeOPProcessesModule";
+import ChangeOPProcessStatusModule from "@/store/modules/ChangeOPProcessStatusModule";
+import ChangeOPProcessStatusesModule from "@/store/modules/ChangeOPRequestProcessesModule";
 
 config.rawError = true;
 
@@ -44,6 +46,8 @@ const store = createStore({
     OperationProgramTypesModule,
     ChangeOPProcessModule,
     ChangeOPProcessesModule,
+    ChangeOPProcessStatusModule,
+    ChangeOPProcessStatusesModule,
   },
 });
 
