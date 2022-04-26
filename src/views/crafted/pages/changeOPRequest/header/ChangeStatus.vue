@@ -74,12 +74,12 @@ export default defineComponent({
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     const currentStatus = computed(() => {
-      const status = store.getters.getCurrentChangeOPRequestStatus;
+      const status = store.getters.getCurrentChangeOPProcessStatus;
       return status ? status.name : "";
     });
     onMounted(() => {
       const contractTypeName =
-        store.getters.getCurrentChangeOPRequestContractTypeName;
+        store.getters.getCurrentChangeOPProcessContractTypeName;
       store.dispatch(
         Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS,
         contractTypeName

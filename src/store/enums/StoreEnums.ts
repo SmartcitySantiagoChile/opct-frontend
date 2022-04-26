@@ -34,6 +34,7 @@ enum Actions {
   GET_CHANGE_OP_PROCESS = "getChangeOPProcess",
   GET_CHANGE_OP_PROCESSES = "getChangeOPProcesses",
   GET_CHANGE_OP_PROCESSES_WITH_PARAMS = "getChangeOPProcessesWithParams",
+  CHANGE_CHANGE_OP_PROCESS_STATUS = "changeChangeOPProcessStatus",
 }
 
 enum Mutations {
