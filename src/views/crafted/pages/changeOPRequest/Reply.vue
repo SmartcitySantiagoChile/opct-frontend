@@ -115,8 +115,8 @@ export default defineComponent({
       formData.append("message", text);
       formData.append("creator", store.getters.currentUserUrl);
       formData.append(
-        "change_op_request",
-        store.getters.getCurrentChangeOPRequestUrl
+        "change_op_process",
+        store.getters.getCurrentChangeOPProcessUrl
       );
       const params = {
         params: formData,
@@ -125,7 +125,7 @@ export default defineComponent({
         },
       };
       store
-        .dispatch(Actions.CREATE_CHANGE_OP_REQUEST_MESSAGE, params)
+        .dispatch(Actions.CREATE_CHANGE_OP_PROCESS_MESSAGE, params)
         .then(function () {
           Swal.fire({
             text: translate("messageSuccess"),
@@ -140,7 +140,7 @@ export default defineComponent({
         })
         .catch(() => {
           Swal.fire({
-            text: store.getters.getChangeOPRequestMessageErrors.map((error) => {
+            text: store.getters.getChangeOPProcessMessageErrors.map((error) => {
               return `${translate(error[0])} : ${translate(error[1])}`;
             }),
             icon: "error",
