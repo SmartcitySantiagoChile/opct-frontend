@@ -167,27 +167,27 @@ export default class ChangeOPProcessModule
         });
     });
   }
-  //
-  // @Action
-  // [Actions.CHANGE_CHANGE_OP_REQUEST_OP](data) {
-  //   return new Promise<void>((resolve, reject) => {
-  //     ApiService.put(
-  //       `change-op-requests/${data.resource}/change-op/`,
-  //       data.params
-  //     )
-  //       .then(({ data }) => {
-  //         console.log(data);
-  //         resolve();
-  //       })
-  //       .catch(({ response }) => {
-  //         console.log(response);
-  //         this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-  //           response.data.error,
-  //         ]);
-  //         reject();
-  //       });
-  //   });
-  // }
+
+  @Action
+  [Actions.CHANGE_CHANGE_OP_PROCESS_OP](data) {
+    return new Promise<void>((resolve, reject) => {
+      ApiService.put(
+        `change-op-processes/${data.resource}/change-op/`,
+        data.params
+      )
+        .then(({ data }) => {
+          console.log(data);
+          resolve();
+        })
+        .catch(({ response }) => {
+          console.log(response);
+          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [
+            response.data.error,
+          ]);
+          reject();
+        });
+    });
+  }
   //
   // @Action
   // [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {

@@ -75,7 +75,7 @@ export default defineComponent({
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     const currentOP = computed(() => {
-      const op = store.getters.getCurrentChangeOPRequestOP;
+      const op = store.getters.getCurrentChangeOPProcessOP;
       return op ? op : translate("withoutAssign");
     });
 
@@ -116,7 +116,7 @@ export default defineComponent({
         op = ["None"];
       }
       let opId: string = op.pop() as string;
-      const changeOPRequestId = store.getters.getCurrentChangeOPRequestId;
+      const changeOPProcessId = store.getters.getCurrentChangeOPProcessId;
       const params = {
         op: opId === "None" ? null : opId,
         update_deadlines: false,
@@ -138,8 +138,8 @@ export default defineComponent({
             if (result.isConfirmed) {
               params["update_deadlines"] = true;
             }
-            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
-              resource: changeOPRequestId,
+            store.dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_OP, {
+              resource: changeOPProcessId,
               params: params,
             });
             return result;
@@ -162,8 +162,8 @@ export default defineComponent({
           .then(() => location.reload());
       } else if (opId === "None") {
         store
-          .dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
-            resource: changeOPRequestId,
+          .dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_OP, {
+            resource: changeOPProcessId,
             params: params,
           })
           .then(() => {
