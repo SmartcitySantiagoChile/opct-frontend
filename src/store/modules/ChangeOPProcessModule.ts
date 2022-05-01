@@ -20,6 +20,7 @@ export interface ChangeOPProcess {
   op_change_logs: Array<any>;
   status_logs: Array<any>;
   change_op_requests: Dictionary<string>;
+  op_release_date: string;
 }
 
 export interface ChangeOPProcessInfo {
