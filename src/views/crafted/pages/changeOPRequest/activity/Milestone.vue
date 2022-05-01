@@ -46,8 +46,7 @@
               changeOPProcessTimelineMilestone.new_op
             "
           >
-            {{ translate("changeRequestOPInfo") }}
-            {{ changeOPProcessTimelineMilestone.change_op_request.title }}:
+            {{ translate("changeOPInfo") }}
             <span class="badge badge-light-warning fs-4 fw-bolder">
               <template v-if="changeOPProcessTimelineMilestone.previous_op">
                 {{

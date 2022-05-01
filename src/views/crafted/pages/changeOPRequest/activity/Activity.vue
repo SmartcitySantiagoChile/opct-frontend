@@ -127,6 +127,16 @@ export default defineComponent({
             }
           );
         }
+        if (props.changeOPProcess["op_change_logs"]) {
+          props.changeOPProcess["op_change_logs"].forEach((changeLog) => {
+            let opChangeLogData = {
+              dateTime: changeLog["created_at"],
+              type: "opChangeLog",
+              data: changeLog,
+            };
+            orderedLogsData.push(opChangeLogData);
+          });
+        }
         if (props.changeOPProcess["change_op_requests"]) {
           props.changeOPProcess["change_op_requests"].forEach(
             (change_op_request) => {
