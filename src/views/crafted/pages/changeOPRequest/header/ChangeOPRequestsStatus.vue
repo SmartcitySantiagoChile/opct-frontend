@@ -32,53 +32,60 @@
           <div class="table-responsive">
             <!--begin::Table-->
             <table
-                class="
-            table
-            align-middle
-            gs-0
-            gy-4
-            table-rounded table-striped
-            border
-          "
+              class="
+                table
+                align-middle
+                gs-0
+                gy-4
+                table-rounded table-striped
+                border
+              "
             >
               <!--begin::Table head-->
               <thead>
-              <tr
-                  class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-              >
-                <th class="ps-4 rounded-start">{{translate("request")}}</th>
-                <th class="min-w-100px">{{ translate("status") }}</th>
-              </tr>
+                <tr
+                  class="
+                    fw-bold
+                    fs-5
+                    text-gray-800
+                    border-bottom-2 border-gray-200
+                  "
+                >
+                  <th class="ps-4 rounded-start">{{ translate("request") }}</th>
+                  <th class="min-w-100px">{{ translate("status") }}</th>
+                </tr>
               </thead>
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-              <template v-for="(item, index) in currentChangeOPRequests" :key="index">
-                <tr>
-                  <td>
-                    {{item.request.title}}
-                  </td>
-                  <td>
-                    <el-select
-                        v-model="value"
+                <template
+                  v-for="(item, index) in currentChangeOPRequests"
+                  :key="index"
+                >
+                  <tr>
+                    <td>
+                      {{ item.request.title }}
+                    </td>
+                    <td>
+                      <el-select
+                        v-model="statusSelectValues[index]"
                         :placeholder="item.request.status.name"
                         style="margin-left: 10px"
-                    >
-                      <el-option
+                      >
+                        <el-option
                           v-for="status in item.statuses"
                           :key="status.url"
                           :label="status.name"
                           :value="status.url"
-                      >
-                      </el-option>
-                    </el-select>
-                  </td>
-                </tr>
-              </template>
+                        >
+                        </el-option>
+                      </el-select>
+                    </td>
+                  </tr>
+                </template>
               </tbody>
             </table>
           </div>
-
         </div>
 
         <div class="modal-footer">
@@ -96,7 +103,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
@@ -108,7 +115,7 @@ export default defineComponent({
     widgetClasses: String,
   },
   setup: function () {
-    const {t, te} = useI18n();
+    const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     const currentStatus = computed(() => {
@@ -117,73 +124,83 @@ export default defineComponent({
     });
     onMounted(() => {
       const contractTypeName =
-          store.getters.getCurrentChangeOPProcessContractTypeName;
+        store.getters.getCurrentChangeOPProcessContractTypeName;
       store.dispatch(
-          Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS,
-          contractTypeName
+        Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS,
+        contractTypeName
       );
     });
-
+    const statusSelectValues: string[] = reactive([]);
     const currentChangeOPRequests = computed(() => {
       const statuses = store.getters.getCurrentChangeOPProcessStatuses;
       const requests = store.getters.getCurrentChangeOPProcessRequests;
       const requestsWithStatuses: any[] = [];
-      if (requests){
+      if (requests) {
         requests.forEach((request) => {
           let requestStatuses = [...statuses];
           requestStatuses.flatMap((status) => {
-            status === request.status ? [] : [{value: status.url, label: status.name}];
+            status === request.status
+              ? []
+              : [{ value: status.url, label: status.name }];
           });
           requestsWithStatuses.push({
             request: request,
             statuses: requestStatuses,
           });
+          statusSelectValues.push("");
         });
       }
+      requestsWithStatuses.sort(function (a, b) {
+        return a["url"] - b["url"];
+      }); // TODO: verificar este orden
       return requestsWithStatuses;
     });
 
-
-    console.log(currentChangeOPRequests);
-
-    const changeStatusOptions = ref(
-        computed(() => {
-          const statuses = store.getters.getCurrentChangeOPProcessStatuses;
-          return statuses.flatMap((status) =>
-              status.name === currentStatus.value
-                  ? []
-                  : [{value: status.url, label: status.name}]
-          );
-        })
-    );
     const value = ref("");
-
     const changeStatus = () => {
-      let status: Array<string> = value.value.split("/");
-      status.pop();
-      const statusId: number = parseInt(status.pop() as string);
-      const changeOPProcessId = store.getters.getCurrentChangeOPProcessId;
-      const params = {
-        status: statusId,
-      };
-      if (statusId) {
-        store
-            .dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_STATUS, {
-              resource: changeOPProcessId,
-              params: params,
+      const requestStatus: any[] = [];
+      statusSelectValues.forEach((status, index) => {
+        let currentStatus: Array<string> = status.split("/");
+        currentStatus.pop();
+        const statusId: number = parseInt(currentStatus.pop() as string);
+        let changeOPRequest =
+          currentChangeOPRequests.value[index].request.url.split("/");
+        changeOPRequest.pop();
+        const changeOPRequestId: number = parseInt(
+          changeOPRequest.pop() as string
+        );
+        const params = {
+          params: {
+            status: statusId,
+          },
+          requestId: changeOPRequestId,
+        };
+        if (statusId) {
+          requestStatus.push(params);
+        }
+      });
+      if (requestStatus) {
+        requestStatus.forEach((param, index) => {
+          store
+            .dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_STATUS, {
+              resource: param.requestId,
+              params: param.params,
             })
             .then(() => {
-              Swal.fire({
-                text: translate("changeStatusSuccess"),
-                icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: translate("continue"),
-                customClass: {
-                  confirmButton: "btn fw-bold btn-light-success",
-                },
-                allowOutsideClick: false,
-              }).then(() => location.reload());
+              if (index == requestStatus.length - 1) {
+                Swal.fire({
+                  text: translate("changeStatusSuccess"),
+                  icon: "success",
+                  buttonsStyling: false,
+                  confirmButtonText: translate("continue"),
+                  customClass: {
+                    confirmButton: "btn fw-bold btn-light-success",
+                  },
+                  allowOutsideClick: false,
+                }).then(() => location.reload());
+              }
             });
+        });
       } else {
         Swal.fire({
           text: translate("changeStatusError"),
@@ -196,13 +213,14 @@ export default defineComponent({
         });
       }
     };
+
     return {
       translate,
       value,
-      changeStatusOptions,
       currentStatus,
       changeStatus,
       currentChangeOPRequests,
+      statusSelectValues,
     };
   },
 });
