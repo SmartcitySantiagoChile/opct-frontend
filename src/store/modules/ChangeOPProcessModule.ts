@@ -108,6 +108,17 @@ export default class ChangeOPProcessModule
     return this.changeOPProcess.status;
   }
 
+  /**
+   * Get current change op process requests
+   * @returns Dictionary
+   */
+  get getCurrentChangeOPProcessRequests(): Dictionary<string> {
+    return this.changeOPProcess.change_op_requests;
+  }
+
+
+
+
   @Mutation
   [Mutations.SET_CHANGE_OP_PROCESS](changeOPProcess) {
     this.changeOPProcess = changeOPProcess;

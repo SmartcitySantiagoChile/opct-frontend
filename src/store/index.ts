@@ -21,7 +21,7 @@ import OperationProgramTypesModule from "@/store/modules/OperationProgramTypesMo
 import ChangeOPProcessModule from "@/store/modules/ChangeOPProcessModule";
 import ChangeOPProcessesModule from "@/store/modules/ChangeOPProcessesModule";
 import ChangeOPProcessStatusModule from "@/store/modules/ChangeOPProcessStatusModule";
-import ChangeOPProcessStatusesModule from "@/store/modules/ChangeOPRequestProcessesModule";
+import ChangeOPProcessStatusesModule from "@/store/modules/ChangeOPProcessStatusesModule";
 import ChangeOPProcessMessageModule from "@/store/modules/ChangeOPProcessMessageModule";
 
 config.rawError = true;

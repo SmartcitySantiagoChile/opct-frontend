@@ -128,27 +128,11 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("requests") }}
                     <template v-if="hasChangeStatusOption">
-                      <ChangeOPRequestsEditInputTable
-                        :id="changeOpProcessId"
-                        @onChangeSelectedChangeOPRequests="
-                          onChangeSelectedChangeOPRequests
-                        "
+                      <ChangeOPRequestsStatus
                       >
-                      </ChangeOPRequestsEditInputTable>
+                      </ChangeOPRequestsStatus>
                     </template>
                   </span>
-                  <a
-                    class="
-                      btn btn-sm btn-icon btn-bg-light btn-active-color-primary
-                    "
-                    data-bs-target="#selectChangeOPRequest"
-                    data-bs-toggle="modal"
-                    type="button"
-                  >
-                    <span class="svg-icon svg-icon-2">
-                      <inline-svg src="/media/icons/duotune/art/art005.svg" />
-                    </span>
-                  </a>
                   <template
                     v-for="(
                       subItem, subIndex
@@ -160,7 +144,7 @@
                       >{{
                         subItem.title
                       }}</a
-                    >&nbsp;
+                    >&nbsp;<br>
                   </template>
                 </td>
               </tr>
@@ -184,12 +168,11 @@ import ChangeStatus from "@/views/crafted/pages/changeOPRequest/header/ChangeSta
 import { useStore } from "vuex";
 import ChangeOP from "@/views/crafted/pages/changeOPRequest/header/ChangeOP.vue";
 import { DateTime } from "luxon";
-import ChangeOPRequestsEditInputTable from "@/components/widgets/tables/ChangeOPRequestsEditInputTable.vue";
-import { Actions } from "@/store/enums/StoreEnums";
+import ChangeOPRequestsStatus from "@/views/crafted/pages/changeOPRequest/header/ChangeOPRequestsStatus.vue";
 
 export default defineComponent({
   name: "ChangeOPProcessBaseInfo",
-  components: { ChangeStatus, ChangeOP, ChangeOPRequestsEditInputTable },
+  components: { ChangeStatus, ChangeOP, ChangeOPRequestsStatus },
   props: {
     widgetClasses: String,
     changeOPProcessBaseInfo: Object,
@@ -202,23 +185,10 @@ export default defineComponent({
     const hasChangeStatusOption = computed(
       () => store.getters.hasChangeStatusOption
     );
-    let relatedChangeOPRequests: Array<string> = [];
-    let relatedChangeOPRequestsInfo: Array<string> = [];
-    const onChangeSelectedChangeOPRequests = (changeOPRequests) => {
-      relatedChangeOPRequests = [];
-      relatedChangeOPRequestsInfo = [];
-      for (let key in changeOPRequests.value) {
-        let value = changeOPRequests.value[key];
-        const info = `${key}: ${value["title"]}`;
-        relatedChangeOPRequestsInfo.push(info);
-        relatedChangeOPRequests.push(value["url"]);
-      }
-    };
     return {
       translate,
       hasChangeStatusOption,
       DateTime,
-      onChangeSelectedChangeOPRequests,
     };
   },
 });
