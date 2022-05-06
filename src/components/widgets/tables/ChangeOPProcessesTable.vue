@@ -204,12 +204,9 @@
                     v-for="(subItem, subIndex) in item.change_op_requests"
                     :key="subIndex"
                   >
-                    <a
-                      class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                      >{{
-                        subItem.title
-                      }}
-                    </a>
+                    <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
+                      >{{ subItem.title }} </a
+                    ><br />
                   </template>
                 </td>
                 <td>
@@ -276,7 +273,6 @@ import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
-import CreateChangeOPRequest from "@/views/crafted/pages/changeOPRequest/CreateChangeOPRequest.vue";
 
 export default defineComponent({
   name: "change-op-processes-table",
