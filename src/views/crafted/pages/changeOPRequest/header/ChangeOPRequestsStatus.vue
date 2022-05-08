@@ -6,15 +6,15 @@
     class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
   >
     <span class="svg-icon svg-icon-2">
-      <inline-svg src="/media/icons/duotune/art/art005.svg" />
+      <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
     </span>
   </a>
   <!--begin::ChangeStatus-->
   <div class="modal fade" tabindex="-1" id="change_request_status_modal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ translate("changeStatus") }}</h5>
+          <h5 class="modal-title">{{ translate("changeOPRequests") }}</h5>
 
           <!--begin::Close-->
           <div
@@ -32,14 +32,7 @@
           <div class="table-responsive">
             <!--begin::Table-->
             <table
-              class="
-                table
-                align-middle
-                gs-0
-                gy-4
-                table-rounded table-striped
-                border
-              "
+              class="table align-middle table-rounded table-striped border"
             >
               <!--begin::Table head-->
               <thead>
@@ -47,12 +40,29 @@
                   class="
                     fw-bold
                     fs-5
+                    align-middle
                     text-gray-800
                     border-bottom-2 border-gray-200
                   "
                 >
-                  <th class="ps-4 rounded-start">{{ translate("request") }}</th>
-                  <th class="min-w-100px">{{ translate("status") }}</th>
+                  <th class="ps-4 rounded-start">
+                    {{ translate("Id") }}
+                  </th>
+                  <th class="ps-4 min-w-100px rounded-start">
+                    {{ translate("changeOPRequest") }}
+                  </th>
+                  <th class="ps-4 min-w-100px rounded-start">
+                    {{ translate("operationProgram") }}
+                  </th>
+                  <th class="ps-4 min-w-100px rounded-start">
+                    {{ translate("reason") }}
+                  </th>
+                  <th class="ps-4 min-w-100px rounded-start">
+                    {{ translate("status") }}
+                  </th>
+                  <th class="ps-4 min-w-100px rounded-start">
+                    {{ translate("relatedRequests") }}
+                  </th>
                 </tr>
               </thead>
               <!--end::Table head-->
@@ -62,25 +72,85 @@
                   v-for="(item, index) in currentChangeOPRequests"
                   :key="index"
                 >
-                  <tr>
-                    <td>
+                  <tr
+                    class="
+                      fw-bold
+                      fs-5
+                      align-middle
+                      text-gray-800
+                      border-bottom-2 border-gray-200
+                    "
+                  >
+                    <td class="ps-4 rounded-start">
+                      {{
+                        item.request.url
+                          .split("change-op-requests/")[1]
+                          .slice(0, -1)
+                      }}
+                    </td>
+                    <td class="ps-4 min-w-50px rounded-start">
                       {{ item.request.title }}
                     </td>
-                    <td>
-                      <el-select
-                        v-model="statusSelectValues[index]"
-                        :placeholder="item.request.status.name"
-                        style="margin-left: 10px"
-                      >
-                        <el-option
-                          v-for="status in item.statuses"
-                          :key="status.url"
-                          :label="status.name"
-                          :value="status.url"
-                        >
-                        </el-option>
-                      </el-select>
+                    <td class="ps-4 min-w-50px rounded-start">
+                      <template v-if="hasChangeStatusOption">
+                        <!--                      <el-select-->
+                        <!--                        v-model="opSelectValues[index]"-->
+                        <!--                        :placeholder="item.request.op.start_at"-->
+                        <!--                      >-->
+                        <!--                        <el-option-->
+                        <!--                          v-for="op in item.ops"-->
+                        <!--                          :key="op.url"-->
+                        <!--                          :label="op.start_at"-->
+                        <!--                          :value="op.url"-->
+                        <!--                        >-->
+                        <!--                        </el-option>-->
+                        <!--                      </el-select>-->
+                        <!--                      <template v-if="item.request.op">-->
+                        <!--                        {{ item.request.op.start_at }}-->
+                        <!--                      </template>-->
+                        <!--                      <template v-else>-->
+                        <!--                        {{ translate("withoutAssign") }}-->
+                        <!--                      </template>-->
+                      </template>
+                      <template v-else>
+                        <template v-if="item.request.op">
+                          {{ item.request.op.start_at }} ({{
+                            item.request.op.op_type.name
+                          }})
+                        </template>
+                        <template v-else>
+                          {{ translate("withoutAssign") }}
+                        </template>
+                      </template>
                     </td>
+                    <td class="ps-4 min-w-50px rounded-start">
+                      <template v-if="hasChangeStatusOption">
+                        {{ item.request.reason }}
+                      </template>
+                      <template v-else>
+                        {{ item.request.reason }}
+                      </template>
+                    </td>
+                    <td>
+                      <template v-if="hasChangeStatusOption">
+                        <el-select
+                          v-model="statusSelectValues[index]"
+                          :placeholder="item.request.status.name"
+                        >
+                          <el-option
+                            v-for="status in item.statuses"
+                            :key="status.url"
+                            :label="status.name"
+                            :value="status.url"
+                          >
+                          </el-option>
+                        </el-select>
+                      </template>
+                      <template v-else>
+                        {{ item.request.status.name }}
+                      </template>
+                    </td>
+                    <td></td>
                   </tr>
                 </template>
               </tbody>
@@ -89,12 +159,19 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-            {{ translate("cancel") }}
-          </button>
-          <button type="button" class="btn btn-primary" @click="changeStatus">
-            {{ translate("send") }}
-          </button>
+          <template v-if="hasChangeStatusOption">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+              {{ translate("cancel") }}
+            </button>
+            <button type="button" class="btn btn-primary" @click="changeStatus">
+              {{ translate("save") }}
+            </button>
+          </template>
+          <template v-else>
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+              {{ translate("continue") }}
+            </button>
+          </template>
         </div>
       </div>
     </div>
@@ -108,11 +185,13 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
+import { bool } from "yup";
 
 export default defineComponent({
   name: "changeOPRequestsStatus",
   props: {
     widgetClasses: String,
+    hasChangeStatusOption: bool,
   },
   setup: function () {
     const { t, te } = useI18n();
@@ -126,14 +205,19 @@ export default defineComponent({
       const contractTypeName =
         store.getters.getCurrentChangeOPProcessContractTypeName;
       store.dispatch(
-        Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS,
+        Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS,
         contractTypeName
       );
+      store.dispatch(Actions.GET_OPERATION_PROGRAMS);
     });
     const statusSelectValues: string[] = reactive([]);
+    const opSelectValues: string[] = reactive([]);
+
     const currentChangeOPRequests = computed(() => {
-      const statuses = store.getters.getCurrentChangeOPProcessStatuses;
+      const statuses = store.getters.getCurrentChangeOPRequestStatuses;
       const requests = store.getters.getCurrentChangeOPProcessRequests;
+      const ops = store.getters.getCurrentOperationProgams;
+
       const requestsWithStatuses: any[] = [];
       if (requests) {
         requests.forEach((request) => {
@@ -143,19 +227,25 @@ export default defineComponent({
               ? []
               : [{ value: status.url, label: status.name }];
           });
+          // let requestOps = [...ops];
+          // requestOps.flatMap((op) => {
+          //   op === request.op ? [] : [{ value: op.url, label: op.start_at }];
+          // });
+
           requestsWithStatuses.push({
             request: request,
             statuses: requestStatuses,
+            // ops: requestOps,
           });
           statusSelectValues.push("");
+          // opSelectValues.push("");
         });
       }
       requestsWithStatuses.sort(function (a, b) {
-        return a["url"] - b["url"];
+        return a.request["url"] - b.request["url"];
       }); // TODO: verificar este orden
       return requestsWithStatuses;
     });
-
     const value = ref("");
     const changeStatus = () => {
       const requestStatus: any[] = [];
@@ -213,7 +303,7 @@ export default defineComponent({
         });
       }
     };
-
+    console.log(currentChangeOPRequests);
     return {
       translate,
       value,
@@ -221,6 +311,7 @@ export default defineComponent({
       changeStatus,
       currentChangeOPRequests,
       statusSelectValues,
+      opSelectValues,
     };
   },
 });

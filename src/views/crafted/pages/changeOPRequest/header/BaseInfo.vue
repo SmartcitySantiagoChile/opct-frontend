@@ -58,7 +58,9 @@
                   <span class="text-dark fw-bolder d-block fs-3">
                     <template v-if="changeOPProcessBaseInfo.base_op">
                       {{
-                        DateTime.fromISO(changeOPProcessBaseInfo.base_op.start_at)
+                        DateTime.fromISO(
+                          changeOPProcessBaseInfo.base_op.start_at
+                        )
                           .setLocale(this.$i18n.locale)
                           .toLocaleString()
                       }}
@@ -127,25 +129,10 @@
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("requests") }}
-                    <template v-if="hasChangeStatusOption">
-                      <ChangeOPRequestsStatus
-                      >
-                      </ChangeOPRequestsStatus>
-                    </template>
                   </span>
-                  <template
-                    v-for="(
-                      subItem, subIndex
-                    ) in changeOPProcessBaseInfo.change_op_requests"
-                    :key="subIndex"
-                  >
-                    <a
-                      class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                      >{{
-                        subItem.title
-                      }}</a
-                    >&nbsp;<br>
-                  </template>
+                  <ChangeOPRequestsStatus
+                    :hasChangeStatusOption="hasChangeStatusOption"
+                  ></ChangeOPRequestsStatus>
                 </td>
               </tr>
             </tbody>
@@ -162,7 +149,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import ChangeStatus from "@/views/crafted/pages/changeOPRequest/header/ChangeStatus.vue";
 import { useStore } from "vuex";

@@ -1,6 +1,4 @@
 import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
-import { ChangeOPRequestStatus } from "@/store/modules/ChangeOPRequestStatusModule";
-import ChangeOPRequest from "@/store/modules/ChangeOPRequestModule";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import ApiService from "@/core/services/ApiService";
 import { OperationProgram } from "@/store/modules/OperationProgramModule";
