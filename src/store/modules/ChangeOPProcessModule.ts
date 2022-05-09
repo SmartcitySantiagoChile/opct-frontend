@@ -142,25 +142,25 @@ export default class ChangeOPProcessModule
       });
   }
 
-  // @Action
-  // [Actions.CREATE_CHANGE_OP_REQUEST](params) {
-  //   return new Promise<void>((resolve, reject) => {
-  //     ApiService.postWithFiles("change-op-requests/", params)
-  //       .then(({ data }) => {
-  //         console.log(data);
-  //         resolve();
-  //       })
-  //       .catch(({ response }) => {
-  //         console.log(response);
-  //         this.context.commit(
-  //           Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS,
-  //           response.data
-  //         );
-  //         reject();
-  //       });
-  //   });
-  // }
-  //
+  @Action
+  [Actions.CREATE_CHANGE_OP_PROCESS](params) {
+    return new Promise<void>((resolve, reject) => {
+      ApiService.postWithFiles("change-op-processes/", params)
+        .then(({ data }) => {
+          console.log(data);
+          resolve();
+        })
+        .catch(({ response }) => {
+          console.log(response);
+          this.context.commit(
+            Mutations.SET_CHANGE_OP_PROCESS_ERRORS,
+            response.data
+          );
+          reject();
+        });
+    });
+  }
+
   @Action
   [Actions.CHANGE_CHANGE_OP_PROCESS_STATUS](data) {
     return new Promise<void>((resolve, reject) => {

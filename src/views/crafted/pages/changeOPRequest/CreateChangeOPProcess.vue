@@ -4,16 +4,16 @@
     <a
       id="kt_toolbar_primary_button"
       class="btn btn-success"
-      data-bs-target="#modal_create_change_op_request"
+      data-bs-target="#modal_create_change_op_process"
       data-bs-toggle="modal"
       href="#"
     >
-      {{ translate("createChangeOPRequest") }}
+      {{ translate("createChangeOPProcess") }}
     </a>
   </span>
   <div
-    id="modal_create_change_op_request"
-    ref="createChangeOPRequestModalRef"
+    id="modal_create_change_op_process"
+    ref="createChangeOPProcessModalRef"
     aria-hidden="true"
     class="modal fade"
     tabindex="-1"
@@ -25,7 +25,7 @@
         <!--begin::Modal header-->
         <div class="modal-header">
           <!--begin::Modal title-->
-          <h2>{{ translate("createChangeOPRequest") }}</h2>
+          <h2>{{ translate("createChangeOPProcess") }}</h2>
           <!--end::Modal title-->
 
           <!--begin::Close-->
@@ -45,7 +45,7 @@
         <div class="modal-body py-lg-10 px-lg-10">
           <!--begin::Stepper-->
           <div
-            id="modal_create_change_op_request_stepper"
+            id="modal_create_change_op_process_stepper"
             ref="createChangeOPRef"
             class="
               stepper stepper-pills stepper-column
@@ -220,45 +220,45 @@
 
                     <!--begin::Input group-->
                     <div class="row mb-10">
-                      <!--begin::Col-->
-                      <div class="col-md-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="required fs-6 fw-bold form-label mb-2">{{
-                          translate("reason")
-                        }}</label>
-                        <!--end::Label-->
+                      <!--                      &lt;!&ndash;begin::Col&ndash;&gt;-->
+                      <!--                      <div class="col-md-8 fv-row">-->
+                      <!--                        &lt;!&ndash;begin::Label&ndash;&gt;-->
+                      <!--                        <label class="required fs-6 fw-bold form-label mb-2">{{-->
+                      <!--                          translate("reason")-->
+                      <!--                        }}</label>-->
+                      <!--                        &lt;!&ndash;end::Label&ndash;&gt;-->
 
-                        <!--begin::Row-->
-                        <div class="row fv-row">
-                          <!--begin::Col-->
-                          <Field
-                            id="reason"
-                            as="select"
-                            class="
-                              form-select form-select-solid
-                              select2-hidden-accessible
-                            "
-                            name="reason"
-                          >
-                            <option
-                              v-for="i in reasonOptions"
-                              :key="i.value"
-                              :label="i.label"
-                              :value="i.value"
-                            ></option>
-                          </Field>
-                          <ErrorMessage
-                            class="
-                              fv-plugins-message-container
-                              invalid-feedback
-                            "
-                            name="reason"
-                          />
-                          <!--end::Col-->
-                        </div>
-                        <!--end::Row-->
-                      </div>
-                      <!--end::Col-->
+                      <!--                        &lt;!&ndash;begin::Row&ndash;&gt;-->
+                      <!--                        <div class="row fv-row">-->
+                      <!--                          &lt;!&ndash;begin::Col&ndash;&gt;-->
+                      <!--                          <Field-->
+                      <!--                            id="reason"-->
+                      <!--                            as="select"-->
+                      <!--                            class="-->
+                      <!--                              form-select form-select-solid-->
+                      <!--                              select2-hidden-accessible-->
+                      <!--                            "-->
+                      <!--                            name="reason"-->
+                      <!--                          >-->
+                      <!--                            <option-->
+                      <!--                              v-for="i in reasonOptions"-->
+                      <!--                              :key="i.value"-->
+                      <!--                              :label="i.label"-->
+                      <!--                              :value="i.value"-->
+                      <!--                            ></option>-->
+                      <!--                          </Field>-->
+                      <!--                          <ErrorMessage-->
+                      <!--                            class="-->
+                      <!--                              fv-plugins-message-container-->
+                      <!--                              invalid-feedback-->
+                      <!--                            "-->
+                      <!--                            name="reason"-->
+                      <!--                          />-->
+                      <!--                          &lt;!&ndash;end::Col&ndash;&gt;-->
+                      <!--                        </div>-->
+                      <!--                        &lt;!&ndash;end::Row&ndash;&gt;-->
+                      <!--                      </div>-->
+                      <!--                      &lt;!&ndash;end::Col&ndash;&gt;-->
                     </div>
                     <!--end::Input group-->
 
@@ -602,7 +602,7 @@ import ChangeOPRequestsInputTable from "@/components/widgets/tables/ChangeOPRequ
 
 interface Step1 {
   title: string;
-  reason: string;
+  // reason: string;
 }
 
 interface Step2 {
@@ -616,30 +616,35 @@ interface Step3 {
 interface KTCreateApp extends Step1, Step2, Step3 {}
 
 export default defineComponent({
-  name: "CreateChangeOpRequest",
+  name: "CreateChangeOpProcess",
   components: {
     Field,
     ErrorMessage,
     ChangeOPRequestsInputTable,
   },
   setup: function () {
+    const { t, te } = useI18n();
+    const translate = (text) => (te(text) ? t(text) : text);
+    const store = useStore();
+
+    // Call actions to get selectors data.
+    store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
+    store.dispatch(Actions.GET_ORGANIZATIONS);
+    store.dispatch(Actions.GET_OPERATION_PROGRAMS);
+
+    // Set constants for form.
     const _stepperObj = ref<StepperComponent | null>(null);
     const createChangeOPRef = ref<HTMLElement | null>(null);
     const createAppModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
-    const { t, te } = useI18n();
-    const translate = (text) => (te(text) ? t(text) : text);
-    const store = useStore();
     const isAdminOrganization = computed(
       () => store.getters.hasChangeStatusOption
     );
     let fileList = [];
     let relatedChangeOPRequests: Array<string> = [];
     let relatedChangeOPRequestsInfo: Array<string> = [];
-    store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
-    store.dispatch(Actions.GET_ORGANIZATIONS);
-    store.dispatch(Actions.GET_OPERATION_PROGRAMS);
 
+    // Create selectors.
     const reasonOptions = computed(() => {
       let options: Array<any> = [];
       const reasons: Array<Array<string>> =
@@ -655,7 +660,6 @@ export default defineComponent({
       }
       return options;
     });
-
     const OPOptions = computed(() => {
       const operationPrograms = store.getters.getCurrentOperationPrograms;
       let options: Array<any> = [];
@@ -680,7 +684,6 @@ export default defineComponent({
       });
       return options;
     });
-
     const organizationsOptions = computed(() => {
       const organizations = store.getters.getAllOrganizations;
       const currentOrganizationName = store.getters.getOrganizationName;
@@ -726,7 +729,6 @@ export default defineComponent({
       }
       return option;
     });
-
     const searchChangeOpRequest = (filter) => {
       if (filter.length > 3 && filter.length < 11) {
         store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {
@@ -737,14 +739,14 @@ export default defineComponent({
 
     const formData = ref<KTCreateApp>({
       title: "",
-      reason: "1",
+      // reason: "1",
       counterpart: "1",
       op: "",
     });
 
     const formDataInfo = ref<KTCreateApp>({
       title: "",
-      reason: "1",
+      // reason: "1",
       counterpart: "1",
       op: "",
     });
@@ -772,9 +774,9 @@ export default defineComponent({
     const createAppSchema = [
       Yup.object({
         title: Yup.string().required(translate("titleRequired")).label("Title"),
-        reason: Yup.string()
-          .required(translate("reasonRequired"))
-          .label("Reason"),
+        // reason: Yup.string()
+        //   .required(translate("reasonRequired"))
+        //   .label("Reason"),
       }),
       Yup.object({
         counterpart: Yup.string().required().label("counterpart"),
@@ -820,13 +822,13 @@ export default defineComponent({
       formDataInfo.value["title"] = formData.value["title"];
       formDataInfo.value["relatedChangeOPRequests"] =
         relatedChangeOPRequestsInfo;
-      const reasonSelector: HTMLSelectElement = document.querySelector(
-        "#reason"
-      ) as HTMLSelectElement;
-      if (reasonSelector) {
-        formDataInfo.value["reason"] =
-          reasonSelector.options[reasonSelector.selectedIndex].label;
-      }
+      // const reasonSelector: HTMLSelectElement = document.querySelector(
+      //   "#reason"
+      // ) as HTMLSelectElement;
+      // if (reasonSelector) {
+      //   formDataInfo.value["reason"] =
+      //     reasonSelector.options[reasonSelector.selectedIndex].label;
+      // }
 
       const counterPartSelector: HTMLSelectElement = document.querySelector(
         "#counterpart"
@@ -881,13 +883,13 @@ export default defineComponent({
         fileFormData.append("files", file_raw, file["name"]);
       });
 
-      if (relatedChangeOPRequests) {
-        relatedChangeOPRequests.forEach((url) => {
-          fileFormData.append("related_requests", url);
-        });
-      } else {
-        fileFormData.append("related_requests", "");
-      }
+      // if (relatedChangeOPRequests) {
+      //   relatedChangeOPRequests.forEach((url) => {
+      //     fileFormData.append("related_requests", url);
+      //   });
+      // } else {
+      //   fileFormData.append("related_requests", "");
+      // }
       const params = {
         params: fileFormData,
         headers: {
@@ -896,7 +898,7 @@ export default defineComponent({
       };
 
       store
-        .dispatch(Actions.CREATE_CHANGE_OP_REQUEST, params)
+        .dispatch(Actions.CREATE_CHANGE_OP_PROCESS, params)
         .then(() => {
           Swal.fire({
             text: translate("createChangeOPRequestSuccess"),
@@ -913,7 +915,7 @@ export default defineComponent({
             .then(() => location.reload());
         })
         .catch(() => {
-          const errors = store.getters.getChangeOPRequestErrors;
+          const errors = store.getters.getChangeOPProcessErrors;
           const parsedErrors = Object.entries(errors).map((key) => {
             return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
           });
@@ -958,7 +960,7 @@ export default defineComponent({
       currentStepIndex,
       totalSteps,
       createAppModalRef,
-      reasonOptions,
+      // reasonOptions,
       translate,
       handleChange,
       fileList,

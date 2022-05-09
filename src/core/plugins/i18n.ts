@@ -182,6 +182,7 @@ const messages = {
     genericError: "Request error",
     changeReasonInfo: "Change Reason:",
     changeReasonRequestInfo: "Change Reason on",
+    createChangeOPProcess: "Create change op process",
   },
   es: {
     dashboard: "Tablero",
@@ -368,6 +369,7 @@ const messages = {
     genericError: "Error en la solicitud",
     changeReasonInfo: "Cambio de motivo:",
     changeReasonRequestInfo: "Cambio de motivo en",
+    createChangeOPProcess: "Crear proceso de cambio de PO",
   },
   de: {
     dashboard: "Instrumententafel",

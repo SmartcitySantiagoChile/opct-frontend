@@ -23,7 +23,7 @@
           />
         </span>
 
-        <!--<CreateChangeOPRequest></CreateChangeOPRequest>-->
+        <CreateChangeOPProcess></CreateChangeOPProcess>
 
         <!--end::Menu-->
       </div>
@@ -273,10 +273,11 @@ import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
+import CreateChangeOPProcess from "@/views/crafted/pages/changeOPRequest/CreateChangeOPProcess.vue";
 
 export default defineComponent({
   name: "change-op-processes-table",
-  //components: { CreateChangeOPRequest },
+  components: { CreateChangeOPProcess },
   props: {
     widgetClasses: String,
   },

@@ -40,6 +40,7 @@ enum Actions {
   CREATE_CHANGE_OP_PROCESS_MESSAGE = "createChangeOPProcessMessage",
   CHANGE_CHANGE_OP_PROCESS_OP = "changeChangeOPProcessOP",
   CHANGE_CHANGE_OP_REQUEST_REASON = "changeChangeOPRequestReason",
+  CREATE_CHANGE_OP_PROCESS = "createChangeOPProcess",
 }
 
 enum Mutations {
