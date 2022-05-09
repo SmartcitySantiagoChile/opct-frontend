@@ -107,10 +107,16 @@
           </template>
           <!--end:: Change OP Case-->
           <!--begin:: Time Threshold Case-->
-          <template v-if="changeOPProcessTimelineMilestone.time_threshold">
+          <template
+            v-if="
+              changeOPProcessTimelineMilestone.time_threshold ||
+              changeOPProcessTimelineMilestone.time_threshold === 0
+            "
+          >
             <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
               {{
-                changeOPProcessTimelineMilestone.time_threshold
+                changeOPProcessTimelineMilestone.time_threshold ||
+                changeOPProcessTimelineMilestone.time_threshold === 0
                   ? translate("endOf") +
                     " " +
                     changeOPProcessTimelineMilestone.name
@@ -131,7 +137,12 @@
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
             <!--begin::Change OP Process Status Detail Case -->
-            <template v-if="changeOPProcessTimelineMilestone.time_threshold">
+            <template
+              v-if="
+                changeOPProcessTimelineMilestone.time_threshold ||
+                changeOPProcessTimelineMilestone.time_threshold === 0
+              "
+            >
               {{
                 DateTime.now().diff(
                   DateTime.fromISO(changeOPProcessTimelineMilestone.dead_line)
