@@ -180,6 +180,8 @@ const messages = {
     changeStatusRequestInfo: "Change status on ",
     changeOPRequest: "Change OP Request",
     genericError: "Request error",
+    changeReasonInfo: "Change Reason:",
+    changeReasonRequestInfo: "Change Reason on",
   },
   es: {
     dashboard: "Tablero",
@@ -364,6 +366,8 @@ const messages = {
     changeStatusRequestInfo: "Cambio de estado en ",
     changeOPRequest: "Solicitud de cambio",
     genericError: "Error en la solicitud",
+    changeReasonInfo: "Cambio de motivo:",
+    changeReasonRequestInfo: "Cambio de motivo en",
   },
   de: {
     dashboard: "Instrumententafel",

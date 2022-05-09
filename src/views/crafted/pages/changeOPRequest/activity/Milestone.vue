@@ -39,7 +39,25 @@
             </span>
           </template>
           <!--end:: Change OP Process and Request Status Case-->
-          <!--begin:: Change OP Case-->
+          <!--begin:: Change OP Process and Request Reason Case-->
+          <template v-if="changeOPProcessTimelineMilestone.new_reason">
+            <template v-if="changeOPProcessTimelineMilestone.change_op_process">
+              {{ translate("changeReasonInfo") }}
+            </template>
+            <template v-if="changeOPProcessTimelineMilestone.change_op_request">
+              {{ translate("changeReasonRequestInfo") }}
+              "{{ changeOPProcessTimelineMilestone.change_op_request.title }}":
+            </template>
+            <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
+              {{ changeOPProcessTimelineMilestone.previous_reason }}
+            </span>
+            {{ translate("to") }}
+            <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
+              {{ changeOPProcessTimelineMilestone.new_reason }}
+            </span>
+          </template>
+          <!--end:: Change OP Process and Request Reason Case-->
+          <!--begin:: Change OP Process and Request OP Case-->
           <template
             v-if="
               changeOPProcessTimelineMilestone.previous_op ||
@@ -136,7 +154,8 @@
               v-if="
                 changeOPProcessTimelineMilestone.new_op ||
                 changeOPProcessTimelineMilestone.previous_op ||
-                changeOPProcessTimelineMilestone.new_status
+                changeOPProcessTimelineMilestone.new_status ||
+                changeOPProcessTimelineMilestone.new_reason
               "
             >
               {{ translate("addedAt") }}

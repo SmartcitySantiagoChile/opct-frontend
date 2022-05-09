@@ -34,7 +34,8 @@
                 v-if="
                   item.type === 'statusLog' ||
                   item.type === 'opChangeLog' ||
-                  item.type === 'opStatus'
+                  item.type === 'opStatus' ||
+                  item.type === 'reasonChangeLog'
                 "
               >
                 <ChangeOPProcessTimelineMilestone
@@ -153,7 +154,6 @@ export default defineComponent({
               if (change_op_request["change_op_request_op_change_logs"]) {
                 change_op_request["change_op_request_op_change_logs"].forEach(
                   (changeLog) => {
-                    console.log(changeLog);
                     let opChangeLogData = {
                       dateTime: changeLog["created_at"],
                       type: "opChangeLog",
@@ -162,6 +162,30 @@ export default defineComponent({
                     orderedLogsData.push(opChangeLogData);
                   }
                 );
+              }
+              if (change_op_request["change_op_request_op_change_logs"]) {
+                change_op_request["change_op_request_op_change_logs"].forEach(
+                  (changeLog) => {
+                    let opChangeLogData = {
+                      dateTime: changeLog["created_at"],
+                      type: "opChangeLog",
+                      data: changeLog,
+                    };
+                    orderedLogsData.push(opChangeLogData);
+                  }
+                );
+                if (change_op_request["change_op_request_reason_change_logs"]) {
+                  change_op_request[
+                    "change_op_request_reason_change_logs"
+                  ].forEach((changeLog) => {
+                    let reasonChangeLogData = {
+                      dateTime: changeLog["created_at"],
+                      type: "reasonChangeLog",
+                      data: changeLog,
+                    };
+                    orderedLogsData.push(reasonChangeLogData);
+                  });
+                }
               }
             }
           );
