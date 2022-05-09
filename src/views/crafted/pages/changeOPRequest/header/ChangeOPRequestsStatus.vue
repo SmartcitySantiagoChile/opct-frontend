@@ -93,24 +93,18 @@
                     </td>
                     <td class="ps-4 min-w-50px rounded-start">
                       <template v-if="hasChangeStatusOption">
-                        <!--                      <el-select-->
-                        <!--                        v-model="opSelectValues[index]"-->
-                        <!--                        :placeholder="item.request.op.start_at"-->
-                        <!--                      >-->
-                        <!--                        <el-option-->
-                        <!--                          v-for="op in item.ops"-->
-                        <!--                          :key="op.url"-->
-                        <!--                          :label="op.start_at"-->
-                        <!--                          :value="op.url"-->
-                        <!--                        >-->
-                        <!--                        </el-option>-->
-                        <!--                      </el-select>-->
-                        <!--                      <template v-if="item.request.op">-->
-                        <!--                        {{ item.request.op.start_at }}-->
-                        <!--                      </template>-->
-                        <!--                      <template v-else>-->
-                        <!--                        {{ translate("withoutAssign") }}-->
-                        <!--                      </template>-->
+                        <el-select
+                          v-model="opSelectValues[index]"
+                          :placeholder="item.request.op.start_at"
+                        >
+                          <el-option
+                            v-for="op in item.ops"
+                            :key="op.url"
+                            :label="op.start_at"
+                            :value="op.url"
+                          >
+                          </el-option>
+                        </el-select>
                       </template>
                       <template v-else>
                         <template v-if="item.request.op">
@@ -125,7 +119,18 @@
                     </td>
                     <td class="ps-4 min-w-50px rounded-start">
                       <template v-if="hasChangeStatusOption">
-                        {{ item.request.reason }}
+                        <el-select
+                          v-model="reasonSelectValues[index]"
+                          :placeholder="item.request.reason"
+                        >
+                          <el-option
+                            v-for="reason in item.reasons"
+                            :key="reason[0]"
+                            :label="reason[1]"
+                            :value="reason[0]"
+                          >
+                          </el-option>
+                        </el-select>
                       </template>
                       <template v-else>
                         {{ item.request.reason }}
@@ -163,7 +168,11 @@
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">
               {{ translate("cancel") }}
             </button>
-            <button type="button" class="btn btn-primary" @click="changeStatus">
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="changeRequests"
+            >
               {{ translate("save") }}
             </button>
           </template>
@@ -193,56 +202,71 @@ export default defineComponent({
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
+
     onMounted(() => {
+      // Call actions to get all selectors data to use in modal
       store.dispatch(Actions.GET_CHANGE_OP_REQUEST_STATUSES);
       store.dispatch(Actions.GET_OPERATION_PROGRAMS);
+      store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
     });
+
+    // Create selectors lists.
     const statusSelectValues: string[] = reactive([]);
     const opSelectValues: string[] = reactive([]);
+    const reasonSelectValues: string[] = reactive([]);
 
+    // Process current change op requests to create selectors with no repeated data.
     const currentChangeOPRequests = computed(() => {
-      const statuses = store.getters.getCurrentChangeOPRequestStatuses;
+      // Get selectors data.
       const requests = store.getters.getCurrentChangeOPProcessRequests;
+      const statuses = store.getters.getCurrentChangeOPRequestStatuses;
+      const ops = store.getters.getCurrentOperationPrograms;
+      const reasons = store.getters.getChangeOPRequestReason;
       const currentContractType =
         store.getters.getCurrentChangeOPProcessContractTypeName;
-      const ops = store.getters.getCurrentOperationProgams;
-      const requestsWithStatuses: any[] = [];
-      if (requests && currentContractType) {
+      const requestsWithSelectors: any[] = [];
+      // Process change op request only when the selector data exist.
+      if (requests && currentContractType && reasons) {
         requests.forEach((request) => {
+          // Process status selector data
           const requestStatuses = JSON.parse(JSON.stringify(statuses)).filter(
             (status) =>
               status.name != request.status.name &&
               status.contract_type.name === currentContractType
           );
-          // requestStatuses.filter((status) => {
-          //   status === request.status ||
-          //   status.contract_type.name !== request.status.contract_type.name
-          //     ? []
-          //     : [{ value: status.url, label: status.name }];
-          // });
-          console.log(requestStatuses);
-          // let requestOps = [...ops];
-          // requestOps.flatMap((op) => {
-          //   op === request.op ? [] : [{ value: op.url, label: op.start_at }];
-          // });
+          // Process op selector data
+          const requestOps = JSON.parse(JSON.stringify(ops)).filter(
+            (op) => op.start_at != request.op.start_at
+          );
 
-          requestsWithStatuses.push({
+          //Process reason selector data
+          const requestReasons = JSON.parse(JSON.stringify(reasons)).filter(
+            (reason) => reason[1] != request.reason
+          );
+          // Add processed data to return statement,
+          requestsWithSelectors.push({
             request: request,
             statuses: requestStatuses,
-            // ops: requestOps,
+            ops: requestOps,
+            reasons: requestReasons,
           });
+          // Add empty values to selector lists.
           statusSelectValues.push("");
-          // opSelectValues.push("");
+          opSelectValues.push("");
+          reasonSelectValues.push("");
         });
       }
-      requestsWithStatuses.sort(function (a, b) {
-        return a.request["url"] - b.request["url"];
-      }); // TODO: verificar este orden
-      return requestsWithStatuses;
+      return requestsWithSelectors;
     });
     const value = ref("");
-    const changeStatus = () => {
+
+    const changeRequests = () => {
       const requestStatus: any[] = [];
+      const requestOps: any[] = [];
+      const requestReasons: any[] = [];
+      let requestsArray: any[] = [];
+
+      // Create GET request for all status selector edited.
       statusSelectValues.forEach((status, index) => {
         let currentStatus: Array<string> = status.split("/");
         currentStatus.pop();
@@ -263,47 +287,112 @@ export default defineComponent({
           requestStatus.push(params);
         }
       });
+      // Add status GET requests to request list.
       if (requestStatus) {
-        requestStatus.forEach((param, index) => {
-          store
-            .dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_STATUS, {
+        requestStatus.forEach((param) => {
+          requestsArray.push(
+            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_STATUS, {
               resource: param.requestId,
               params: param.params,
             })
-            .then(() => {
-              if (index == requestStatus.length - 1) {
-                Swal.fire({
-                  text: translate("changeStatusSuccess"),
-                  icon: "success",
-                  buttonsStyling: false,
-                  confirmButtonText: translate("continue"),
-                  customClass: {
-                    confirmButton: "btn fw-bold btn-light-success",
-                  },
-                  allowOutsideClick: false,
-                }).then(() => location.reload());
-              }
-            });
-        });
-      } else {
-        Swal.fire({
-          text: translate("changeStatusError"),
-          icon: "error",
-          buttonsStyling: false,
-          confirmButtonText: translate("tryAgain"),
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-danger",
-          },
+          );
         });
       }
+      // Create GET request for all op selector edited.
+      opSelectValues.forEach((op, index) => {
+        let currentOp: Array<string> = op.split("/");
+        currentOp.pop();
+        const opId: number = parseInt(currentOp.pop() as string);
+        let changeOPRequest =
+          currentChangeOPRequests.value[index].request.url.split("/");
+        changeOPRequest.pop();
+        const changeOPRequestId: number = parseInt(
+          changeOPRequest.pop() as string
+        );
+        const params = {
+          params: {
+            op: opId,
+          },
+          requestId: changeOPRequestId,
+        };
+        if (opId) {
+          requestOps.push(params);
+        }
+      });
+      // Add op GET requests to request list.
+      if (requestOps) {
+        requestOps.forEach((param) => {
+          requestsArray.push(
+            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_OP, {
+              resource: param.requestId,
+              params: param.params,
+            })
+          );
+        });
+      }
+      // Create GET request for all status selector edited.
+      reasonSelectValues.forEach((reason, index) => {
+        let changeOPRequest =
+          currentChangeOPRequests.value[index].request.url.split("/");
+        changeOPRequest.pop();
+        const changeOPRequestId: number = parseInt(
+          changeOPRequest.pop() as string
+        );
+        const params = {
+          params: {
+            reason: reason,
+          },
+          requestId: changeOPRequestId,
+        };
+        if (reason) {
+          requestReasons.push(params);
+        }
+      });
+      // Add status GET requests to request list.
+      if (requestReasons) {
+        requestReasons.forEach((param) => {
+          requestsArray.push(
+            store.dispatch(Actions.CHANGE_CHANGE_OP_REQUEST_REASON, {
+              resource: param.requestId,
+              params: param.params,
+            })
+          );
+        });
+      }
+      // Send all requests.
+      Promise.all(requestsArray)
+        .then(
+          Swal.fire({
+            text: translate("changeStatusSuccess"),
+            icon: "success",
+            buttonsStyling: false,
+            confirmButtonText: translate("continue"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-success",
+            },
+            allowOutsideClick: false,
+          }).then(() => location.reload())
+        )
+        .catch(() => {
+          Swal.fire({
+            text: translate("genericError"),
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: translate("tryAgain"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-danger",
+            },
+          });
+        });
     };
     return {
       translate,
       value,
-      changeStatus,
+      changeRequests,
       currentChangeOPRequests,
       statusSelectValues,
       opSelectValues,
+      reasonSelectValues,
     };
   },
 });

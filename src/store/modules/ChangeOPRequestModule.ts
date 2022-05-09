@@ -172,7 +172,6 @@ export default class ChangeOPRequestModule
     return new Promise<void>((resolve, reject) => {
       ApiService.postWithFiles("change-op-requests/", params)
         .then(({ data }) => {
-          console.log(data);
           resolve();
         })
         .catch(({ response }) => {
@@ -194,7 +193,26 @@ export default class ChangeOPRequestModule
         data.params
       )
         .then(({ data }) => {
-          console.log(data);
+          resolve();
+        })
+        .catch(({ response }) => {
+          console.log(response);
+          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
+            response.data.error,
+          ]);
+          reject();
+        });
+    });
+  }
+
+  @Action
+  [Actions.CHANGE_CHANGE_OP_REQUEST_REASON](data) {
+    return new Promise<void>((resolve, reject) => {
+      ApiService.put(
+        `change-op-requests/${data.resource}/change-reason/`,
+        data.params
+      )
+        .then(({ data }) => {
           resolve();
         })
         .catch(({ response }) => {
@@ -232,6 +250,7 @@ export default class ChangeOPRequestModule
   [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {
     ApiService.get("change-op-request-reasons")
       .then(({ data }) => {
+        console.log(data);
         this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_REASONS, data);
       })
       .catch(({ response }) => {
