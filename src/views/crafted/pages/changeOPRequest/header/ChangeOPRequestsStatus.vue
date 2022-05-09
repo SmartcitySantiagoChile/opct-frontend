@@ -204,7 +204,7 @@ export default defineComponent({
     const store = useStore();
 
     onMounted(() => {
-      // Call actions to get all selectors data to use in modal
+      // Call actions to get all selector data to use in modal
       store.dispatch(Actions.GET_CHANGE_OP_REQUEST_STATUSES);
       store.dispatch(Actions.GET_OPERATION_PROGRAMS);
       store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
@@ -227,6 +227,7 @@ export default defineComponent({
       const requestsWithSelectors: any[] = [];
       // Process change op request only when the selector data exist.
       if (requests && currentContractType && reasons) {
+        //TODO: order requests
         requests.forEach((request) => {
           // Process status selector data
           const requestStatuses = JSON.parse(JSON.stringify(statuses)).filter(
