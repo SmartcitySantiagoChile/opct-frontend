@@ -65,7 +65,9 @@ export default class ChangeOPProcessModule
    * @returns string
    */
   get getCurrentChangeOPProcessOP(): string {
-    return this.changeOPProcess.base_op ? this.changeOPProcess.base_op.start_at : "";
+    return this.changeOPProcess.base_op
+      ? this.changeOPProcess.base_op.start_at
+      : "";
   }
 
   /**
@@ -115,9 +117,6 @@ export default class ChangeOPProcessModule
   get getCurrentChangeOPProcessRequests(): Dictionary<string> {
     return this.changeOPProcess.change_op_requests;
   }
-
-
-
 
   @Mutation
   [Mutations.SET_CHANGE_OP_PROCESS](changeOPProcess) {
@@ -188,11 +187,9 @@ export default class ChangeOPProcessModule
         data.params
       )
         .then(({ data }) => {
-          console.log(data);
           resolve();
         })
         .catch(({ response }) => {
-          console.log(response);
           this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [
             response.data.error,
           ]);
@@ -200,6 +197,7 @@ export default class ChangeOPProcessModule
         });
     });
   }
+
   //
   // @Action
   // [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {

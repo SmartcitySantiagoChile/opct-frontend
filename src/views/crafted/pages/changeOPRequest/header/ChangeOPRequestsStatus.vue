@@ -185,29 +185,16 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
-import { bool } from "yup";
 
 export default defineComponent({
   name: "changeOPRequestsStatus",
-  props: {
-    widgetClasses: String,
-    hasChangeStatusOption: bool,
-  },
-  setup: function () {
+  props: ["widgetClasses", "hasChangeStatusOption"],
+  setup: function (props) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    const currentStatus = computed(() => {
-      const status = store.getters.getCurrentChangeOPProcessStatus;
-      return status ? status.name : "";
-    });
     onMounted(() => {
-      const contractTypeName =
-        store.getters.getCurrentChangeOPProcessContractTypeName;
-      store.dispatch(
-        Actions.GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS,
-        contractTypeName
-      );
+      store.dispatch(Actions.GET_CHANGE_OP_REQUEST_STATUSES);
       store.dispatch(Actions.GET_OPERATION_PROGRAMS);
     });
     const statusSelectValues: string[] = reactive([]);
@@ -216,17 +203,24 @@ export default defineComponent({
     const currentChangeOPRequests = computed(() => {
       const statuses = store.getters.getCurrentChangeOPRequestStatuses;
       const requests = store.getters.getCurrentChangeOPProcessRequests;
+      const currentContractType =
+        store.getters.getCurrentChangeOPProcessContractTypeName;
       const ops = store.getters.getCurrentOperationProgams;
-
       const requestsWithStatuses: any[] = [];
-      if (requests) {
+      if (requests && currentContractType) {
         requests.forEach((request) => {
-          let requestStatuses = [...statuses];
-          requestStatuses.flatMap((status) => {
-            status === request.status
-              ? []
-              : [{ value: status.url, label: status.name }];
-          });
+          const requestStatuses = JSON.parse(JSON.stringify(statuses)).filter(
+            (status) =>
+              status.name != request.status.name &&
+              status.contract_type.name === currentContractType
+          );
+          // requestStatuses.filter((status) => {
+          //   status === request.status ||
+          //   status.contract_type.name !== request.status.contract_type.name
+          //     ? []
+          //     : [{ value: status.url, label: status.name }];
+          // });
+          console.log(requestStatuses);
           // let requestOps = [...ops];
           // requestOps.flatMap((op) => {
           //   op === request.op ? [] : [{ value: op.url, label: op.start_at }];
@@ -303,11 +297,9 @@ export default defineComponent({
         });
       }
     };
-    console.log(currentChangeOPRequests);
     return {
       translate,
       value,
-      currentStatus,
       changeStatus,
       currentChangeOPRequests,
       statusSelectValues,

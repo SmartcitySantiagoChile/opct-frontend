@@ -1,8 +1,7 @@
 import { App } from "vue";
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import VueAxios from "vue-axios";
 import JwtService from "@/core/services/JwtService";
-import { AxiosResponse, AxiosRequestConfig } from "axios";
 
 /**
  * @description service to call HTTP request via Axios

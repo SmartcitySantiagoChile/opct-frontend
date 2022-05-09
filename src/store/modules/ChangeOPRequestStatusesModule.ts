@@ -1,6 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
 import { ChangeOPRequestStatus } from "@/store/modules/ChangeOPRequestStatusModule";
-import ChangeOPRequest from "@/store/modules/ChangeOPRequestModule";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import ApiService from "@/core/services/ApiService";
 
@@ -48,6 +47,7 @@ export default class ChangeOPRequestStatusesModule
   [Actions.GET_CHANGE_OP_REQUEST_STATUSES]() {
     ApiService.get("change-op-request-statuses")
       .then(({ data }) => {
+        console.log(data);
         this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_STATUSES, data);
       })
       .catch(({ response }) => {

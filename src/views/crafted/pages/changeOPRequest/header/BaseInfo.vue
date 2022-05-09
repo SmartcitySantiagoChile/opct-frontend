@@ -165,7 +165,7 @@ export default defineComponent({
     changeOPProcessBaseInfo: Object,
     changeOpProcessId: String,
   },
-  setup() {
+  setup: function (props) {
     const store = useStore();
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
