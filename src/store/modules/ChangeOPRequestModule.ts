@@ -233,7 +233,6 @@ export default class ChangeOPRequestModule
         data.params
       )
         .then(({ data }) => {
-          console.log(data);
           resolve();
         })
         .catch(({ response }) => {

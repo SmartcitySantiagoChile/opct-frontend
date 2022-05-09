@@ -150,15 +150,18 @@ export default defineComponent({
                   orderedLogsData.push(statusLogData);
                 });
               }
-              if (change_op_request["op_change_logs"]) {
-                change_op_request["op_change_logs"].forEach((changeLog) => {
-                  let opChangeLogData = {
-                    dateTime: changeLog["created_at"],
-                    type: "opChangeLog",
-                    data: changeLog,
-                  };
-                  orderedLogsData.push(opChangeLogData);
-                });
+              if (change_op_request["change_op_request_op_change_logs"]) {
+                change_op_request["change_op_request_op_change_logs"].forEach(
+                  (changeLog) => {
+                    console.log(changeLog);
+                    let opChangeLogData = {
+                      dateTime: changeLog["created_at"],
+                      type: "opChangeLog",
+                      data: changeLog,
+                    };
+                    orderedLogsData.push(opChangeLogData);
+                  }
+                );
               }
             }
           );

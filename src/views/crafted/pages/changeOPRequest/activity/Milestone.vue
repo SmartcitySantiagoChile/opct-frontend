@@ -24,11 +24,11 @@
           <!--begin:: Change OP Process and Request Status Case-->
           <template v-if="changeOPProcessTimelineMilestone.new_status">
             <template v-if="changeOPProcessTimelineMilestone.change_op_process">
-            {{ translate("changeStatusInfo") }}
+              {{ translate("changeStatusInfo") }}
             </template>
             <template v-if="changeOPProcessTimelineMilestone.change_op_request">
               {{ translate("changeStatusRequestInfo") }}
-              {{changeOPProcessTimelineMilestone.change_op_request.title}}:
+              "{{ changeOPProcessTimelineMilestone.change_op_request.title }}":
             </template>
             <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
               {{ changeOPProcessTimelineMilestone.previous_status.name }}
@@ -46,7 +46,13 @@
               changeOPProcessTimelineMilestone.new_op
             "
           >
-            {{ translate("changeOPInfo") }}
+            <template v-if="changeOPProcessTimelineMilestone.change_op_process">
+              {{ translate("changeOPInfo") }}
+            </template>
+            <template v-if="changeOPProcessTimelineMilestone.change_op_request">
+              {{ translate("changeOPRequestInfo") }}
+              "{{ changeOPProcessTimelineMilestone.change_op_request.title }}":
+            </template>
             <span class="badge badge-light-warning fs-4 fw-bolder">
               <template v-if="changeOPProcessTimelineMilestone.previous_op">
                 {{
@@ -69,7 +75,7 @@
               <template v-if="changeOPProcessTimelineMilestone.new_op">
                 {{
                   DateTime.fromISO(
-                      changeOPProcessTimelineMilestone.new_op.start_at
+                    changeOPProcessTimelineMilestone.new_op.start_at
                   )
                     .setLocale(this.$i18n.locale)
                     .toLocaleString()
@@ -110,18 +116,14 @@
             <template v-if="changeOPProcessTimelineMilestone.time_threshold">
               {{
                 DateTime.now().diff(
-                  DateTime.fromISO(
-                      changeOPProcessTimelineMilestone.dead_line
-                  )
+                  DateTime.fromISO(changeOPProcessTimelineMilestone.dead_line)
                 ) > 0
                   ? translate("finishedOn")
                   : translate("finishOn")
               }}
               {{
                 changeOPProcessTimelineMilestone.dead_line
-                  ? DateTime.fromISO(
-                        changeOPProcessTimelineMilestone.dead_line
-                    )
+                  ? DateTime.fromISO(changeOPProcessTimelineMilestone.dead_line)
                       .setLocale(this.$i18n.locale)
                       .toLocaleString()
                   : ""
@@ -151,7 +153,7 @@
               {{
                 changeOPProcessTimelineMilestone.created_at
                   ? DateTime.fromISO(
-                        changeOPProcessTimelineMilestone.created_at
+                      changeOPProcessTimelineMilestone.created_at
                     )
                       .setLocale(this.$i18n.locale)
                       .toLocaleString(DateTime.TIME_SIMPLE)

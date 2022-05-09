@@ -132,6 +132,7 @@ export default class ChangeOPProcessModule
   [Actions.GET_CHANGE_OP_PROCESS](changeOPProcessId) {
     ApiService.get("change-op-processes", changeOPProcessId)
       .then(({ data }) => {
+        console.log(data);
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESS, data);
       })
       .catch(({ response }) => {
