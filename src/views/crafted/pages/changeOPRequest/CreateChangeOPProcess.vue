@@ -107,17 +107,16 @@
                   <!--begin::Label-->
                   <div class="stepper-label">
                     <h3 class="stepper-title">
-                      {{ translate("counterpart") }}
+                      {{ translate("changeOPRequests") }}
                     </h3>
 
                     <div class="stepper-desc">
-                      {{ translate("counterPartInfo") }}
+                      {{ translate("changeOPRequestsInfo") }}
                     </div>
                   </div>
                   <!--begin::Label-->
                 </div>
                 <!--end::Step 2-->
-
                 <!--begin::Step 3-->
                 <div class="stepper-item" data-kt-stepper-element="nav">
                   <!--begin::Line-->
@@ -134,14 +133,14 @@
                   <!--begin::Label-->
                   <div class="stepper-label">
                     <h3 class="stepper-title">
-                      {{ translate("operationProgram") }}
+                      {{ translate("counterpart") }}
                     </h3>
 
                     <div class="stepper-desc">
-                      {{ translate("operationProgramInfo") }}
+                      {{ translate("counterPartInfo") }}
                     </div>
                   </div>
-                  <!--end::Label-->
+                  <!--begin::Label-->
                 </div>
                 <!--end::Step 3-->
 
@@ -161,6 +160,33 @@
                   <!--begin::Label-->
                   <div class="stepper-label">
                     <h3 class="stepper-title">
+                      {{ translate("operationProgram") }}
+                    </h3>
+
+                    <div class="stepper-desc">
+                      {{ translate("operationProgramInfo") }}
+                    </div>
+                  </div>
+                  <!--end::Label-->
+                </div>
+                <!--end::Step 4-->
+
+                <!--begin::Step 5-->
+                <div class="stepper-item" data-kt-stepper-element="nav">
+                  <!--begin::Line-->
+                  <div class="stepper-line w-40px"></div>
+                  <!--end::Line-->
+
+                  <!--begin::Icon-->
+                  <div class="stepper-icon w-40px h-40px">
+                    <i class="stepper-check fas fa-check"></i>
+                    <span class="stepper-number">5</span>
+                  </div>
+                  <!--end::Icon-->
+
+                  <!--begin::Label-->
+                  <div class="stepper-label">
+                    <h3 class="stepper-title">
                       {{ translate("confirmation") }}
                     </h3>
 
@@ -170,7 +196,7 @@
                   </div>
                   <!--end::Label-->
                 </div>
-                <!--end::Step 4-->
+                <!--end::Step 5-->
               </div>
               <!--end::Nav-->
             </div>
@@ -215,50 +241,6 @@
                         name="title"
                       />
                       <!--end::Input-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-10">
-                      <!--                      &lt;!&ndash;begin::Col&ndash;&gt;-->
-                      <!--                      <div class="col-md-8 fv-row">-->
-                      <!--                        &lt;!&ndash;begin::Label&ndash;&gt;-->
-                      <!--                        <label class="required fs-6 fw-bold form-label mb-2">{{-->
-                      <!--                          translate("reason")-->
-                      <!--                        }}</label>-->
-                      <!--                        &lt;!&ndash;end::Label&ndash;&gt;-->
-
-                      <!--                        &lt;!&ndash;begin::Row&ndash;&gt;-->
-                      <!--                        <div class="row fv-row">-->
-                      <!--                          &lt;!&ndash;begin::Col&ndash;&gt;-->
-                      <!--                          <Field-->
-                      <!--                            id="reason"-->
-                      <!--                            as="select"-->
-                      <!--                            class="-->
-                      <!--                              form-select form-select-solid-->
-                      <!--                              select2-hidden-accessible-->
-                      <!--                            "-->
-                      <!--                            name="reason"-->
-                      <!--                          >-->
-                      <!--                            <option-->
-                      <!--                              v-for="i in reasonOptions"-->
-                      <!--                              :key="i.value"-->
-                      <!--                              :label="i.label"-->
-                      <!--                              :value="i.value"-->
-                      <!--                            ></option>-->
-                      <!--                          </Field>-->
-                      <!--                          <ErrorMessage-->
-                      <!--                            class="-->
-                      <!--                              fv-plugins-message-container-->
-                      <!--                              invalid-feedback-->
-                      <!--                            "-->
-                      <!--                            name="reason"-->
-                      <!--                          />-->
-                      <!--                          &lt;!&ndash;end::Col&ndash;&gt;-->
-                      <!--                        </div>-->
-                      <!--                        &lt;!&ndash;end::Row&ndash;&gt;-->
-                      <!--                      </div>-->
-                      <!--                      &lt;!&ndash;end::Col&ndash;&gt;-->
                     </div>
                     <!--end::Input group-->
 
@@ -329,6 +311,255 @@
                   <div class="w-100">
                     <!--begin::Input group-->
                     <div class="row mb-10">
+                      <!--begin::Card-->
+                      <div :class="widgetClasses" class="card">
+                        <!--begin::Header-->
+                        <div class="card-header border-0 pt-5">
+                          <!--begin::Card Title-->
+                          <h3 class="card-title align-items-start flex-column">
+                            <!--begin::Label-->
+                            <label
+                              class="required fs-6 fw-bold form-label mb-2"
+                              >{{ translate("changeOPRequests") }}</label
+                            >
+                            <!--end::Label-->
+                          </h3>
+                          <!--end::Card Title-->
+                          <!--begin::Add Button-->
+                          <div class="card-toolbar align-items-start">
+                            <button
+                              class="btn btn-primary btn-success"
+                              type="button"
+                            >
+                              {{ translate("add") }}
+                            </button>
+                          </div>
+                          <!--end::Add Button-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body py-3">
+                          <!--begin::Table container-->
+                          <div class="table-responsive">
+                            <!--begin::Table-->
+                            <table
+                              class="
+                                table
+                                align-middle
+                                gs-0
+                                gy-4
+                                table-rounded table-striped
+                                border
+                              "
+                            >
+                              <!--begin::Table head-->
+                              <thead>
+                                <tr
+                                  class="
+                                    fw-bold
+                                    fs-5
+                                    text-gray-800
+                                    border-bottom-2 border-gray-200
+                                  "
+                                >
+                                  <th class="ps-4 rounded-start">
+                                    {{ translate("title") }}
+                                  </th>
+                                  <th class="ps-4 min-w-125px rounded-start">
+                                    {{ translate("reason") }}
+                                  </th>
+                                  <th class="ps-4 rounded-start"></th>
+                                </tr>
+                              </thead>
+                              <!--end::Table head-->
+
+                              <!--begin::Table body-->
+                              <tbody>
+                                <template
+                                  v-for="(
+                                    item, index
+                                  ) in mutableSelectedChangeOPRequests"
+                                  :key="index"
+                                >
+                                  <tr>
+                                    <td>
+                                      <div class="d-flex align-items-center">
+                                        <div
+                                          class="symbol symbol-10px me-5"
+                                        ></div>
+                                        <div
+                                          class="
+                                            d-flex
+                                            justify-content-start
+                                            flex-column
+                                          "
+                                        >
+                                          <!--begin::Input group-->
+                                          <div class="fv-row mb-10">
+                                            <!--begin::Label-->
+                                            <label
+                                              class="
+                                                d-flex
+                                                align-items-center
+                                                fs-5
+                                                fw-bold
+                                                mb-2
+                                              "
+                                            >
+                                              <span class="required">{{
+                                                translate("title")
+                                              }}</span>
+                                              <i
+                                                :title="`${translate(
+                                                  'changeOPRequestTitleLabel'
+                                                )}`"
+                                                class="
+                                                  fas
+                                                  fa-exclamation-circle
+                                                  ms-2
+                                                  fs-7
+                                                "
+                                                data-bs-toggle="tooltip"
+                                              ></i>
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <Field
+                                              class="
+                                                form-control
+                                                form-control-lg
+                                                form-control-solid
+                                              "
+                                              name="title"
+                                              placeholder=""
+                                              type="text"
+                                            />
+                                            <ErrorMessage
+                                              class="
+                                                fv-plugins-message-container
+                                                invalid-feedback
+                                              "
+                                              name="title"
+                                            />
+                                            <!--end::Input-->
+                                          </div>
+                                          <!--end::Input group-->
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="d-flex align-items-center">
+                                        <div
+                                          class="symbol symbol-10px me-5"
+                                        ></div>
+                                        <div
+                                          class="
+                                            d-flex
+                                            justify-content-start
+                                            flex-column
+                                          "
+                                        >
+                                          <!--begin::Input group-->
+                                          <div class="fv-row mb-10">
+                                            <!--begin::Label-->
+                                            <label
+                                              class="
+                                                d-flex
+                                                align-items-center
+                                                fs-5
+                                                fw-bold
+                                                mb-2
+                                              "
+                                            >
+                                              <span class="required">{{
+                                                translate("title")
+                                              }}</span>
+                                              <i
+                                                :title="`${translate(
+                                                  'changeOPRequestTitleLabel'
+                                                )}`"
+                                                class="
+                                                  fas
+                                                  fa-exclamation-circle
+                                                  ms-2
+                                                  fs-7
+                                                "
+                                                data-bs-toggle="tooltip"
+                                              ></i>
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <Field
+                                              class="
+                                                form-control
+                                                form-control-lg
+                                                form-control-solid
+                                              "
+                                              name="title"
+                                              placeholder=""
+                                              type="text"
+                                            />
+                                            <ErrorMessage
+                                              class="
+                                                fv-plugins-message-container
+                                                invalid-feedback
+                                              "
+                                              name="title"
+                                            />
+                                            <!--end::Input-->
+                                          </div>
+                                          <!--end::Input group-->
+                                        </div>
+                                      </div>
+                                    </td>
+
+                                    <td>
+                                      <div class="mb-10">
+                                        <div
+                                          class="
+                                            form-check
+                                            form-check-custom
+                                            form-check-solid
+                                          "
+                                        >
+                                          <input
+                                            :checked="
+                                              isChecked(JSON.stringify(item))
+                                            "
+                                            :data-change-op-request="
+                                              JSON.stringify(item)
+                                            "
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            @change="onCheckboxChange"
+                                          />
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </template>
+                              </tbody>
+                              <!--end::Table body-->
+                            </table>
+                            <!--end::Table-->
+                          </div>
+                          <!--end::Table container-->
+                        </div>
+                      </div>
+                      <!--end::Card-->
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+                </div>
+                <!--end::Step 2-->
+
+                <!--begin::Step 3-->
+                <div data-kt-stepper-element="content">
+                  <div class="w-100">
+                    <!--begin::Input group-->
+                    <div class="row mb-10">
                       <!--begin::Col-->
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
@@ -379,9 +610,9 @@
                     <!--end::Input group-->
                   </div>
                 </div>
-                <!--end::Step 2-->
+                <!--end::Step 3-->
 
-                <!--begin::Step 3-->
+                <!--begin::Step 4-->
                 <div data-kt-stepper-element="content">
                   <div class="w-100">
                     <!--begin::Input group-->
@@ -426,9 +657,9 @@
                     <!--end::Input group-->
                   </div>
                 </div>
-                <!--end::Step 3-->
+                <!--end::Step 4-->
 
-                <!--begin::Step 4-->
+                <!--begin::Step 5-->
                 <div data-kt-stepper-element="content">
                   <div class="w-100 text-center">
                     <!--begin::Heading-->
@@ -602,18 +833,21 @@ import ChangeOPRequestsInputTable from "@/components/widgets/tables/ChangeOPRequ
 
 interface Step1 {
   title: string;
-  // reason: string;
 }
 
 interface Step2 {
-  counterpart: string;
+  change_op_requests: any[];
 }
 
 interface Step3 {
+  counterpart: string;
+}
+
+interface Step4 {
   op: string;
 }
 
-interface KTCreateApp extends Step1, Step2, Step3 {}
+interface KTCreateApp extends Step1, Step2, Step3, Step4 {}
 
 export default defineComponent({
   name: "CreateChangeOpProcess",
@@ -621,6 +855,9 @@ export default defineComponent({
     Field,
     ErrorMessage,
     ChangeOPRequestsInputTable,
+  },
+  props: {
+    widgetClasses: String,
   },
   setup: function () {
     const { t, te } = useI18n();
@@ -643,6 +880,20 @@ export default defineComponent({
     let fileList = [];
     let relatedChangeOPRequests: Array<string> = [];
     let relatedChangeOPRequestsInfo: Array<string> = [];
+
+    const formData = ref<KTCreateApp>({
+      title: "",
+      change_op_requests: [],
+      counterpart: "1",
+      op: "",
+    });
+
+    const formDataInfo = ref<KTCreateApp>({
+      title: "",
+      change_op_requests: [],
+      counterpart: "1",
+      op: "",
+    });
 
     // Create selectors.
     const reasonOptions = computed(() => {
@@ -737,20 +988,6 @@ export default defineComponent({
       }
     };
 
-    const formData = ref<KTCreateApp>({
-      title: "",
-      // reason: "1",
-      counterpart: "1",
-      op: "",
-    });
-
-    const formDataInfo = ref<KTCreateApp>({
-      title: "",
-      // reason: "1",
-      counterpart: "1",
-      op: "",
-    });
-
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(
         createChangeOPRef.value as HTMLElement
@@ -771,16 +1008,18 @@ export default defineComponent({
       new Quill("#" + editorId, options);
     });
 
+    // Set form validators
     const createAppSchema = [
       Yup.object({
         title: Yup.string().required(translate("titleRequired")).label("Title"),
-        // reason: Yup.string()
-        //   .required(translate("reasonRequired"))
-        //   .label("Reason"),
       }),
+      // Yup.object({
+      //   change_op_requests: Yup.array().required().label("changeOPRequest"),
+      // }),
       Yup.object({
         counterpart: Yup.string().required().label("counterpart"),
       }),
+      Yup.object({}),
       Yup.object({
         op: Yup.string().required().label("OperationProgram"),
       }),
@@ -799,7 +1038,7 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3>({
+    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3 | Step4>({
       validationSchema: currentSchema,
     });
 
@@ -960,7 +1199,6 @@ export default defineComponent({
       currentStepIndex,
       totalSteps,
       createAppModalRef,
-      // reasonOptions,
       translate,
       handleChange,
       fileList,

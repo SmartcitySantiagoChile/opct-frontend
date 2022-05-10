@@ -3,13 +3,13 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title">{{ translate("selectChangeOPRequest") }}:</h3>
+          <h3 class="modal-title">{{ translate('addChangeOPRequest') }}:</h3>
 
           <!--begin::Close-->
           <div
-            aria-label="Close"
-            class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-            data-bs-dismiss="modal"
+              aria-label="Close"
+              class="btn btn-icon btn-sm btn-active-light-primary ms-2"
+              data-bs-dismiss="modal"
           >
             <span class="svg-icon svg-icon-2x"></span>
           </div>
@@ -22,33 +22,29 @@
             <div class="card-header border-0 pt-5">
               <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bolder fs-3 mb-1">
-                  {{ translate("selectedChangeOPRequests") }}:
+                  {{ translate('changeOPRequests') }}:
                 </span>
                 <span class="text-muted mt-1 fw-bold fs-7">
                   <template
-                    v-for="(
+                      v-for="(
                       requestItem, requestIndex
                     ) in mutableSelectedChangeOPRequests"
-                    :key="requestIndex"
+                      :key="requestIndex"
                   >
                     #{{ requestIndex }}: {{ requestItem.title }},
                     {{ requestItem.reason }},
-                    {{ requestItem.op ? requestItem.op.start_at : "" }} <br />
+                    {{ requestItem.op ? requestItem.op.start_at : '' }} <br/>
                   </template>
                 </span>
               </h3>
               <div class="card-toolbar align-items-start">
-                <!--begin::Menu-->
-                <span class="card-label fw-bolder fs-3 me-3">
-                  <input
-                    class="form-control"
-                    name="filter"
-                    type="text"
-                    v-bind:placeholder="translate('filter')"
-                    @keyup="onFilterChange"
-                  />
-                </span>
-                <!--end::Menu-->
+                <button
+                    class="btn btn-primary btn-success"
+                    type="button"
+                    @click="addChangeOPRequest"
+                >
+                  {{ translate('addRequest') }}
+                </button>
               </div>
             </div>
             <!--end::Header-->
@@ -59,7 +55,7 @@
               <div class="table-responsive">
                 <!--begin::Table-->
                 <table
-                  class="
+                    class="
                     table
                     align-middle
                     gs-0
@@ -70,157 +66,162 @@
                 >
                   <!--begin::Table head-->
                   <thead>
-                    <tr
+                  <tr
                       class="
                         fw-bold
                         fs-5
                         text-gray-800
                         border-bottom-2 border-gray-200
                       "
-                    >
-                      <th class="ps-4 rounded-start">Id</th>
-                      <th class="ps-4 min-w-125px rounded-start">
-                        {{ translate("creationDate") }}
-                      </th>
-                      <th class="min-w-150px">
-                        {{ translate("operationProgram") }}
-                      </th>
-                      <th class="min-w-150px">{{ translate("title") }}</th>
-                      <th class="min-w-150px">{{ translate("reason") }}</th>
-                      <th class="min-w-80px"></th>
-                    </tr>
+                  >
+                    <th class="ps-4 rounded-start">
+                      {{ translate('title') }}
+                    </th>
+                    <th class="ps-4 min-w-125px rounded-start">
+                      {{ translate('reason') }}
+                    </th>
+                    <th class="min-w-80px"></th>
+                  </tr>
                   </thead>
                   <!--end::Table head-->
 
                   <!--begin::Table body-->
                   <tbody>
-                    <template
-                      v-for="(item, index) in changeOPRequests"
+                  <template
+                      v-for="(item, index) in mutableSelectedChangeOPRequests"
                       :key="index"
-                    >
-                      <tr>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <div class="symbol symbol-10px me-5"></div>
-                            <div
+                  >
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="symbol symbol-10px me-5"></div>
+                          <div
                               class="d-flex justify-content-start flex-column"
-                            >
-                              <a
-                                class="
-                                  text-dark
-                                  fw-bolder
-                                  text-hover-primary
-                                  mb-1
-                                  fs-6
-                                "
-                                href=""
-                                >{{
-                                  item.url
-                                    .split("/change-op-requests/")[1]
-                                    .split("/")[0]
-                                }}
-                              </a>
+                          >
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                              <!--begin::Label-->
+                              <label
+                                  class="
+                                    d-flex
+                                    align-items-center
+                                    fs-5
+                                    fw-bold
+                                    mb-2
+                                  "
+                              >
+                                  <span class="required">{{
+                                      translate('title')
+                                    }}</span>
+                                <i
+                                    :title="`${translate(
+                                      'changeOPRequestTitleLabel'
+                                    )}`"
+                                    class="fas fa-exclamation-circle ms-2 fs-7"
+                                    data-bs-toggle="tooltip"
+                                ></i>
+                              </label>
+                              <!--end::Label-->
+
+                              <!--begin::Input-->
+                              <Field
+                                  class="
+                                    form-control
+                                    form-control-lg
+                                    form-control-solid
+                                  "
+                                  name="title"
+                                  placeholder=""
+                                  type="text"
+                              />
+                              <ErrorMessage
+                                  class="
+                                    fv-plugins-message-container
+                                    invalid-feedback
+                                  "
+                                  name="title"
+                              />
+                              <!--end::Input-->
                             </div>
+                            <!--end::Input group-->
                           </div>
-                        </td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <div class="symbol symbol-10px me-5"></div>
-                            <div
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="symbol symbol-10px me-5"></div>
+                          <div
                               class="d-flex justify-content-start flex-column"
-                            >
-                              <a
-                                class="
-                                  text-dark
-                                  fw-bolder
-                                  text-hover-primary
-                                  mb-1
-                                  fs-6
-                                "
-                                href=""
-                                >{{
-                                  DateTime.fromISO(item.created_at)
-                                    .setLocale(this.$i18n.locale)
-                                    .toLocaleString()
-                                }}
-                              </a>
+                          >
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-10">
+                              <!--begin::Label-->
+                              <label
+                                  class="
+                                    d-flex
+                                    align-items-center
+                                    fs-5
+                                    fw-bold
+                                    mb-2
+                                  "
+                              >
+                                  <span class="required">{{
+                                      translate('title')
+                                    }}</span>
+                                <i
+                                    :title="`${translate(
+                                      'changeOPRequestTitleLabel'
+                                    )}`"
+                                    class="fas fa-exclamation-circle ms-2 fs-7"
+                                    data-bs-toggle="tooltip"
+                                ></i>
+                              </label>
+                              <!--end::Label-->
+
+                              <!--begin::Input-->
+                              <Field
+                                  class="
+                                    form-control
+                                    form-control-lg
+                                    form-control-solid
+                                  "
+                                  name="title"
+                                  placeholder=""
+                                  type="text"
+                              />
+                              <ErrorMessage
+                                  class="
+                                    fv-plugins-message-container
+                                    invalid-feedback
+                                  "
+                                  name="title"
+                              />
+                              <!--end::Input-->
                             </div>
+                            <!--end::Input group-->
                           </div>
-                        </td>
+                        </div>
+                      </td>
 
-                        <td>
-                          <a
-                            class="
-                              text-dark
-                              fw-bolder
-                              text-hover-primary
-                              d-block
-                              mb-1
-                              fs-6
-                            "
-                            href="#"
-                          >
-                            <template v-if="item.op">
-                              {{
-                                DateTime.fromISO(item.op.start_at)
-                                  .setLocale(this.$i18n.locale)
-                                  .toLocaleString()
-                              }}
-                              ({{ item.op.op_type.name }})
-                            </template>
-                            <template v-else>
-                              {{ translate("withoutAssign") }}
-                            </template>
-                          </a>
-                        </td>
-                        <td>
-                          <a
-                            class="
-                              text-dark
-                              fw-bolder
-                              text-hover-primary
-                              d-block
-                              mb-1
-                              fs-6
-                            "
-                            href="#"
-                            >{{ item.title }}</a
-                          >
-                        </td>
-                        <td>
-                          <a
-                            class="
-                              text-dark
-                              fw-bolder
-                              text-hover-primary
-                              d-block
-                              mb-1
-                              fs-6
-                            "
-                            href="#"
-                            >{{ item.reason }}</a
-                          >
-                        </td>
-
-                        <td>
-                          <div class="mb-10">
-                            <div
+                      <td>
+                        <div class="mb-10">
+                          <div
                               class="
                                 form-check form-check-custom form-check-solid
                               "
-                            >
-                              <input
+                          >
+                            <input
                                 :checked="isChecked(JSON.stringify(item))"
                                 :data-change-op-request="JSON.stringify(item)"
                                 class="form-check-input"
                                 type="checkbox"
                                 @change="onCheckboxChange"
-                              />
-                            </div>
+                            />
                           </div>
-                        </td>
-                      </tr>
-                    </template>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
                   </tbody>
                   <!--end::Table body-->
                 </table>
@@ -229,25 +230,25 @@
                   <ul class="pagination d-flex align-items-center">
                     <li id="previousItem" class="page-item previous disabled">
                       <button
-                        class="page-link"
-                        data-value="-1"
-                        @click="onPageChange"
+                          class="page-link"
+                          data-value="-1"
+                          @click="onPageChange"
                       >
                         <i class="previous" data-value="1"></i>
                       </button>
                     </li>
                     <template
-                      v-for="(item, index) in Array.from(
+                        v-for="(item, index) in Array.from(
                         { length: Math.ceil(changeOPRequestsCount / 10) },
                         (_, i) => i + 1
                       )"
-                      :key="index"
+                        :key="index"
                     >
                       <li class="page-item">
                         <button
-                          :data-value="item"
-                          class="page-link"
-                          @click="onPageChange"
+                            :data-value="item"
+                            class="page-link"
+                            @click="onPageChange"
                         >
                           {{ item }}
                         </button>
@@ -255,9 +256,9 @@
                     </template>
                     <li class="page-item next">
                       <button
-                        class="page-link"
-                        data-value="-1"
-                        @click="onPageChange"
+                          class="page-link"
+                          data-value="-1"
+                          @click="onPageChange"
                       >
                         <i class="next" data-value="-1"></i>
                       </button>
@@ -274,15 +275,15 @@
 
         <div class="modal-footer">
           <button class="btn btn-light" data-bs-dismiss="modal" type="button">
-            {{ translate("cancel") }}
+            {{ translate('cancel') }}
           </button>
           <button
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            type="button"
-            @click="saveSelectedChangeOPRequests"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              type="button"
+              @click="saveSelectedChangeOPRequests"
           >
-            {{ translate("save") }}
+            {{ translate('save') }}
           </button>
         </div>
       </div>
@@ -290,11 +291,11 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { Actions } from "@/store/enums/StoreEnums";
-import { useStore } from "vuex";
-import { useI18n } from "vue-i18n";
-import { DateTime } from "luxon";
+import {computed, defineComponent, Ref, ref} from "vue";
+import {Actions} from "@/store/enums/StoreEnums";
+import {useStore} from "vuex";
+import {useI18n} from "vue-i18n";
+import {DateTime} from "luxon";
 
 export default defineComponent({
   name: "change-op-requests-input-table",
@@ -303,17 +304,21 @@ export default defineComponent({
   },
   emits: ["onChangeSelectedChangeOPRequests"],
   setup: function (props, context) {
-    const { t, te } = useI18n();
+    const {t, te} = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_REQUESTS);
     const changeOPRequests = computed(
-      () => store.getters.getCurrentChangeOPRequests
+        () => store.getters.getCurrentChangeOPRequests
     );
     const changeOPRequestsCount = computed(
-      () => store.getters.getCurrentChangeOPRequestsCount
+        () => store.getters.getCurrentChangeOPRequestsCount
     );
-    const mutableSelectedChangeOPRequests = ref({});
+
+    // Manage new requests
+    const mutableSelectedChangeOPRequests: Ref<any[]> = ref([]);
+    let currentRequestCounter = 0;
+
     // Events
     const onFilterChange = (event) => {
       const filter = String(event.target.value);
@@ -328,7 +333,7 @@ export default defineComponent({
 
     const onPageChange = (event) => {
       const filter = document.querySelector<HTMLInputElement>(
-        'input[name="filter"]'
+          'input[name="filter"]'
       );
       let params = {};
       if (filter) {
@@ -336,9 +341,9 @@ export default defineComponent({
       }
       let pageId = event.target.getAttribute("data-value");
       pageId =
-        pageId === "-1"
-          ? String(Math.ceil(changeOPRequestsCount.value / 10))
-          : pageId;
+          pageId === "-1"
+              ? String(Math.ceil(changeOPRequestsCount.value / 10))
+              : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();
@@ -370,11 +375,11 @@ export default defineComponent({
     const onCheckboxChange = (event) => {
       const changeOPRequest = JSON.parse(event.target.dataset.changeOpRequest);
       const changeOPRequestId = changeOPRequest.url
-        .split("/change-op-requests/")[1]
-        .split("/")[0];
+          .split("/change-op-requests/")[1]
+          .split("/")[0];
       if (event.target.checked) {
-        mutableSelectedChangeOPRequests.value[changeOPRequestId] =
-          changeOPRequest;
+        //mutableSelectedChangeOPRequests.value[changeOPRequestId] =
+        //  changeOPRequest;
       } else {
         delete mutableSelectedChangeOPRequests.value[changeOPRequestId];
       }
@@ -383,16 +388,23 @@ export default defineComponent({
     const isChecked = (event) => {
       const changeOPRequest = JSON.parse(event);
       const changeOPRequestId = changeOPRequest.url
-        .split("/change-op-requests/")[1]
-        .split("/")[0];
+          .split("/change-op-requests/")[1]
+          .split("/")[0];
       return !!mutableSelectedChangeOPRequests.value[changeOPRequestId];
     };
 
     const saveSelectedChangeOPRequests = () => {
       context.emit(
-        "onChangeSelectedChangeOPRequests",
-        mutableSelectedChangeOPRequests
+          "onChangeSelectedChangeOPRequests",
+          mutableSelectedChangeOPRequests
       );
+    };
+
+    const addChangeOPRequest = () => {
+      console.log("addChangeOPRequest");
+      mutableSelectedChangeOPRequests.value.push(["title", "reason"]);
+      console.log(mutableSelectedChangeOPRequests);
+      currentRequestCounter += 1;
     };
 
     return {
@@ -406,6 +418,7 @@ export default defineComponent({
       isChecked,
       mutableSelectedChangeOPRequests,
       saveSelectedChangeOPRequests,
+      addChangeOPRequest,
     };
   },
 });

@@ -183,6 +183,9 @@ const messages = {
     changeReasonInfo: "Change Reason:",
     changeReasonRequestInfo: "Change Reason on",
     createChangeOPProcess: "Create change op process",
+    addRequest: "Add request",
+    changeOPRequestsInfo: "Add the requests",
+    add: "Add",
   },
   es: {
     dashboard: "Tablero",
@@ -370,6 +373,9 @@ const messages = {
     changeReasonInfo: "Cambio de motivo:",
     changeReasonRequestInfo: "Cambio de motivo en",
     createChangeOPProcess: "Crear proceso de cambio de PO",
+    addRequest: "Añadir solicitud",
+    changeOPRequestsInfo: "Añada las solicitudes",
+    add: "Añadir",
   },
   de: {
     dashboard: "Instrumententafel",
