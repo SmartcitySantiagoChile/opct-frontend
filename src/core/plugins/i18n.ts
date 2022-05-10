@@ -362,11 +362,11 @@ const messages = {
     filter: "Filtrar",
     relatedRequests: "Solicitudes relacionadas",
     relatedChangeOPRequests: "Solicitudes relacionadas",
-    requests: "Solicitudes",
+    requests: "Procesos de modificación",
     changeRelatedRequestSuccess:
       "¡Solicitudes relacionadas cambiadas exitosamente!",
     changeRelatedRequestError: "¡Error al modificar solicitudes!",
-    changeOPProcesses: "Procesos de cambio de PO",
+    changeOPProcesses: "Procesos de modificación de PO",
     changeRequestOPInfo: "Cambio de PO en ",
     changeStatusRequestInfo: "Cambio de estado en ",
     changeOPRequest: "Solicitud de cambio",
