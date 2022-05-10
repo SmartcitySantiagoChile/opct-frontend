@@ -273,8 +273,6 @@
                         <!--end::Input group-->
                       </form>
                     </div>
-
-
                   </div>
                 </div>
                 <!--end::Step 1-->
@@ -1058,7 +1056,7 @@ export default defineComponent({
     const formSubmit = () => {
       formData.value["created_at"] = new Date().toISOString();
       formData.value["creator"] = store.getters.currentUserUrl;
-      formData.value["op"] =
+      formData.value["base_op"] =
         formData.value["op"] !== "None" ? formData.value["op"] : "";
 
       const fileFormData = new FormData();
