@@ -60,7 +60,7 @@
               <th class="min-w-100px">{{ translate("creator") }}</th>
               <th class="max-w-100px">{{ translate("counterpart") }}</th>
               <th class="min-w-80px">{{ translate("status") }}</th>
-              <th class="max-w-80px">{{ translate("requests") }}</th>
+              <th class="max-w-80px">{{ translate("change_op_requests") }}</th>
               <th class="min-w-80px"></th>
             </tr>
           </thead>
