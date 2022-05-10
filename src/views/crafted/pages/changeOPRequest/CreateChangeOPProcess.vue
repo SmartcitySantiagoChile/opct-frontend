@@ -330,6 +330,7 @@
                             <button
                               class="btn btn-primary btn-success"
                               type="button"
+                              @click="addChangeOPRequest"
                             >
                               {{ translate("add") }}
                             </button>
@@ -351,6 +352,7 @@
                                 table-rounded table-striped
                                 border
                               "
+                              id="changeOPRequestsTable"
                             >
                               <!--begin::Table head-->
                               <thead>
@@ -396,34 +398,6 @@
                                         >
                                           <!--begin::Input group-->
                                           <div class="fv-row mb-10">
-                                            <!--begin::Label-->
-                                            <label
-                                              class="
-                                                d-flex
-                                                align-items-center
-                                                fs-5
-                                                fw-bold
-                                                mb-2
-                                              "
-                                            >
-                                              <span class="required">{{
-                                                translate("title")
-                                              }}</span>
-                                              <i
-                                                :title="`${translate(
-                                                  'changeOPRequestTitleLabel'
-                                                )}`"
-                                                class="
-                                                  fas
-                                                  fa-exclamation-circle
-                                                  ms-2
-                                                  fs-7
-                                                "
-                                                data-bs-toggle="tooltip"
-                                              ></i>
-                                            </label>
-                                            <!--end::Label-->
-
                                             <!--begin::Input-->
                                             <Field
                                               class="
@@ -431,8 +405,8 @@
                                                 form-control-lg
                                                 form-control-solid
                                               "
-                                              name="title"
-                                              placeholder=""
+                                              :name="'changeoprequest' + index"
+                                              placeholder="Título"
                                               type="text"
                                             />
                                             <ErrorMessage
@@ -440,7 +414,7 @@
                                                 fv-plugins-message-container
                                                 invalid-feedback
                                               "
-                                              name="title"
+                                              :name="'changeoprequest' + index"
                                             />
                                             <!--end::Input-->
                                           </div>
@@ -461,54 +435,35 @@
                                           "
                                         >
                                           <!--begin::Input group-->
-                                          <div class="fv-row mb-10">
-                                            <!--begin::Label-->
-                                            <label
-                                              class="
-                                                d-flex
-                                                align-items-center
-                                                fs-5
-                                                fw-bold
-                                                mb-2
-                                              "
-                                            >
-                                              <span class="required">{{
-                                                translate("title")
-                                              }}</span>
-                                              <i
-                                                :title="`${translate(
-                                                  'changeOPRequestTitleLabel'
-                                                )}`"
-                                                class="
-                                                  fas
-                                                  fa-exclamation-circle
-                                                  ms-2
-                                                  fs-7
-                                                "
-                                                data-bs-toggle="tooltip"
-                                              ></i>
-                                            </label>
-                                            <!--end::Label-->
+                                          <div class="row mb-10">
+                                            <!--begin::Col-->
+                                            <div class="col-md-8 fv-row">
+                                              <!--end::Label-->
 
-                                            <!--begin::Input-->
-                                            <Field
-                                              class="
-                                                form-control
-                                                form-control-lg
-                                                form-control-solid
-                                              "
-                                              name="title"
-                                              placeholder=""
-                                              type="text"
-                                            />
-                                            <ErrorMessage
-                                              class="
-                                                fv-plugins-message-container
-                                                invalid-feedback
-                                              "
-                                              name="title"
-                                            />
-                                            <!--end::Input-->
+                                              <!--begin::Row-->
+                                              <div class="row fv-row">
+                                                <!--begin::Col-->
+                                                <select
+                                                  :id="'reason' + index"
+                                                  class="
+                                                    form-select
+                                                    form-select-solid
+                                                    select2-hidden-accessible
+                                                    selected
+                                                  "
+                                                >
+                                                  <option
+                                                    v-for="i in reasonOptions"
+                                                    :key="i.value"
+                                                    :label="i.label"
+                                                    :value="i.value"
+                                                  ></option>
+                                                </select>
+                                                <!--end::Col-->
+                                              </div>
+                                              <!--end::Row-->
+                                            </div>
+                                            <!--end::Col-->
                                           </div>
                                           <!--end::Input group-->
                                         </div>
@@ -523,19 +478,7 @@
                                             form-check-custom
                                             form-check-solid
                                           "
-                                        >
-                                          <input
-                                            :checked="
-                                              isChecked(JSON.stringify(item))
-                                            "
-                                            :data-change-op-request="
-                                              JSON.stringify(item)
-                                            "
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            @change="onCheckboxChange"
-                                          />
-                                        </div>
+                                        ></div>
                                       </div>
                                     </td>
                                   </tr>
@@ -802,10 +745,6 @@
     <!--end::Modal dialog-->
   </div>
   <!--end::Modal - Create App-->
-  <ChangeOPRequestsInputTable
-    @onChangeSelectedChangeOPRequests="onChangeSelectedChangeOPRequests"
-  >
-  </ChangeOPRequestsInputTable>
 </template>
 
 <style lang="scss" scoped>
@@ -819,7 +758,7 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, Ref, ref } from "vue";
 import { StepperComponent } from "@/assets/ts/components/_StepperComponent";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import { ErrorMessage, Field, useForm } from "vee-validate";
@@ -829,7 +768,6 @@ import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import Quill from "quill/dist/quill.js";
-import ChangeOPRequestsInputTable from "@/components/widgets/tables/ChangeOPRequestsInputTable.vue";
 
 interface Step1 {
   title: string;
@@ -854,7 +792,6 @@ export default defineComponent({
   components: {
     Field,
     ErrorMessage,
-    ChangeOPRequestsInputTable,
   },
   props: {
     widgetClasses: String,
@@ -1069,6 +1006,32 @@ export default defineComponent({
       //     reasonSelector.options[reasonSelector.selectedIndex].label;
       // }
 
+      const changeOPRequestsTable: HTMLTableElement = document.getElementById(
+        "changeOPRequestsTable"
+      ) as HTMLTableElement;
+
+      if (changeOPRequestsTable) {
+        const tableRows: HTMLCollection = changeOPRequestsTable.tBodies[0]
+          .rows as HTMLCollection;
+        for (let i = 0; i <= tableRows.length; i++) {
+          const row: HTMLTableRowElement = tableRows.item(
+            i
+          ) as HTMLTableRowElement;
+          if (row) {
+            const cells = row.cells;
+            const title: HTMLTableCellElement = cells.item(
+              0
+            ) as HTMLTableCellElement;
+            const titleValue = title.getElementsByTagName("input")[0].value;
+            const reason: HTMLTableCellElement = cells.item(
+              1
+            ) as HTMLTableCellElement;
+            // console.log(titleValue);
+            // console.log(reason.getElementsByTagName("select")[0]);
+          }
+        }
+      }
+
       const counterPartSelector: HTMLSelectElement = document.querySelector(
         "#counterpart"
       ) as HTMLSelectElement;
@@ -1122,13 +1085,6 @@ export default defineComponent({
         fileFormData.append("files", file_raw, file["name"]);
       });
 
-      // if (relatedChangeOPRequests) {
-      //   relatedChangeOPRequests.forEach((url) => {
-      //     fileFormData.append("related_requests", url);
-      //   });
-      // } else {
-      //   fileFormData.append("related_requests", "");
-      // }
       const params = {
         params: fileFormData,
         headers: {
@@ -1191,6 +1147,15 @@ export default defineComponent({
         relatedChangeOPRequests.push(value["url"]);
       }
     };
+
+    let addedChangeOPRequest: Ref<Array<string>> = ref([]);
+    const mutableSelectedChangeOPRequests = computed(() => {
+      return addedChangeOPRequest.value;
+    });
+    const addChangeOPRequest = () => {
+      addedChangeOPRequest.value.push("");
+      console.log(mutableSelectedChangeOPRequests);
+    };
     return {
       handleStep,
       formSubmit,
@@ -1211,6 +1176,9 @@ export default defineComponent({
       searchChangeOpRequest,
       onChangeSelectedChangeOPRequests,
       relatedChangeOPRequestsInfo,
+      addChangeOPRequest,
+      mutableSelectedChangeOPRequests,
+      reasonOptions,
     };
   },
 });
