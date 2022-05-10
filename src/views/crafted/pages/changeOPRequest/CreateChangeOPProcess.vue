@@ -274,34 +274,7 @@
                       </form>
                     </div>
 
-                    <!--begin::Input group-->
-                    <template v-if="isAdminOrganization">
-                      <div class="row mb-10">
-                        <!--begin::Col-->
-                        <div class="col-md-8 fv-row">
-                          <!--begin::Row-->
-                          <div class="row fv-row">
-                            <!--begin::Col-->
-                            <div class="col-md-8 fv-row">
-                              <a
-                                class="
-                                  btn btn-bg-light btn-active-color-primary
-                                "
-                                data-bs-target="#selectChangeOPRequest"
-                                data-bs-toggle="modal"
-                                type="button"
-                              >
-                                {{ translate("assignChangeOPRequests") }}
-                              </a>
-                            </div>
-                            <!--end::Col-->
-                          </div>
-                          <!--end::Row-->
-                        </div>
-                        <!--end::Col-->
-                      </div>
-                    </template>
-                    <!--end::Input group-->
+
                   </div>
                 </div>
                 <!--end::Step 1-->
