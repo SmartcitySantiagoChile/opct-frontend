@@ -186,6 +186,7 @@ const messages = {
     addRequest: "Add request",
     changeOPRequestsInfo: "Add the requests",
     add: "Add",
+    change_op_requests: "Change OP Requests",
   },
   es: {
     dashboard: "Tablero",
@@ -376,6 +377,7 @@ const messages = {
     addRequest: "Añadir solicitud",
     changeOPRequestsInfo: "Añada las solicitudes",
     add: "Añadir",
+    change_op_requests: "Solicitudes de cambio",
   },
   de: {
     dashboard: "Instrumententafel",

@@ -147,8 +147,7 @@ export default class ChangeOPProcessModule
     return new Promise<void>((resolve, reject) => {
       ApiService.postWithFiles("change-op-processes/", params)
         .then(({ data }) => {
-          console.log(data);
-          resolve();
+          resolve(data);
         })
         .catch(({ response }) => {
           console.log(response);

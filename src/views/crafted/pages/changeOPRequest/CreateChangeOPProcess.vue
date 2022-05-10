@@ -639,13 +639,13 @@
                                 </template>
                               </template>
                               <template
-                                v-else-if="index === 'relatedChangeOPRequests'"
+                                v-else-if="index === 'change_op_requests'"
                               >
                                 <template
                                   v-for="(subitem, subindex) in item"
                                   :key="subindex"
                                 >
-                                  {{ subitem }}<br />
+                                  {{ subitem }} <br />
                                 </template>
                               </template>
                               <template v-else>
@@ -839,10 +839,9 @@ export default defineComponent({
         store.getters.getChangeOPRequestReason;
       if (reasons.length) {
         reasons.forEach((v) => {
-          const option: string = v[1];
           options.push({
-            value: option,
-            label: option,
+            value: v[0],
+            label: v[1],
           });
         });
       }
@@ -996,20 +995,14 @@ export default defineComponent({
       };
 
       formDataInfo.value["title"] = formData.value["title"];
-      formDataInfo.value["relatedChangeOPRequests"] =
-        relatedChangeOPRequestsInfo;
-      // const reasonSelector: HTMLSelectElement = document.querySelector(
-      //   "#reason"
-      // ) as HTMLSelectElement;
-      // if (reasonSelector) {
-      //   formDataInfo.value["reason"] =
-      //     reasonSelector.options[reasonSelector.selectedIndex].label;
-      // }
+      //formDataInfo.value["relatedChangeOPRequests"] =
+      //  relatedChangeOPRequestsInfo;
 
       const changeOPRequestsTable: HTMLTableElement = document.getElementById(
         "changeOPRequestsTable"
       ) as HTMLTableElement;
-
+      formDataInfo.value["change_op_requests"] = [];
+      formData.value["change_op_requests"] = [];
       if (changeOPRequestsTable) {
         const tableRows: HTMLCollection = changeOPRequestsTable.tBodies[0]
           .rows as HTMLCollection;
@@ -1026,8 +1019,20 @@ export default defineComponent({
             const reason: HTMLTableCellElement = cells.item(
               1
             ) as HTMLTableCellElement;
-            // console.log(titleValue);
-            // console.log(reason.getElementsByTagName("select")[0]);
+            const reasonSelector: HTMLSelectElement =
+              reason.getElementsByTagName("select")[0];
+            const reasonValue =
+              reasonSelector.options[reasonSelector.selectedIndex].value;
+            const reasonLabel =
+              reasonSelector.options[reasonSelector.selectedIndex].label;
+            formDataInfo.value["change_op_requests"].push([
+              titleValue,
+              reasonLabel,
+            ]);
+            formData.value["change_op_requests"].push([
+              titleValue,
+              reasonValue,
+            ]);
           }
         }
       }
@@ -1094,20 +1099,57 @@ export default defineComponent({
 
       store
         .dispatch(Actions.CREATE_CHANGE_OP_PROCESS, params)
-        .then(() => {
-          Swal.fire({
-            text: translate("createChangeOPRequestSuccess"),
-            icon: "success",
-            buttonsStyling: false,
-            confirmButtonText: translate("confirm"),
-            customClass: {
-              confirmButton: "btn fw-bold btn-light-primary",
-            },
-          })
+        .then((data) => {
+          console.log(data);
+          // Create change op requests.
+          const changeOPRequestsCreationRequests: Array<Promise<any>> = [];
+          formData.value["change_op_requests"].forEach((change_op_request) => {
+            const params = {
+              title: change_op_request[0],
+              reason: change_op_request[1],
+              contract_type: formData.value["contract_type"],
+              op: formData.value["op"],
+              change_op_process: data.url,
+            };
+            changeOPRequestsCreationRequests.push(
+              store.dispatch(Actions.CREATE_CHANGE_OP_REQUEST, {
+                params: params,
+              })
+            );
+          });
+          Promise.all(changeOPRequestsCreationRequests)
             .then(() => {
-              hideModal(createAppModalRef.value);
+              Swal.fire({
+                text: translate("createChangeOPRequestSuccess"),
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: translate("confirm"),
+                customClass: {
+                  confirmButton: "btn fw-bold btn-light-primary",
+                },
+              })
+                .then(() => {
+                  hideModal(createAppModalRef.value);
+                })
+                .then(() => location.reload());
             })
-            .then(() => location.reload());
+            .catch(() => {
+              const errors = store.getters.getChangeOPRequestErrors;
+              const parsedErrors = Object.entries(errors).map((key) => {
+                return `<b>${translate(key[0])}</b>: ${translate(
+                  key[1]
+                )}<br><br>`;
+              });
+              Swal.fire({
+                icon: "error",
+                html: parsedErrors.join(""),
+                buttonsStyling: false,
+                confirmButtonText: translate("tryAgain"),
+                customClass: {
+                  confirmButton: "btn fw-bold btn-light-danger",
+                },
+              });
+            });
         })
         .catch(() => {
           const errors = store.getters.getChangeOPProcessErrors;
@@ -1154,7 +1196,6 @@ export default defineComponent({
     });
     const addChangeOPRequest = () => {
       addedChangeOPRequest.value.push("");
-      console.log(mutableSelectedChangeOPRequests);
     };
     return {
       handleStep,
