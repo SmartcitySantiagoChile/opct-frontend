@@ -39,7 +39,6 @@ const routes: Array<RouteRecordRaw> = [
             "@/views/crafted/pages/operationProgram/OperationPrograms.vue"
           ),
         props: true,
-        beforeEnter: ifHasChangeStatusOption,
       },
     ],
   },
