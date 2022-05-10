@@ -326,7 +326,7 @@
                           </h3>
                           <!--end::Card Title-->
                           <!--begin::Add Button-->
-                          <div class="card-toolbar align-items-start">
+                          <div class="card-toolbar">
                             <button
                               class="btn btn-primary btn-success"
                               type="button"
@@ -334,6 +334,25 @@
                             >
                               {{ translate("add") }}
                             </button>
+
+                            <a
+                              @click="deleteChangeOPRequest(index)"
+                              class="
+                                btn
+                                btn-sm
+                                btn-icon
+                                btn-bg-light
+                                btn-active-color-primary
+                                ml-1
+                              "
+                              type="button"
+                            >
+                              <span class="svg-icon svg-icon-2">
+                                <inline-svg
+                                  src="/media/icons/duotune/general/gen027.svg"
+                                />
+                              </span>
+                            </a>
                           </div>
                           <!--end::Add Button-->
                         </div>
@@ -378,9 +397,7 @@
                               <!--begin::Table body-->
                               <tbody>
                                 <template
-                                  v-for="(
-                                    item, index
-                                  ) in mutableSelectedChangeOPRequests"
+                                  v-for="(item, index) in addedChangeOPRequest"
                                   :key="index"
                                 >
                                   <tr>
@@ -408,6 +425,10 @@
                                               :name="'changeoprequest' + index"
                                               placeholder="Título"
                                               type="text"
+                                              :id="'changeoprequest' + index"
+                                              :value="
+                                                item[0] !== '0' ? item[0] : ''
+                                              "
                                             />
                                             <ErrorMessage
                                               class="
@@ -467,18 +488,6 @@
                                           </div>
                                           <!--end::Input group-->
                                         </div>
-                                      </div>
-                                    </td>
-
-                                    <td>
-                                      <div class="mb-10">
-                                        <div
-                                          class="
-                                            form-check
-                                            form-check-custom
-                                            form-check-solid
-                                          "
-                                        ></div>
                                       </div>
                                     </td>
                                   </tr>
@@ -758,7 +767,7 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, Ref, ref } from "vue";
+import { computed, defineComponent, onMounted, Ref, ref, watch } from "vue";
 import { StepperComponent } from "@/assets/ts/components/_StepperComponent";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import { ErrorMessage, Field, useForm } from "vee-validate";
@@ -1190,13 +1199,32 @@ export default defineComponent({
       }
     };
 
-    let addedChangeOPRequest: Ref<Array<string>> = ref([]);
+    let addedChangeOPRequest: Ref<Array<Array<string>>> = ref([]);
     const mutableSelectedChangeOPRequests = computed(() => {
       return addedChangeOPRequest.value;
     });
     const addChangeOPRequest = () => {
-      addedChangeOPRequest.value.push("");
+      addedChangeOPRequest.value.push(["", ""]);
     };
+
+    const deleteChangeOPRequest = (e) => {
+      addedChangeOPRequest.value.forEach((element, index) => {
+        const title: HTMLInputElement = document.getElementById(
+          `changeoprequest` + index
+        ) as HTMLInputElement;
+        const reason: HTMLSelectElement = document.getElementById(
+          `reason` + index
+        ) as HTMLSelectElement;
+        if (title && reason) {
+          addedChangeOPRequest[index] = [title.value, reason.value];
+        }
+      });
+      addedChangeOPRequest.value.splice(0);
+    };
+    watch(addedChangeOPRequest, (currentValue, oldValue) => {
+      console.log(currentValue);
+      console.log(oldValue);
+    });
     return {
       handleStep,
       formSubmit,
@@ -1220,6 +1248,8 @@ export default defineComponent({
       addChangeOPRequest,
       mutableSelectedChangeOPRequests,
       reasonOptions,
+      deleteChangeOPRequest,
+      addedChangeOPRequest,
     };
   },
 });
