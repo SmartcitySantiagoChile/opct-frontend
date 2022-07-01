@@ -16,6 +16,7 @@ import { initVeeValidate } from "@/core/plugins/vee-validate";
 
 import "@/core/plugins/keenthemes";
 import "bootstrap";
+import "element-plus/dist/index.css";
 
 const app = createApp(App);
 
