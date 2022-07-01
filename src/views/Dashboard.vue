@@ -3,6 +3,7 @@
     widget-classes="card-xxl-stretch mb-5 mb-xl-8"
   ></ChangeOPProcessesTable>
 </template>
+
 <script lang="ts">
 import { defineComponent, onMounted, onUpdated } from "vue";
 import {
