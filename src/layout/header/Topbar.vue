@@ -9,13 +9,7 @@
       >
         <!--begin::Menu-->
         <div
-          class="
-            btn btn-icon btn-active-light-primary
-            w-30px
-            h-30px
-            w-md-40px
-            h-md-40px
-          "
+          class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
           data-kt-menu-trigger="click"
           data-kt-menu-attach="parent"
           data-kt-menu-placement="bottom-end"

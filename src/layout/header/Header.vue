@@ -21,13 +21,7 @@
         title="Show aside menu"
       >
         <div
-          class="
-            btn btn-icon btn-active-light-primary
-            w-30px
-            h-30px
-            w-md-40px
-            h-md-40px
-          "
+          class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
           id="kt_header_menu_mobile_toggle"
         >
           <span class="svg-icon svg-icon-2x">
@@ -56,12 +50,7 @@
 
       <!--begin::Wrapper-->
       <div
-        class="
-          d-flex
-          align-items-stretch
-          justify-content-between
-          flex-lg-grow-1
-        "
+        class="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
       >
         <!--begin::Navbar-->
         <div class="d-flex align-items-stretch" id="kt_header_menu_nav">
