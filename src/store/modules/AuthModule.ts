@@ -3,6 +3,7 @@ import JwtService from "@/core/services/JwtService";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import { Module, Action, Mutation, VuexModule } from "vuex-module-decorators";
 import { Dictionary } from "@/store/modules/HelperModule";
+import { Organization } from "@/store/modules/OrganizationModule";
 
 export interface User {
   url: string;
@@ -11,7 +12,7 @@ export interface User {
   email: string;
   password: string;
   token: string;
-  organization: any;
+  organization: Organization;
   role: string;
   access_to_ops: boolean;
   access_to_organizations: boolean;
@@ -103,20 +104,18 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
   }
 
   /**
-   * Returns true if organization name is "DTPM" todo: change condition
+   * Returns true if organization can change counterpart
    * @returns boolean
    */
   get hasChangeStatusOption(): boolean {
-    return this.user.organization
-      ? this.user.organization.name === "DTPM"
-      : false;
+    return this.user.organization.can_change_counterpart;
   }
 
   /**
    * Returns organization name  1Q
    * @returns boolean
    */
-  get getOrganizationName(): boolean {
+  get getOrganizationName(): string {
     return this.user.organization.name;
   }
 

@@ -7,6 +7,7 @@ export interface Organization {
   created_at: string;
   contract_type: Dictionary<string>;
   default_counterpart: Dictionary<string>;
+  can_change_counterpart: boolean;
 }
 
 export interface OrganizationInfo {
