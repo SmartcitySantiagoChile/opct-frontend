@@ -83,11 +83,14 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(() => {
+router.beforeResolve(async (to) => {
+  console.log("holo2 holo2");
+  console.log(to);
+  console.log(to.meta);
   // reset config to initial state
-  store.commit(Mutations.RESET_LAYOUT_CONFIG);
+  await store.commit(Mutations.RESET_LAYOUT_CONFIG);
 
-  store.dispatch(Actions.VERIFY_AUTH);
+  await store.dispatch(Actions.VERIFY_AUTH);
 
   // Scroll page to top on every route change
   setTimeout(() => {
