@@ -254,10 +254,17 @@
                           :file-list="fileList"
                           :on-change="handleChange"
                           action=""
+                          multiple=""
+                          :limit="5"
                         >
                           <el-button size="small" type="primary"
                             >{{ translate("attachFiles") }}
                           </el-button>
+                          <template #tip>
+                            <div class="el-upload__tip">
+                              {{ translate("attachFilesHelp") }}
+                            </div>
+                          </template>
                         </el-upload>
                         <!--end::Toolbar-->
                         <div class="separator"></div>
