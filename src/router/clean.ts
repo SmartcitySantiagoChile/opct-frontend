@@ -2,14 +2,6 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import store from "@/store";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 
-const ifHasChangeStatusOption = (to, from, next) => {
-  if (store.getters.hasChangeStatusOption) {
-    next();
-  } else {
-    next("/");
-  }
-};
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: "",
