@@ -84,9 +84,6 @@ const router = createRouter({
 });
 
 router.beforeResolve(async (to) => {
-  console.log("holo2 holo2");
-  console.log(to);
-  console.log(to.meta);
   // reset config to initial state
   await store.commit(Mutations.RESET_LAYOUT_CONFIG);
 
