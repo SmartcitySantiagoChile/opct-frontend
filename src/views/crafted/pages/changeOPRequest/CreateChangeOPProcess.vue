@@ -692,26 +692,30 @@ import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import Quill from "quill/dist/quill.js";
 
-interface Step1 {
+interface Step1Form {
   title: string;
 }
 
-interface Step2 {
+interface Step2Form {
   change_op_requests: any[];
 }
 
-interface Step3 {
+interface Step3Form {
   counterpart: string;
 }
 
-interface Step4 {
-  op: string;
+interface Step4Form {
+  operation_program: string;
 }
 
-interface KTCreateApp extends Step1, Step2, Step3, Step4 {}
+interface ChangeOPProcessCreationPayload
+  extends Step1Form,
+    Step2Form,
+    Step3Form,
+    Step4Form {}
 
 export default defineComponent({
-  name: "CreateChangeOpProcess",
+  name: "CreateChangeOPProcess",
   components: {
     Field,
     ErrorMessage,
@@ -741,18 +745,18 @@ export default defineComponent({
     let relatedChangeOPRequests: Array<string> = [];
     let relatedChangeOPRequestsInfo: Array<string> = [];
 
-    const formData = ref<KTCreateApp>({
+    const formData = ref<ChangeOPProcessCreationPayload>({
       title: "",
       change_op_requests: [],
-      counterpart: "1",
-      op: "",
+      counterpart: "",
+      operation_program: "",
     });
 
-    const formDataInfo = ref<KTCreateApp>({
+    const formDataInfo = ref<ChangeOPProcessCreationPayload>({
       title: "",
       change_op_requests: [],
-      counterpart: "1",
-      op: "",
+      counterpart: "",
+      operation_program: "",
     });
 
     // Create selectors.
@@ -897,7 +901,9 @@ export default defineComponent({
       return _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<Step1 | Step2 | Step3 | Step4>({
+    const { resetForm, handleSubmit } = useForm<
+      Step1Form | Step2Form | Step3Form | Step4Form
+    >({
       validationSchema: currentSchema,
     });
 
