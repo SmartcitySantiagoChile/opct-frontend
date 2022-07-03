@@ -47,20 +47,11 @@
           <div
             id="modal_create_change_op_process_stepper"
             ref="createChangeOPRef"
-            class="
-              stepper stepper-pills stepper-column
-              d-flex
-              flex-column flex-xl-row flex-row-fluid
-            "
+            class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid"
           >
             <!--begin::Aside-->
             <div
-              class="
-                d-flex
-                justify-content-center justify-content-xl-start
-                flex-row-auto
-                w-100 w-xl-300px
-              "
+              class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px"
             >
               <!--begin::Nav-->
               <div class="stepper-nav ps-lg-10">
@@ -308,14 +299,7 @@
 
                             <a
                               @click="deleteChangeOPRequest(index)"
-                              class="
-                                btn
-                                btn-sm
-                                btn-icon
-                                btn-bg-light
-                                btn-active-color-primary
-                                ml-1
-                              "
+                              class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary ml-1"
                               type="button"
                             >
                               <span class="svg-icon svg-icon-2">
@@ -334,25 +318,13 @@
                           <div class="table-responsive">
                             <!--begin::Table-->
                             <table
-                              class="
-                                table
-                                align-middle
-                                gs-0
-                                gy-4
-                                table-rounded table-striped
-                                border
-                              "
+                              class="table align-middle gs-0 gy-4 table-rounded table-striped border"
                               id="changeOPRequestsTable"
                             >
                               <!--begin::Table head-->
                               <thead>
                                 <tr
-                                  class="
-                                    fw-bold
-                                    fs-5
-                                    text-gray-800
-                                    border-bottom-2 border-gray-200
-                                  "
+                                  class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
                                 >
                                   <th class="ps-4 rounded-start">
                                     {{ translate("title") }}
@@ -378,21 +350,13 @@
                                           class="symbol symbol-10px me-5"
                                         ></div>
                                         <div
-                                          class="
-                                            d-flex
-                                            justify-content-start
-                                            flex-column
-                                          "
+                                          class="d-flex justify-content-start flex-column"
                                         >
                                           <!--begin::Input group-->
                                           <div class="fv-row mb-10">
                                             <!--begin::Input-->
                                             <Field
-                                              class="
-                                                form-control
-                                                form-control-lg
-                                                form-control-solid
-                                              "
+                                              class="form-control form-control-lg form-control-solid"
                                               :name="'changeoprequest' + index"
                                               placeholder="Título"
                                               type="text"
@@ -402,10 +366,7 @@
                                               "
                                             />
                                             <ErrorMessage
-                                              class="
-                                                fv-plugins-message-container
-                                                invalid-feedback
-                                              "
+                                              class="fv-plugins-message-container invalid-feedback"
                                               :name="'changeoprequest' + index"
                                             />
                                             <!--end::Input-->
@@ -420,11 +381,7 @@
                                           class="symbol symbol-10px me-5"
                                         ></div>
                                         <div
-                                          class="
-                                            d-flex
-                                            justify-content-start
-                                            flex-column
-                                          "
+                                          class="d-flex justify-content-start flex-column"
                                         >
                                           <!--begin::Input group-->
                                           <div class="row mb-10">
@@ -437,12 +394,7 @@
                                                 <!--begin::Col-->
                                                 <select
                                                   :id="'reason' + index"
-                                                  class="
-                                                    form-select
-                                                    form-select-solid
-                                                    select2-hidden-accessible
-                                                    selected
-                                                  "
+                                                  class="form-select form-select-solid select2-hidden-accessible selected"
                                                 >
                                                   <option
                                                     v-for="i in reasonOptions"
@@ -496,11 +448,7 @@
                           <!--begin::Col-->
                           <select
                             id="counterpart"
-                            class="
-                              form-select form-select-solid
-                              select2-hidden-accessible
-                              selected
-                            "
+                            class="form-select form-select-solid select2-hidden-accessible selected"
                           >
                             <template v-if="isAdminOrganization">
                               <option
@@ -554,11 +502,8 @@
                           <Field
                             id="op"
                             as="select"
-                            class="
-                              form-select form-select-solid
-                              select2-hidden-accessible
-                            "
-                            name="op"
+                            class="form-select form-select-solid select2-hidden-accessible"
+                            name="operation_program"
                           >
                             <option disabled selected value="">
                               {{ translate("selectOP") }}
@@ -593,12 +538,7 @@
 
                     <!--begin::Description-->
                     <table
-                      class="
-                        table
-                        align-middle
-                        table-rounded table-striped
-                        border
-                      "
+                      class="table align-middle table-rounded table-striped border"
                     >
                       <tbody>
                         <template
@@ -690,11 +630,7 @@
                       <span class="indicator-progress">
                         {{ translate("pleaseWait") }}
                         <span
-                          class="
-                            spinner-border spinner-border-sm
-                            align-middle
-                            ms-2
-                          "
+                          class="spinner-border spinner-border-sm align-middle ms-2"
                         ></span>
                       </span>
                     </button>
