@@ -379,7 +379,7 @@ const messages = {
     addRequest: "Añadir solicitud",
     changeOPRequestsInfo: "Añada las solicitudes",
     add: "Añadir",
-    change_op_requests: "Solicitudes de modificación",
+    change_op_requests: "N° de solicitudes de modificación",
   },
   de: {
     dashboard: "Instrumententafel",

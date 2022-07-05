@@ -36,14 +36,7 @@
       <div class="table-responsive">
         <!--begin::Table-->
         <table
-          class="
-            table
-            align-middle
-            gs-0
-            gy-4
-            table-rounded table-striped
-            border
-          "
+          class="table align-middle gs-0 gy-4 table-rounded table-striped border"
         >
           <!--begin::Table head-->
           <thead>
@@ -104,14 +97,7 @@
                 </td>
                 <td>
                   <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
+                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
                     href="#"
                   >
                     <template v-if="item.base_op">
@@ -129,42 +115,21 @@
                 </td>
                 <td>
                   <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
+                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
                     href="#"
                     >{{ item.contract_type ? item.contract_type.name : "" }}</a
                   >
                 </td>
                 <td>
                   <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
+                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
                     href="#"
                     >{{ item.title }}</a
                   >
                 </td>
                 <td>
                   <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
+                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
                     href="#"
                     >{{
                       item.creator.first_name + " " + item.creator.last_name
@@ -173,47 +138,28 @@
                 </td>
                 <td>
                   <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
+                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
                     href="#"
                     >{{ item.counterpart.name }}</a
                   >
                 </td>
                 <td>
                   <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
+                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
                     href="#"
                     >{{ item.status.name }}</a
                   >
                 </td>
                 <td>
-                  <template
-                    v-for="(subItem, subIndex) in item.change_op_requests"
-                    :key="subIndex"
+                  <a
+                    class="text-center text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
+                    href="#"
+                    >{{ item.change_op_requests_count }}</a
                   >
-                    <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                      >{{ subItem.title }} </a
-                    ><br />
-                  </template>
                 </td>
                 <td>
                   <a
-                    class="
-                      btn btn-sm btn-icon btn-bg-light btn-active-color-primary
-                    "
+                    class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
                     v-bind:href="item.url.split('api')[1]"
                   >
                     <span class="svg-icon svg-icon-2">
