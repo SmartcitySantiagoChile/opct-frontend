@@ -1,16 +1,11 @@
 <template>
-  <ChangeOPProcessesTable
-    widget-classes="card-xxl-stretch mb-5 mb-xl-8"
-  ></ChangeOPProcessesTable>
+  <ChangeOPProcessesTable widget-classes="card-xxl-stretch mb-5 mb-xl-8"></ChangeOPProcessesTable>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, onUpdated } from "vue";
-import {
-  setCurrentCreateButton,
-  setCurrentPageTitle,
-} from "@/core/helpers/breadcrumb";
-import ChangeOPProcessesTable from "@/components/widgets/tables/ChangeOPProcessesTable.vue";
+import { setCurrentCreateButton, setCurrentPageTitle } from "@/core/helpers/breadcrumb";
+import ChangeOPProcessesTable from "@/views/opct/changeopprocess/ChangeOPProcessResumeTable.vue";
 
 export default defineComponent({
   name: "dashboard",

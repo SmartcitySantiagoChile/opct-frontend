@@ -35,14 +35,10 @@
       <!--begin::Table container-->
       <div class="table-responsive">
         <!--begin::Table-->
-        <table
-          class="table align-middle gs-0 gy-4 table-rounded table-striped border"
-        >
+        <table class="table align-middle gs-0 gy-4 table-rounded table-striped border">
           <!--begin::Table head-->
           <thead>
-            <tr
-              class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-            >
+            <tr class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200">
               <th class="ps-4 rounded-start">Id</th>
               <th class="ps-4 min-w-125px rounded-start">
                 {{ translate("creationDate") }}
@@ -67,14 +63,8 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a
-                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                        href=""
-                        >{{
-                          item.url
-                            .split("/change-op-processes/")[1]
-                            .split("/")[0]
-                        }}
+                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
+                        >{{ item.url.split("/change-op-processes/")[1].split("/")[0] }}
                       </a>
                     </div>
                   </div>
@@ -83,29 +73,16 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a
-                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                        href=""
-                        >{{
-                          DateTime.fromISO(item.created_at)
-                            .setLocale(this.$i18n.locale)
-                            .toLocaleString()
-                        }}
+                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
+                        >{{ DateTime.fromISO(item.created_at).setLocale(this.$i18n.locale).toLocaleString() }}
                       </a>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <a
-                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
-                    href="#"
-                  >
+                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">
                     <template v-if="item.base_op">
-                      {{
-                        DateTime.fromISO(item.base_op.start_at)
-                          .setLocale(this.$i18n.locale)
-                          .toLocaleString()
-                      }}
+                      {{ DateTime.fromISO(item.base_op.start_at).setLocale(this.$i18n.locale).toLocaleString() }}
                       ({{ item.base_op.op_type.name }})
                     </template>
                     <template v-else>
@@ -114,48 +91,32 @@
                   </a>
                 </td>
                 <td>
-                  <a
-                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
-                    href="#"
-                    >{{ item.contract_type ? item.contract_type.name : "" }}</a
-                  >
+                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
+                    item.contract_type ? item.contract_type.name : ""
+                  }}</a>
                 </td>
                 <td>
-                  <a
-                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
-                    href="#"
-                    >{{ item.title }}</a
-                  >
+                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{ item.title }}</a>
                 </td>
                 <td>
-                  <a
-                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
-                    href="#"
-                    >{{
-                      item.creator.first_name + " " + item.creator.last_name
-                    }}</a
-                  >
+                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
+                    item.creator.first_name + " " + item.creator.last_name
+                  }}</a>
                 </td>
                 <td>
-                  <a
-                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
-                    href="#"
-                    >{{ item.counterpart.name }}</a
-                  >
+                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
+                    item.counterpart.name
+                  }}</a>
                 </td>
                 <td>
-                  <a
-                    class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
-                    href="#"
-                    >{{ item.status.name }}</a
-                  >
+                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
+                    item.status.name
+                  }}</a>
                 </td>
                 <td>
-                  <a
-                    class="text-center text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"
-                    href="#"
-                    >{{ item.change_op_requests_count }}</a
-                  >
+                  <a class="text-center text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
+                    item.change_op_requests_count
+                  }}</a>
                 </td>
                 <td>
                   <a
@@ -163,9 +124,7 @@
                     v-bind:href="item.url.split('api')[1]"
                   >
                     <span class="svg-icon svg-icon-2">
-                      <inline-svg
-                        src="/media/icons/duotune/arrows/arr064.svg"
-                      />
+                      <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
                     </span>
                   </a>
                 </td>
@@ -183,18 +142,11 @@
               </button>
             </li>
             <template
-              v-for="(item, index) in Array.from(
-                { length: Math.ceil(changeOPProcessesCount / 10) },
-                (_, i) => i + 1
-              )"
+              v-for="(item, index) in Array.from({ length: Math.ceil(changeOPProcessesCount / 10) }, (_, i) => i + 1)"
               :key="index"
             >
               <li class="page-item">
-                <button
-                  :data-value="item"
-                  class="page-link"
-                  @click="onPageChange"
-                >
+                <button :data-value="item" class="page-link" @click="onPageChange">
                   {{ item }}
                 </button>
               </li>
@@ -213,13 +165,14 @@
   </div>
   <!--end::Tables Widget 12-->
 </template>
+
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
-import CreateChangeOPProcess from "@/views/crafted/pages/changeOPRequest/CreateChangeOPProcess.vue";
+import CreateChangeOPProcess from "@/views/opct/changeopprocess/ChangeOPProcessCreate.vue";
 
 export default defineComponent({
   name: "change-op-processes-table",
@@ -232,12 +185,8 @@ export default defineComponent({
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_CHANGE_OP_PROCESSES);
-    const changeOPProcesses = computed(
-      () => store.getters.getCurrentChangeOPProcesses
-    );
-    const changeOPProcessesCount = computed(
-      () => store.getters.getCurrentChangeOPProcessesCount
-    );
+    const changeOPProcesses = computed(() => store.getters.getCurrentChangeOPProcesses);
+    const changeOPProcessesCount = computed(() => store.getters.getCurrentChangeOPProcessesCount);
 
     // Events
     const onFilterChange = (event) => {
@@ -252,18 +201,13 @@ export default defineComponent({
     };
 
     const onPageChange = (event) => {
-      const filter = document.querySelector<HTMLInputElement>(
-        'input[name="filter"]'
-      );
+      const filter = document.querySelector<HTMLInputElement>('input[name="filter"]');
       let params = {};
       if (filter) {
         params["search"] = filter.value;
       }
       let pageId = event.target.getAttribute("data-value");
-      pageId =
-        pageId === "-1"
-          ? String(Math.ceil(changeOPProcessesCount.value / 10))
-          : pageId;
+      pageId = pageId === "-1" ? String(Math.ceil(changeOPProcessesCount.value / 10)) : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();
