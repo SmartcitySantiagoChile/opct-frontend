@@ -247,7 +247,7 @@ export default class ChangeOPRequestModule
 
   @Action
   [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {
-    ApiService.get("change-op-request-reasons")
+    return ApiService.get("change-op-request-reasons")
       .then(({ data }) => {
         this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_REASONS, data);
       })

@@ -53,7 +53,7 @@ export default class OperationProgramsModule
 
   @Action
   [Actions.GET_OPERATION_PROGRAMS]() {
-    ApiService.get("operation-programs")
+    return ApiService.get("operation-programs")
       .then(({ data }) => {
         this.context.commit(Mutations.SET_OPERATION_PROGRAMS, data);
       })

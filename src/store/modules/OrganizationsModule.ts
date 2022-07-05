@@ -45,7 +45,7 @@ export default class OrganizationsModule
 
   @Action
   [Actions.GET_ORGANIZATIONS]() {
-    ApiService.get("organizations")
+    return ApiService.get("organizations")
       .then(({ data }) => {
         this.context.commit(Mutations.SET_ORGANIZATIONS, data);
       })
