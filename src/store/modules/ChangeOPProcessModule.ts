@@ -21,6 +21,7 @@ export interface ChangeOPProcess {
   status_logs: Array<any>;
   change_op_requests: Dictionary<string>;
   op_release_date: string;
+  change_op_requests_count?: number;
 }
 
 export interface ChangeOPProcessInfo {
@@ -29,10 +30,7 @@ export interface ChangeOPProcessInfo {
 }
 
 @Module
-export default class ChangeOPProcessModule
-  extends VuexModule
-  implements ChangeOPProcessInfo
-{
+export default class ChangeOPProcessModule extends VuexModule implements ChangeOPProcessInfo {
   errors = {};
   changeOPProcess = {} as ChangeOPProcess;
 
@@ -65,9 +63,7 @@ export default class ChangeOPProcessModule
    * @returns string
    */
   get getCurrentChangeOPProcessOP(): string {
-    return this.changeOPProcess.base_op
-      ? this.changeOPProcess.base_op.start_at
-      : "";
+    return this.changeOPProcess.base_op ? this.changeOPProcess.base_op.start_at : "";
   }
 
   /**
@@ -97,9 +93,7 @@ export default class ChangeOPProcessModule
    * @returns string
    */
   get getCurrentChangeOPProcessContractTypeName(): string {
-    return this.changeOPProcess.contract_type
-      ? this.changeOPProcess.contract_type.name
-      : "";
+    return this.changeOPProcess.contract_type ? this.changeOPProcess.contract_type.name : "";
   }
 
   /**
@@ -136,9 +130,7 @@ export default class ChangeOPProcessModule
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESS, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [response.data.error]);
       });
   }
 
@@ -151,10 +143,7 @@ export default class ChangeOPProcessModule
         })
         .catch(({ response }) => {
           console.log(response);
-          this.context.commit(
-            Mutations.SET_CHANGE_OP_PROCESS_ERRORS,
-            response.data
-          );
+          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, response.data);
           reject();
         });
     });
@@ -163,17 +152,12 @@ export default class ChangeOPProcessModule
   @Action
   [Actions.CHANGE_CHANGE_OP_PROCESS_STATUS](data) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.put(
-        `change-op-processes/${data.resource}/change-status/`,
-        data.params
-      )
+      ApiService.put(`change-op-processes/${data.resource}/change-status/`, data.params)
         .then(({ data }) => {
           resolve();
         })
         .catch(({ response }) => {
-          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [
-            response.data.error,
-          ]);
+          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [response.data.error]);
           reject();
         });
     });
@@ -182,17 +166,12 @@ export default class ChangeOPProcessModule
   @Action
   [Actions.CHANGE_CHANGE_OP_PROCESS_OP](data) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.put(
-        `change-op-processes/${data.resource}/change-op/`,
-        data.params
-      )
+      ApiService.put(`change-op-processes/${data.resource}/change-op/`, data.params)
         .then(({ data }) => {
           resolve();
         })
         .catch(({ response }) => {
-          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [
-            response.data.error,
-          ]);
+          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [response.data.error]);
           reject();
         });
     });
