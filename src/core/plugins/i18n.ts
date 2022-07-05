@@ -293,8 +293,7 @@ const messages = {
     changeOPSuccess: "¡Programa de Operación cambiado exitosamente!",
     update: "Actualizar",
     notUpdate: "No actualizar",
-    wantToUpdateDeadlines:
-      "¿Desea actualizar los plazos de las etapas de la solicitud?",
+    wantToUpdateDeadlines: "¿Desea actualizar los plazos de las etapas de la solicitud?",
     deadlinesUpdated: "Plazos actualizados",
     deadlinesNotUpdated: "Plazos no actualizados",
     contractType: "Tipo de contrato",
@@ -332,8 +331,7 @@ const messages = {
     operationProgramDate: "Fecha de Programa de Operación",
     date: "Fecha",
     dateRequired: "Se require una fecha",
-    createOperationProgramSuccess:
-      "¡Programa de Operación creado exitosamente!",
+    createOperationProgramSuccess: "¡Programa de Operación creado exitosamente!",
     updateOpSuccess: "¡Programa de Operación actualizado exitosamente!",
     editOP: "Modificar Programa de Operación",
     changeOpDate: "Modificar fecha",
@@ -346,8 +344,7 @@ const messages = {
     deleteOpError: "Error al eliminar el Programa de Operación",
     deleted: "¡Eliminado!",
     detail: "Detalle",
-    deleteOperationProgramSuccess:
-      "¡Programa de Operación eliminado exitosamente!",
+    deleteOperationProgramSuccess: "¡Programa de Operación eliminado exitosamente!",
     information: "Información",
     value: "Valor",
     previousData: "Datos anteriores",
@@ -365,8 +362,7 @@ const messages = {
     relatedRequests: "Solicitudes relacionadas",
     relatedChangeOPRequests: "Solicitudes relacionadas",
     requests: "Procesos de modificación",
-    changeRelatedRequestSuccess:
-      "¡Solicitudes relacionadas cambiadas exitosamente!",
+    changeRelatedRequestSuccess: "¡Solicitudes relacionadas cambiadas exitosamente!",
     changeRelatedRequestError: "¡Error al modificar solicitudes!",
     changeOPProcesses: "Procesos de modificación de PO",
     changeRequestOPInfo: "Cambio de PO en ",
