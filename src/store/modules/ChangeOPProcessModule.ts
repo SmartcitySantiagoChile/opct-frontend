@@ -137,7 +137,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
   @Action
   [Actions.CREATE_CHANGE_OP_PROCESS](params) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.postWithFiles("change-op-processes/", params)
+      ApiService.post("change-op-processes/", params)
         .then(({ data }) => {
           resolve(data);
         })
