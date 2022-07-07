@@ -81,9 +81,11 @@
                 </td>
                 <td>
                   <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">
-                    <template v-if="item.base_op">
-                      {{ DateTime.fromISO(item.base_op.start_at).setLocale(this.$i18n.locale).toLocaleString() }}
-                      ({{ item.base_op.op_type.name }})
+                    <template v-if="item.operation_program">
+                      {{
+                        DateTime.fromISO(item.operation_program.start_at).setLocale(this.$i18n.locale).toLocaleString()
+                      }}
+                      ({{ item.operation_program.op_type.name }})
                     </template>
                     <template v-else>
                       {{ translate("withoutAssign") }}
