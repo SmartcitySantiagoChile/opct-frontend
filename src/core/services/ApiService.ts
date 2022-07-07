@@ -18,17 +18,14 @@ class ApiService {
   public static init(app: App<Element>) {
     ApiService.vueInstance = app;
     ApiService.vueInstance.use(VueAxios, axios);
-    ApiService.vueInstance.axios.defaults.baseURL =
-      process.env.VUE_APP_API_BASE_URL;
+    ApiService.vueInstance.axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
   }
 
   /**
    * @description set the default HTTP request headers
    */
   public static setHeader(): void {
-    ApiService.vueInstance.axios.defaults.headers.common[
-      "Authorization"
-    ] = `Token ${JwtService.getToken()}`;
+    ApiService.vueInstance.axios.defaults.headers.common["Authorization"] = `Token ${JwtService.getToken()}`;
   }
 
   /**
@@ -37,10 +34,7 @@ class ApiService {
    * @param params: AxiosRequestConfig
    * @returns Promise<AxiosResponse>
    */
-  public static query(
-    resource: string,
-    params: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
+  public static query(resource: string, params: AxiosRequestConfig): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.get(resource, params).catch((error) => {
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -52,15 +46,10 @@ class ApiService {
    * @param slug: string
    * @returns Promise<AxiosResponse>
    */
-  public static get(
-    resource: string,
-    slug = "" as string
-  ): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios
-      .get(`${resource}/${slug}`)
-      .catch((error) => {
-        throw new Error(`[KT] ApiService ${error}`);
-      });
+  public static get(resource: string, slug = "" as string): Promise<AxiosResponse> {
+    return ApiService.vueInstance.axios.get(`${resource}/${slug}`).catch((error) => {
+      throw new Error(`[KT] ApiService ${error}`);
+    });
   }
 
   /**
@@ -69,10 +58,7 @@ class ApiService {
    * @param params: AxiosRequestConfig
    * @returns Promise<AxiosResponse>
    */
-  public static post(
-    resource: string,
-    params: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
+  public static post(resource: string, params: AxiosRequestConfig): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.post(`${resource}`, params);
   }
 
@@ -82,15 +68,8 @@ class ApiService {
    * @param params: AxiosRequestConfig
    * @returns Promise<AxiosResponse>
    */
-  public static postWithFiles(
-    resource: string,
-    params: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios.post(
-      `${resource}`,
-      params.params,
-      params
-    );
+  public static postWithFiles(resource: string, params: AxiosRequestConfig): Promise<AxiosResponse> {
+    return ApiService.vueInstance.axios.post(`${resource}`, params.params, params);
   }
 
   /**
@@ -100,11 +79,7 @@ class ApiService {
    * @param params: AxiosRequestConfig
    * @returns Promise<AxiosResponse>
    */
-  public static update(
-    resource: string,
-    slug: string,
-    params: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
+  public static update(resource: string, slug: string, params: AxiosRequestConfig): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.put(`${resource}/${slug}`, params);
   }
 
@@ -114,10 +89,7 @@ class ApiService {
    * @param params: AxiosRequestConfig
    * @returns Promise<AxiosResponse>
    */
-  public static put(
-    resource: string,
-    params: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
+  public static put(resource: string, params: AxiosRequestConfig): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.put(`${resource}`, params);
   }
 
@@ -127,10 +99,7 @@ class ApiService {
    * @param params: AxiosRequestConfig
    * @returns Promise<AxiosResponse>
    */
-  public static patch(
-    resource: string,
-    params: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
+  public static patch(resource: string, params: AxiosRequestConfig): Promise<AxiosResponse> {
     return ApiService.vueInstance.axios.patch(`${resource}`, params);
   }
 
