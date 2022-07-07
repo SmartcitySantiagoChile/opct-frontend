@@ -160,7 +160,7 @@
                       <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                         <span class="required">{{ translate("title") }}</span>
                         <i
-                          :title="`${translate('changeOPRequestTitleLabel')}`"
+                          :title="`${translate('changeOPProcessTitleLabel')}`"
                           class="fas fa-exclamation-circle ms-2 fs-7"
                           data-bs-toggle="tooltip"
                         ></i>
