@@ -7,6 +7,15 @@ export interface ChangeOPRequestReasons {
   options: Array<Array<string>>;
 }
 
+export interface RouteDefinition {
+  auth_route_code: string;
+  user_route_code: string;
+}
+
+export interface RouteDefinitions {
+  options: Array<RouteDefinition>;
+}
+
 export interface ChangeOPRequest {
   url: string;
   created_at: string;
@@ -34,13 +43,11 @@ export interface ChangeOPRequestInfo {
 }
 
 @Module
-export default class ChangeOPRequestModule
-  extends VuexModule
-  implements ChangeOPRequestInfo
-{
+export default class ChangeOPRequestModule extends VuexModule implements ChangeOPRequestInfo {
   errors = {};
   changeOPRequest = {} as ChangeOPRequest;
   reasons = {} as ChangeOPRequestReasons;
+  routeDefinitions = {} as RouteDefinitions;
 
   /**
    * Get change op request errors
@@ -101,9 +108,7 @@ export default class ChangeOPRequestModule
    * @returns string
    */
   get getCurrentChangeOPRequestContractTypeName(): string {
-    return this.changeOPRequest.contract_type
-      ? this.changeOPRequest.contract_type.name
-      : "";
+    return this.changeOPRequest.contract_type ? this.changeOPRequest.contract_type.name : "";
   }
 
   /**
@@ -138,6 +143,14 @@ export default class ChangeOPRequestModule
     return this.changeOPRequest.related_requests;
   }
 
+  /**
+   * Get all route definitions
+   * @returns RouteDefinitions
+   */
+  get getAllRouteDefinitions(): RouteDefinitions {
+    return this.routeDefinitions;
+  }
+
   @Mutation
   [Mutations.SET_CHANGE_OP_REQUEST](changeOPRequest) {
     this.changeOPRequest = changeOPRequest;
@@ -153,6 +166,16 @@ export default class ChangeOPRequestModule
     this.errors = errors;
   }
 
+  @Mutation
+  [Mutations.SET_ROUTE_DEFINITIONS](routeDefinitions) {
+    this.routeDefinitions = routeDefinitions;
+  }
+
+  @Mutation
+  [Mutations.SET_ROUTE_DEFINITIONS_ERROR](errors) {
+    this.errors = errors;
+  }
+
   @Action
   [Actions.GET_CHANGE_OP_REQUEST](changeOPRequestId) {
     ApiService.get("change-op-requests", changeOPRequestId)
@@ -161,9 +184,7 @@ export default class ChangeOPRequestModule
       })
       .catch(({ response }) => {
         console.log(response);
-        this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
       });
   }
 
@@ -176,10 +197,7 @@ export default class ChangeOPRequestModule
         })
         .catch(({ response }) => {
           console.log(response);
-          this.context.commit(
-            Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS,
-            response.data
-          );
+          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, response.data);
           reject();
         });
     });
@@ -188,18 +206,13 @@ export default class ChangeOPRequestModule
   @Action
   [Actions.CHANGE_CHANGE_OP_REQUEST_STATUS](data) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.put(
-        `change-op-requests/${data.resource}/change-status/`,
-        data.params
-      )
+      ApiService.put(`change-op-requests/${data.resource}/change-status/`, data.params)
         .then(({ data }) => {
           resolve();
         })
         .catch(({ response }) => {
           console.log(response);
-          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-            response.data.error,
-          ]);
+          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
           reject();
         });
     });
@@ -208,18 +221,13 @@ export default class ChangeOPRequestModule
   @Action
   [Actions.CHANGE_CHANGE_OP_REQUEST_REASON](data) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.put(
-        `change-op-requests/${data.resource}/change-reason/`,
-        data.params
-      )
+      ApiService.put(`change-op-requests/${data.resource}/change-reason/`, data.params)
         .then(({ data }) => {
           resolve();
         })
         .catch(({ response }) => {
           console.log(response);
-          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-            response.data.error,
-          ]);
+          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
           reject();
         });
     });
@@ -228,18 +236,13 @@ export default class ChangeOPRequestModule
   @Action
   [Actions.CHANGE_CHANGE_OP_REQUEST_OP](data) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.put(
-        `change-op-requests/${data.resource}/change-op/`,
-        data.params
-      )
+      ApiService.put(`change-op-requests/${data.resource}/change-op/`, data.params)
         .then(({ data }) => {
           resolve();
         })
         .catch(({ response }) => {
           console.log(response);
-          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-            response.data.error,
-          ]);
+          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
           reject();
         });
     });
@@ -253,30 +256,35 @@ export default class ChangeOPRequestModule
       })
       .catch(({ response }) => {
         console.log(response);
-        this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
       });
   }
 
   @Action
   [Actions.CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS](data) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.put(
-        `change-op-requests/${data.resource}/change-related-requests/`,
-        data.params
-      )
+      ApiService.put(`change-op-requests/${data.resource}/change-related-requests/`, data.params)
         .then(({ data }) => {
           console.log(data);
           resolve();
         })
         .catch(({ response }) => {
           console.log(response);
-          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-            response.data.error,
-          ]);
+          this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [response.data.error]);
           reject();
         });
     });
+  }
+
+  @Action
+  [Actions.GET_ROUTE_DEFINITIONS]() {
+    return ApiService.get("route-definitions")
+      .then(({ data }) => {
+        this.context.commit(Mutations.SET_ROUTE_DEFINITIONS, data);
+      })
+      .catch(({ response }) => {
+        console.log(response);
+        this.context.commit(Mutations.SET_ROUTE_DEFINITIONS_ERROR, [response.data.error]);
+      });
   }
 }
