@@ -195,7 +195,7 @@
                           multiple=""
                           :limit="5"
                         >
-                          <el-button size="small" type="primary">{{ translate("attachFiles") }} </el-button>
+                          <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
                           <template #tip>
                             <div class="el-upload__tip">
                               {{ translate("attachFilesHelp") }}
@@ -554,7 +554,7 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, Ref, ref, watch, reactive } from "vue";
+import { computed, defineComponent, onMounted, Ref, ref, watch } from "vue";
 import { StepperComponent } from "@/assets/ts/components/_StepperComponent";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import { ErrorMessage, Field, useForm } from "vee-validate";
@@ -856,39 +856,47 @@ export default defineComponent({
         },
       };
 
-      store.dispatch(Actions.CREATE_CHANGE_OP_PROCESS, formData.value).then((data) => {
-        messageParams.url = data.url;
-        store
-          .dispatch(Actions.CREATE_CHANGE_OP_PROCESS_MESSAGE, messageParams)
-          .then((data) => {
-            console.log(data);
-            Swal.fire({
-              text: translate("createChangeOPRequestSuccess"),
-              icon: "success",
-              showConfirmButton: false,
-              timer: 1000,
+      const processErrorResponse = (response) => {
+        console.log(response);
+        const errors = response.data;
+        const parsedErrors = Object.entries(errors).map((key) => {
+          return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
+        });
+        Swal.fire({
+          icon: "error",
+          html: parsedErrors.join(""),
+          buttonsStyling: false,
+          confirmButtonText: translate("tryAgain"),
+          customClass: {
+            confirmButton: "btn fw-bold btn-light-danger",
+          },
+        });
+      };
+
+      store
+        .dispatch(Actions.CREATE_CHANGE_OP_PROCESS, formData.value)
+        .then((data) => {
+          messageParams.url = data.url;
+          store
+            .dispatch(Actions.CREATE_CHANGE_OP_PROCESS_MESSAGE, messageParams)
+            .then((data) => {
+              console.log(data);
+              Swal.fire({
+                text: translate("createChangeOPRequestSuccess"),
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1000,
+              })
+                .then(() => hideModal(createAppModalRef.value))
+                .then(() => emit("change-op-process-created"));
             })
-              .then(() => hideModal(createAppModalRef.value))
-              .then(() => emit("change-op-process-created"));
-          })
-          .catch((data) => {
-            console.log("error");
-            console.log(data);
-            const errors = store.getters.getChangeOPRequestErrors;
-            const parsedErrors = Object.entries(errors).map((key) => {
-              return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
+            .catch((response) => {
+              processErrorResponse(response);
             });
-            Swal.fire({
-              icon: "error",
-              html: parsedErrors.join(""),
-              buttonsStyling: false,
-              confirmButtonText: translate("tryAgain"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-danger",
-              },
-            });
-          });
-      });
+        })
+        .catch((response) => {
+          processErrorResponse(response);
+        });
     };
 
     resetForm({
