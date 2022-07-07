@@ -130,6 +130,7 @@ const messages = {
     counterpartRequired: "Counterpart is required",
     operationProgramRequired: "Operation program is required",
     reasonRequired: "Reason is required",
+    changeOPRequestRequired: "It should have one or more change op requests",
     writeMessage: "Write a message...",
     withoutOP: "Without OP",
     selectOP: "Choose OP",
@@ -190,6 +191,7 @@ const messages = {
     changeOPRequestsInfo: "Add the requests",
     add: "Add",
     change_op_requests: "Change OP Requests",
+    operation_program: "Operation program",
   },
   es: {
     dashboard: "Tablero",
@@ -320,6 +322,7 @@ const messages = {
     counterpartRequired: "Se requiere una contraparte",
     operationProgramRequired: "Se requiere un programa de operación o indicar explícitamente que no",
     reasonRequired: "Se requiere seleccionar un motivo",
+    changeOPRequestRequired: "Debe indicar al menos una solicitud de modificación",
     writeMessage: "Escriba un mensaje...",
     withoutOP: "Sin PO",
     selectOP: "Seleccione un PO",
@@ -380,6 +383,7 @@ const messages = {
     changeOPRequestsInfo: "Añada las solicitudes",
     add: "Añadir",
     change_op_requests: "N° de solicitudes de modificación",
+    operation_program: "Programa de operación",
   },
   de: {
     dashboard: "Instrumententafel",
