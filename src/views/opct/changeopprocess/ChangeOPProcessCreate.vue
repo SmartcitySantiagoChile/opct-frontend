@@ -12,9 +12,9 @@
     </a>
   </span>
   <!--begin::Modal - Create Change OP Request-->
-  <div id="modal_create_change_op_process" aria-hidden="true" class="modal fade" tabindex="-1">
+  <div id="modal_create_change_op_process" aria-hidden="true" class="modal fade" tabindex="-1" ref="createAppModalRef">
     <!--begin::Modal dialog-->
-    <div class="modal-dialog modal-dialog-centered mw-900px">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <!--begin::Modal content-->
       <div class="modal-content">
         <!--begin::Modal header-->
@@ -173,7 +173,6 @@
                         name="title"
                         placeholder=""
                         type="text"
-                        :rules="'required'"
                       />
                       <ErrorMessage class="fv-plugins-message-container invalid-feedback" name="title" />
                       <!--end::Input-->
@@ -190,7 +189,7 @@
                         <div id="message_toolbar" class="ql-toolbar d-flex flex-stack py-2"></div>
                         <el-upload
                           :auto-upload="false"
-                          :file-list="fileList"
+                          :file-list="messageData.files"
                           :on-change="handleChange"
                           action=""
                           multiple=""
@@ -361,14 +360,16 @@
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
                         <label class="required fs-6 fw-bold form-label mb-2">{{ translate("counterpart") }}</label>
-                        <ErrorMessage class="fv-plugins-message-container invalid-feedback" name="counterpart" />
                         <!--end::Label-->
 
                         <!--begin::Row-->
                         <div class="row fv-row">
                           <!--begin::Col-->
-                          <select
+                          <Field
+                            as="select"
+                            ref="counterpart"
                             id="counterpart"
+                            name="counterpart"
                             class="form-select form-select-solid select2-hidden-accessible selected"
                           >
                             <option
@@ -378,7 +379,8 @@
                               :label="i.label"
                               :value="i.value"
                             ></option>
-                          </select>
+                          </Field>
+                          <ErrorMessage class="fv-plugins-message-container invalid-feedback" name="counterpart" />
                           <!--end::Col-->
                         </div>
                         <!--end::Row-->
@@ -399,7 +401,6 @@
                       <div class="col-md-8 fv-row">
                         <!--begin::Label-->
                         <label class="required fs-6 fw-bold form-label mb-2">{{ translate("operationProgram") }}</label>
-                        <ErrorMessage class="fv-plugins-message-container invalid-feedback" name="op" />
                         <!--end::Label-->
 
                         <!--begin::Row-->
@@ -422,6 +423,10 @@
                               :value="i.value"
                             ></option>
                           </Field>
+                          <ErrorMessage
+                            class="fv-plugins-message-container invalid-feedback"
+                            name="operation_program"
+                          />
                           <!--end::Col-->
                         </div>
                         <!--end::Row-->
@@ -560,12 +565,17 @@ import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import Quill from "quill/dist/quill.js";
 
+interface ChangeOPRequest {
+  title: string;
+  reason: string;
+}
+
 interface Step1Form {
   title: string;
 }
 
 interface Step2Form {
-  change_op_requests: any[];
+  change_op_requests: Array<ChangeOPRequest>;
 }
 
 interface Step3Form {
@@ -573,13 +583,13 @@ interface Step3Form {
 }
 
 interface Step4Form {
-  operation_program: string;
+  operation_program?: string;
 }
 
-interface ChangeOPProcessCreationPayload extends Step1Form, Step2Form, Step3Form, Step4Form {}
+interface ChangeOPProcessCreationForm extends Step1Form, Step2Form, Step3Form, Step4Form {}
 
 interface ReasonOption {
-  value: string;
+  value: string | null;
   label: string;
 }
 
@@ -591,6 +601,11 @@ interface OrganizationOption extends ReasonOption {
   contractType: string;
 }
 
+interface MessageData {
+  message: string;
+  files: Array<unknown>;
+}
+
 export default defineComponent({
   name: "ChangeOPProcessCreate",
   components: {
@@ -600,75 +615,81 @@ export default defineComponent({
   props: {
     widgetClasses: String,
   },
-  setup: function () {
+  emits: ["change-op-process-created"],
+  setup: function (props, { emit }) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
 
     /********************************************************************
-    // Set constants for form
-    //*******************************************************************/
+     // Set constants for form
+     //*******************************************************************/
     const _stepperObj = ref<StepperComponent | null>(null);
     const createChangeOPRef = ref<HTMLElement | null>(null);
     const createAppModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
-    const currentUser = store.getters.currentUser;
     const isAdminOrganization = computed(() => store.getters.hasChangeStatusOption);
-    let fileList = [];
     let relatedChangeOPRequests: Array<string> = [];
     let relatedChangeOPRequestsInfo: Array<string> = [];
 
-    const formData = ref<ChangeOPProcessCreationPayload>({
+    const formData = ref<ChangeOPProcessCreationForm>({
       title: "",
       change_op_requests: [],
       counterpart: "",
       operation_program: "",
     });
 
-    const formDataInfo = ref<ChangeOPProcessCreationPayload>({
+    const formDataInfo = ref<ChangeOPProcessCreationForm>({
       title: "",
       change_op_requests: [],
       counterpart: "",
       operation_program: "",
     });
 
-    let reasonOptions: Array<ReasonOption> = reactive<Array<ReasonOption>>([]);
-    let OPOptions: Array<OperationProgramOption> = reactive<Array<OperationProgramOption>>([]);
-    let organizationOptions: Array<OrganizationOption> = reactive<Array<OrganizationOption>>([]);
+    const messageData = ref<MessageData>({
+      message: "",
+      files: [],
+    });
+
     /********************************************************************
-    // Call actions to get selectors data.
-    //*******************************************************************/
-    const promise1 = store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
-    const promise2 = store.dispatch(Actions.GET_ORGANIZATIONS);
-    const promise3 = store.dispatch(Actions.GET_OPERATION_PROGRAMS);
-    Promise.all([promise1, promise2, promise3]).then(() => {
-      /********************************************************************
-      // Create selectors.
-      //*******************************************************************/
+     // Call actions to get selectors data.
+     //*******************************************************************/
+    store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
+    store.dispatch(Actions.GET_ORGANIZATIONS);
+    store.dispatch(Actions.GET_OPERATION_PROGRAMS);
+
+    const reasonOptions = computed(() => {
       const reasons: Array<Array<string>> = store.getters.getChangeOPRequestReason;
       if (reasons.length) {
-        reasons.forEach((v) => {
-          reasonOptions.push({ value: v[0], label: v[1] });
-        });
+        return reasons.map((v) => ({ value: v[0], label: v[1] }));
       }
+      return [];
+    });
 
+    const OPOptions = computed(() => {
       const operationPrograms = store.getters.getCurrentOperationPrograms;
+      let options: Array<OperationProgramOption> = [];
       if (operationPrograms.length && store.getters.hasChangeStatusOption) {
         operationPrograms.forEach((operationProgram) => {
-          OPOptions.push({
+          options.push({
             value: operationProgram.url,
             label: operationProgram.start_at + " (" + operationProgram.op_type.name + ")",
             release: operationProgram.start_at,
           });
         });
       }
-      OPOptions.push({ value: "None", label: translate("withoutOP"), release: "" });
+      options.push({ value: "withoutOP", label: translate("withoutOP"), release: "" });
+      return options;
+    });
 
+    const organizationOptions = computed(() => {
       const organizations = store.getters.getAllOrganizations;
+      const currentUser = store.getters.currentUser;
+      let options: Array<OrganizationOption> = [];
       if (store.getters.hasChangeStatusOption) {
         organizations.forEach((organization) => {
           if (organization.url !== currentUser.organization.url) {
-            organizationOptions.push({
+            options.push({
               value: organization.url,
               label: organization.name,
               contractType: organization.contract_type.url,
@@ -678,7 +699,7 @@ export default defineComponent({
       } else {
         organizations.some((organization) => {
           if (organization.url === currentUser.organization.default_counterpart) {
-            organizationOptions.push({
+            options.push({
               value: organization.url,
               label: organization.name,
               contractType: organization.contract_type.url,
@@ -687,6 +708,7 @@ export default defineComponent({
           }
         });
       }
+      return options;
     });
 
     const searchChangeOpRequest = (filter) => {
@@ -720,13 +742,14 @@ export default defineComponent({
       Yup.object({
         title: Yup.string().required(translate("titleRequired")).label("Title"),
       }),
-      // Yup.object({
-      //   change_op_requests: Yup.array().required().label("changeOPRequest"),
-      // }),
+      Yup.object({
+        change_op_requests: Yup.array(Yup.object({ title: Yup.string().required(), reason: Yup.string().required() }))
+          .required(translate("changeOPRequestRequired"))
+          .label("changeOPRequest"),
+      }),
       Yup.object({
         counterpart: Yup.string().required(translate("counterpartRequired")).label("Counterpart"),
       }),
-      Yup.object({}),
       Yup.object({
         operation_program: Yup.string().required(translate("operationProgramRequired")).label("OperationProgram"),
       }),
@@ -741,9 +764,7 @@ export default defineComponent({
       return !_stepperObj.value ? null : _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<Step1Form | Step2Form | Step3Form | Step4Form>({
-      validationSchema: currentSchema,
-    });
+    const { resetForm, handleSubmit } = useForm<ChangeOPProcessCreationForm>({ validationSchema: currentSchema });
 
     const previousStep = () => {
       if (!_stepperObj.value) {
@@ -754,8 +775,6 @@ export default defineComponent({
     };
 
     const handleStep = handleSubmit((values) => {
-      console.log("handleSubmit");
-      console.log(values);
       formData.value = {
         ...formData.value,
         ...values,
@@ -789,21 +808,21 @@ export default defineComponent({
       }
 
       const counterPartSelector: HTMLSelectElement = document.querySelector("#counterpart") as HTMLSelectElement;
-      if (counterPartSelector.selectedIndex !== -1) {
+      if (counterPartSelector && counterPartSelector.selectedIndex >= 0) {
+        let selectedOption = counterPartSelector.options[counterPartSelector.selectedIndex];
         formData.value["counterpart"] = counterPartSelector.value;
-        formData.value["contract_type"] =
-          counterPartSelector.options[counterPartSelector.selectedIndex].dataset.contractType;
-        formDataInfo.value["counterpart"] = counterPartSelector.options[counterPartSelector.selectedIndex].label;
-      }
-      const opSelector: HTMLSelectElement = document.querySelector("#op") as HTMLSelectElement;
-      if (opSelector) {
-        formData.value["op_release_date"] = opSelector.options[opSelector.selectedIndex].dataset.release;
-        formDataInfo.value["operation_program"] = opSelector.options[opSelector.selectedIndex].label;
+        formDataInfo.value["counterpart"] = selectedOption.label;
       }
 
-      const container = document.querySelector("#message_editor");
+      const operationProgramSelector: HTMLSelectElement = document.querySelector("#op") as HTMLSelectElement;
+      if (operationProgramSelector) {
+        let selectedOption = operationProgramSelector.options[operationProgramSelector.selectedIndex];
+        formDataInfo.value["operation_program"] = selectedOption.label;
+      }
+
+      const container: HTMLSelectElement = document.querySelector("#message_editor") as HTMLSelectElement;
       const quill = Quill.find(container);
-      formData.value["message"] = quill.getText();
+      messageData.value.message = quill.getText();
       formDataInfo.value["message"] = quill.getText();
 
       currentStepIndex.value++;
@@ -816,96 +835,60 @@ export default defineComponent({
     });
 
     const formSubmit = () => {
-      formData.value["created_at"] = new Date().toISOString();
-      formData.value["creator"] = store.getters.currentUserUrl;
-      formData.value["base_op"] =
-        formData.value["operation_program"] !== "None" ? formData.value["operation_program"] : "";
+      if (formData.value["operation_program"] === "withoutOP") {
+        delete formData.value["operation_program"];
+      }
 
-      const fileFormData = new FormData();
-      Object.keys(formData.value).forEach((key) => {
-        if (typeof formData.value[key] !== "object") {
-          fileFormData.append(key, formData.value[key]);
-        } else fileFormData.append(key, JSON.stringify(formData.value[key]));
-      });
-      fileList.forEach((file) => {
+      const messageFormData = new FormData();
+      messageFormData.append("message", messageData.value.message);
+      messageData.value.files.forEach((file) => {
         const file_raw = file["raw"];
-        fileFormData.append("files", file_raw, file["name"]);
+        messageFormData.append("files", file_raw, file["name"]);
       });
 
-      const params = {
-        params: fileFormData,
-        headers: {
-          "content-Type": "multipart/form-data",
+      const messageParams = {
+        url: null,
+        payload: {
+          params: messageFormData,
+          headers: {
+            "content-Type": "multipart/form-data",
+          },
         },
       };
 
-      store
-        .dispatch(Actions.CREATE_CHANGE_OP_PROCESS, params)
-        .then((data) => {
-          console.log(data);
-          // Create change op requests.
-          const changeOPRequestsCreationRequests: Array<Promise<any>> = [];
-          formData.value["change_op_requests"].forEach((change_op_request) => {
-            const params = {
-              title: change_op_request[0],
-              reason: change_op_request[1],
-              contract_type: formData.value["contract_type"],
-              operation_program: formData.value["operation_program"],
-              change_op_process: data.url,
-            };
-            changeOPRequestsCreationRequests.push(
-              store.dispatch(Actions.CREATE_CHANGE_OP_REQUEST, {
-                params: params,
-              })
-            );
-          });
-          Promise.all(changeOPRequestsCreationRequests)
-            .then(() => {
-              Swal.fire({
-                text: translate("createChangeOPRequestSuccess"),
-                icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: translate("confirm"),
-                customClass: {
-                  confirmButton: "btn fw-bold btn-light-primary",
-                },
-              })
-                .then(() => {
-                  hideModal(createAppModalRef.value);
-                })
-                .then(() => location.reload());
+      store.dispatch(Actions.CREATE_CHANGE_OP_PROCESS, formData.value).then((data) => {
+        messageParams.url = data.url;
+        store
+          .dispatch(Actions.CREATE_CHANGE_OP_PROCESS_MESSAGE, messageParams)
+          .then((data) => {
+            console.log(data);
+            Swal.fire({
+              text: translate("createChangeOPRequestSuccess"),
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1000,
             })
-            .catch(() => {
-              const errors = store.getters.getChangeOPRequestErrors;
-              const parsedErrors = Object.entries(errors).map((key) => {
-                return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
-              });
-              Swal.fire({
-                icon: "error",
-                html: parsedErrors.join(""),
-                buttonsStyling: false,
-                confirmButtonText: translate("tryAgain"),
-                customClass: {
-                  confirmButton: "btn fw-bold btn-light-danger",
-                },
-              });
+              .then(() => hideModal(createAppModalRef.value))
+              .then(() => emit("change-op-process-created"));
+          })
+          .catch((data) => {
+            console.log("error");
+            console.log(data);
+            const errors = store.getters.getChangeOPRequestErrors;
+            const parsedErrors = Object.entries(errors).map((key) => {
+              return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
             });
-        })
-        .catch(() => {
-          const errors = store.getters.getChangeOPProcessErrors;
-          const parsedErrors = Object.entries(errors).map((key) => {
-            return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
+            Swal.fire({
+              icon: "error",
+              html: parsedErrors.join(""),
+              buttonsStyling: false,
+              confirmButtonText: translate("tryAgain"),
+              customClass: {
+                confirmButton: "btn fw-bold btn-light-danger",
+              },
+            });
           });
-          Swal.fire({
-            icon: "error",
-            html: parsedErrors.join(""),
-            buttonsStyling: false,
-            confirmButtonText: translate("tryAgain"),
-            customClass: {
-              confirmButton: "btn fw-bold btn-light-danger",
-            },
-          });
-        });
+      });
     };
 
     resetForm({
@@ -915,7 +898,7 @@ export default defineComponent({
     });
 
     const handleChange = (file, fileListData) => {
-      fileList = fileListData;
+      messageData.value.files = fileListData;
       formDataInfo.value["files"] = fileListData;
     };
 
@@ -963,7 +946,7 @@ export default defineComponent({
       createAppModalRef,
       translate,
       handleChange,
-      fileList,
+      messageData,
       isAdminOrganization,
       OPOptions,
       organizationOptions,
