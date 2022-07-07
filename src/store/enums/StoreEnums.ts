@@ -19,12 +19,9 @@ enum Actions {
   GET_CHANGE_OP_REQUEST_STATUSES = "getChangeOPRequestStatuses",
   GET_CHANGE_OP_REQUEST_STATUSES_WITH_PARAMS = "getChangeOPRequestStatusesWithParams",
   CHANGE_CHANGE_OP_REQUEST_STATUS = "changeChangeOPRequestStatus",
-  GET_OPERATION_PROGRAMS = "getOperationPrograms",
   CHANGE_CHANGE_OP_REQUEST_OP = "changeChangeOPRequestOP",
   GET_OPERATION_PROGRAM_STATUSES = "getOperationProgramStatuses",
   GET_OPERATION_PROGRAM_STATUSES_WITH_PARAMS = "getOperationProgramStatusesWithParams",
-  GET_CHANGE_OP_REQUEST_REASONS = "getChangeOPRequestReasons",
-  GET_ORGANIZATIONS = "getOrganizations",
   CREATE_CHANGE_OP_REQUEST = "createChangeOPRequest",
   GET_OPERATION_PROGRAM_TYPES = "getOperationProgramTypes",
   CREATE_OPERATION_PROGRAM = "createOperationProgram",
@@ -32,15 +29,20 @@ enum Actions {
   DELETE_OPERATION_PROGRAM = "deleteOperationProgram",
   CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS = "changeChangeOPRequestRelatedRequests",
   GET_CHANGE_OP_PROCESS = "getChangeOPProcess",
-  GET_CHANGE_OP_PROCESSES = "getChangeOPProcesses",
-  GET_CHANGE_OP_PROCESSES_WITH_PARAMS = "getChangeOPProcessesWithParams",
   CHANGE_CHANGE_OP_PROCESS_STATUS = "changeChangeOPProcessStatus",
   GET_CHANGE_OP_PROCESS_STATUSES = "getChangeOPProcessStatuses",
   GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS = "getChangeOPProcessStatusesWithParams",
-  CREATE_CHANGE_OP_PROCESS_MESSAGE = "createChangeOPProcessMessage",
   CHANGE_CHANGE_OP_PROCESS_OP = "changeChangeOPProcessOP",
   CHANGE_CHANGE_OP_REQUEST_REASON = "changeChangeOPRequestReason",
+
+  GET_CHANGE_OP_REQUEST_REASONS = "getChangeOPRequestReasons",
+  GET_ORGANIZATIONS = "getOrganizations",
+  GET_OPERATION_PROGRAMS = "getOperationPrograms",
+  GET_CHANGE_OP_PROCESSES_WITH_PARAMS = "getChangeOPProcessesWithParams",
   CREATE_CHANGE_OP_PROCESS = "createChangeOPProcess",
+  CREATE_CHANGE_OP_PROCESS_MESSAGE = "createChangeOPProcessMessage",
+  GET_CHANGE_OP_PROCESSES = "getChangeOPProcesses",
+  GET_ROUTE_DEFINITIONS = "getRouteDefinitions",
 }
 
 enum Mutations {
@@ -80,6 +82,8 @@ enum Mutations {
   SET_CHANGE_OP_PROCESS_STATUSES = "setChangeOPProcessStatuses",
   SET_CHANGE_OP_PROCESS_STATUSES_ERRORS = "setChangeOPProcessStatusesErrors",
   SET_CHANGE_OP_PROCESS_MESSAGE_ERROR = "setChangeOPProcessMessageError",
+  SET_ROUTE_DEFINITIONS = "setRouteDefinitions",
+  SET_ROUTE_DEFINITIONS_ERROR = "setRouteDefinitionsError",
 }
 
 export { Actions, Mutations };
