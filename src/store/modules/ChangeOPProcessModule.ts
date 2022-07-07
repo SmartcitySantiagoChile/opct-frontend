@@ -154,11 +154,11 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-processes/${data.resource}/change-status/`, data.params)
         .then(({ data }) => {
-          resolve();
+          resolve(data);
         })
         .catch(({ response }) => {
           this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [response.data.error]);
-          reject();
+          reject(response);
         });
     });
   }
@@ -168,11 +168,11 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-processes/${data.resource}/change-op/`, data.params)
         .then(({ data }) => {
-          resolve();
+          resolve(data);
         })
         .catch(({ response }) => {
           this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [response.data.error]);
-          reject();
+          reject(response);
         });
     });
   }
