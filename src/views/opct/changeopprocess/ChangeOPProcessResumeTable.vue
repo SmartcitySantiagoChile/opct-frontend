@@ -23,7 +23,7 @@
           />
         </span>
 
-        <CreateChangeOPProcess></CreateChangeOPProcess>
+        <CreateChangeOPProcess @change-op-process-created="updateData"></CreateChangeOPProcess>
 
         <!--end::Menu-->
       </div>
@@ -186,7 +186,12 @@ export default defineComponent({
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    store.dispatch(Actions.GET_CHANGE_OP_PROCESSES);
+
+    const updateData = () => {
+      store.dispatch(Actions.GET_CHANGE_OP_PROCESSES);
+    };
+
+    updateData();
     const changeOPProcesses = computed(() => store.getters.getCurrentChangeOPProcesses);
     const changeOPProcessesCount = computed(() => store.getters.getCurrentChangeOPProcessesCount);
 
@@ -244,6 +249,7 @@ export default defineComponent({
       onFilterChange,
       onPageChange,
       DateTime,
+      updateData,
     };
   },
 });
