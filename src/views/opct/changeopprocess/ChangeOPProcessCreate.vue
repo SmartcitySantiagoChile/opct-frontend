@@ -657,6 +657,7 @@ export default defineComponent({
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
     store.dispatch(Actions.GET_ORGANIZATIONS);
     store.dispatch(Actions.GET_OPERATION_PROGRAMS);
+    store.dispatch(Actions.GET_ROUTE_DEFINITIONS);
 
     const reasonOptions = computed(() => {
       const reasons: Array<Array<string>> = store.getters.getChangeOPRequestReason;
@@ -711,6 +712,16 @@ export default defineComponent({
       return options;
     });
 
+    const routeDefinitionsOption = computed(() => {
+      const routeDefinitions = store.getters.getAllRouteDefinitions;
+      let options: Array<ReasonOption> = [];
+      routeDefinitions.forEach((routeDefinition) => {
+        options.push({ value: routeDefinition.auth_route_code, label: routeDefinition.auth_route_code });
+      });
+      return options;
+    });
+
+    // TODO: no se usa, se debería usar para relacionar solicitudes
     const searchChangeOpRequest = (filter) => {
       if (filter.length > 3 && filter.length < 11) {
         store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {
@@ -958,6 +969,7 @@ export default defineComponent({
       isAdminOrganization,
       OPOptions,
       organizationOptions,
+      routeDefinitionsOption,
       formData,
       formDataInfo,
       searchChangeOpRequest,
