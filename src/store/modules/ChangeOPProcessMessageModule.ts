@@ -18,10 +18,7 @@ export interface ChangeOPProcessMessageInfo {
 }
 
 @Module
-export default class ChangeOPProcessMessageModule
-  extends VuexModule
-  implements ChangeOPProcessMessageInfo
-{
+export default class ChangeOPProcessMessageModule extends VuexModule implements ChangeOPProcessMessageInfo {
   errors = [] as Array<any>;
   changeOPProcessMessage = {} as ChangeOPProcessMessage;
 
