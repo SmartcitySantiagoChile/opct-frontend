@@ -6,21 +6,12 @@ import { Organization } from "@/store/modules/OrganizationModule";
 export interface OrganizationsInfo {
   errors: Array<any>;
   organizations: Array<Organization>;
-  count: number;
-  next: string;
-  previous: string;
 }
 
 @Module
-export default class OrganizationsModule
-  extends VuexModule
-  implements OrganizationsInfo
-{
+export default class OrganizationsModule extends VuexModule implements OrganizationsInfo {
   errors = [];
   organizations = [] as Organization[];
-  count = 0;
-  next = "";
-  previous = "";
 
   /**
    * Get current organizations
@@ -32,10 +23,7 @@ export default class OrganizationsModule
 
   @Mutation
   [Mutations.SET_ORGANIZATIONS](organizationsList) {
-    this.organizations = organizationsList.results;
-    this.count = organizationsList.count;
-    this.next = organizationsList.next;
-    this.previous = organizationsList.previous;
+    this.organizations = organizationsList;
   }
 
   @Mutation
@@ -50,9 +38,7 @@ export default class OrganizationsModule
         this.context.commit(Mutations.SET_ORGANIZATIONS, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_ORGANIZATIONS_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_ORGANIZATIONS_ERRORS, [response.data.error]);
       });
   }
 }
