@@ -193,7 +193,7 @@ const messages = {
     add: "Add",
     change_op_requests: "Change OP Requests",
     operation_program: "Operation program",
-    routes: "Routes",
+    relatedRoutes: "Related routes",
   },
   es: {
     dashboard: "Tablero",
@@ -387,7 +387,7 @@ const messages = {
     add: "Añadir",
     change_op_requests: "N° de solicitudes de modificación",
     operation_program: "Programa de operación",
-    routes: "Servicios",
+    relatedRoutes: "Servicios relacionados",
   },
   de: {
     dashboard: "Instrumententafel",
