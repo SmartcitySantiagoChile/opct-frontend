@@ -260,12 +260,9 @@
                               <!--begin::Table head-->
                               <thead>
                                 <tr class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200">
-                                  <th class="ps-4 rounded-start">
-                                    {{ translate("title") }}
-                                  </th>
-                                  <th class="ps-4 min-w-125px rounded-start">
-                                    {{ translate("reason") }}
-                                  </th>
+                                  <th class="ps-4 rounded-start">{{ translate("title") }}</th>
+                                  <th class="ps-4 min-w-125px rounded-start">{{ translate("relatedRoutes") }}</th>
+                                  <th class="ps-4 min-w-125px rounded-start">{{ translate("reason") }}</th>
                                   <th class="ps-4 rounded-start"></th>
                                 </tr>
                               </thead>
@@ -276,63 +273,33 @@
                                 <template v-for="(item, index) in addedChangeOPRequest" :key="index">
                                   <tr>
                                     <td>
-                                      <div class="d-flex align-items-center">
-                                        <div class="symbol symbol-10px me-5"></div>
-                                        <div class="d-flex justify-content-start flex-column">
-                                          <!--begin::Input group-->
-                                          <div class="fv-row mb-10">
-                                            <!--begin::Input-->
-                                            <Field
-                                              class="form-control form-control-lg form-control-solid"
-                                              :name="'changeoprequest' + index"
-                                              placeholder="Título"
-                                              type="text"
-                                              :id="'changeoprequest' + index"
-                                              :value="item[0] !== '0' ? item[0] : ''"
-                                            />
-                                            <ErrorMessage
-                                              class="fv-plugins-message-container invalid-feedback"
-                                              :name="'changeoprequest' + index"
-                                            />
-                                            <!--end::Input-->
-                                          </div>
-                                          <!--end::Input group-->
-                                        </div>
-                                      </div>
+                                      <input
+                                        class="form-control form-control-lg form-control-solid"
+                                        v-model="item.title"
+                                        :name="'changeoprequest' + index"
+                                        placeholder="Título"
+                                        type="text"
+                                        :id="'changeoprequest' + index"
+                                      />
                                     </td>
                                     <td>
-                                      <div class="d-flex align-items-center">
-                                        <div class="symbol symbol-10px me-5"></div>
-                                        <div class="d-flex justify-content-start flex-column">
-                                          <!--begin::Input group-->
-                                          <div class="row mb-10">
-                                            <!--begin::Col-->
-                                            <div class="col-md-8 fv-row">
-                                              <!--end::Label-->
-
-                                              <!--begin::Row-->
-                                              <div class="row fv-row">
-                                                <!--begin::Col-->
-                                                <select
-                                                  :id="'reason' + index"
-                                                  class="form-select form-select-solid select2-hidden-accessible selected"
-                                                >
-                                                  <option
-                                                    v-for="i in reasonOptions"
-                                                    :key="i.value"
-                                                    :label="i.label"
-                                                    :value="i.value"
-                                                  ></option>
-                                                </select>
-                                                <!--end::Col-->
-                                              </div>
-                                              <!--end::Row-->
-                                            </div>
-                                            <!--end::Col-->
-                                          </div>
-                                          <!--end::Input group-->
-                                        </div>
-                                      </div>
+                                      <Multiselect
+                                        v-model="item.related_routes"
+                                        :id="'relatedRoutes' + index"
+                                        :name="'relatedRoutes' + index"
+                                        :options="routeDefinitionsOption"
+                                        :mode="'tags'"
+                                        :searchable="true"
+                                      ></Multiselect>
+                                    </td>
+                                    <td>
+                                      <Multiselect
+                                        v-model="item.reason"
+                                        :id="'reason' + index"
+                                        :name="'reason' + index"
+                                        :options="reasonOptions"
+                                        :searchable="true"
+                                      ></Multiselect>
                                     </td>
                                   </tr>
                                 </template>
@@ -564,9 +531,12 @@ import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import Quill from "quill/dist/quill.js";
+import Multiselect from "@vueform/multiselect";
 
 interface ChangeOPRequest {
   title: string;
+  related_routes: Array<string>;
+  related_requests: Array<string | number>;
   reason: string;
 }
 
@@ -586,7 +556,13 @@ interface Step4Form {
   operation_program?: string;
 }
 
+interface Step2FormPresentation {
+  change_op_requests: Array<Array<string>>;
+}
+
 interface ChangeOPProcessCreationForm extends Step1Form, Step2Form, Step3Form, Step4Form {}
+
+interface ChangeOPProcessPresentationForm extends Step1Form, Step2FormPresentation, Step3Form, Step4Form {}
 
 interface ReasonOption {
   value: string | null;
@@ -601,9 +577,14 @@ interface OrganizationOption extends ReasonOption {
   contractType: string;
 }
 
+interface File {
+  raw: string;
+  name: string;
+}
+
 interface MessageData {
   message: string;
-  files: Array<unknown>;
+  files: Array<File>;
 }
 
 export default defineComponent({
@@ -611,6 +592,7 @@ export default defineComponent({
   components: {
     Field,
     ErrorMessage,
+    Multiselect,
   },
   props: {
     widgetClasses: String,
@@ -639,7 +621,7 @@ export default defineComponent({
       operation_program: "",
     });
 
-    const formDataInfo = ref<ChangeOPProcessCreationForm>({
+    const formDataInfo = ref<ChangeOPProcessPresentationForm>({
       title: "",
       change_op_requests: [],
       counterpart: "",
@@ -754,7 +736,13 @@ export default defineComponent({
         title: Yup.string().required(translate("titleRequired")).label("Title"),
       }),
       Yup.object({
-        change_op_requests: Yup.array(Yup.object({ title: Yup.string().required(), reason: Yup.string().required() }))
+        change_op_requests: Yup.array(
+          Yup.object().shape({
+            title: Yup.string().required(),
+            related_routes: Yup.array().of(Yup.string()),
+            reason: Yup.string().required(),
+          })
+        )
           .required(translate("changeOPRequestRequired"))
           .label("changeOPRequest"),
       }),
@@ -775,7 +763,7 @@ export default defineComponent({
       return !_stepperObj.value ? null : _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<ChangeOPProcessCreationForm>({ validationSchema: currentSchema });
+    const { resetForm, handleSubmit } = useForm<ChangeOPProcessCreationForm>({}); //{ validationSchema: currentSchema });
 
     const previousStep = () => {
       if (!_stepperObj.value) {
@@ -795,28 +783,25 @@ export default defineComponent({
       //formDataInfo.value["relatedChangeOPRequests"] =
       //  relatedChangeOPRequestsInfo;
 
-      const changeOPRequestsTable: HTMLTableElement = document.getElementById(
-        "changeOPRequestsTable"
-      ) as HTMLTableElement;
       formDataInfo.value["change_op_requests"] = [];
       formData.value["change_op_requests"] = [];
-      if (changeOPRequestsTable) {
-        const tableRows: HTMLCollection = changeOPRequestsTable.tBodies[0].rows as HTMLCollection;
-        for (let i = 0; i <= tableRows.length; i++) {
-          const row: HTMLTableRowElement = tableRows.item(i) as HTMLTableRowElement;
-          if (row) {
-            const cells = row.cells;
-            const title: HTMLTableCellElement = cells.item(0) as HTMLTableCellElement;
-            const titleValue = title.getElementsByTagName("input")[0].value;
-            const reason: HTMLTableCellElement = cells.item(1) as HTMLTableCellElement;
-            const reasonSelector: HTMLSelectElement = reason.getElementsByTagName("select")[0];
-            const reasonValue = reasonSelector.options[reasonSelector.selectedIndex].value;
-            const reasonLabel = reasonSelector.options[reasonSelector.selectedIndex].label;
-            formDataInfo.value["change_op_requests"].push([titleValue, reasonLabel]);
-            formData.value["change_op_requests"].push([titleValue, reasonValue]);
-          }
-        }
-      }
+      addedChangeOPRequest.value.forEach((changeOPRequest) => {
+        let reasonLabel: string | undefined = reasonOptions?.value?.find(
+          (el) => el.value === changeOPRequest.reason
+        )?.label;
+        reasonLabel = reasonLabel === undefined ? "" : reasonLabel;
+        formDataInfo.value["change_op_requests"].push([
+          changeOPRequest.title,
+          `(${changeOPRequest.related_routes.join(", ")})`,
+          reasonLabel,
+        ]);
+        formData.value["change_op_requests"].push({
+          title: changeOPRequest.title,
+          related_routes: changeOPRequest.related_routes,
+          related_requests: [],
+          reason: changeOPRequest.reason,
+        });
+      });
 
       const counterPartSelector: HTMLSelectElement = document.querySelector("#counterpart") as HTMLSelectElement;
       if (counterPartSelector && counterPartSelector.selectedIndex >= 0) {
@@ -932,12 +917,12 @@ export default defineComponent({
       }
     };
 
-    let addedChangeOPRequest: Ref<Array<Array<string>>> = ref([]);
+    let addedChangeOPRequest: Ref<Array<ChangeOPRequest>> = ref([]);
     const mutableSelectedChangeOPRequests = computed(() => {
       return addedChangeOPRequest.value;
     });
     const addChangeOPRequest = () => {
-      addedChangeOPRequest.value.push(["", ""]);
+      addedChangeOPRequest.value.push({ title: "", related_routes: [], related_requests: [], reason: "" });
     };
 
     const deleteChangeOPRequest = (e) => {
