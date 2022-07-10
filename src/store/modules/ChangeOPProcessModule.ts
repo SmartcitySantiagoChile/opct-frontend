@@ -4,6 +4,7 @@ import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
 import { Dictionary } from "@/store/modules/HelperModule";
 
 export interface ChangeOPProcess {
+  id: number;
   url: string;
   created_at: string;
   title: string;
