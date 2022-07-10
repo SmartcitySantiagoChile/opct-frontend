@@ -7,7 +7,7 @@
         <!--begin::Tap pane-->
 
         <!--begin::Table container-->
-        <h2>{{ changeOPProcessBaseInfo.title }}</h2>
+        <h2>{{ changeOPProcess.title }}</h2>
         <div class="table-responsive">
           <!--begin::Table-->
           <table class="table align-middle gs-0 gy-3">
@@ -31,19 +31,15 @@
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">Id </span>
                   <span class="text-dark fw-bolder d-block fs-3">
-                    {{ changeOpProcessId }}
+                    {{ changeOPProcess.id }}
                   </span>
                 </td>
                 <td>
-                  <span class="text-muted fw-bold d-block fs-5"
-                    >{{ translate("creationDate") }}
-                  </span>
+                  <span class="text-muted fw-bold d-block fs-5">{{ translate("creationDate") }} </span>
                   <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOPProcessBaseInfo.created_at
-                        ? DateTime.fromISO(changeOPProcessBaseInfo.created_at)
-                            .setLocale(this.$i18n.locale)
-                            .toLocaleString()
+                      changeOPProcess.created_at
+                        ? DateTime.fromISO(changeOPProcess.created_at).setLocale(this.$i18n.locale).toLocaleString()
                         : ""
                     }}
                   </span>
@@ -56,15 +52,11 @@
                     </template>
                   </span>
                   <span class="text-dark fw-bolder d-block fs-3">
-                    <template v-if="changeOPProcessBaseInfo.base_op">
+                    <template v-if="changeOPProcess.base_op">
                       {{
-                        DateTime.fromISO(
-                          changeOPProcessBaseInfo.base_op.start_at
-                        )
-                          .setLocale(this.$i18n.locale)
-                          .toLocaleString()
+                        DateTime.fromISO(changeOPProcess.base_op.start_at).setLocale(this.$i18n.locale).toLocaleString()
                       }}
-                      ({{ changeOPProcessBaseInfo.base_op.op_type.name }})
+                      ({{ changeOPProcess.base_op.op_type.name }})
                     </template>
                     <template v-else>
                       {{ translate("withoutAssign") }}
@@ -72,41 +64,25 @@
                   </span>
                 </td>
                 <td>
-                  <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("contractType") }}</span
+                  <span class="text-muted fw-bold d-block fs-5"> {{ translate("contractType") }}</span>
+                  <span class="text-dark fw-bolder d-block fs-3">
+                    {{ changeOPProcess.contract_type ? changeOPProcess.contract_type.name : "" }}</span
                   >
+                </td>
+                <td>
+                  <span class="text-muted fw-bold d-block fs-5"> {{ translate("creator") }}</span>
                   <span class="text-dark fw-bolder d-block fs-3">
                     {{
-                      changeOPProcessBaseInfo.contract_type
-                        ? changeOPProcessBaseInfo.contract_type.name
+                      changeOPProcess.creator
+                        ? changeOPProcess.creator.first_name + " " + changeOPProcess.creator.last_name
                         : ""
                     }}</span
                   >
                 </td>
                 <td>
-                  <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("creator") }}</span
-                  >
+                  <span class="text-muted fw-bold d-block fs-5"> {{ translate("counterpart") }}</span>
                   <span class="text-dark fw-bolder d-block fs-3">
-                    {{
-                      changeOPProcessBaseInfo.creator
-                        ? changeOPProcessBaseInfo.creator.first_name +
-                          " " +
-                          changeOPProcessBaseInfo.creator.last_name
-                        : ""
-                    }}</span
-                  >
-                </td>
-                <td>
-                  <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("counterpart") }}</span
-                  >
-                  <span class="text-dark fw-bolder d-block fs-3">
-                    {{
-                      changeOPProcessBaseInfo.counterpart
-                        ? changeOPProcessBaseInfo.counterpart.name
-                        : ""
-                    }}</span
+                    {{ changeOPProcess.counterpart ? changeOPProcess.counterpart.name : "" }}</span
                   >
                 </td>
                 <td>
@@ -116,23 +92,15 @@
                       <ChangeStatus></ChangeStatus>
                     </template>
                   </span>
-                  <span
-                    :class="`badge-light-success`"
-                    class="badge fs-4 fw-bolder"
-                    >{{
-                      changeOPProcessBaseInfo.status
-                        ? changeOPProcessBaseInfo.status.name
-                        : ""
-                    }}</span
-                  >
+                  <span :class="`badge-light-success`" class="badge fs-4 fw-bolder">{{
+                    changeOPProcess.status ? changeOPProcess.status.name : ""
+                  }}</span>
                 </td>
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("requests") }}
                   </span>
-                  <ChangeOPRequestsStatus
-                    :hasChangeStatusOption="hasChangeStatusOption"
-                  ></ChangeOPRequestsStatus>
+                  <ChangeOPRequestsStatus :hasChangeStatusOption="hasChangeStatusOption"></ChangeOPRequestsStatus>
                 </td>
               </tr>
             </tbody>
@@ -151,27 +119,24 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
-import ChangeStatus from "@/views/crafted/pages/changeOPRequest/header/ChangeStatus.vue";
 import { useStore } from "vuex";
-import ChangeOP from "@/views/crafted/pages/changeOPRequest/header/ChangeOP.vue";
 import { DateTime } from "luxon";
-import ChangeOPRequestsStatus from "@/views/crafted/pages/changeOPRequest/header/ChangeOPRequestsStatus.vue";
+import ChangeOP from "@/views/opct/changeopprocess/detail/edit/ChangeOP.vue";
+import ChangeStatus from "@/views/opct/changeopprocess/detail/edit/ChangeStatus.vue";
+import ChangeOPRequestsStatus from "@/views/opct/changeopprocess/detail/edit/ChangeOPProcessDetailChangeOPRequestList.vue";
 
 export default defineComponent({
-  name: "ChangeOPProcessBaseInfo",
+  name: "ChangeOPProcessDetailHeader",
   components: { ChangeStatus, ChangeOP, ChangeOPRequestsStatus },
   props: {
     widgetClasses: String,
-    changeOPProcessBaseInfo: Object,
-    changeOpProcessId: String,
+    changeOPProcess: Object,
   },
-  setup: function (props) {
+  setup() {
     const store = useStore();
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
-    const hasChangeStatusOption = computed(
-      () => store.getters.hasChangeStatusOption
-    );
+    const hasChangeStatusOption = computed(() => store.getters.hasChangeStatusOption);
     return {
       translate,
       hasChangeStatusOption,

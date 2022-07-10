@@ -5,9 +5,7 @@
     data-bs-target="#change_status_modal"
     class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
   >
-    <span class="svg-icon svg-icon-2">
-      <inline-svg src="/media/icons/duotune/art/art005.svg" />
-    </span>
+    <span class="svg-icon svg-icon-2"> <inline-svg src="/media/icons/duotune/art/art005.svg" /> </span>
   </a>
   <!--begin::ChangeStatus-->
   <div class="modal fade" tabindex="-1" id="change_status_modal">
@@ -17,28 +15,15 @@
           <h5 class="modal-title">{{ translate("changeStatus") }}</h5>
 
           <!--begin::Close-->
-          <div
-            class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
+          <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
             <span class="svg-icon svg-icon-2x"></span>
           </div>
           <!--end::Close-->
         </div>
 
         <div class="modal-body">
-          <el-select
-            v-model="value"
-            :placeholder="currentStatus"
-            style="margin-left: 10px"
-          >
-            <el-option
-              v-for="item in changeStatusOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
+          <el-select v-model="value" :placeholder="currentStatus" style="margin-left: 10px">
+            <el-option v-for="item in changeStatusOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </div>
@@ -78,20 +63,14 @@ export default defineComponent({
       return status ? status.name : "";
     });
     onMounted(() => {
-      const contractTypeName =
-        store.getters.getCurrentChangeOPProcessContractTypeName;
-      store.dispatch(
-        Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS,
-        contractTypeName
-      );
+      const contractTypeName = store.getters.getCurrentChangeOPProcessContractTypeName;
+      store.dispatch(Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS, contractTypeName);
     });
     const changeStatusOptions = ref(
       computed(() => {
         const statuses = store.getters.getCurrentChangeOPProcessStatuses;
         return statuses.flatMap((status) =>
-          status.name === currentStatus.value
-            ? []
-            : [{ value: status.url, label: status.name }]
+          status.name === currentStatus.value ? [] : [{ value: status.url, label: status.name }]
         );
       })
     );
@@ -104,7 +83,7 @@ export default defineComponent({
       const changeOPProcessId = store.getters.getCurrentChangeOPProcessId;
       const params = {
         status: statusId,
-      }
+      };
       if (statusId) {
         store
           .dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_STATUS, {

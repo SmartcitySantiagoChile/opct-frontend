@@ -19,17 +19,13 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/change-op-processes/:id",
         name: "changeOPRequest",
-        component: () =>
-          import("@/views/crafted/pages/changeOPRequest/ChangeOPRequest.vue"),
+        component: () => import("@/views/opct/changeopprocess/detail/ChangeOPProcessDetail.vue"),
         props: true,
       },
       {
         path: "/operation-programs",
         name: "operationPrograms",
-        component: () =>
-          import(
-            "@/views/crafted/pages/operationProgram/OperationPrograms.vue"
-          ),
+        component: () => import("@/views/crafted/pages/operationProgram/OperationPrograms.vue"),
         props: true,
       },
     ],
@@ -41,20 +37,17 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/sign-in",
         name: "sign-in",
-        component: () =>
-          import("@/views/crafted/authentication/basic-flow/SignIn.vue"),
+        component: () => import("@/views/crafted/authentication/basic-flow/SignIn.vue"),
       },
       {
         path: "/sign-up",
         name: "sign-up",
-        component: () =>
-          import("@/views/crafted/authentication/basic-flow/SignUp.vue"),
+        component: () => import("@/views/crafted/authentication/basic-flow/SignUp.vue"),
       },
       {
         path: "/password-reset",
         name: "password-reset",
-        component: () =>
-          import("@/views/crafted/authentication/basic-flow/PasswordReset.vue"),
+        component: () => import("@/views/crafted/authentication/basic-flow/PasswordReset.vue"),
       },
     ],
   },

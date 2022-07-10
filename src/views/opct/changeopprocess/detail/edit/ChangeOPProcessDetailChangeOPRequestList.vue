@@ -5,9 +5,7 @@
     data-bs-target="#change_request_status_modal"
     class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
   >
-    <span class="svg-icon svg-icon-2">
-      <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
-    </span>
+    <span class="svg-icon svg-icon-2"> <inline-svg src="/media/icons/duotune/arrows/arr064.svg" /> </span>
   </a>
   <!--begin::ChangeStatus-->
   <div class="modal fade" tabindex="-1" id="change_request_status_modal">
@@ -17,11 +15,7 @@
           <h5 class="modal-title">{{ translate("changeOPRequests") }}</h5>
 
           <!--begin::Close-->
-          <div
-            class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
+          <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
             <span class="svg-icon svg-icon-2x"></span>
           </div>
           <!--end::Close-->
@@ -31,20 +25,10 @@
           <!--begin::Table container-->
           <div class="table-responsive">
             <!--begin::Table-->
-            <table
-              class="table align-middle table-rounded table-striped border"
-            >
+            <table class="table align-middle table-rounded table-striped border">
               <!--begin::Table head-->
               <thead>
-                <tr
-                  class="
-                    fw-bold
-                    fs-5
-                    align-middle
-                    text-gray-800
-                    border-bottom-2 border-gray-200
-                  "
-                >
+                <tr class="fw-bold fs-5 align-middle text-gray-800 border-bottom-2 border-gray-200">
                   <th class="ps-4 rounded-start">
                     {{ translate("Id") }}
                   </th>
@@ -68,25 +52,10 @@
               <!--end::Table head-->
               <!--begin::Table body-->
               <tbody>
-                <template
-                  v-for="(item, index) in currentChangeOPRequests"
-                  :key="index"
-                >
-                  <tr
-                    class="
-                      fw-bold
-                      fs-5
-                      align-middle
-                      text-gray-800
-                      border-bottom-2 border-gray-200
-                    "
-                  >
+                <template v-for="(item, index) in currentChangeOPRequests" :key="index">
+                  <tr class="fw-bold fs-5 align-middle text-gray-800 border-bottom-2 border-gray-200">
                     <td class="ps-4 rounded-start">
-                      {{
-                        item.request.url
-                          .split("change-op-requests/")[1]
-                          .slice(0, -1)
-                      }}
+                      {{ item.request.url.split("change-op-requests/")[1].slice(0, -1) }}
                     </td>
                     <td class="ps-4 min-w-50px rounded-start">
                       {{ item.request.title }}
@@ -95,21 +64,16 @@
                       <template v-if="hasChangeStatusOption">
                         <el-select
                           v-model="opSelectValues[index]"
-                          :placeholder="item.request.op.start_at"
+                          :placeholder="item.request?.operation_program?.start_at"
                         >
-                          <el-option
-                            v-for="op in item.ops"
-                            :key="op.url"
-                            :label="op.start_at"
-                            :value="op.url"
-                          >
+                          <el-option v-for="op in item.ops" :key="op.url" :label="op.start_at" :value="op.url">
                           </el-option>
                         </el-select>
                       </template>
                       <template v-else>
-                        <template v-if="item.request.op">
-                          {{ item.request.op.start_at }} ({{
-                            item.request.op.op_type.name
+                        <template v-if="item.request.operation_program">
+                          {{ item.request.operation_program.start_at }} ({{
+                            item.request.operation_program.op_type.name
                           }})
                         </template>
                         <template v-else>
@@ -119,10 +83,7 @@
                     </td>
                     <td class="ps-4 min-w-50px rounded-start">
                       <template v-if="hasChangeStatusOption">
-                        <el-select
-                          v-model="reasonSelectValues[index]"
-                          :placeholder="item.request.reason"
-                        >
+                        <el-select v-model="reasonSelectValues[index]" :placeholder="item.request.reason">
                           <el-option
                             v-for="reason in item.reasons"
                             :key="reason[0]"
@@ -138,10 +99,7 @@
                     </td>
                     <td>
                       <template v-if="hasChangeStatusOption">
-                        <el-select
-                          v-model="statusSelectValues[index]"
-                          :placeholder="item.request.status.name"
-                        >
+                        <el-select v-model="statusSelectValues[index]" :placeholder="item.request.status.name">
                           <el-option
                             v-for="status in item.statuses"
                             :key="status.url"
@@ -168,11 +126,7 @@
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">
               {{ translate("cancel") }}
             </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="changeRequests"
-            >
+            <button type="button" class="btn btn-primary" @click="changeRequests">
               {{ translate("save") }}
             </button>
           </template>
@@ -198,7 +152,7 @@ import Swal from "sweetalert2/dist/sweetalert2.min.js";
 export default defineComponent({
   name: "changeOPRequestsStatus",
   props: ["widgetClasses", "hasChangeStatusOption"],
-  setup: function (props) {
+  setup() {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
@@ -222,8 +176,7 @@ export default defineComponent({
       const statuses = store.getters.getCurrentChangeOPRequestStatuses;
       const ops = store.getters.getCurrentOperationPrograms;
       const reasons = store.getters.getChangeOPRequestReason;
-      const currentContractType =
-        store.getters.getCurrentChangeOPProcessContractTypeName;
+      const currentContractType = store.getters.getCurrentChangeOPProcessContractTypeName;
       const requestsWithSelectors: any[] = [];
       // Process change op request only when the selector data exist.
       if (requests && currentContractType && reasons) {
@@ -231,19 +184,18 @@ export default defineComponent({
         requests.forEach((request) => {
           // Process status selector data
           const requestStatuses = JSON.parse(JSON.stringify(statuses)).filter(
-            (status) =>
-              status.name != request.status.name &&
-              status.contract_type.name === currentContractType
+            (status) => status.name != request.status.name && status.contract_type.name === currentContractType
           );
           // Process op selector data
+          console.log("wena wena");
+          console.log(ops);
+          console.log(request);
           const requestOps = JSON.parse(JSON.stringify(ops)).filter(
-            (op) => op.start_at != request.op.start_at
+            (op) => op.start_at != request?.operation_program?.start_at
           );
 
           //Process reason selector data
-          const requestReasons = JSON.parse(JSON.stringify(reasons)).filter(
-            (reason) => reason[1] != request.reason
-          );
+          const requestReasons = JSON.parse(JSON.stringify(reasons)).filter((reason) => reason[1] != request.reason);
           // Add processed data to return statement,
           requestsWithSelectors.push({
             request: request,
@@ -272,12 +224,9 @@ export default defineComponent({
         let currentStatus: Array<string> = status.split("/");
         currentStatus.pop();
         const statusId: number = parseInt(currentStatus.pop() as string);
-        let changeOPRequest =
-          currentChangeOPRequests.value[index].request.url.split("/");
+        let changeOPRequest = currentChangeOPRequests.value[index].request.url.split("/");
         changeOPRequest.pop();
-        const changeOPRequestId: number = parseInt(
-          changeOPRequest.pop() as string
-        );
+        const changeOPRequestId: number = parseInt(changeOPRequest.pop() as string);
         const params = {
           params: {
             status: statusId,
@@ -304,12 +253,9 @@ export default defineComponent({
         let currentOp: Array<string> = op.split("/");
         currentOp.pop();
         const opId: number = parseInt(currentOp.pop() as string);
-        let changeOPRequest =
-          currentChangeOPRequests.value[index].request.url.split("/");
+        let changeOPRequest = currentChangeOPRequests.value[index].request.url.split("/");
         changeOPRequest.pop();
-        const changeOPRequestId: number = parseInt(
-          changeOPRequest.pop() as string
-        );
+        const changeOPRequestId: number = parseInt(changeOPRequest.pop() as string);
         const params = {
           params: {
             op: opId,
@@ -333,12 +279,9 @@ export default defineComponent({
       }
       // Create GET request for all status selector edited.
       reasonSelectValues.forEach((reason, index) => {
-        let changeOPRequest =
-          currentChangeOPRequests.value[index].request.url.split("/");
+        let changeOPRequest = currentChangeOPRequests.value[index].request.url.split("/");
         changeOPRequest.pop();
-        const changeOPRequestId: number = parseInt(
-          changeOPRequest.pop() as string
-        );
+        const changeOPRequestId: number = parseInt(changeOPRequest.pop() as string);
         const params = {
           params: {
             reason: reason,

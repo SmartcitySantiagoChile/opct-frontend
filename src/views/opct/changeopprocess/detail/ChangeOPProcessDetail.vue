@@ -3,10 +3,7 @@
   <div class="card">
     <!--begin::Base Info-->
     <div class="card-title align-items-center">
-      <changeOPProcessBaseInfo
-        v-bind:changeOPProcessBaseInfo="changeOPProcess"
-        v-bind:changeOpProcessId="id"
-      ></changeOPProcessBaseInfo>
+      <ChangeOPProcessDetailHeader :changeOPProcess="changeOPProcess"></ChangeOPProcessDetailHeader>
     </div>
     <!--end::Base Info-->
     <div class="separator"></div>
@@ -14,40 +11,48 @@
       v-bind:changeOPProcess="changeOPProcess"
       widget-classes="card-xxl-stretch mb-5 mb-xl-8"
     ></ChangeOPProcessActivity>
-    <Reply></Reply>
+    <ChangeOPProcessDetailReplay
+      :changeOPProcess="changeOPProcess"
+      @message-added="updateTimeline"
+    ></ChangeOPProcessDetailReplay>
     <!--end::Card body-->
   </div>
   <!--end::Timeline-->
 </template>
+
 <script lang="ts">
 import { computed, defineComponent, onUpdated, ref } from "vue";
 import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
-import ChangeOPProcessActivity from "@/views/crafted/pages/changeOPRequest/activity/Activity.vue";
+import ChangeOPProcessActivity from "@/views/opct/changeopprocess/detail/timeline/Activity.vue";
 import { useStore } from "vuex";
 import { Actions } from "@/store/enums/StoreEnums";
-import ChangeOPProcessBaseInfo from "@/views/crafted/pages/changeOPRequest/header/BaseInfo.vue";
-import Reply from "@/views/crafted/pages/changeOPRequest/Reply.vue";
-
+import ChangeOPProcessDetailHeader from "@/views/opct/changeopprocess/detail/ChangeOPProcessDetailHeader.vue";
+import ChangeOPProcessDetailReplay from "@/views/opct/changeopprocess/detail/ChangeOPProcessDetailReplay.vue";
 
 export default defineComponent({
   name: "changeOPRequest",
   props: ["id"],
   components: {
-    ChangeOPProcessBaseInfo,
+    ChangeOPProcessDetailHeader,
     ChangeOPProcessActivity,
-    Reply,
+    ChangeOPProcessDetailReplay,
   },
   setup(props) {
     const store = useStore();
-    store.dispatch(Actions.GET_CHANGE_OP_PROCESS, props.id);
-    const changeOPProcess = ref(
-      computed(() => store.getters.getCurrentChangeOPProcess)
-    );
+    const changeOPProcess = ref(computed(() => store.getters.getCurrentChangeOPProcess));
+
+    const updateTimeline = () => {
+      store.dispatch(Actions.GET_CHANGE_OP_PROCESS, props.id);
+    };
+    updateTimeline();
+
     onUpdated(() => {
       return setCurrentPageTitle("Proceso de cambio de PO");
     });
+
     return {
       changeOPProcess,
+      updateTimeline,
     };
   },
 });

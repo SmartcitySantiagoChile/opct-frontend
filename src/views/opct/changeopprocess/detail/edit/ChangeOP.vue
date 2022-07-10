@@ -5,9 +5,7 @@
     data-bs-toggle="modal"
     type="button"
   >
-    <span class="svg-icon svg-icon-2">
-      <inline-svg src="/media/icons/duotune/art/art005.svg" />
-    </span>
+    <span class="svg-icon svg-icon-2"> <inline-svg src="/media/icons/duotune/art/art005.svg" /> </span>
   </a>
   <!--begin::ChangeOP-->
   <div id="change_op" class="modal fade" tabindex="-1">
@@ -17,28 +15,15 @@
           <h5 class="modal-title">{{ translate("changeOP") }}:</h5>
 
           <!--begin::Close-->
-          <div
-            aria-label="Close"
-            class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-            data-bs-dismiss="modal"
-          >
+          <div aria-label="Close" class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal">
             <span class="svg-icon svg-icon-2x"></span>
           </div>
           <!--end::Close-->
         </div>
 
         <div class="modal-body">
-          <el-select
-            v-model="value"
-            :placeholder="currentOP"
-            style="margin-left: 10px"
-          >
-            <el-option
-              v-for="item in changeOPOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
+          <el-select v-model="value" :placeholder="currentOP" style="margin-left: 10px">
+            <el-option v-for="item in changeOPOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
         </div>
@@ -91,11 +76,7 @@ export default defineComponent({
             : [
                 {
                   value: operationProgram.url,
-                  label:
-                    operationProgram.start_at +
-                    " (" +
-                    operationProgram.op_type.name +
-                    ")",
+                  label: operationProgram.start_at + " (" + operationProgram.op_type.name + ")",
                 },
               ]
         );

@@ -32,36 +32,20 @@
         <!--begin::Files Record-->
         <template v-if="filesLength > 0">
           <div
-            class="
-              d-flex
-              align-items-center
-              border border-dashed border-gray-300
-              rounded
-              min-w-750px
-              px-7
-              py-3
-              mb-5
-            "
+            class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5"
           >
             <template v-for="(item, index) in files" :key="index">
               <!--begin::Item-->
               <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
                 <!--begin::Icon-->
-                <img
-                  alt=""
-                  class="w-30px me-3"
-                  src="/media/svg/files/doc.svg"
-                />
+                <img alt="" class="w-30px me-3" src="/media/svg/files/doc.svg" />
                 <!--end::Icon-->
 
                 <!--begin::Info-->
                 <div class="ms-1 fw-bold">
                   <!--begin::Desc-->
-                  <a
-                    :download="item.file.split('/media/')[1]"
-                    :href="item.file"
-                    class="fs-6 text-hover-primary fw-bolder"
-                    >{{ item.file.split("/media/")[1] }}
+                  <a :download="item.filename" :href="item.file" class="fs-6 text-hover-primary fw-bolder"
+                    >{{ item.filename }}
                   </a>
                   <!--end::Desc-->
 
@@ -121,7 +105,6 @@
     <!--end::Timeline content-->
   </div>
   <!--end::ChangeOPProcessTimelineMessage item-->
-
 </template>
 
 <script lang="ts">
@@ -139,19 +122,16 @@ export default defineComponent({
         return this.changeOPProcessTimelineMessage.change_op_process_files;
       }
       if (this.changeOPProcessTimelineMessage.change_op_process_message_files) {
-        return this.changeOPProcessTimelineMessage
-          .change_op_process_message_files;
+        return this.changeOPProcessTimelineMessage.change_op_process_message_files;
       }
       return [];
     });
     const filesLength = computed(() => {
       if (this.changeOPProcessTimelineMessage.change_op_process_files) {
-        return this.changeOPProcessTimelineMessage.change_op_process_files
-          .length;
+        return this.changeOPProcessTimelineMessage.change_op_process_files.length;
       }
       if (this.changeOPProcessTimelineMessage.change_op_process_message_files) {
-        return this.changeOPProcessTimelineMessage
-          .change_op_process_message_files.length;
+        return this.changeOPProcessTimelineMessage.change_op_process_message_files.length;
       }
       return 0;
     });
