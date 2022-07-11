@@ -82,9 +82,9 @@ export default defineComponent({
       let orderedLogsData = [] as any;
       if (opStatuses.value) {
         opStatuses.value.forEach((opStatus) => {
-          if (props.changeOPProcess["contract_type"] && props.changeOPProcess["op_release_date"]) {
-            const releaseDate = new Date(props.changeOPProcess["op_release_date"] + " 00:00");
-            if (opStatus.contract_type.name == props.changeOPProcess["contract_type"]["name"]) {
+          if (props.changeOPProcess.contract_type && props.changeOPProcess.op_release_date) {
+            const releaseDate = new Date(props.changeOPProcess.op_release_date + " 00:00");
+            if (opStatus.contract_type.name == props.changeOPProcess.contract_type.name) {
               let deadLineDate = new Date(JSON.parse(JSON.stringify(releaseDate)));
               deadLineDate.setDate(deadLineDate.getDate() - opStatus.time_threshold);
               const deadLineStringDate = JSON.parse(JSON.stringify(deadLineDate));
@@ -100,61 +100,61 @@ export default defineComponent({
         });
       }
       if (props.changeOPProcess) {
-        if (props.changeOPProcess["change_op_process_messages"]) {
-          props.changeOPProcess["change_op_process_messages"].forEach((message) => {
+        if (props.changeOPProcess.change_op_process_messages) {
+          props.changeOPProcess.change_op_process_messages.forEach((message) => {
             let changeOPProcessData = {
-              dateTime: message["created_at"],
+              dateTime: message.created_at,
               type: "changeOPProcessMessage",
               data: message,
             };
             orderedLogsData.push(changeOPProcessData);
           });
         }
-        if (props.changeOPProcess["op_change_logs"]) {
-          props.changeOPProcess["op_change_logs"].forEach((changeLog) => {
+        if (props.changeOPProcess.op_change_logs) {
+          props.changeOPProcess.op_change_logs.forEach((changeLog) => {
             let opChangeLogData = {
-              dateTime: changeLog["created_at"],
+              dateTime: changeLog.created_at,
               type: "opChangeLog",
               data: changeLog,
             };
             orderedLogsData.push(opChangeLogData);
           });
         }
-        if (props.changeOPProcess["change_op_requests"]) {
-          props.changeOPProcess["change_op_requests"].forEach((change_op_request) => {
-            if (change_op_request["status_logs"]) {
-              change_op_request["status_logs"].forEach((status_log) => {
+        if (props.changeOPProcess.change_op_requests) {
+          props.changeOPProcess.change_op_requests.forEach((change_op_request) => {
+            if (change_op_request.status_logs) {
+              change_op_request.status_logs.forEach((status_log) => {
                 let statusLogData = {
-                  dateTime: status_log["created_at"],
+                  dateTime: status_log.created_at,
                   type: "opChangeLog",
                   data: status_log,
                 };
                 orderedLogsData.push(statusLogData);
               });
             }
-            if (change_op_request["change_op_request_op_change_logs"]) {
-              change_op_request["change_op_request_op_change_logs"].forEach((changeLog) => {
+            if (change_op_request.change_op_request_op_change_logs) {
+              change_op_request.change_op_request_op_change_logs.forEach((changeLog) => {
                 let opChangeLogData = {
-                  dateTime: changeLog["created_at"],
+                  dateTime: changeLog.created_at,
                   type: "opChangeLog",
                   data: changeLog,
                 };
                 orderedLogsData.push(opChangeLogData);
               });
             }
-            if (change_op_request["change_op_request_op_change_logs"]) {
-              change_op_request["change_op_request_op_change_logs"].forEach((changeLog) => {
+            if (change_op_request.change_op_request_op_change_logs) {
+              change_op_request.change_op_request_op_change_logs.forEach((changeLog) => {
                 let opChangeLogData = {
-                  dateTime: changeLog["created_at"],
+                  dateTime: changeLog.created_at,
                   type: "opChangeLog",
                   data: changeLog,
                 };
                 orderedLogsData.push(opChangeLogData);
               });
-              if (change_op_request["change_op_request_reason_change_logs"]) {
-                change_op_request["change_op_request_reason_change_logs"].forEach((changeLog) => {
+              if (change_op_request.change_op_request_reason_change_logs) {
+                change_op_request.change_op_request_reason_change_logs.forEach((changeLog) => {
                   let reasonChangeLogData = {
-                    dateTime: changeLog["created_at"],
+                    dateTime: changeLog.created_at,
                     type: "reasonChangeLog",
                     data: changeLog,
                   };
@@ -164,10 +164,10 @@ export default defineComponent({
             }
           });
         }
-        if (props.changeOPProcess["change_op_process_status_logs"]) {
-          props.changeOPProcess["change_op_process_status_logs"].forEach((statusLog) => {
+        if (props.changeOPProcess.change_op_process_status_logs) {
+          props.changeOPProcess.change_op_process_status_logs.forEach((statusLog) => {
             let changeOPProcessStatusLogData = {
-              dateTime: statusLog["created_at"],
+              dateTime: statusLog.created_at,
               type: "statusLog",
               data: statusLog,
             };
