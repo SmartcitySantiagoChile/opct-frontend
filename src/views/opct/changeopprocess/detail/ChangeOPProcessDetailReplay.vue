@@ -44,7 +44,7 @@
             ref="uploader"
           >
             <template #trigger>
-              <el-button size="small" type="primary">{{ translate("attachFiles") }} </el-button>
+              <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
             </template>
             <el-button size="small" style="margin-left: 10px" type="primary" @click="createMessage">
               {{ translate("send") }}
@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, nextTick, onMounted, ref } from "vue";
 import Quill from "quill/dist/quill.js";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
@@ -139,6 +139,12 @@ export default defineComponent({
                 .then(() => {
                   uploader.value.clearFiles();
                   quill.setContents([{ insert: "\n" }]);
+                  nextTick(() => {
+                    setTimeout(function () {
+                      //uploader.value.scrollIntoView({ behavior: "smooth" });
+                      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+                    }, 500);
+                  });
                 });
             })
             .catch(() => {
