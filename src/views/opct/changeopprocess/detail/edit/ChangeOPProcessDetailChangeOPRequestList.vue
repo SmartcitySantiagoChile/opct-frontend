@@ -187,9 +187,6 @@ export default defineComponent({
             (status) => status.name != request.status.name && status.contract_type.name === currentContractType
           );
           // Process op selector data
-          console.log("wena wena");
-          console.log(ops);
-          console.log(request);
           const requestOps = JSON.parse(JSON.stringify(ops)).filter(
             (op) => op.start_at != request?.operation_program?.start_at
           );
