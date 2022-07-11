@@ -6,6 +6,7 @@
       <ChangeOPProcessDetailHeader
         :changeOPProcess="changeOPProcess"
         @operation-program-updated="updateTimeline"
+        @status-updated="updateTimeline"
       ></ChangeOPProcessDetailHeader>
     </div>
     <!--end::Base Info-->

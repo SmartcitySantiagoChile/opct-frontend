@@ -8,7 +8,7 @@
     <span class="svg-icon svg-icon-2"> <inline-svg src="/media/icons/duotune/art/art005.svg" /> </span>
   </a>
   <!--begin::ChangeStatus-->
-  <div class="modal fade" tabindex="-1" id="change_status_modal">
+  <div class="modal fade" tabindex="-1" id="change_status_modal" ref="statusModalRef">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -45,6 +45,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import { hideModal } from "@/core/helpers/dom";
 import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
@@ -54,7 +55,8 @@ export default defineComponent({
   props: {
     widgetClasses: String,
   },
-  setup() {
+  emits: ["status-updated"],
+  setup(props, { emit }) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
@@ -62,6 +64,8 @@ export default defineComponent({
       const status = store.getters.getCurrentChangeOPProcessStatus;
       return status ? status.name : "";
     });
+    const statusModalRef = ref<HTMLElement | null>(null);
+
     onMounted(() => {
       const contractTypeName = store.getters.getCurrentChangeOPProcessContractTypeName;
       store.dispatch(Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS, contractTypeName);
@@ -94,13 +98,11 @@ export default defineComponent({
             Swal.fire({
               text: translate("changeStatusSuccess"),
               icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: translate("continue"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-success",
-              },
-              allowOutsideClick: false,
-            }).then(() => location.reload());
+              showConfirmButton: false,
+              timer: 1000,
+            })
+              .then(() => emit("status-updated"))
+              .then(() => hideModal(statusModalRef.value));
           });
       } else {
         Swal.fire({
@@ -120,6 +122,7 @@ export default defineComponent({
       changeStatusOptions,
       currentStatus,
       changeStatus,
+      statusModalRef,
     };
   },
 });

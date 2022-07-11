@@ -48,7 +48,7 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("operationProgram") }}
                     <template v-if="hasChangeStatusOption">
-                      <ChangeOP v-bind="$attrs"></ChangeOP>
+                      <ChangeOP @operation-program-updated="$emit('operation-program-updated')"></ChangeOP>
                     </template>
                   </span>
                   <span class="text-dark fw-bolder d-block fs-3">
@@ -91,7 +91,7 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("status") }}
                     <template v-if="hasChangeStatusOption">
-                      <ChangeStatus></ChangeStatus>
+                      <ChangeStatus @status-updated="$emit('status-updated')"></ChangeStatus>
                     </template>
                   </span>
                   <span :class="`badge-light-success`" class="badge fs-4 fw-bolder">{{
@@ -134,6 +134,7 @@ export default defineComponent({
     widgetClasses: String,
     changeOPProcess: Object,
   },
+  emits: ["status-updated", "operation-program-updated"],
   setup() {
     const store = useStore();
     const { t, te } = useI18n();
