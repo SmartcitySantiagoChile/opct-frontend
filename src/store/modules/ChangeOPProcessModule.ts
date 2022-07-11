@@ -11,7 +11,7 @@ export interface ChangeOPProcess {
   message: string;
   updated_at: string;
   creator: Dictionary<string>;
-  base_op: Dictionary<string>;
+  operation_program: Dictionary<string>;
   status: Dictionary<string>;
   counterpart: Dictionary<string>;
   contract_type: Dictionary<string>;
@@ -64,7 +64,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
    * @returns string
    */
   get getCurrentChangeOPProcessOP(): string {
-    return this.changeOPProcess.base_op ? this.changeOPProcess.base_op.start_at : "";
+    return this.changeOPProcess.operation_program ? this.changeOPProcess.operation_program.start_at : "";
   }
 
   /**

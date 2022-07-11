@@ -3,7 +3,10 @@
   <div class="card">
     <!--begin::Base Info-->
     <div class="card-title align-items-center">
-      <ChangeOPProcessDetailHeader :changeOPProcess="changeOPProcess"></ChangeOPProcessDetailHeader>
+      <ChangeOPProcessDetailHeader
+        :changeOPProcess="changeOPProcess"
+        @operation-program-updated="updateTimeline"
+      ></ChangeOPProcessDetailHeader>
     </div>
     <!--end::Base Info-->
     <div class="separator"></div>

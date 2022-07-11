@@ -48,15 +48,17 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("operationProgram") }}
                     <template v-if="hasChangeStatusOption">
-                      <ChangeOP></ChangeOP>
+                      <ChangeOP v-bind="$attrs"></ChangeOP>
                     </template>
                   </span>
                   <span class="text-dark fw-bolder d-block fs-3">
-                    <template v-if="changeOPProcess.base_op">
+                    <template v-if="changeOPProcess.operation_program">
                       {{
-                        DateTime.fromISO(changeOPProcess.base_op.start_at).setLocale(this.$i18n.locale).toLocaleString()
+                        DateTime.fromISO(changeOPProcess.operation_program.start_at)
+                          .setLocale(this.$i18n.locale)
+                          .toLocaleString()
                       }}
-                      ({{ changeOPProcess.base_op.op_type.name }})
+                      ({{ changeOPProcess.operation_program.op_type.name }})
                     </template>
                     <template v-else>
                       {{ translate("withoutAssign") }}

@@ -8,7 +8,7 @@
     <span class="svg-icon svg-icon-2"> <inline-svg src="/media/icons/duotune/art/art005.svg" /> </span>
   </a>
   <!--begin::ChangeOP-->
-  <div id="change_op" class="modal fade" tabindex="-1">
+  <div id="change_op" class="modal fade" tabindex="-1" ref="changeOPModalRef">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -39,7 +39,6 @@
       </div>
     </div>
   </div>
-
   <!--end::ChangeOP-->
 </template>
 
@@ -47,6 +46,7 @@
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
+import { hideModal } from "@/core/helpers/dom";
 import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 
@@ -55,7 +55,8 @@ export default defineComponent({
   props: {
     widgetClasses: String,
   },
-  setup: function () {
+  emits: ["operation-program-updated"],
+  setup(props, { emit }) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
@@ -63,6 +64,7 @@ export default defineComponent({
       const op = store.getters.getCurrentChangeOPProcessOP;
       return op ? op : translate("withoutAssign");
     });
+    const changeOPModalRef = ref<HTMLElement | null>(null);
 
     onMounted(() => {
       store.dispatch(Actions.GET_OPERATION_PROGRAMS);
@@ -99,7 +101,7 @@ export default defineComponent({
       let opId: string = op.pop() as string;
       const changeOPProcessId = store.getters.getCurrentChangeOPProcessId;
       const params = {
-        op: opId === "None" ? null : opId,
+        operation_program: opId === "None" ? null : opId,
         update_deadlines: false,
       };
       if (opId && opId !== "None") {
@@ -129,18 +131,23 @@ export default defineComponent({
             if (result.isConfirmed) {
               Swal.fire({
                 title: translate("changeOPSuccess"),
-                message: translate("deadlinesUpdated"),
+                text: translate("deadlinesUpdated"),
                 icon: "success",
+                showConfirmButton: false,
+                timer: 1000,
               });
             } else {
               Swal.fire({
                 title: translate("changeOPSuccess"),
-                message: translate("deadlinesNotUpdated"),
+                text: translate("deadlinesNotUpdated"),
                 icon: "success",
+                showConfirmButton: false,
+                timer: 1000,
               });
             }
           })
-          .then(() => location.reload());
+          .then(() => emit("operation-program-updated"))
+          .then(() => hideModal(changeOPModalRef.value));
       } else if (opId === "None") {
         store
           .dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_OP, {
@@ -151,9 +158,12 @@ export default defineComponent({
             Swal.fire({
               title: translate("changeOPSuccess"),
               icon: "success",
+              showConfirmButton: false,
+              timer: 1000,
             });
           })
-          .then(() => location.reload());
+          .then(() => emit("operation-program-updated"))
+          .then(() => hideModal(changeOPModalRef.value));
       } else {
         Swal.fire({
           text: translate("mustSelectOP"),
@@ -172,8 +182,8 @@ export default defineComponent({
       changeOPOptions,
       currentOP,
       changeOP,
+      changeOPModalRef,
     };
   },
 });
 </script>
-b
