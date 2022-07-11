@@ -33,7 +33,7 @@
             {{ translate("cancel") }}
           </button>
           <button type="button" class="btn btn-primary" @click="changeStatus">
-            {{ translate("send") }}
+            {{ translate("update") }}
           </button>
         </div>
       </div>
