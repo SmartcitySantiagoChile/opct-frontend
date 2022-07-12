@@ -19,9 +19,7 @@
         <div class="text-gray-400 fw-bold fs-4">
           Already have an account?
 
-          <router-link to="/sign-in" class="link-primary fw-bolder">
-            Sign in here
-          </router-link>
+          <router-link to="/sign-in" class="link-primary fw-bolder"> Sign in here </router-link>
         </div>
         <!--end::Link-->
       </div>
@@ -29,11 +27,7 @@
 
       <!--begin::Action-->
       <button type="button" class="btn btn-light-primary fw-bolder w-100 mb-10">
-        <img
-          alt="Logo"
-          src="/media/svg/brand-logos/google-icon.svg"
-          class="h-20px me-3"
-        />
+        <img alt="Logo" src="/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" />
         Sign in with Google
       </button>
       <!--end::Action-->
@@ -135,9 +129,7 @@
 
       <!--begin::Input group-->
       <div class="fv-row mb-5">
-        <label class="form-label fw-bolder text-dark fs-6"
-          >Confirm Password</label
-        >
+        <label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
         <Field
           class="form-control form-control-lg form-control-solid"
           type="password"
@@ -156,12 +148,7 @@
       <!--begin::Input group-->
       <div class="fv-row mb-10">
         <label class="form-check form-check-custom form-check-solid">
-          <Field
-            class="form-check-input"
-            type="checkbox"
-            name="toc"
-            value="1"
-          />
+          <Field class="form-check-input" type="checkbox" name="toc" value="1" />
           <span class="form-check-label fw-bold text-gray-700 fs-6">
             I Agree &
             <a href="#" class="ms-1 link-primary">Terms and conditions</a>.
@@ -172,18 +159,11 @@
 
       <!--begin::Actions-->
       <div class="text-center">
-        <button
-          id="kt_sign_up_submit"
-          ref="submitButton"
-          type="submit"
-          class="btn btn-lg btn-primary"
-        >
+        <button id="kt_sign_up_submit" ref="submitButton" type="submit" class="btn btn-lg btn-primary">
           <span class="indicator-label"> Submit </span>
           <span class="indicator-progress">
             Please wait...
-            <span
-              class="spinner-border spinner-border-sm align-middle ms-2"
-            ></span>
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
           </span>
         </button>
       </div>
@@ -230,7 +210,7 @@ export default defineComponent({
 
     const onSubmitRegister = (values) => {
       // Clear existing errors
-      store.dispatch(Actions.LOGOUT);
+      store.dispatch(Actions.USERS.LOGOUT);
 
       // Activate indicator
       submitButton.value?.setAttribute("data-kt-indicator", "on");
@@ -239,7 +219,7 @@ export default defineComponent({
       setTimeout(() => {
         // Send login request
         store
-          .dispatch(Actions.REGISTER, values)
+          .dispatch(Actions.USERS.REGISTER, values)
           .then(() => {
             Swal.fire({
               text: "All is cool! Now you submit this form",

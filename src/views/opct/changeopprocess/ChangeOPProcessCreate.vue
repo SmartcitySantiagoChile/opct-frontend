@@ -870,7 +870,7 @@ export default defineComponent({
       };
 
       store
-        .dispatch(Actions.CREATE_CHANGE_OP_PROCESS, formData.value)
+        .dispatch(Actions.CHANGE_OP_PROCESSES.CREATE, formData.value)
         .then((data) => {
           messageParams.url = data.url;
           store

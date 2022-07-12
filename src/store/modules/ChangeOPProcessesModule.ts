@@ -12,10 +12,7 @@ export interface ChangeOPRequestsInfo {
 }
 
 @Module
-export default class ChangeOPProcessesModule
-  extends VuexModule
-  implements ChangeOPRequestsInfo
-{
+export default class ChangeOPProcessesModule extends VuexModule implements ChangeOPRequestsInfo {
   errors = [];
   changeOPProcesses = [] as ChangeOPProcess[];
   count = 0;
@@ -60,28 +57,24 @@ export default class ChangeOPProcessesModule
   }
 
   @Action
-  [Actions.GET_CHANGE_OP_PROCESSES]() {
+  [Actions.CHANGE_OP_PROCESSES.LIST]() {
     ApiService.get("change-op-processes")
       .then(({ data }) => {
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESSES, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_PROCESSES_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CHANGE_OP_PROCESSES_ERRORS, [response.data.error]);
       });
   }
 
   @Action
-  [Actions.GET_CHANGE_OP_PROCESSES_WITH_PARAMS](params) {
+  [Actions.CHANGE_OP_PROCESSES.LIST_WiTH_PARAMS](params) {
     ApiService.query("change-op-processes", { params: params })
       .then(({ data }) => {
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESSES, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_PROCESSES_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CHANGE_OP_PROCESSES_ERRORS, [response.data.error]);
       });
   }
 }

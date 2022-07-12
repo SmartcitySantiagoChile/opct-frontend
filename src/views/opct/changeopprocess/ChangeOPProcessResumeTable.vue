@@ -188,7 +188,7 @@ export default defineComponent({
     const store = useStore();
 
     const updateData = () => {
-      store.dispatch(Actions.GET_CHANGE_OP_PROCESSES);
+      store.dispatch(Actions.CHANGE_OP_PROCESSES.LIST);
     };
 
     updateData();
@@ -199,11 +199,11 @@ export default defineComponent({
     const onFilterChange = (event) => {
       const filter = String(event.target.value);
       if (filter.length > 3 && filter.length < 11) {
-        store.dispatch(Actions.GET_CHANGE_OP_PROCESSES_WITH_PARAMS, {
+        store.dispatch(Actions.CHANGE_OP_PROCESSES.LIST_WiTH_PARAMS, {
           search: filter,
         });
       } else if (filter.length === 0) {
-        store.dispatch(Actions.GET_CHANGE_OP_PROCESSES);
+        store.dispatch(Actions.CHANGE_OP_PROCESSES.LIST);
       }
     };
 
@@ -225,7 +225,7 @@ export default defineComponent({
         return;
       }
       params["page"] = pageId;
-      store.dispatch(Actions.GET_CHANGE_OP_PROCESSES_WITH_PARAMS, params);
+      store.dispatch(Actions.CHANGE_OP_PROCESSES.LIST_WiTH_PARAMS, params);
     };
 
     // Pagination

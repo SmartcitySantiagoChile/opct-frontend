@@ -12,10 +12,7 @@ export interface ChangeOPRequestsInfo {
 }
 
 @Module
-export default class ChangeOPRequestsModule
-  extends VuexModule
-  implements ChangeOPRequestsInfo
-{
+export default class ChangeOPRequestsModule extends VuexModule implements ChangeOPRequestsInfo {
   errors = [];
   changeOPRequests = [] as ChangeOPRequest[];
   count = 0;
@@ -66,9 +63,7 @@ export default class ChangeOPRequestsModule
         this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS_ERRORS, [response.data.error]);
       });
   }
 
@@ -79,9 +74,7 @@ export default class ChangeOPRequestsModule
         this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CHANGE_OP_REQUESTS_ERRORS, [response.data.error]);
       });
   }
 }

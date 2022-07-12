@@ -1,19 +1,7 @@
 <template>
   <!--begin::Menu-->
   <div
-    class="
-      menu
-      menu-sub
-      menu-sub-dropdown
-      menu-column
-      menu-rounded
-      menu-gray-600
-      menu-state-bg-light-primary
-      fw-bold
-      py-4
-      fs-6
-      w-275px
-    "
+    class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px"
     data-kt-menu="true"
   >
     <!--begin::Menu item-->
@@ -30,9 +18,7 @@
               >Pro</span
             >-->
           </div>
-          <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{
-            currentUserEmail
-          }}</a>
+          <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ currentUserEmail }}</a>
         </div>
         <!--end::Username-->
       </div>
@@ -99,9 +85,7 @@ export default defineComponent({
       }
     };
 
-    i18n.locale.value = localStorage.getItem("lang")
-      ? (localStorage.getItem("lang") as string)
-      : "es";
+    i18n.locale.value = localStorage.getItem("lang") ? (localStorage.getItem("lang") as string) : "es";
 
     const countries = {
       en: {
@@ -127,9 +111,7 @@ export default defineComponent({
     };
 
     const signOut = () => {
-      store
-        .dispatch(Actions.LOGOUT)
-        .then(() => router.push({ name: "sign-in" }));
+      store.dispatch(Actions.USERS.LOGOUT).then(() => router.push({ name: "sign-in" }));
     };
 
     const setLang = (lang) => {

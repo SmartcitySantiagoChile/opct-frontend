@@ -72,7 +72,7 @@ router.beforeResolve(async (to) => {
   // reset config to initial state
   await store.commit(Mutations.RESET_LAYOUT_CONFIG);
 
-  await store.dispatch(Actions.VERIFY_AUTH);
+  await store.dispatch(Actions.USERS.VERIFY_AUTH);
 
   // Scroll page to top on every route change
   setTimeout(() => {

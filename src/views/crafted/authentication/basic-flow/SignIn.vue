@@ -2,12 +2,7 @@
   <!--begin::Wrapper-->
   <div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
     <!--begin::Form-->
-    <Form
-      class="form w-100"
-      id="kt_login_signin_form"
-      @submit="onSubmitLogin"
-      :validation-schema="login"
-    >
+    <Form class="form w-100" id="kt_login_signin_form" @submit="onSubmitLogin" :validation-schema="login">
       <!--begin::Heading-->
       <div class="text-center mb-10">
         <!--begin::Title-->
@@ -35,18 +30,11 @@
       <!--begin::Input group-->
       <div class="fv-row mb-10">
         <!--begin::Label-->
-        <label class="form-label fs-6 fw-bolder text-dark">{{
-          t("email")
-        }}</label>
+        <label class="form-label fs-6 fw-bolder text-dark">{{ t("email") }}</label>
         <!--end::Label-->
 
         <!--begin::Input-->
-        <Field
-          class="form-control form-control-lg form-control-solid"
-          type="text"
-          name="email"
-          autocomplete="off"
-        />
+        <Field class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />
         <!--end::Input-->
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
@@ -61,9 +49,7 @@
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack mb-2">
           <!--begin::Label-->
-          <label class="form-label fw-bolder text-dark fs-6 mb-0">{{
-            t("password")
-          }}</label>
+          <label class="form-label fw-bolder text-dark fs-6 mb-0">{{ t("password") }}</label>
           <!--end::Label-->
 
           <!--begin::Link-->
@@ -93,19 +79,12 @@
       <!--begin::Actions-->
       <div class="text-center">
         <!--begin::Submit button-->
-        <button
-          type="submit"
-          ref="submitButton"
-          id="kt_sign_in_submit"
-          class="btn btn-lg btn-primary w-100 mb-5"
-        >
+        <button type="submit" ref="submitButton" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
           <span class="indicator-label"> {{ t("continue") }} </span>
 
           <span class="indicator-progress">
             {{ t("pleaseWait") }}
-            <span
-              class="spinner-border spinner-border-sm align-middle ms-2"
-            ></span>
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
           </span>
         </button>
         <!--end::Submit button-->
@@ -202,7 +181,7 @@ export default defineComponent({
     //Form submit function
     const onSubmitLogin = (values) => {
       // Clear existing errors
-      store.dispatch(Actions.LOGOUT);
+      store.dispatch(Actions.USERS.LOGOUT);
 
       if (submitButton.value) {
         // Activate indicator
@@ -213,7 +192,7 @@ export default defineComponent({
       setTimeout(() => {
         // Send login request
         store
-          .dispatch(Actions.LOGIN, values)
+          .dispatch(Actions.USERS.LOGIN, values)
           .then(function () {
             // Go to page after successfully login
             router.push({ name: "dashboard" });
@@ -221,9 +200,7 @@ export default defineComponent({
           .catch(() => {
             const errors = store.getters.getErrors;
             const parsedErrors = Object.entries(errors).map((key) => {
-              return `<b>${translate(key[0])}</b>: ${translate(
-                key[1]
-              )}<br><br>`;
+              return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
             });
             Swal.fire({
               html: parsedErrors.join(""),

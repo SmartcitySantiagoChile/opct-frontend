@@ -46,7 +46,8 @@ export default defineComponent({
     const changeOPProcess = ref(computed(() => store.getters.getCurrentChangeOPProcess));
 
     const updateTimeline = () => {
-      store.dispatch(Actions.GET_CHANGE_OP_PROCESS, props.id);
+      console.log("update timeline");
+      store.dispatch(Actions.CHANGE_OP_PROCESSES.DETAIL, props.id);
     };
     updateTimeline();
 

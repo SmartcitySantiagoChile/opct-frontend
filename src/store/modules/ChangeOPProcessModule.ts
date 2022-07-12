@@ -124,7 +124,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
   }
 
   @Action
-  [Actions.GET_CHANGE_OP_PROCESS](changeOPProcessId) {
+  [Actions.CHANGE_OP_PROCESSES.DETAIL](changeOPProcessId) {
     ApiService.get("change-op-processes", changeOPProcessId)
       .then(({ data }) => {
         console.log(data);
@@ -136,7 +136,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
   }
 
   @Action
-  [Actions.CREATE_CHANGE_OP_PROCESS](params) {
+  [Actions.CHANGE_OP_PROCESSES.CREATE](params) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post("change-op-processes/", params)
         .then(({ data }) => {
