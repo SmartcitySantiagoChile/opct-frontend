@@ -15,9 +15,7 @@
         <!--end::Title-->
 
         <!--begin::Link-->
-        <div class="text-gray-400 fw-bold fs-4">
-          Enter your email to reset your password.
-        </div>
+        <div class="text-gray-400 fw-bold fs-4">Enter your email to reset your password.</div>
         <!--end::Link-->
       </div>
       <!--begin::Heading-->
@@ -25,13 +23,7 @@
       <!--begin::Input group-->
       <div class="fv-row mb-10">
         <label class="form-label fw-bolder text-gray-900 fs-6">Email</label>
-        <Field
-          class="form-control form-control-solid"
-          type="email"
-          placeholder=""
-          name="email"
-          autocomplete="off"
-        />
+        <Field class="form-control form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
             <ErrorMessage name="email" />
@@ -51,17 +43,11 @@
           <span class="indicator-label"> Submit </span>
           <span class="indicator-progress">
             Please wait...
-            <span
-              class="spinner-border spinner-border-sm align-middle ms-2"
-            ></span>
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
           </span>
         </button>
 
-        <router-link
-          to="/sign-up"
-          class="btn btn-lg btn-light-primary fw-bolder"
-          >Cancel</router-link
-        >
+        <router-link to="/sign-up" class="btn btn-lg btn-light-primary fw-bolder">Cancel</router-link>
       </div>
       <!--end::Actions-->
     </Form>
@@ -106,7 +92,7 @@ export default defineComponent({
       setTimeout(() => {
         // Send login request
         store
-          .dispatch(Actions.FORGOT_PASSWORD, values)
+          .dispatch(Actions.USERS.FORGOT_PASSWORD, values)
           .then(() => {
             Swal.fire({
               text: "All is cool! Now you submit this form",
