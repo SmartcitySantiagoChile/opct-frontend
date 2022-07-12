@@ -26,38 +26,32 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: "overview",
             name: "profile-overview",
-            component: () =>
-              import("@/views/crafted/pages/profile/Overview.vue"),
+            component: () => import("@/views/crafted/pages/profile/Overview.vue"),
           },
           {
             path: "projects",
             name: "profile-projects",
-            component: () =>
-              import("@/views/crafted/pages/profile/Projects.vue"),
+            component: () => import("@/views/crafted/pages/profile/Projects.vue"),
           },
           {
             path: "campaigns",
             name: "profile-campaigns",
-            component: () =>
-              import("@/views/crafted/pages/profile/Campaigns.vue"),
+            component: () => import("@/views/crafted/pages/profile/Campaigns.vue"),
           },
           {
             path: "documents",
             name: "profile-documents",
-            component: () =>
-              import("@/views/crafted/pages/profile/Documents.vue"),
+            component: () => import("@/views/crafted/pages/profile/Documents.vue"),
           },
           {
             path: "connections",
             name: "profile-connections",
-            component: () =>
-              import("@/views/crafted/pages/profile/Connections.vue"),
+            component: () => import("@/views/crafted/pages/profile/Connections.vue"),
           },
           {
             path: "activity",
             name: "profile-activity",
-            component: () =>
-              import("@/views/crafted/pages/profile/Activity.vue"),
+            component: () => import("@/views/crafted/pages/profile/Activity.vue"),
           },
         ],
       },
@@ -126,8 +120,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/crafted/modals/general/invite-friends",
         name: "modals-general-invite-friends",
-        component: () =>
-          import("@/views/crafted/modals/general/InviteFriends.vue"),
+        component: () => import("@/views/crafted/modals/general/InviteFriends.vue"),
       },
       {
         path: "/crafted/modals/general/view-user",
@@ -137,14 +130,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/crafted/modals/general/upgrade-plan",
         name: "modals-general-upgrade-plan",
-        component: () =>
-          import("@/views/crafted/modals/general/UpgradePlan.vue"),
+        component: () => import("@/views/crafted/modals/general/UpgradePlan.vue"),
       },
       {
         path: "/crafted/modals/general/share-and-earn",
         name: "modals-general-share-and-earn",
-        component: () =>
-          import("@/views/crafted/modals/general/ShareAndEarn.vue"),
+        component: () => import("@/views/crafted/modals/general/ShareAndEarn.vue"),
       },
       {
         path: "/crafted/modals/forms/new-target",
@@ -164,14 +155,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/crafted/modals/forms/create-api-key",
         name: "modals-forms-create-api-key",
-        component: () =>
-          import("@/views/crafted/modals/forms/CreateApiKey.vue"),
+        component: () => import("@/views/crafted/modals/forms/CreateApiKey.vue"),
       },
       {
         path: "/crafted/modals/wizards/two-factor-auth",
         name: "modals-wizards-two-factor-auth",
-        component: () =>
-          import("@/views/crafted/modals/wizards/TwoFactorAuth.vue"),
+        component: () => import("@/views/crafted/modals/wizards/TwoFactorAuth.vue"),
       },
       {
         path: "/crafted/modals/wizards/create-app",
@@ -181,8 +170,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/crafted/modals/wizards/create-account",
         name: "modals-wizards-create-account",
-        component: () =>
-          import("@/views/crafted/modals/wizards/CreateAccount.vue"),
+        component: () => import("@/views/crafted/modals/wizards/CreateAccount.vue"),
       },
       {
         path: "/crafted/widgets/lists",
@@ -223,20 +211,17 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/sign-in",
         name: "sign-in",
-        component: () =>
-          import("@/views/crafted/authentication/basic-flow/SignIn.vue"),
+        component: () => import("@/views/crafted/authentication/basic-flow/SignIn.vue"),
       },
       {
         path: "/sign-up",
         name: "sign-up",
-        component: () =>
-          import("@/views/crafted/authentication/basic-flow/SignUp.vue"),
+        component: () => import("@/views/crafted/authentication/basic-flow/SignUp.vue"),
       },
       {
         path: "/password-reset",
         name: "password-reset",
-        component: () =>
-          import("@/views/crafted/authentication/basic-flow/PasswordReset.vue"),
+        component: () => import("@/views/crafted/authentication/basic-flow/PasswordReset.vue"),
       },
     ],
   },
@@ -266,7 +251,7 @@ router.beforeEach(() => {
   // reset config to initial state
   store.commit(Mutations.RESET_LAYOUT_CONFIG);
 
-  store.dispatch(Actions.VERIFY_AUTH);
+  store.dispatch(Actions.USERS.VERIFY_AUTH);
 
   // Scroll page to top on every route change
   setTimeout(() => {
