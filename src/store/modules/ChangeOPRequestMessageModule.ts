@@ -18,10 +18,7 @@ export interface ChangeOPRequestMessageInfo {
 }
 
 @Module
-export default class ChangeOPRequestMessageModule
-  extends VuexModule
-  implements ChangeOPRequestMessageInfo
-{
+export default class ChangeOPRequestMessageModule extends VuexModule implements ChangeOPRequestMessageInfo {
   errors = [] as Array<any>;
   changeOPRequestMessage = {} as ChangeOPRequestMessage;
 
@@ -56,10 +53,7 @@ export default class ChangeOPRequestMessageModule
         })
         .catch(({ response }) => {
           console.log(response);
-          this.context.commit(
-            Mutations.SET_CHANGE_OP_REQUEST_MESSAGE_ERROR,
-            response.data
-          );
+          this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_MESSAGE_ERROR, response.data);
           reject();
         });
     });

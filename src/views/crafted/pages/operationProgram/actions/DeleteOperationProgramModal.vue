@@ -1,9 +1,5 @@
 <template>
-  <a
-    :onclick="deleteOP"
-    class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
-    type="button"
-  >
+  <a :onclick="deleteOP" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" type="button">
     <span class="svg-icon svg-icon-2">
       <inline-svg src="/media/icons/duotune/general/gen027.svg" />
     </span>
@@ -41,11 +37,9 @@ export default defineComponent({
           store
             .dispatch(Actions.DELETE_OPERATION_PROGRAM, props.url)
             .then(function () {
-              Swal.fire(
-                translate("deleted"),
-                translate("deleteOperationProgramSuccess"),
-                "success"
-              ).then(() => location.reload());
+              Swal.fire(translate("deleted"), translate("deleteOperationProgramSuccess"), "success").then(() =>
+                location.reload()
+              );
             })
             .catch(() => {
               const errors = store.getters.getCurrentOperationProgramErrors[0];

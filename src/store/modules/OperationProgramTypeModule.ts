@@ -11,10 +11,7 @@ export interface OperationProgramTypeInfo {
 }
 
 @Module
-export default class OperationProgramTypeModule
-  extends VuexModule
-  implements OperationProgramTypeInfo
-{
+export default class OperationProgramTypeModule extends VuexModule implements OperationProgramTypeInfo {
   errors = [] as Array<any>;
   operationProgramType = {} as OperationProgramType;
 }

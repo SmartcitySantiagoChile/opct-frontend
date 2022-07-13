@@ -12,10 +12,7 @@ export interface OperationProgramStatusesInfo {
 }
 
 @Module
-export default class OperationProgramStatusesModule
-  extends VuexModule
-  implements OperationProgramStatusesInfo
-{
+export default class OperationProgramStatusesModule extends VuexModule implements OperationProgramStatusesInfo {
   errors = [];
   operationProgramStatuses = [] as OperationProgramStatus[];
   count = 0;
@@ -51,9 +48,7 @@ export default class OperationProgramStatusesModule
       })
       .catch(({ response }) => {
         console.log(response);
-        this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES_ERRORS, [response.data.error]);
       });
   }
 
@@ -64,9 +59,7 @@ export default class OperationProgramStatusesModule
         this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_OPERATION_PROGRAM_STATUSES_ERRORS, [response.data.error]);
       });
   }
 }

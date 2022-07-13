@@ -20,24 +20,11 @@
         <div class="card-title">
           <!--begin::User-->
           <div class="d-flex justify-content-center flex-column me-3">
-            <a
-              href="#"
-              class="
-                fs-4
-                fw-bolder
-                text-gray-900 text-hover-primary
-                me-1
-                mb-2
-                lh-1
-              "
-              >Brian Cox</a
-            >
+            <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian Cox</a>
 
             <!--begin::Info-->
             <div class="mb-0 lh-1">
-              <span
-                class="badge badge-success badge-circle w-10px h-10px me-1"
-              ></span>
+              <span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
               <span class="fs-7 fw-bold text-gray-400">Active</span>
             </div>
             <!--end::Info-->
@@ -63,10 +50,7 @@
           <!--end::Menu-->
 
           <!--begin::Close-->
-          <div
-            class="btn btn-sm btn-icon btn-active-icon-primary"
-            id="kt_drawer_chat_close"
-          >
+          <div class="btn btn-sm btn-icon btn-active-icon-primary" id="kt_drawer_chat_close">
             <span class="svg-icon svg-icon-2x">
               <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>
@@ -149,14 +133,7 @@
           <!--end::Actions-->
 
           <!--begin::Send-->
-          <button
-            @click="addNewMessage"
-            class="btn btn-primary"
-            type="button"
-            data-kt-element="send"
-          >
-            Send
-          </button>
+          <button @click="addNewMessage" class="btn btn-primary" type="button" data-kt-element="send">Send</button>
           <!--end::Send-->
         </div>
         <!--end::Toolbar-->
@@ -282,10 +259,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      if (
-        !messagesRef.value ||
-        !ScrollComponent.getInstance(messagesRef.value)
-      ) {
+      if (!messagesRef.value || !ScrollComponent.getInstance(messagesRef.value)) {
         return;
       }
 

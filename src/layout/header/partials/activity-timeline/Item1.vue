@@ -20,9 +20,7 @@
       <!--begin::Timeline heading-->
       <div class="pe-3 mb-5">
         <!--begin::Title-->
-        <div class="fs-5 fw-bold mb-2">
-          There are 2 new tasks for you in “AirPlus Mobile APp” project:
-        </div>
+        <div class="fs-5 fw-bold mb-2">There are 2 new tasks for you in “AirPlus Mobile APp” project:</div>
         <!--end::Title-->
 
         <!--begin::Description-->
@@ -50,30 +48,9 @@
       <!--begin::Timeline details-->
       <div class="overflow-auto pb-5">
         <!--begin::Record-->
-        <div
-          class="
-            d-flex
-            align-items-center
-            border border-dashed border-gray-300
-            rounded
-            min-w-750px
-            px-7
-            py-3
-            mb-5
-          "
-        >
+        <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
           <!--begin::Title-->
-          <a
-            href="#"
-            class="
-              fs-5
-              text-dark text-hover-primary
-              fw-bold
-              w-375px
-              min-w-200px
-            "
-            >Meeting with customer</a
-          >
+          <a href="#" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Meeting with customer</a>
           <!--end::Title-->
 
           <!--begin::Label-->
@@ -83,14 +60,7 @@
           <!--end::Label-->
 
           <!--begin::Users-->
-          <div
-            class="
-              symbol-group symbol-hover
-              flex-nowrap flex-grow-1
-              min-w-100px
-              pe-2
-            "
-          >
+          <div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px pe-2">
             <!--begin::User-->
             <div class="symbol symbol-circle symbol-25px">
               <img src="/media/avatars/150-3.jpg" alt="img" />
@@ -105,17 +75,7 @@
 
             <!--begin::User-->
             <div class="symbol symbol-circle symbol-25px">
-              <div
-                class="
-                  symbol-label
-                  fs-8
-                  fw-bold
-                  bg-primary
-                  text-inverse-primary
-                "
-              >
-                A
-              </div>
+              <div class="symbol-label fs-8 fw-bold bg-primary text-inverse-primary">A</div>
             </div>
             <!--end::User-->
           </div>
@@ -128,56 +88,27 @@
           <!--end::Progress-->
 
           <!--begin::Action-->
-          <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-            >View</a
-          >
+          <a href="#" class="btn btn-sm btn-light btn-active-light-primary">View</a>
           <!--end::Action-->
         </div>
         <!--end::Record-->
 
         <!--begin::Record-->
-        <div
-          class="
-            d-flex
-            align-items-center
-            border border-dashed border-gray-300
-            rounded
-            min-w-750px
-            px-7
-            py-3
-            mb-0
-          "
-        >
+        <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-0">
           <!--begin::Title-->
-          <a
-            href="#"
-            class="
-              fs-5
-              text-dark text-hover-primary
-              fw-bold
-              w-375px
-              min-w-200px
-            "
+          <a href="#" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px"
             >Project Delivery Preparation</a
           >
           <!--end::Title-->
 
           <!--begin::Label-->
           <div class="min-w-175px">
-            <span class="badge badge-light text-muted"
-              >CRM System Development</span
-            >
+            <span class="badge badge-light text-muted">CRM System Development</span>
           </div>
           <!--end::Label-->
 
           <!--begin::Users-->
-          <div
-            class="
-              symbol-group symbol-hover
-              flex-nowrap flex-grow-1
-              min-w-100px
-            "
-          >
+          <div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px">
             <!--begin::User-->
             <div class="symbol symbol-circle symbol-25px">
               <img src="/media/avatars/150-5.jpg" alt="img" />
@@ -186,17 +117,7 @@
 
             <!--begin::User-->
             <div class="symbol symbol-circle symbol-25px">
-              <div
-                class="
-                  symbol-label
-                  fs-8
-                  fw-bold
-                  bg-success
-                  text-inverse-primary
-                "
-              >
-                B
-              </div>
+              <div class="symbol-label fs-8 fw-bold bg-success text-inverse-primary">B</div>
             </div>
             <!--end::User-->
           </div>
@@ -209,9 +130,7 @@
           <!--end::Progress-->
 
           <!--begin::Action-->
-          <a href="#" class="btn btn-sm btn-light btn-active-light-primary"
-            >View</a
-          >
+          <a href="#" class="btn btn-sm btn-light btn-active-light-primary">View</a>
           <!--end::Action-->
         </div>
         <!--end::Record-->

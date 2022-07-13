@@ -21,9 +21,8 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
-          Task <a href="#" class="text-primary fw-bolder me-1">#45890</a> merged
-          with <a href="#" class="text-primary fw-bolder me-1">#45890</a> in
-          “Ads Pro Admin Dashboard project:
+          Task <a href="#" class="text-primary fw-bolder me-1">#45890</a> merged with
+          <a href="#" class="text-primary fw-bolder me-1">#45890</a> in “Ads Pro Admin Dashboard project:
         </div>
         <!--end::Title-->
 

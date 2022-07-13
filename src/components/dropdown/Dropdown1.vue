@@ -1,9 +1,6 @@
 <template>
   <!--begin::Menu 1-->
-  <div
-    class="menu menu-sub menu-sub-dropdown w-250px w-md-300px"
-    data-kt-menu="true"
-  >
+  <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true">
     <!--begin::Header-->
     <div class="px-7 py-5">
       <div class="fs-5 text-dark fw-bolder">Filter Options</div>
@@ -24,11 +21,7 @@
 
         <!--begin::Input-->
         <div>
-          <el-select
-            class="form-select-solid"
-            placeholder="Select option"
-            v-model="data.status"
-          >
+          <el-select class="form-select-solid" placeholder="Select option" v-model="data.status">
             <el-option label="Approved" value="1">Approved</el-option>
             <el-option label="Pending" value="2">Pending</el-option>
             <el-option label="In Process" value="3">In Process</el-option>
@@ -48,21 +41,14 @@
         <!--begin::Options-->
         <div class="d-flex">
           <!--begin::Options-->
-          <label
-            class="
-              form-check form-check-sm form-check-custom form-check-solid
-              me-5
-            "
-          >
+          <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
             <el-checkbox type="checkbox" value="1" v-model="data.author" />
             <span class="form-check-label"> Author </span>
           </label>
           <!--end::Options-->
 
           <!--begin::Options-->
-          <label
-            class="form-check form-check-sm form-check-custom form-check-solid"
-          >
+          <label class="form-check form-check-sm form-check-custom form-check-solid">
             <el-checkbox type="checkbox" value="2" v-model="data.customer" />
             <span class="form-check-label"> Customer </span>
           </label>
@@ -79,21 +65,8 @@
         <!--end::Label-->
 
         <!--begin::Switch-->
-        <div
-          class="
-            form-check
-            form-switch
-            form-switch-sm
-            form-check-custom
-            form-check-solid
-          "
-        >
-          <input
-            class="form-check-input"
-            type="checkbox"
-            name="notifications"
-            v-model="data.notifications"
-          />
+        <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+          <input class="form-check-input" type="checkbox" name="notifications" v-model="data.notifications" />
           <label class="form-check-label"> Enabled </label>
         </div>
         <!--end::Switch-->
@@ -102,21 +75,11 @@
 
       <!--begin::Actions-->
       <div class="d-flex justify-content-end">
-        <button
-          type="reset"
-          class="btn btn-sm btn-white btn-active-light-primary me-2"
-          data-kt-menu-dismiss="true"
-        >
+        <button type="reset" class="btn btn-sm btn-white btn-active-light-primary me-2" data-kt-menu-dismiss="true">
           Reset
         </button>
 
-        <button
-          type="submit"
-          class="btn btn-sm btn-primary"
-          data-kt-menu-dismiss="true"
-        >
-          Apply
-        </button>
+        <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
       </div>
       <!--end::Actions-->
     </div>

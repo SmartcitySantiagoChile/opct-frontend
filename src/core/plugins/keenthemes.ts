@@ -1,9 +1,4 @@
-import {
-  MenuComponent,
-  ScrollTopComponent,
-  StickyComponent,
-  ToggleComponent,
-} from "@/assets/ts/components";
+import { MenuComponent, ScrollTopComponent, StickyComponent, ToggleComponent } from "@/assets/ts/components";
 
 /**
  * Initialize KeenThemes custom components

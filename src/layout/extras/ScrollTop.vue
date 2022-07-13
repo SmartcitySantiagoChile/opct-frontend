@@ -1,11 +1,6 @@
 <template>
   <!-- begin::Scrolltop -->
-  <div
-    id="kt_scrolltop"
-    ref="kt_scrolltop"
-    class="scrolltop"
-    data-kt-scrolltop="true"
-  >
+  <div id="kt_scrolltop" ref="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
     <span class="svg-icon">
       <inline-svg src="/media/icons/duotune/arrows/arr066.svg" />
     </span>

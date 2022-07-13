@@ -7,12 +7,7 @@
       <KTHeader :title="pageTitle"></KTHeader>
 
       <!-- begin:: Content Head -->
-      <KTToolbar
-        v-if="subheaderDisplay"
-        :breadcrumbs="breadcrumbs"
-        :title="pageTitle"
-        :create-button="createButton"
-      />
+      <KTToolbar v-if="subheaderDisplay" :breadcrumbs="breadcrumbs" :title="pageTitle" :create-button="createButton" />
       <!-- end:: Content Head -->
 
       <!-- begin:: Content -->
@@ -25,11 +20,7 @@
         }"
       >
         <!-- begin:: Aside Left -->
-        <KTAside
-          v-if="asideEnabled"
-          :lightLogo="themeLightLogo"
-          :darkLogo="themeDarkLogo"
-        ></KTAside>
+        <KTAside v-if="asideEnabled" :lightLogo="themeLightLogo" :darkLogo="themeDarkLogo"></KTAside>
         <!-- end:: Aside Left -->
         <!-- begin:: Content Body -->
         <div class="content flex-row-fluid">
@@ -62,11 +53,7 @@ import KTLoader from "@/components/Loader.vue";
 import KTExplore from "@/layout/extras/Explore.vue";
 import KTDrawerMessenger from "@/layout/extras/DrawerMessenger.vue";
 import { Actions } from "@/store/enums/StoreEnums";
-import {
-  MenuComponent,
-  DrawerComponent,
-  ScrollComponent,
-} from "@/assets/ts/components/index";
+import { MenuComponent, DrawerComponent, ScrollComponent } from "@/assets/ts/components/index";
 import { removeModalBackdrop } from "@/core/helpers/dom";
 import {
   toolbarDisplay,

@@ -31,17 +31,7 @@
       <div class="overflow-auto pb-5">
         <!--begin::Files Record-->
         <template v-if="changeOPDataLog.created_at">
-          <div
-            class="
-              d-flex
-              align-items-center
-              border border-dashed border-gray-300
-              rounded
-              px-7
-              py-3
-              mb-5
-            "
-          >
+          <div class="d-flex align-items-center border border-dashed border-gray-300 rounded px-7 py-3 mb-5">
             <!--begin::Item-->
             <template v-if="changeOPDataLog.previous_data">
               <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
@@ -77,9 +67,7 @@
             {{ translate("addedAt") }}
             {{
               changeOPDataLog.created_at
-                ? DateTime.fromISO(changeOPDataLog.created_at)
-                    .setLocale(this.$i18n.locale)
-                    .toLocaleString()
+                ? DateTime.fromISO(changeOPDataLog.created_at).setLocale(this.$i18n.locale).toLocaleString()
                 : ""
             }}
             {{ translate("atTime") }}
@@ -94,13 +82,7 @@
             {{ translate("by") }}
           </div>
           <a class="text-primary fw-bolder me-1" href="#">
-            {{
-              changeOPDataLog.user
-                ? changeOPDataLog.user.first_name +
-                  " " +
-                  changeOPDataLog.user.last_name
-                : ""
-            }}
+            {{ changeOPDataLog.user ? changeOPDataLog.user.first_name + " " + changeOPDataLog.user.last_name : "" }}
           </a>
         </div>
         <!--end::User-->

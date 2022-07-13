@@ -47,8 +47,7 @@ export const useCopyClipboard = () => {
               const highlight = trigger.closest(".highlight");
 
               if (highlight) {
-                let el: Element | null =
-                  highlight.querySelector(".tab-pane.active");
+                let el: Element | null = highlight.querySelector(".tab-pane.active");
 
                 if (el == null) {
                   el = highlight.querySelector(".highlight-code");

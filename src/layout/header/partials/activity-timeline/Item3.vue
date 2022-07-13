@@ -20,9 +20,7 @@
       <!--begin::Timeline heading-->
       <div class="mb-5 pe-3">
         <!--begin::Title-->
-        <a href="#" class="fs-5 fw-bold text-gray-800 text-hover-primary mb-2"
-          >3 New Incoming Project Files:</a
-        >
+        <a href="#" class="fs-5 fw-bold text-gray-800 text-hover-primary mb-2">3 New Incoming Project Files:</a>
         <!--end::Title-->
 
         <!--begin::Description-->
@@ -49,16 +47,7 @@
 
       <!--begin::Timeline details-->
       <div class="overflow-auto pb-5">
-        <div
-          class="
-            d-flex
-            align-items-center
-            border border-dashed border-gray-300
-            rounded
-            min-w-700px
-            p-5
-          "
-        >
+        <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-5">
           <!--begin::Item-->
           <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
             <!--begin::Icon-->
@@ -68,9 +57,7 @@
             <!--begin::Info-->
             <div class="ms-1 fw-bold">
               <!--begin::Desc-->
-              <a href="#" class="fs-6 text-hover-primary fw-bolder"
-                >Finance KPI App Guidelines</a
-              >
+              <a href="#" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
               <!--end::Desc-->
 
               <!--begin::Number-->
@@ -90,9 +77,7 @@
             <!--begin::Info-->
             <div class="ms-1 fw-bold">
               <!--begin::Desc-->
-              <a href="#" class="fs-6 text-hover-primary fw-bolder"
-                >Client UAT Testing Results</a
-              >
+              <a href="#" class="fs-6 text-hover-primary fw-bolder">Client UAT Testing Results</a>
               <!--end::Desc-->
 
               <!--begin::Number-->
@@ -112,9 +97,7 @@
             <!--begin::Info-->
             <div class="ms-1 fw-bold">
               <!--begin::Desc-->
-              <a href="#" class="fs-6 text-hover-primary fw-bolder"
-                >Finance Reports</a
-              >
+              <a href="#" class="fs-6 text-hover-primary fw-bolder">Finance Reports</a>
               <!--end::Desc-->
 
               <!--begin::Number-->

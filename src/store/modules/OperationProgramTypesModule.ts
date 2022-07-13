@@ -12,10 +12,7 @@ export interface OperationProgramTypesInfo {
 }
 
 @Module
-export default class OperationProgramTypesModule
-  extends VuexModule
-  implements OperationProgramTypesInfo
-{
+export default class OperationProgramTypesModule extends VuexModule implements OperationProgramTypesInfo {
   errors = [];
   operationProgramTypes = [] as OperationProgramType[];
   count = 0;
@@ -51,9 +48,7 @@ export default class OperationProgramTypesModule
       })
       .catch(({ response }) => {
         console.log(response);
-        this.context.commit(Mutations.SET_OPERATION_PROGRAM_TYPES_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_OPERATION_PROGRAM_TYPES_ERRORS, [response.data.error]);
       });
   }
 }

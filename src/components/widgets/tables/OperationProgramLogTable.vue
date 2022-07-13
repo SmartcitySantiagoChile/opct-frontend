@@ -16,21 +16,10 @@
       <!--begin::Table container-->
       <div class="table-responsive">
         <!--begin::Table-->
-        <table
-          class="
-            table
-            align-middle
-            gs-0
-            gy-4
-            table-rounded table-striped
-            border
-          "
-        >
+        <table class="table align-middle gs-0 gy-4 table-rounded table-striped border">
           <!--begin::Table head-->
           <thead>
-            <tr
-              class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-            >
+            <tr class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200">
               <th class="ps-4 rounded-start">
                 {{ translate("information") }}
               </th>
@@ -49,11 +38,7 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a
-                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                        href=""
-                        >{{ translate(index) }}
-                      </a>
+                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href="">{{ translate(index) }} </a>
                     </div>
                   </div>
                 </td>
@@ -61,11 +46,7 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a
-                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                        href=""
-                        >{{ translate(item) }}
-                      </a>
+                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href="">{{ translate(item) }} </a>
                     </div>
                   </div>
                 </td>

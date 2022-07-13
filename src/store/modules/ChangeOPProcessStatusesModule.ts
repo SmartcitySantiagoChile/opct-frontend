@@ -1,6 +1,5 @@
 import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
 import { ChangeOPProcessStatus } from "@/store/modules/ChangeOPProcessStatusModule";
-import ChangeOPProcess from "@/store/modules/ChangeOPProcessModule";
 import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import ApiService from "@/core/services/ApiService";
 
@@ -13,10 +12,7 @@ export interface ChangeOPProcessStatusesInfo {
 }
 
 @Module
-export default class ChangeOPProcessStatusesModule
-  extends VuexModule
-  implements ChangeOPProcessStatusesInfo
-{
+export default class ChangeOPProcessStatusesModule extends VuexModule implements ChangeOPProcessStatusesInfo {
   errors = [];
   changeOPProcessStatuses = [] as ChangeOPProcessStatus[];
   count = 0;
@@ -51,9 +47,7 @@ export default class ChangeOPProcessStatusesModule
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_STATUSES, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_STATUSES_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_STATUSES_ERRORS, [response.data.error]);
       });
   }
 
@@ -64,9 +58,7 @@ export default class ChangeOPProcessStatusesModule
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_STATUSES, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_STATUSES_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_STATUSES_ERRORS, [response.data.error]);
       });
   }
 }

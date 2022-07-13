@@ -14,10 +14,7 @@ export interface OperationProgramStatusInfo {
 }
 
 @Module
-export default class OperationProgramStatusModule
-  extends VuexModule
-  implements OperationProgramStatusInfo
-{
+export default class OperationProgramStatusModule extends VuexModule implements OperationProgramStatusInfo {
   errors = [] as Array<any>;
   operationProgramStatus = {} as OperationProgramStatus;
 }

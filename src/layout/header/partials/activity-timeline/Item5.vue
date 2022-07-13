@@ -20,9 +20,7 @@
       <!--begin::Timeline heading-->
       <div class="pe-3 mb-5">
         <!--begin::Title-->
-        <div class="fs-5 fw-bold mb-2">
-          3 new application design concepts added:
-        </div>
+        <div class="fs-5 fw-bold mb-2">3 new application design concepts added:</div>
         <!--end::Title-->
 
         <!--begin::Description-->
@@ -49,25 +47,12 @@
 
       <!--begin::Timeline details-->
       <div class="overflow-auto pb-5">
-        <div
-          class="
-            d-flex
-            align-items-center
-            border border-dashed border-gray-300
-            rounded
-            min-w-700px
-            p-7
-          "
-        >
+        <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-700px p-7">
           <!--begin::Item-->
           <div class="overlay me-10">
             <!--begin::Image-->
             <div class="overlay-wrapper">
-              <img
-                alt="img"
-                class="rounded w-200px"
-                src="/media/demos/demo1.png"
-              />
+              <img alt="img" class="rounded w-200px" src="/media/demos/demo1.png" />
             </div>
             <!--end::Image-->
 
@@ -83,11 +68,7 @@
           <div class="overlay me-10">
             <!--begin::Image-->
             <div class="overlay-wrapper">
-              <img
-                alt="img"
-                class="rounded w-200px"
-                src="/media/demos/demo2.png"
-              />
+              <img alt="img" class="rounded w-200px" src="/media/demos/demo2.png" />
             </div>
             <!--end::Image-->
 
@@ -103,11 +84,7 @@
           <div class="overlay">
             <!--begin::Image-->
             <div class="overlay-wrapper">
-              <img
-                alt="img"
-                class="rounded w-200px"
-                src="/media/demos/demo3.png"
-              />
+              <img alt="img" class="rounded w-200px" src="/media/demos/demo3.png" />
             </div>
             <!--end::Image-->
 

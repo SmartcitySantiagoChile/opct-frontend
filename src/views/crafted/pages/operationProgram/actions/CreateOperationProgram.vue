@@ -29,10 +29,7 @@
           <!--end::Modal title-->
 
           <!--begin::Close-->
-          <div
-            class="btn btn-sm btn-icon btn-active-color-primary"
-            data-bs-dismiss="modal"
-          >
+          <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
             <span class="svg-icon svg-icon-1">
               <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>
@@ -47,21 +44,10 @@
           <div
             id="modal_create_change_op_request_stepper"
             ref="createChangeOPRef"
-            class="
-              stepper stepper-pills stepper-column
-              d-flex
-              flex-column flex-xl-row flex-row-fluid
-            "
+            class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid"
           >
             <!--begin::Aside-->
-            <div
-              class="
-                d-flex
-                justify-content-center justify-content-xl-start
-                flex-row-auto
-                w-100 w-xl-300px
-              "
-            >
+            <div class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px">
               <!--begin::Nav-->
               <div class="stepper-nav ps-lg-10">
                 <!--begin::Step 1-->
@@ -148,21 +134,14 @@
             <!--begin::Content-->
             <div class="flex-row-fluid py-lg-5 px-lg-15">
               <!--begin::Form-->
-              <form
-                id="modal_create_change_op_request_form"
-                class="form"
-                novalidate="novalidate"
-                @submit="handleStep"
-              >
+              <form id="modal_create_change_op_request_form" class="form" novalidate="novalidate" @submit="handleStep">
                 <!--begin::Step 1-->
                 <div class="current" data-kt-stepper-element="content">
                   <div class="w-100">
                     <!--begin::Input group-->
                     <div class="fv-row mb-10">
                       <!--begin::Label-->
-                      <label
-                        class="d-flex align-items-center fs-5 fw-bold mb-2"
-                      >
+                      <label class="d-flex align-items-center fs-5 fw-bold mb-2">
                         <span class="required">{{ translate("date") }}</span>
                         <i
                           :title="`${translate('date')}`"
@@ -179,10 +158,7 @@
                         placeholder=""
                         type="date"
                       />
-                      <ErrorMessage
-                        class="fv-plugins-message-container invalid-feedback"
-                        name="date"
-                      />
+                      <ErrorMessage class="fv-plugins-message-container invalid-feedback" name="date" />
                       <!--end::Input-->
                     </div>
                     <!--end::Input group-->
@@ -208,11 +184,7 @@
                           <!--begin::Col-->
                           <select
                             id="operationProgramType"
-                            class="
-                              form-select form-select-solid
-                              select2-hidden-accessible
-                              selected
-                            "
+                            class="form-select form-select-solid select2-hidden-accessible selected"
                           >
                             <option
                               v-for="i in operationProgramTypeOptions"
@@ -242,19 +214,9 @@
                     <!--end::Heading-->
 
                     <!--begin::Description-->
-                    <table
-                      class="
-                        table
-                        align-middle
-                        table-rounded table-striped
-                        border
-                      "
-                    >
+                    <table class="table align-middle table-rounded table-striped border">
                       <tbody>
-                        <template
-                          v-for="(item, index) in formDataInfo"
-                          :key="index"
-                        >
+                        <template v-for="(item, index) in formDataInfo" :key="index">
                           <tr>
                             <th>
                               <b>{{ translate(index) }}</b>
@@ -270,11 +232,7 @@
 
                     <!--begin::Illustration-->
                     <div class="text-center px-4 py-15">
-                      <img
-                        alt=""
-                        class="w-100 mh-300px"
-                        src="/media/illustrations/sketchy-1/9.png"
-                      />
+                      <img alt="" class="w-100 mh-300px" src="/media/illustrations/sketchy-1/9.png" />
                     </div>
                     <!--end::Illustration-->
                   </div>
@@ -292,9 +250,7 @@
                       @click="previousStep()"
                     >
                       <span class="svg-icon svg-icon-3 me-1">
-                        <inline-svg
-                          src="/media/icons/duotune/arrows/arr063.svg"
-                        />
+                        <inline-svg src="/media/icons/duotune/arrows/arr063.svg" />
                       </span>
                       {{ translate("back") }}
                     </button>
@@ -312,29 +268,19 @@
                       <span class="indicator-label">
                         {{ translate("create") }}
                         <span class="svg-icon svg-icon-3 ms-2 me-0">
-                          <inline-svg
-                            src="/media/icons/duotune/arrows/arr064.svg"
-                          />
+                          <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
                         </span>
                       </span>
                       <span class="indicator-progress">
                         {{ translate("pleaseWait") }}
-                        <span
-                          class="
-                            spinner-border spinner-border-sm
-                            align-middle
-                            ms-2
-                          "
-                        ></span>
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                       </span>
                     </button>
 
                     <button v-else class="btn btn-lg btn-primary" type="submit">
                       {{ translate("continue") }}
                       <span class="svg-icon svg-icon-3 ms-1 me-0">
-                        <inline-svg
-                          src="/media/icons/duotune/arrows/arr064.svg"
-                        />
+                        <inline-svg src="/media/icons/duotune/arrows/arr064.svg" />
                       </span>
                     </button>
                   </div>
@@ -406,8 +352,7 @@ export default defineComponent({
 
     const operationProgramTypeOptions = computed(() => {
       let options: Array<any> = [];
-      const operationProgramTypes: Array<any> =
-        store.getters.getCurrentOperationProgramTypes;
+      const operationProgramTypes: Array<any> = store.getters.getCurrentOperationProgramTypes;
       if (operationProgramTypes.length) {
         operationProgramTypes.forEach((v) => {
           options.push({
@@ -429,9 +374,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      _stepperObj.value = StepperComponent.createInsance(
-        createChangeOPRef.value as HTMLElement
-      );
+      _stepperObj.value = StepperComponent.createInsance(createChangeOPRef.value as HTMLElement);
     });
 
     const createAppSchema = [
@@ -439,9 +382,7 @@ export default defineComponent({
         date: Yup.string().required(translate("dateRequired")).label("Date"),
       }),
       Yup.object({
-        operationProgramType: Yup.string()
-          .required()
-          .label("operationProgramTYpe"),
+        operationProgramType: Yup.string().required().label("operationProgramTYpe"),
       }),
     ];
 
@@ -480,15 +421,13 @@ export default defineComponent({
 
       formDataInfo.value["date"] = formData.value["date"];
 
-      const operationProgramTypeSelector: HTMLSelectElement =
-        document.querySelector("#operationProgramType") as HTMLSelectElement;
+      const operationProgramTypeSelector: HTMLSelectElement = document.querySelector(
+        "#operationProgramType"
+      ) as HTMLSelectElement;
       if (operationProgramTypeSelector) {
-        formData.value["operationProgramType"] =
-          operationProgramTypeSelector.value;
+        formData.value["operationProgramType"] = operationProgramTypeSelector.value;
         formDataInfo.value["operationProgramType"] =
-          operationProgramTypeSelector.options[
-            operationProgramTypeSelector.selectedIndex
-          ].label;
+          operationProgramTypeSelector.options[operationProgramTypeSelector.selectedIndex].label;
       }
       currentStepIndex.value++;
 

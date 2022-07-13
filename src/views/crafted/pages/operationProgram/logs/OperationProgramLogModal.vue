@@ -17,11 +17,7 @@
           <h5 class="modal-title">{{ translate("opLog") }}</h5>
 
           <!--begin::Close-->
-          <div
-            aria-label="Close"
-            class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-            data-bs-dismiss="modal"
-          >
+          <div aria-label="Close" class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal">
             <span class="svg-icon svg-icon-2x"></span>
           </div>
           <!--end::Close-->
@@ -39,12 +35,8 @@
             >
               <!--begin::Timeline-->
               <div class="timeline">
-                <template
-                  v-for="(item, index) in opChangeDataLogs"
-                  :key="index"
-                >
-                  <OperationProgramLog :changeOPDataLog="item">
-                  </OperationProgramLog>
+                <template v-for="(item, index) in opChangeDataLogs" :key="index">
+                  <OperationProgramLog :changeOPDataLog="item"> </OperationProgramLog>
                 </template>
               </div>
               <!--end::Timeline-->
@@ -101,11 +93,9 @@ export default defineComponent({
           store
             .dispatch(Actions.DELETE_OPERATION_PROGRAM, props.url)
             .then(function () {
-              Swal.fire(
-                translate("deleted"),
-                translate("deleteOperationProgramSuccess"),
-                "success"
-              ).then(() => location.reload());
+              Swal.fire(translate("deleted"), translate("deleteOperationProgramSuccess"), "success").then(() =>
+                location.reload()
+              );
             })
             .catch(() => {
               const errors = store.getters.getCurrentOperationProgramErrors[0];

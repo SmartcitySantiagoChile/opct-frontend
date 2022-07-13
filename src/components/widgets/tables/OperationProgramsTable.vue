@@ -8,9 +8,7 @@
           {{ translate("operationPrograms") }}
         </span>
         <span class="text-muted mt-1 fw-bold fs-7">
-          {{
-            translate("operationProgramsNumber") + ": " + operationProgramsCount
-          }}
+          {{ translate("operationProgramsNumber") + ": " + operationProgramsCount }}
         </span>
       </h3>
       <div class="card-toolbar">
@@ -26,21 +24,10 @@
       <!--begin::Table container-->
       <div class="table-responsive">
         <!--begin::Table-->
-        <table
-          class="
-            table
-            align-middle
-            gs-0
-            gy-4
-            table-rounded table-striped
-            border
-          "
-        >
+        <table class="table align-middle gs-0 gy-4 table-rounded table-striped border">
           <!--begin::Table head-->
           <thead>
-            <tr
-              class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200"
-            >
+            <tr class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200">
               <th class="ps-4 rounded-start">
                 {{ translate("Id") }}
               </th>
@@ -63,12 +50,8 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a
-                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                        href=""
-                        >{{
-                          item.url.split("operation-programs/")[1].split("/")[0]
-                        }}
+                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
+                        >{{ item.url.split("operation-programs/")[1].split("/")[0] }}
                       </a>
                     </div>
                   </div>
@@ -77,31 +60,15 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a
-                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6"
-                        href=""
-                        >{{
-                          DateTime.fromISO(item.start_at)
-                            .setLocale(this.$i18n.locale)
-                            .toLocaleString()
-                        }}
+                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
+                        >{{ DateTime.fromISO(item.start_at).setLocale(this.$i18n.locale).toLocaleString() }}
                       </a>
                     </div>
                   </div>
                 </td>
 
                 <td>
-                  <a
-                    class="
-                      text-dark
-                      fw-bolder
-                      text-hover-primary
-                      d-block
-                      mb-1
-                      fs-6
-                    "
-                    href="#"
-                  >
+                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">
                     <template v-if="item.op_type">
                       {{ item.op_type.name }}
                     </template>
@@ -111,9 +78,7 @@
                 <td>
                   <template v-if="item.op_change_data_logs.length">
                     <OperationProgramLogModal
-                      :id="
-                        item.url.split('operation-programs/')[1].split('/')[0]
-                      "
+                      :id="item.url.split('operation-programs/')[1].split('/')[0]"
                       :opChangeDataLogs="item.op_change_data_logs"
                     ></OperationProgramLogModal>
                   </template>
@@ -124,8 +89,7 @@
                     :url="item.url.split('api')[1]"
                   >
                   </EditOperationProgramModal>
-                  <DeleteOperationProgramModal :url="item.url.split('api')[1]">
-                  </DeleteOperationProgramModal>
+                  <DeleteOperationProgramModal :url="item.url.split('api')[1]"> </DeleteOperationProgramModal>
                 </td>
               </tr>
             </template>
@@ -141,18 +105,11 @@
               </button>
             </li>
             <template
-              v-for="(item, index) in Array.from(
-                { length: Math.ceil(operationProgramsCount / 10) },
-                (_, i) => i + 1
-              )"
+              v-for="(item, index) in Array.from({ length: Math.ceil(operationProgramsCount / 10) }, (_, i) => i + 1)"
               :key="index"
             >
               <li class="page-item">
-                <button
-                  :data-value="item"
-                  class="page-link"
-                  @click="onPageChange"
-                >
+                <button :data-value="item" class="page-link" @click="onPageChange">
                   {{ item }}
                 </button>
               </li>
@@ -198,26 +155,17 @@ export default defineComponent({
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     store.dispatch(Actions.GET_OPERATION_PROGRAMS);
-    const operationPrograms = computed(
-      () => store.getters.getCurrentOperationPrograms
-    );
-    const operationProgramsCount = computed(
-      () => store.getters.getCurrentOperationProgramsCount
-    );
+    const operationPrograms = computed(() => store.getters.getCurrentOperationPrograms);
+    const operationProgramsCount = computed(() => store.getters.getCurrentOperationProgramsCount);
 
     const onPageChange = (event) => {
-      const filter = document.querySelector<HTMLInputElement>(
-        'input[name="filter"]'
-      );
+      const filter = document.querySelector<HTMLInputElement>('input[name="filter"]');
       let params = {};
       if (filter) {
         params["search"] = filter.value;
       }
       let pageId = event.target.getAttribute("data-value");
-      pageId =
-        pageId === "-1"
-          ? String(Math.ceil(operationProgramsCount.value / 10))
-          : pageId;
+      pageId = pageId === "-1" ? String(Math.ceil(operationProgramsCount.value / 10)) : pageId;
 
       if (pageId === "1") {
         disablePreviousItem();

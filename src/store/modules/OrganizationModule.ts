@@ -16,10 +16,7 @@ export interface OrganizationInfo {
 }
 
 @Module
-export default class OrganizationModule
-  extends VuexModule
-  implements OrganizationInfo
-{
+export default class OrganizationModule extends VuexModule implements OrganizationInfo {
   errors = [] as Array<any>;
   organization = {} as Organization;
 }

@@ -18,10 +18,7 @@
     <!--end::Aside menu-->
 
     <!--begin::Footer-->
-    <div
-      class="aside-footer flex-column-auto pt-5 pb-7 px-5"
-      id="kt_aside_footer"
-    >
+    <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
       <a
         href="https://preview.keenthemes.com/metronic8/vue/docs/#/doc-overview"
         class="btn btn-custom btn-primary w-100"

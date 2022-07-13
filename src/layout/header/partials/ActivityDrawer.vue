@@ -18,11 +18,7 @@
         <h3 class="card-title fw-bolder text-dark">Activity Logs</h3>
 
         <div class="card-toolbar">
-          <button
-            type="button"
-            class="btn btn-sm btn-icon btn-active-light-primary me-n5"
-            id="kt_activities_close"
-          >
+          <button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5" id="kt_activities_close">
             <span class="svg-icon svg-icon-1">
               <inline-svg src="/media/icons/duotune/arrows/arr061.svg" />
             </span>

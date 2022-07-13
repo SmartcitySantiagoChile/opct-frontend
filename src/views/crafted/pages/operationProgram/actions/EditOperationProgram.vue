@@ -17,11 +17,7 @@
           <h5 class="modal-title">{{ translate("editOP") }}:</h5>
 
           <!--begin::Close-->
-          <div
-            aria-label="Close"
-            class="btn btn-icon btn-sm btn-active-light-primary ms-2"
-            data-bs-dismiss="modal"
-          >
+          <div aria-label="Close" class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal">
             <span class="svg-icon svg-icon-2x"></span>
           </div>
           <!--end::Close-->
@@ -42,17 +38,8 @@
             </div>
             <div class="d-flex flex-row">
               <span class="m-4">{{ translate("changeOpType") }}</span>
-              <el-select
-                v-model="changeOpTypeValue"
-                :placeholder="opTypeName"
-                style="margin-left: 10px"
-              >
-                <el-option
-                  v-for="item in opTypes"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="changeOpTypeValue" :placeholder="opTypeName" style="margin-left: 10px">
+                <el-option v-for="item in opTypes" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
@@ -114,9 +101,7 @@ export default defineComponent({
     const editOP = () => {
       const params = {};
       if (changeOpDateValue.value) {
-        params["start_at"] = new Date(changeOpDateValue.value)
-          .toISOString()
-          .split("T")[0];
+        params["start_at"] = new Date(changeOpDateValue.value).toISOString().split("T")[0];
       } else {
         params["start_at"] = props.opDate;
       }
@@ -145,9 +130,7 @@ export default defineComponent({
           .catch(() => {
             const errors = store.getters.getCurrentOperationProgramErrors;
             const parsedErrors = Object.entries(errors).map((key) => {
-              return `<b>${translate(key[0])}</b>: ${translate(
-                key[1]
-              )}<br><br>`;
+              return `<b>${translate(key[0])}</b>: ${translate(key[1])}<br><br>`;
             });
             Swal.fire({
               html: parsedErrors.join(""),

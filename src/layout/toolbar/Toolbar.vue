@@ -17,10 +17,7 @@
         <!--end::Title-->
 
         <!--begin::Breadcrumb-->
-        <ul
-          v-if="breadcrumbs"
-          class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1"
-        >
+        <ul v-if="breadcrumbs" class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
           <li class="breadcrumb-item text-white opacity-75">
             <router-link to="/dashboard" class="text-white"> Home </router-link>
           </li>

@@ -6,10 +6,7 @@ import { Actions } from "@/store/enums/StoreEnums";
  * @param {string} pageTitle Current page title
  * @param {Array<string>} breadcrumbs Current page breadcrumbs
  */
-export const setCurrentPageBreadcrumbs = (
-  pageTitle: string,
-  breadcrumbs: Array<string>
-): void => {
+export const setCurrentPageBreadcrumbs = (pageTitle: string, breadcrumbs: Array<string>): void => {
   store.dispatch(Actions.SET_BREADCRUMB_ACTION, {
     title: pageTitle,
     pageBreadcrumbPath: breadcrumbs,

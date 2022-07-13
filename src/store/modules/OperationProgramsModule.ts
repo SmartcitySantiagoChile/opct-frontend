@@ -12,10 +12,7 @@ export interface OperationProgramsInfo {
 }
 
 @Module
-export default class OperationProgramsModule
-  extends VuexModule
-  implements OperationProgramsInfo
-{
+export default class OperationProgramsModule extends VuexModule implements OperationProgramsInfo {
   errors = [];
   operationPrograms = [] as OperationProgram[];
   count = 0;
@@ -58,9 +55,7 @@ export default class OperationProgramsModule
         this.context.commit(Mutations.SET_OPERATION_PROGRAMS, data);
       })
       .catch(({ response }) => {
-        this.context.commit(Mutations.SET_OPERATION_PROGRAMS_ERRORS, [
-          response.data.error,
-        ]);
+        this.context.commit(Mutations.SET_OPERATION_PROGRAMS_ERRORS, [response.data.error]);
       });
   }
 }

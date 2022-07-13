@@ -48,16 +48,7 @@
       <!--begin::Timeline details-->
       <div class="overflow-auto pb-5">
         <div
-          class="
-            notice
-            d-flex
-            bg-light-primary
-            rounded
-            border-primary border border-dashed
-            min-w-lg-600px
-            flex-shrink-0
-            p-6
-          "
+          class="notice d-flex bg-light-primary rounded border-primary border border-dashed min-w-lg-600px flex-shrink-0 p-6"
         >
           <!--begin::Icon-->
           <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
@@ -69,24 +60,16 @@
           <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
             <!--begin::Content-->
             <div class="mb-3 mb-md-0 fw-bold">
-              <h4 class="text-gray-800 fw-bolder">
-                Database Backup Process Completed!
-              </h4>
+              <h4 class="text-gray-800 fw-bolder">Database Backup Process Completed!</h4>
 
               <div class="fs-6 text-gray-600 pe-7">
-                Login into Metronic Admin Dashboard to make sure the data
-                integrity is OK
+                Login into Metronic Admin Dashboard to make sure the data integrity is OK
               </div>
             </div>
             <!--end::Content-->
 
             <!--begin::Action-->
-            <a
-              href="#"
-              class="btn btn-primary px-6 align-self-center text-nowrap"
-            >
-              Proceed
-            </a>
+            <a href="#" class="btn btn-primary px-6 align-self-center text-nowrap"> Proceed </a>
             <!--end::Action-->
           </div>
           <!--end::Wrapper-->

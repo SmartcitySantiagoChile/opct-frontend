@@ -7,11 +7,7 @@
         <!--begin::Details-->
         <div class="me-3">
           <span class="text-muted fs-7 mb-1">{{ time }}</span>
-          <a
-            href="#"
-            class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1"
-            >You</a
-          >
+          <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">You</a>
         </div>
         <!--end::Details-->
 
@@ -22,18 +18,7 @@
       <!--end::User-->
 
       <!--begin::Text-->
-      <div
-        class="
-          p-5
-          rounded
-          bg-light-primary
-          text-dark
-          fw-bold
-          mw-lg-400px
-          text-end
-        "
-        data-kt-element="message-text"
-      >
+      <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end" data-kt-element="message-text">
         {{ text }}
       </div>
       <!--end::Text-->

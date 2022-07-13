@@ -13,10 +13,7 @@ export interface ChangeOPProcessStatusInfo {
 }
 
 @Module
-export default class ChangeOPProcessStatusModule
-  extends VuexModule
-  implements ChangeOPProcessStatusInfo
-{
+export default class ChangeOPProcessStatusModule extends VuexModule implements ChangeOPProcessStatusInfo {
   errors = [] as Array<unknown>;
   changeOPProcessStatus = {} as ChangeOPProcessStatus;
 }

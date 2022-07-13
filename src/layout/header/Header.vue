@@ -16,10 +16,7 @@
       class="d-flex align-items-center"
     >
       <!--begin::Aside mobile toggle-->
-      <div
-        class="d-flex topbar align-items-center d-lg-none ms-n2 me-3"
-        title="Show aside menu"
-      >
+      <div class="d-flex topbar align-items-center d-lg-none ms-n2 me-3" title="Show aside menu">
         <div
           class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
           id="kt_header_menu_mobile_toggle"
@@ -34,24 +31,14 @@
       <!--begin::Mobile logo-->
       <div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
         <a href="#">
-          <img
-            alt="Logo"
-            src="/media/logos/logo-4.png"
-            class="logo-default h-25px"
-          />
-          <img
-            alt="Logo"
-            src="/media/logos/logo-5.png"
-            class="logo-sticky h-25px"
-          />
+          <img alt="Logo" src="/media/logos/logo-4.png" class="logo-default h-25px" />
+          <img alt="Logo" src="/media/logos/logo-5.png" class="logo-sticky h-25px" />
         </a>
       </div>
       <!--end::Mobile logo-->
 
       <!--begin::Wrapper-->
-      <div
-        class="d-flex align-items-stretch justify-content-between flex-lg-grow-1"
-      >
+      <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
         <!--begin::Navbar-->
         <div class="d-flex align-items-stretch" id="kt_header_menu_nav">
           <KTMenu></KTMenu>
@@ -77,13 +64,7 @@ import KTTopbar from "@/layout/header/Topbar.vue";
 import KTMenu from "@/layout/header/Menu.vue";
 import { StickyComponent } from "@/assets/ts/components";
 
-import {
-  headerWidthFluid,
-  headerFixed,
-  headerFixedOnMobile,
-  headerLeft,
-  asideDisplay,
-} from "@/core/helpers/config";
+import { headerWidthFluid, headerFixed, headerFixedOnMobile, headerLeft, asideDisplay } from "@/core/helpers/config";
 
 export default defineComponent({
   name: "KTHeader",

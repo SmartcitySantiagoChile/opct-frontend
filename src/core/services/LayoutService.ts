@@ -44,10 +44,7 @@ class LayoutService {
     }
 
     if (objectPath.get(config.value, "header.fixed.tabletAndMobile")) {
-      store.dispatch(
-        Actions.ADD_BODY_CLASSNAME,
-        "header-tablet-and-mobile-fixed"
-      );
+      store.dispatch(Actions.ADD_BODY_CLASSNAME, "header-tablet-and-mobile-fixed");
     }
   }
 
@@ -65,10 +62,7 @@ class LayoutService {
       store.dispatch(Actions.ADD_BODY_CLASSNAME, "toolbar-fixed");
     }
 
-    store.dispatch(
-      Actions.ADD_BODY_CLASSNAME,
-      "toolbar-tablet-and-mobile-fixed"
-    );
+    store.dispatch(Actions.ADD_BODY_CLASSNAME, "toolbar-tablet-and-mobile-fixed");
   }
 
   /**
