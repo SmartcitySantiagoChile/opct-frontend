@@ -90,7 +90,7 @@ export default defineComponent({
       };
       if (statusId) {
         store
-          .dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_STATUS, {
+          .dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_STATUS, {
             resource: changeOPProcessId,
             params: params,
           })

@@ -121,7 +121,7 @@ export default defineComponent({
             if (result.isConfirmed) {
               params["update_deadlines"] = true;
             }
-            store.dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_OP, {
+            store.dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_OPERATION_PROGRAM, {
               resource: changeOPProcessId,
               params: params,
             });
@@ -150,7 +150,7 @@ export default defineComponent({
           .then(() => hideModal(changeOPModalRef.value));
       } else if (opId === "None") {
         store
-          .dispatch(Actions.CHANGE_CHANGE_OP_PROCESS_OP, {
+          .dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_OPERATION_PROGRAM, {
             resource: changeOPProcessId,
             params: params,
           })

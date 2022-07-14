@@ -71,13 +71,11 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
    * Get current change op process id
    * @returns string
    */
-  get getCurrentChangeOPProcessId(): string {
-    if (this.changeOPProcess.url) {
-      const IdArray: Array<string> = this.changeOPProcess.url.split("/");
-      IdArray.pop();
-      return IdArray.pop() as string;
+  get getCurrentChangeOPProcessId(): number | null {
+    if (this.changeOPProcess) {
+      return this.changeOPProcess.id;
     } else {
-      return "";
+      return null;
     }
   }
 
@@ -127,7 +125,6 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
   [Actions.CHANGE_OP_PROCESSES.DETAIL](changeOPProcessId) {
     ApiService.get("change-op-processes", changeOPProcessId)
       .then(({ data }) => {
-        console.log(data);
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESS, data);
       })
       .catch(({ response }) => {
@@ -151,7 +148,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
   }
 
   @Action
-  [Actions.CHANGE_CHANGE_OP_PROCESS_STATUS](data) {
+  [Actions.CHANGE_OP_PROCESSES.UPDATE_STATUS](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-processes/${data.resource}/change-status/`, data.params)
         .then(({ data }) => {
@@ -165,7 +162,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
   }
 
   @Action
-  [Actions.CHANGE_CHANGE_OP_PROCESS_OP](data) {
+  [Actions.CHANGE_OP_PROCESSES.UPDATE_OPERATION_PROGRAM](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-processes/${data.resource}/change-op/`, data.params)
         .then(({ data }) => {
@@ -178,39 +175,31 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     });
   }
 
-  //
-  // @Action
-  // [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {
-  //   ApiService.get("change-op-request-reasons")
-  //     .then(({ data }) => {
-  //       this.context.commit(Mutations.SET_CHANGE_OP_REQUEST_REASONS, data);
-  //     })
-  //     .catch(({ response }) => {
-  //       console.log(response);
-  //       this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-  //         response.data.error,
-  //       ]);
-  //     });
-  // }
-  //
-  // @Action
-  // [Actions.CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS](data) {
-  //   return new Promise<void>((resolve, reject) => {
-  //     ApiService.put(
-  //       `change-op-requests/${data.resource}/change-related-requests/`,
-  //       data.params
-  //     )
-  //       .then(({ data }) => {
-  //         console.log(data);
-  //         resolve();
-  //       })
-  //       .catch(({ response }) => {
-  //         console.log(response);
-  //         this.context.commit(Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS, [
-  //           response.data.error,
-  //         ]);
-  //         reject();
-  //       });
-  //   });
-  // }
+  @Action
+  [Actions.CHANGE_OP_PROCESSES.CREATE_CHANGE_OP_REQUEST](data) {
+    return new Promise<void>((resolve, reject) => {
+      ApiService.post(`change-op-processes/${data.resource}/create-change-op-request/`, data.params)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [response.data.error]);
+          reject(response);
+        });
+    });
+  }
+
+  @Action
+  [Actions.CHANGE_OP_PROCESSES.UPDATE_CHANGE_OP_REQUESTS](data) {
+    return new Promise<void>((resolve, reject) => {
+      ApiService.put(`change-op-processes/${data.resource}/update-change-op-requests/`, data.params)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, [response.data.error]);
+          reject(response);
+        });
+    });
+  }
 }

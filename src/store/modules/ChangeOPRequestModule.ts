@@ -20,20 +20,13 @@ export interface ChangeOPRequest {
   url: string;
   created_at: string;
   title: string;
-  message: string;
-  updated_at: string;
   reason: string;
-  op_release_date: string;
   creator: Dictionary<string>;
-  op: Dictionary<string>;
+  operation_program: Dictionary<string>;
   status: Dictionary<string>;
-  counterpart: Dictionary<string>;
-  contract_type: Dictionary<string>;
-  change_op_request_files: Array<any>;
-  change_op_request_message: Array<any>;
-  op_change_logs: Array<any>;
-  status_logs: Array<any>;
+  change_op_requests_logs: Array<any>;
   related_requests: Array<any>;
+  related_routes: Array<string>;
 }
 
 export interface ChangeOPRequestInfo {
@@ -78,7 +71,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
    * @returns string
    */
   get getCurrentChangeOPRequestOP(): string {
-    return this.changeOPRequest.op ? this.changeOPRequest.op.start_at : "";
+    return this.changeOPRequest.operation_program ? this.changeOPRequest.operation_program.start_at : "";
   }
 
   /**
@@ -105,26 +98,10 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
 
   /**
    * Get current change op request contract type name
-   * @returns string
-   */
-  get getCurrentChangeOPRequestContractTypeName(): string {
-    return this.changeOPRequest.contract_type ? this.changeOPRequest.contract_type.name : "";
-  }
-
-  /**
-   * Get current change op request contract type name
    * @returns Dictionary
    */
   get getCurrentChangeOPRequestStatus(): Dictionary<string> {
     return this.changeOPRequest.status;
-  }
-
-  /**
-   * Get current change op request release date
-   * @returns string
-   */
-  get getCurrentChangeOPRequestReleaseDate(): string {
-    return this.changeOPRequest.op_release_date;
   }
 
   /**

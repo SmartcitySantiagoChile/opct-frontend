@@ -126,7 +126,7 @@ export default defineComponent({
       }).then((result) => {
         if (result.isConfirmed) {
           store
-            .dispatch(Actions.CREATE_CHANGE_OP_PROCESS_MESSAGE, messageParams)
+            .dispatch(Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE, messageParams)
             .then(function () {
               Swal.fire({
                 text: translate("messageSuccess"),
