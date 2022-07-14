@@ -532,13 +532,13 @@ import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import Quill from "quill/dist/quill.js";
 import Multiselect from "@vueform/multiselect";
-
-interface ChangeOPRequest {
-  title: string;
-  related_routes: Array<string>;
-  related_requests: Array<string | number>;
-  reason: string;
-}
+import {
+  ChangeOPRequest,
+  MessageData,
+  OperationProgramOption,
+  OrganizationOption,
+  SelectOption,
+} from "@/typings/globals";
 
 interface Step1Form {
   title: string;
@@ -563,29 +563,6 @@ interface Step2FormPresentation {
 interface ChangeOPProcessCreationForm extends Step1Form, Step2Form, Step3Form, Step4Form {}
 
 interface ChangeOPProcessPresentationForm extends Step1Form, Step2FormPresentation, Step3Form, Step4Form {}
-
-interface ReasonOption {
-  value: string | null;
-  label: string;
-}
-
-interface OperationProgramOption extends ReasonOption {
-  release: string;
-}
-
-interface OrganizationOption extends ReasonOption {
-  contractType: string;
-}
-
-interface File {
-  raw: string;
-  name: string;
-}
-
-interface MessageData {
-  message: string;
-  files: Array<File>;
-}
 
 export default defineComponent({
   name: "ChangeOPProcessCreate",
@@ -696,7 +673,7 @@ export default defineComponent({
 
     const routeDefinitionsOption = computed(() => {
       const routeDefinitions = store.getters.getAllRouteDefinitions;
-      let options: Array<ReasonOption> = [];
+      let options: Array<SelectOption> = [];
       routeDefinitions.forEach((routeDefinition) => {
         options.push({ value: routeDefinition.auth_route_code, label: routeDefinition.auth_route_code });
       });
@@ -874,7 +851,7 @@ export default defineComponent({
         .then((data) => {
           messageParams.url = data.url;
           store
-            .dispatch(Actions.CREATE_CHANGE_OP_PROCESS_MESSAGE, messageParams)
+            .dispatch(Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE, messageParams)
             .then((data) => {
               console.log(data);
               Swal.fire({

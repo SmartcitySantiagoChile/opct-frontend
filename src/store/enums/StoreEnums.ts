@@ -35,16 +35,27 @@ const Actions = {
     CREATE: "change_op_processes_create",
     LIST: "change_op_processes_list",
     LIST_WiTH_PARAMS: "change_op_processes_list_with_params",
+    UPDATE_OPERATION_PROGRAM: "change_op_processes_action_update_operation_program",
+    UPDATE_STATUS: "change_op_processes_action_update_status",
+    ADD_MESSAGE: "change_op_processes_action_add_message",
+    UPDATE_CHANGE_OP_REQUESTS: "change_op_processes_action_update_change_op_requests",
+    CREATE_CHANGE_OP_REQUEST: "change_op_processes_action_create_change_op_requests",
   },
-  CHANGE_CHANGE_OP_PROCESS_STATUS: "changeChangeOPProcessStatus",
+  CHANGE_OP_REQUESTS: {
+    DETAIL: "",
+    CREATE: "",
+    LIST: "",
+    LIST_WITH_PARAMS: "",
+  },
+
   GET_CHANGE_OP_PROCESS_STATUSES: "getChangeOPProcessStatuses",
   GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS: "getChangeOPProcessStatusesWithParams",
-  CHANGE_CHANGE_OP_PROCESS_OP: "changeChangeOPProcessOP",
+
   CHANGE_CHANGE_OP_REQUEST_REASON: "changeChangeOPRequestReason",
+
   GET_CHANGE_OP_REQUEST_REASONS: "getChangeOPRequestReasons",
   GET_ORGANIZATIONS: "getOrganizations",
   GET_OPERATION_PROGRAMS: "getOperationPrograms",
-  CREATE_CHANGE_OP_PROCESS_MESSAGE: "createChangeOPProcessMessage",
   GET_ROUTE_DEFINITIONS: "getRouteDefinitions",
 };
 
