@@ -283,23 +283,32 @@
                                       />
                                     </td>
                                     <td>
-                                      <Multiselect
+                                      <el-select
                                         v-model="item.related_routes"
                                         :id="'relatedRoutes' + index"
                                         :name="'relatedRoutes' + index"
-                                        :options="routeDefinitionsOption"
-                                        :mode="'tags'"
-                                        :searchable="true"
-                                      ></Multiselect>
+                                        multiple
+                                        filterable
+                                      >
+                                        <el-option
+                                          v-for="route in routeDefinitionsOption"
+                                          :key="route.value"
+                                          :label="route.label"
+                                          :value="route.value"
+                                        >
+                                        </el-option>
+                                      </el-select>
                                     </td>
                                     <td>
-                                      <Multiselect
-                                        v-model="item.reason"
-                                        :id="'reason' + index"
-                                        :name="'reason' + index"
-                                        :options="reasonOptions"
-                                        :searchable="true"
-                                      ></Multiselect>
+                                      <el-select v-model="item.reason" :id="'reason' + index" :name="'reason' + index">
+                                        <el-option
+                                          v-for="reason in reasonOptions"
+                                          :key="reason.value"
+                                          :label="reason.label"
+                                          :value="reason.value"
+                                        >
+                                        </el-option>
+                                      </el-select>
                                     </td>
                                   </tr>
                                 </template>
@@ -531,7 +540,6 @@ import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import Quill from "quill/dist/quill.js";
-import Multiselect from "@vueform/multiselect";
 import {
   ChangeOPRequest,
   MessageData,
@@ -569,7 +577,6 @@ export default defineComponent({
   components: {
     Field,
     ErrorMessage,
-    Multiselect,
   },
   props: {
     widgetClasses: String,
