@@ -123,7 +123,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
 
   @Action
   [Actions.CHANGE_OP_PROCESSES.DETAIL](changeOPProcessId) {
-    ApiService.get("change-op-processes", changeOPProcessId)
+    ApiService.get("change-op-processes", changeOPProcessId + "/")
       .then(({ data }) => {
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESS, data);
       })
