@@ -102,7 +102,10 @@
                   <span class="text-muted fw-bold d-block fs-5">
                     {{ translate("requests") }}
                   </span>
-                  <ChangeOPRequestsStatus :hasChangeStatusOption="hasChangeStatusOption"></ChangeOPRequestsStatus>
+                  <ChangeOPRequestsEditor
+                    @change-op-requests-updated="$emit('change-op-requests-updated')"
+                    :enable-edition="hasChangeStatusOption"
+                  ></ChangeOPRequestsEditor>
                 </td>
               </tr>
             </tbody>
@@ -125,16 +128,16 @@ import { useStore } from "vuex";
 import { DateTime } from "luxon";
 import ChangeOP from "@/views/opct/changeopprocess/detail/edit/ChangeOP.vue";
 import ChangeStatus from "@/views/opct/changeopprocess/detail/edit/ChangeStatus.vue";
-import ChangeOPRequestsStatus from "@/views/opct/changeopprocess/detail/edit/ChangeOPProcessDetailChangeOPRequestList.vue";
+import ChangeOPRequestsEditor from "@/views/opct/changeopprocess/detail/edit/ChangeOPRequestsEditor.vue";
 
 export default defineComponent({
   name: "ChangeOPProcessDetailHeader",
-  components: { ChangeStatus, ChangeOP, ChangeOPRequestsStatus },
+  components: { ChangeStatus, ChangeOP, ChangeOPRequestsEditor },
   props: {
     widgetClasses: String,
     changeOPProcess: Object,
   },
-  emits: ["status-updated", "operation-program-updated"],
+  emits: ["status-updated", "operation-program-updated", "change-op-requests-updated"],
   setup() {
     const store = useStore();
     const { t, te } = useI18n();
