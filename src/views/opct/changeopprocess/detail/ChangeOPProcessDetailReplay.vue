@@ -28,33 +28,56 @@
 
         <!--begin::Form-->
         <form id="reply_form" class="ql-quil ql-quil-plain pb-3">
-          <!--begin::Editor-->
-          <div id="reply_editor" class="py-6"></div>
-          <!--end::Editor-->
-          <div class="separator"></div>
           <!--begin::Toolbar-->
-          <div id="reply_toolbar" class="ql-toolbar d-flex flex-stack py-2"></div>
-          <el-upload
-            :auto-upload="false"
-            :file-list="fileList"
-            :on-change="handleChange"
-            action=""
-            multiple=""
-            :limit="5"
-            ref="uploader"
-          >
-            <template #trigger>
-              <el-button size="small" type="primary">{{ translate("attachFiles") }}</el-button>
-            </template>
-            <el-button size="small" style="margin-left: 10px" type="primary" @click="createMessage">
-              {{ translate("send") }}
-            </el-button>
-            <template #tip>
-              <div class="el-upload__tip">
-                {{ translate("attachFilesHelp") }}
+          <div class="card-footer pt-4" id="kt_chat_messenger_footer">
+            <!--begin::Editor-->
+            <div id="reply_editor" class="py-6 form-control form-control-flush mb-3"></div>
+            <!--end::Editor-->
+            <!--begin:Toolbar-->
+            <div id="reply_toolbar" class="ql-toolbar d-flex flex-stack py-2"></div>
+            <div class="d-flex flex-stack">
+              <!--begin::Actions-->
+              <el-upload
+                :auto-upload="false"
+                :file-list="fileList"
+                :on-change="handleChange"
+                action=""
+                multiple=""
+                :limit="5"
+                ref="uploader"
+              >
+                <template #trigger>
+                  <el-button size="small" type="primary"> {{ translate("attachFiles") }}</el-button>
+                </template>
+                <template #tip>
+                  <div class="el-upload__tip">
+                    {{ translate("attachFilesHelp") }}
+                  </div>
+                </template>
+              </el-upload>
+              <div>
+                <label for="exampleFormControlInput1" class="required"
+                  >Solicitudes de modificación relacionadas al mensaje</label
+                ><br />
+                <el-select v-model="related_requests" multiple filterable collapse-tags collapse-tags-tooltip>
+                  <el-option
+                    v-for="option in relatedRequestsOptions"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  >
+                  </el-option>
+                </el-select>
               </div>
-            </template>
-          </el-upload>
+              <!--end::Actions-->
+              <!--begin::Send-->
+              <button class="btn btn-primary" type="button" data-kt-element="send" @click="createMessage">
+                {{ translate("send") }}
+              </button>
+              <!--end::Send-->
+            </div>
+            <!--end::Toolbar-->
+          </div>
           <!--end::Toolbar-->
         </form>
         <!--end::Form-->
@@ -66,12 +89,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, onMounted, ref } from "vue";
+import { computed, defineComponent, nextTick, onMounted, ref, Ref } from "vue";
 import Quill from "quill/dist/quill.js";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
+import { SelectOption } from "@/typings/globals";
 
 export default defineComponent({
   name: "ChangeOPProcessDetailReplay",
@@ -90,21 +114,37 @@ export default defineComponent({
       return store.getters.currentUserNameAndSurname;
     });
     let fileList = [];
+    let related_requests: Ref<Array<number>> = ref([]);
     const uploader = ref();
+    const relatedRequestsOptions = computed(() => {
+      const requests = store.getters.getCurrentChangeOPProcessRequests;
+      let options: Array<SelectOption> = [];
+      if (requests && requests.length) {
+        requests.forEach((request) => {
+          options.push({ value: request.id, label: request.title });
+        });
+      }
+      return options;
+    });
 
     const createMessage = () => {
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
-      const text = quill.getText();
+      let text: string = quill.getText();
+      if (text === "\n") {
+        text = "";
+      }
       let formData = new FormData();
       fileList.forEach((file) => {
         const file_raw = file["raw"];
         formData.append("files", file_raw, file["name"]);
       });
-
-      formData.append("created_at", new Date().toISOString());
       formData.append("message", text);
-      formData.append("creator", store.getters.currentUserUrl);
+      let related_requests_to_send: Array<string> = [];
+      related_requests.value.forEach((el) => {
+        related_requests_to_send.push(el.toString());
+      });
+      formData.append("related_requests", JSON.stringify(related_requests_to_send));
       formData.append("change_op_process", store.getters.getCurrentChangeOPProcessUrl);
       const messageParams = {
         url: props.changeOPProcess.url,
@@ -127,7 +167,7 @@ export default defineComponent({
         if (result.isConfirmed) {
           store
             .dispatch(Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE, messageParams)
-            .then(function () {
+            .then(() => {
               Swal.fire({
                 text: translate("messageSuccess"),
                 icon: "success",
@@ -138,6 +178,7 @@ export default defineComponent({
                 .then(() => emit("message-added"))
                 .then(() => {
                   uploader.value.clearFiles();
+                  fileList = [];
                   quill.setContents([{ insert: "\n" }]);
                   nextTick(() => {
                     setTimeout(function () {
@@ -183,7 +224,10 @@ export default defineComponent({
 
       // Init editor
       new Quill("#" + editorId, options);
+
+      store.dispatch(Actions.GET_ROUTE_DEFINITIONS);
     });
+
     return {
       userNameAndSurname,
       fileList,
@@ -191,6 +235,8 @@ export default defineComponent({
       createMessage,
       translate,
       uploader,
+      relatedRequestsOptions,
+      related_requests,
     };
   },
 });
