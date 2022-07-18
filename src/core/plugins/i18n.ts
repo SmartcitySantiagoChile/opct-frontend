@@ -195,6 +195,7 @@ const messages = {
     operation_program: "Operation program",
     relatedRoutes: "Related routes",
     confirmMessageInsert: "Are you sure? this action can not be undone.",
+    actions: "Actions",
   },
   es: {
     dashboard: "Tablero",
@@ -390,6 +391,7 @@ const messages = {
     operation_program: "Programa de operación",
     relatedRoutes: "Servicios relacionados",
     confirmMessageInsert: "¿Está seguro que desea enviar el mensaje? esta acción no se puede deshacer.",
+    actions: "Acciones",
   },
   de: {
     dashboard: "Instrumententafel",

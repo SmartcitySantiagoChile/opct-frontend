@@ -25,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/operation-programs",
         name: "operationPrograms",
-        component: () => import("@/views/crafted/pages/operationProgram/OperationPrograms.vue"),
+        component: () => import("@/views/opct/operationprogram/OperationPrograms.vue"),
         props: true,
       },
     ],
