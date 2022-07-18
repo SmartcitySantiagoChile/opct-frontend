@@ -142,7 +142,7 @@
                     <div class="fv-row mb-10">
                       <!--begin::Label-->
                       <label class="d-flex align-items-center fs-5 fw-bold mb-2">
-                        <span class="required">{{ translate("date") }}</span>
+                        <span class="required">{{ translate("implementationDate") }}</span>
                         <i
                           :title="`${translate('date')}`"
                           class="fas fa-exclamation-circle ms-2 fs-7"
@@ -229,12 +229,6 @@
                       </tbody>
                     </table>
                     <!--end::Description-->
-
-                    <!--begin::Illustration-->
-                    <div class="text-center px-4 py-15">
-                      <img alt="" class="w-100 mh-300px" src="/media/illustrations/sketchy-1/9.png" />
-                    </div>
-                    <!--end::Illustration-->
                   </div>
                 </div>
                 <!--end::Step 5-->
@@ -340,10 +334,11 @@ export default defineComponent({
     Field,
     ErrorMessage,
   },
-  setup() {
+  emits: ["update-data"],
+  setup(props, { emit }) {
     const _stepperObj = ref<StepperComponent | null>(null);
     const createChangeOPRef = ref<HTMLElement | null>(null);
-    const createAppModalRef = ref<HTMLElement | null>(null);
+    const createOperationProgramModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
@@ -450,16 +445,12 @@ export default defineComponent({
           Swal.fire({
             text: translate("createOperationProgramSuccess"),
             icon: "success",
-            buttonsStyling: false,
-            confirmButtonText: translate("confirm"),
-            customClass: {
-              confirmButton: "btn fw-bold btn-light-primary",
-            },
-          })
-            .then(() => {
-              hideModal(createAppModalRef.value);
-            })
-            .then(() => location.reload());
+            showConfirmButton: false,
+            timer: 1000,
+          }).then(() => {
+            emit("update-data");
+            hideModal(createOperationProgramModalRef.value);
+          });
         })
         .catch(() => {
           const errors = store.getters.getCurrentOperationProgramErrors;
@@ -491,7 +482,7 @@ export default defineComponent({
       createChangeOPRef,
       currentStepIndex,
       totalSteps,
-      createAppModalRef,
+      createOperationProgramModalRef,
       translate,
       formData,
       operationProgramTypeOptions,

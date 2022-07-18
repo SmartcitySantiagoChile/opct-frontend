@@ -38,7 +38,7 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href="">{{ translate(index) }} </a>
+                      <div class="text-dark fw-bolder mb-1 fs-6">{{ translate(index) }}</div>
                     </div>
                   </div>
                 </td>
@@ -46,7 +46,7 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href="">{{ translate(item) }} </a>
+                      <div class="text-dark fw-bolder mb-1 fs-6">{{ translate(item) }}</div>
                     </div>
                   </div>
                 </td>
@@ -64,24 +64,18 @@
   <!--end::Tables OperationProgramLogTable-->
 </template>
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { Actions } from "@/store/enums/StoreEnums";
-import { useStore } from "vuex";
+import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
-import CreateOperationProgram from "@/views/crafted/pages/operationProgram/actions/CreateOperationProgram.vue";
-import EditOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/EditOperationProgram.vue";
-import DeleteOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/DeleteOperationProgramModal.vue";
-import OperationProgramLogModal from "@/views/crafted/pages/operationProgram/logs/OperationProgramLogModal.vue";
 
 export default defineComponent({
-  name: "operation-program-log-table",
+  name: "operationProgramLogTable",
   props: {
     widgetClasses: String,
     opData: Object,
     dataName: String,
   },
-  setup(props) {
+  setup() {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
 

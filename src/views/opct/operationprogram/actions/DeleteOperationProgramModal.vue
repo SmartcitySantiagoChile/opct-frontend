@@ -14,12 +14,13 @@ import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 
 export default defineComponent({
-  name: "changeOP",
+  name: "DeleteOperationProgramModal",
   props: {
     widgetClasses: String,
     url: String,
   },
-  setup: function (props) {
+  emits: ["update-data"],
+  setup: function (props, { emit }) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
@@ -37,9 +38,13 @@ export default defineComponent({
           store
             .dispatch(Actions.DELETE_OPERATION_PROGRAM, props.url)
             .then(function () {
-              Swal.fire(translate("deleted"), translate("deleteOperationProgramSuccess"), "success").then(() =>
-                location.reload()
-              );
+              Swal.fire({
+                title: translate("deleted"),
+                text: translate("deleteOperationProgramSuccess"),
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1000,
+              }).then(() => emit("update-data"));
             })
             .catch(() => {
               const errors = store.getters.getCurrentOperationProgramErrors[0];

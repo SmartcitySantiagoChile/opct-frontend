@@ -10,7 +10,7 @@
     </span>
   </a>
   <!--begin::EditOP-->
-  <div :id="`editOp${id}`" class="modal fade" tabindex="-1">
+  <div :id="`editOp${id}`" class="modal fade" tabindex="-1" ref="changeOPModalRef">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -51,7 +51,7 @@
             {{ translate("cancel") }}
           </button>
           <button class="btn btn-primary" type="button" @click="editOP">
-            {{ translate("send") }}
+            {{ translate("update") }}
           </button>
         </div>
       </div>
@@ -66,6 +66,7 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
+import { hideModal } from "@/core/helpers/dom";
 
 export default defineComponent({
   name: "changeOP",
@@ -74,12 +75,14 @@ export default defineComponent({
     url: String,
     opDate: String,
     opTypeName: String,
-    id: String,
+    id: Number,
   },
-  setup: function (props) {
+  emits: ["update-data"],
+  setup: function (props, { emit }) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
+    const changeOPModalRef = ref<HTMLElement | null>(null);
 
     onMounted(() => {
       store.dispatch(Actions.GET_OPERATION_PROGRAM_TYPES);
@@ -117,15 +120,14 @@ export default defineComponent({
           })
           .then(function () {
             Swal.fire({
-              text: translate("updateOpSuccess"),
+              title: translate("updateOpSuccess"),
               icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: translate("continue"),
-              customClass: {
-                confirmButton: "btn fw-bold btn-light-success",
-              },
-              allowOutsideClick: false,
-            }).then(() => location.reload());
+              showConfirmButton: false,
+              timer: 1000,
+            }).then(() => {
+              emit("update-data");
+              hideModal(changeOPModalRef.value);
+            });
           })
           .catch(() => {
             const errors = store.getters.getCurrentOperationProgramErrors;
@@ -160,6 +162,7 @@ export default defineComponent({
       changeOpTypeValue,
       opTypes,
       editOP,
+      changeOPModalRef,
     };
   },
 });

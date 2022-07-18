@@ -13,7 +13,7 @@
       </h3>
       <div class="card-toolbar">
         <!--begin::Menu-->
-        <CreateOperationProgram></CreateOperationProgram>
+        <CreateOperationProgram @update-data="updateData"></CreateOperationProgram>
         <!--end::Menu-->
       </div>
     </div>
@@ -28,16 +28,10 @@
           <!--begin::Table head-->
           <thead>
             <tr class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200">
-              <th class="ps-4 rounded-start">
-                {{ translate("Id") }}
-              </th>
-              <th class="ps-4 rounded-start">
-                {{ translate("operationProgram") }}
-              </th>
-              <th class="ps-4 rounded-start">
-                {{ translate("operationProgramType") }}
-              </th>
-              <th class="ps-4 align-right"></th>
+              <th class="ps-4 rounded-start">{{ translate("Id") }}</th>
+              <th class="ps-4 rounded-start">{{ translate("operationProgram") }}</th>
+              <th class="ps-4 rounded-start">{{ translate("operationProgramType") }}</th>
+              <th class="ps-4 align-right">{{ translate("actions") }}</th>
             </tr>
           </thead>
           <!--end::Table head-->
@@ -50,9 +44,7 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
-                        >{{ item.url.split("operation-programs/")[1].split("/")[0] }}
-                      </a>
+                      <div class="text-dark fw-bolder mb-1 fs-6">{{ item.id }}</div>
                     </div>
                   </div>
                 </td>
@@ -60,36 +52,37 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
-                        >{{ DateTime.fromISO(item.start_at).setLocale(this.$i18n.locale).toLocaleString() }}
-                      </a>
+                      <div class="text-dark fw-bolder mb-1 fs-6">
+                        {{ DateTime.fromISO(item.start_at).setLocale(this.$i18n.locale).toLocaleString() }}
+                      </div>
                     </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">
+                    <template v-if="item.op_type">
+                      {{ item.op_type.name }}
+                    </template>
                   </div>
                 </td>
 
                 <td>
-                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">
-                    <template v-if="item.op_type">
-                      {{ item.op_type.name }}
-                    </template>
-                  </a>
-                </td>
-
-                <td>
-                  <template v-if="item.op_change_data_logs.length">
+                  <template v-if="item.op_change_logs.length">
                     <OperationProgramLogModal
-                      :id="item.url.split('operation-programs/')[1].split('/')[0]"
-                      :opChangeDataLogs="item.op_change_data_logs"
+                      :id="item.id"
+                      :opChangeDataLogs="item.op_change_logs"
                     ></OperationProgramLogModal>
                   </template>
                   <EditOperationProgramModal
-                    :id="item.url.split('operation-programs/')[1].split('/')[0]"
+                    :id="item.id"
                     :opDate="item.start_at"
                     :opTypeName="item.op_type.name"
                     :url="item.url.split('api')[1]"
+                    @update-data="updateData"
                   >
                   </EditOperationProgramModal>
-                  <DeleteOperationProgramModal :url="item.url.split('api')[1]"> </DeleteOperationProgramModal>
+                  <DeleteOperationProgramModal :url="item.url.split('api')[1]" @update-data="updateData">
+                  </DeleteOperationProgramModal>
                 </td>
               </tr>
             </template>
@@ -129,15 +122,15 @@
   <!--end::Tables Widget 12-->
 </template>
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import { Actions } from "@/store/enums/StoreEnums";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
-import CreateOperationProgram from "@/views/crafted/pages/operationProgram/actions/CreateOperationProgram.vue";
-import EditOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/EditOperationProgram.vue";
-import DeleteOperationProgramModal from "@/views/crafted/pages/operationProgram/actions/DeleteOperationProgramModal.vue";
-import OperationProgramLogModal from "@/views/crafted/pages/operationProgram/logs/OperationProgramLogModal.vue";
+import CreateOperationProgram from "@/views/opct/operationprogram/actions/CreateOperationProgram.vue";
+import EditOperationProgramModal from "@/views/opct/operationprogram/actions/EditOperationProgram.vue";
+import DeleteOperationProgramModal from "@/views/opct/operationprogram/actions/DeleteOperationProgramModal.vue";
+import OperationProgramLogModal from "@/views/opct/operationprogram/logs/OperationProgramLogModal.vue";
 
 export default defineComponent({
   name: "operation-program-table",
@@ -154,7 +147,6 @@ export default defineComponent({
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    store.dispatch(Actions.GET_OPERATION_PROGRAMS);
     const operationPrograms = computed(() => store.getters.getCurrentOperationPrograms);
     const operationProgramsCount = computed(() => store.getters.getCurrentOperationProgramsCount);
 
@@ -193,12 +185,22 @@ export default defineComponent({
         previousItem.setAttribute("class", "page-item previous");
       }
     };
+
+    const updateData = () => {
+      store.dispatch(Actions.GET_OPERATION_PROGRAMS);
+    };
+
+    onMounted(() => {
+      updateData();
+    });
+
     return {
       operationPrograms,
       operationProgramsCount,
       translate,
       onPageChange,
       DateTime,
+      updateData,
     };
   },
 });

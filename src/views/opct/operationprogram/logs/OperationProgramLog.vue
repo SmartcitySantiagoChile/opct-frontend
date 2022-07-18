@@ -20,9 +20,7 @@
       <!--begin::Timeline heading-->
       <div class="pe-3 mb-5">
         <!--begin::Title-->
-        <div class="fs-5 fw-bold mb-2">
-          {{ translate("dataChange") }}
-        </div>
+        <div class="fs-5 fw-bold mb-2">{{ translate("dataChange") }}</div>
         <!--end::Title-->
       </div>
       <!--end::Timeline heading-->
@@ -101,7 +99,7 @@
 import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
-import OperationProgramLogTable from "@/components/widgets/tables/OperationProgramLogTable.vue";
+import OperationProgramLogTable from "@/views/opct/operationprogram/logs/OperationProgramLogTable.vue";
 export default defineComponent({
   name: "operationProgramLog",
   props: ["changeOpRequestTimelineMessage", "changeOPDataLog"],

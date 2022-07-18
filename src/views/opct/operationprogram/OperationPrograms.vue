@@ -4,10 +4,10 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
-import OperationProgramsTable from "@/components/widgets/tables/OperationProgramsTable.vue";
+import OperationProgramsTable from "@/views/opct/operationprogram/OperationProgramsTable.vue";
 
 export default defineComponent({
-  name: "dashboard",
+  name: "OperationPrograms",
   components: { OperationProgramsTable },
   setup() {
     onMounted(() => {

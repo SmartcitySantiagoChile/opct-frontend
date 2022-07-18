@@ -28,7 +28,7 @@
           <div class="tab-content">
             <!--begin::Tab panel-->
             <div
-              id="`logOpActivity${id}`"
+              :id="`logOpActivity${id}`"
               aria-labelledby="kt_activity_today_tab"
               class="card-body p-0 tab-pane fade show active"
               role="tabpanel"
@@ -64,14 +64,14 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { Actions } from "@/store/enums/StoreEnums";
 import { Swal } from "sweetalert2/dist/sweetalert2.min.js";
-import OperationProgramLog from "@/views/crafted/pages/operationProgram/logs/OperationProgramLog.vue";
+import OperationProgramLog from "@/views/opct/operationprogram/logs/OperationProgramLog.vue";
 
 export default defineComponent({
   name: "opLogModal",
   props: {
     widgetClasses: String,
     url: String,
-    id: String,
+    id: Number,
     opChangeDataLogs: Array,
   },
   components: { OperationProgramLog },
