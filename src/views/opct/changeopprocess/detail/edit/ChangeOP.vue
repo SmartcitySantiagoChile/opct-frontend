@@ -115,9 +115,9 @@ export default defineComponent({
             confirmButton: "btn fw-bold btn-light-success",
             cancelButton: "btn fw-bold btn-light-danger",
           },
-          allowOutsideClick: false,
-        })
-          .then((result) => {
+          allowOutsideClick: true,
+        }).then((result) => {
+          if (!result.isDismissed) {
             if (result.isConfirmed) {
               params["update_deadlines"] = true;
             }
@@ -125,9 +125,7 @@ export default defineComponent({
               resource: changeOPProcessId,
               params: params,
             });
-            return result;
-          })
-          .then((result) => {
+
             if (result.isConfirmed) {
               Swal.fire({
                 title: translate("changeOPSuccess"),
@@ -145,9 +143,11 @@ export default defineComponent({
                 timer: 1000,
               });
             }
-          })
-          .then(() => emit("operation-program-updated"))
-          .then(() => hideModal(changeOPModalRef.value));
+
+            emit("operation-program-updated");
+            hideModal(changeOPModalRef.value);
+          }
+        });
       } else if (opId === "None") {
         store
           .dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_OPERATION_PROGRAM, {
@@ -161,9 +161,9 @@ export default defineComponent({
               showConfirmButton: false,
               timer: 1000,
             });
-          })
-          .then(() => emit("operation-program-updated"))
-          .then(() => hideModal(changeOPModalRef.value));
+            emit("operation-program-updated");
+            hideModal(changeOPModalRef.value);
+          });
       } else {
         Swal.fire({
           text: translate("mustSelectOP"),
