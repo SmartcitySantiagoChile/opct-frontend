@@ -63,9 +63,7 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
-                        >{{ item.url.split("/change-op-processes/")[1].split("/")[0] }}
-                      </a>
+                      <div class="text-dark fw-bolder mb-1 fs-6">{{ item.id }}</div>
                     </div>
                   </div>
                 </td>
@@ -73,14 +71,14 @@
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
                     <div class="d-flex justify-content-start flex-column">
-                      <a class="text-dark fw-bolder text-hover-primary mb-1 fs-6" href=""
-                        >{{ DateTime.fromISO(item.created_at).setLocale(this.$i18n.locale).toLocaleString() }}
-                      </a>
+                      <div class="text-dark fw-bolder mb-1 fs-6">
+                        {{ DateTime.fromISO(item.created_at).setLocale(this.$i18n.locale).toLocaleString() }}
+                      </div>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">
                     <template v-if="item.operation_program">
                       {{
                         DateTime.fromISO(item.operation_program.start_at).setLocale(this.$i18n.locale).toLocaleString()
@@ -90,35 +88,31 @@
                     <template v-else>
                       {{ translate("withoutAssign") }}
                     </template>
-                  </a>
+                  </div>
                 </td>
                 <td>
-                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
-                    item.contract_type ? item.contract_type.name : ""
-                  }}</a>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">
+                    {{ item.contract_type ? item.contract_type.name : "" }}
+                  </div>
                 </td>
                 <td>
-                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{ item.title }}</a>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.title }}</div>
                 </td>
                 <td>
-                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
-                    item.creator.first_name + " " + item.creator.last_name
-                  }}</a>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">
+                    {{ item.creator.first_name + " " + item.creator.last_name }}
+                  </div>
                 </td>
                 <td>
-                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
-                    item.counterpart.name
-                  }}</a>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.counterpart.name }}</div>
                 </td>
                 <td>
-                  <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
-                    item.status.name
-                  }}</a>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.status.name }}</div>
                 </td>
                 <td>
-                  <a class="text-center text-dark fw-bolder text-hover-primary d-block mb-1 fs-6" href="#">{{
-                    item.change_op_requests_count
-                  }}</a>
+                  <div class="text-center text-dark fw-bolder d-block mb-1 fs-6">
+                    {{ item.change_op_requests_count }}
+                  </div>
                 </td>
                 <td>
                   <a
