@@ -197,6 +197,7 @@ const messages = {
     confirmMessageInsert: "Are you sure? this action can not be undone.",
     actions: "Actions",
     implementationDate: "Implementation date",
+    related_routes: "Related routes",
   },
   es: {
     dashboard: "Tablero",
@@ -394,6 +395,7 @@ const messages = {
     confirmMessageInsert: "¿Está seguro que desea enviar el mensaje? esta acción no se puede deshacer.",
     actions: "Acciones",
     implementationDate: "Fecha de implementación",
+    related_routes: "Servicios relacionados",
   },
   de: {
     dashboard: "Instrumententafel",

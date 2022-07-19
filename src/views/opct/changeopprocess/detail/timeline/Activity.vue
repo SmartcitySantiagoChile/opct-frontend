@@ -17,32 +17,39 @@
           <div class="timeline">
             <!--begin::ChangeOPProcessTimelineMessage - First message-->
             <ChangeOPProcessTimelineMessage
-              v-bind:changeOPProcessTimelineMessage="changeOPProcess"
+              :changeOPProcessTimelineMessage="changeOPProcess"
             ></ChangeOPProcessTimelineMessage>
             <!--end::ChangeOPProcessTimelineMessage - First message-->
             <!--begin::Ordered Logs-->
             <template v-for="(item, index) in orderedLogs" :key="index">
               <!--begin::ChangeOPProcessTimelineMessages-->
-              <template v-if="item.type === 'changeOPProcessMessage'">
+              <template v-if="item.type === LOG_TYPE.USER_MESSAGE">
                 <ChangeOPProcessTimelineMessage
                   v-bind:changeOPProcessTimelineMessage="item.data"
                 ></ChangeOPProcessTimelineMessage>
               </template>
-              <!--end::ChangeOPProcessTimelineMessages-->
-              <!--begin::ChangeOPProcessTimelineMilestones-->
-              <template
-                v-if="
-                  item.type === 'statusLog' ||
-                  item.type === 'opChangeLog' ||
-                  item.type === 'opStatus' ||
-                  item.type === 'reasonChangeLog'
-                "
-              >
+              <template v-else-if="item.type === LOG_TYPE.OPERATION_PROGRAM_CHANGE">
+                <ChangeOPProcessTimelineOperationProgramLog
+                  :data="item.data"
+                ></ChangeOPProcessTimelineOperationProgramLog>
+              </template>
+              <template v-else-if="item.type === LOG_TYPE.OPERATION_PROGRAM_STAGE">
                 <ChangeOPProcessTimelineMilestone
-                  v-bind:changeOPProcessTimelineMilestone="item.data"
+                  :changeOPProcessTimelineMilestone="item.data"
                 ></ChangeOPProcessTimelineMilestone>
               </template>
-              <!--end::ChangeOPProcessTimelineMilestones-->
+              <template v-else-if="item.type === LOG_TYPE.CHANGE_OP_PROCESS_CHANGE">
+                <ChangeOPProcessTimelineChangeOPProcessLog
+                  :data="item.data"
+                ></ChangeOPProcessTimelineChangeOPProcessLog>
+              </template>
+              <template v-else-if="item.type === LOG_TYPE.CHANGE_OP_REQUEST_CHANGE">
+                <!--
+                <ChangeOPProcessTimelineMilestone
+                  :changeOPProcessTimelineMilestone="item.data"
+                ></ChangeOPProcessTimelineMilestone>
+                -->
+              </template>
             </template>
             <!--end::Ordered Logs-->
           </div>
@@ -64,6 +71,7 @@ import { useI18n } from "vue-i18n";
 import ChangeOPProcessTimelineMessage from "@/views/opct/changeopprocess/detail/timeline/Message.vue";
 import ChangeOPProcessTimelineMilestone from "@/views/opct/changeopprocess/detail/timeline/Milestone.vue";
 import ChangeOPProcessTimelineOperationProgramLog from "@/views/opct/changeopprocess/detail/timeline/OperationProgramLog.vue";
+import ChangeOPProcessTimelineChangeOPProcessLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPProcessLog.vue";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
@@ -73,9 +81,20 @@ export default defineComponent({
   components: {
     ChangeOPProcessTimelineMessage,
     ChangeOPProcessTimelineMilestone,
+    ChangeOPProcessTimelineOperationProgramLog,
+    ChangeOPProcessTimelineChangeOPProcessLog,
   },
   setup(props) {
+    const { t, te } = useI18n();
+    const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
+    const LOG_TYPE = {
+      USER_MESSAGE: "changeOPProcessMessage",
+      OPERATION_PROGRAM_STAGE: "operationProgramStage",
+      OPERATION_PROGRAM_CHANGE: "operationProgramChange",
+      CHANGE_OP_REQUEST_CHANGE: "changeOPRequestChange",
+      CHANGE_OP_PROCESS_CHANGE: "changeOPProcessChange",
+    };
     store.dispatch(Actions.GET_OPERATION_PROGRAM_STATUSES);
 
     const opStatuses = ref(computed(() => store.getters.getCurrentOperationProgramStatuses));
@@ -85,14 +104,14 @@ export default defineComponent({
         opStatuses.value.forEach((opStatus) => {
           if (props.changeOPProcess.contract_type && props.changeOPProcess.op_release_date) {
             const releaseDate = new Date(props.changeOPProcess.op_release_date + " 00:00");
-            if (opStatus.contract_type.name == props.changeOPProcess.contract_type.name) {
+            if (opStatus.contract_type.name === props.changeOPProcess.contract_type.name) {
               let deadLineDate = new Date(JSON.parse(JSON.stringify(releaseDate)));
               deadLineDate.setDate(deadLineDate.getDate() - opStatus.time_threshold);
               const deadLineStringDate = JSON.parse(JSON.stringify(deadLineDate));
               opStatus["dead_line"] = deadLineStringDate;
               let opStatusData = {
                 dateTime: JSON.parse(JSON.stringify(deadLineStringDate)),
-                type: "opStatus",
+                type: LOG_TYPE.OPERATION_PROGRAM_STAGE,
                 data: opStatus,
               };
               orderedLogsData.push(opStatusData);
@@ -100,82 +119,58 @@ export default defineComponent({
           }
         });
       }
+
       if (props.changeOPProcess) {
         if (props.changeOPProcess.change_op_process_messages) {
           props.changeOPProcess.change_op_process_messages.forEach((message) => {
             let changeOPProcessData = {
               dateTime: message.created_at,
-              type: "changeOPProcessMessage",
+              type: LOG_TYPE.USER_MESSAGE,
               data: message,
             };
             orderedLogsData.push(changeOPProcessData);
           });
         }
-        if (props.changeOPProcess.op_change_logs) {
-          props.changeOPProcess.op_change_logs.forEach((changeLog) => {
+
+        if (props.changeOPProcess.operation_program) {
+          props.changeOPProcess.operation_program.op_change_logs.forEach((changeLog) => {
             let opChangeLogData = {
               dateTime: changeLog.created_at,
-              type: "opChangeLog",
+              type: LOG_TYPE.OPERATION_PROGRAM_CHANGE,
               data: changeLog,
             };
             orderedLogsData.push(opChangeLogData);
           });
         }
-        if (props.changeOPProcess.change_op_requests) {
-          props.changeOPProcess.change_op_requests.forEach((change_op_request) => {
-            if (change_op_request.status_logs) {
-              change_op_request.status_logs.forEach((status_log) => {
-                let statusLogData = {
-                  dateTime: status_log.created_at,
-                  type: "opChangeLog",
-                  data: status_log,
+
+        if (props.changeOPProcess.change_op_requests?.length) {
+          props.changeOPProcess.change_op_requests.forEach((changeOPRequest) => {
+            if (changeOPRequest.change_op_requests_logs) {
+              changeOPRequest.change_op_requests_logs.forEach((changeOPRequestLog) => {
+                console.log(changeOPRequestLog);
+                let logData = {
+                  dateTime: changeOPRequestLog.created_at,
+                  type: LOG_TYPE.CHANGE_OP_REQUEST_CHANGE,
+                  data: changeOPRequestLog,
                 };
-                orderedLogsData.push(statusLogData);
+                orderedLogsData.push(logData);
               });
-            }
-            if (change_op_request.change_op_request_op_change_logs) {
-              change_op_request.change_op_request_op_change_logs.forEach((changeLog) => {
-                let opChangeLogData = {
-                  dateTime: changeLog.created_at,
-                  type: "opChangeLog",
-                  data: changeLog,
-                };
-                orderedLogsData.push(opChangeLogData);
-              });
-            }
-            if (change_op_request.change_op_request_op_change_logs) {
-              change_op_request.change_op_request_op_change_logs.forEach((changeLog) => {
-                let opChangeLogData = {
-                  dateTime: changeLog.created_at,
-                  type: "opChangeLog",
-                  data: changeLog,
-                };
-                orderedLogsData.push(opChangeLogData);
-              });
-              if (change_op_request.change_op_request_reason_change_logs) {
-                change_op_request.change_op_request_reason_change_logs.forEach((changeLog) => {
-                  let reasonChangeLogData = {
-                    dateTime: changeLog.created_at,
-                    type: "reasonChangeLog",
-                    data: changeLog,
-                  };
-                  orderedLogsData.push(reasonChangeLogData);
-                });
-              }
             }
           });
         }
-        if (props.changeOPProcess.change_op_process_status_logs) {
-          props.changeOPProcess.change_op_process_status_logs.forEach((statusLog) => {
-            let changeOPProcessStatusLogData = {
-              dateTime: statusLog.created_at,
-              type: "statusLog",
-              data: statusLog,
+        if (props.changeOPProcess.change_op_process_logs) {
+          props.changeOPProcess.change_op_process_logs.forEach((changeOPProcessLog) => {
+            console.log(changeOPProcessLog);
+            let logData = {
+              dateTime: changeOPProcessLog.created_at,
+              type: LOG_TYPE.CHANGE_OP_PROCESS_CHANGE,
+              data: changeOPProcessLog,
             };
-            orderedLogsData.push(changeOPProcessStatusLogData);
+            orderedLogsData.push(logData);
           });
         }
       }
+
       orderedLogsData.sort(function (a, b) {
         const date_a = Date.parse(a.dateTime);
         const date_b = Date.parse(b.dateTime);
@@ -183,11 +178,11 @@ export default defineComponent({
       });
       return orderedLogsData;
     });
-    const { t, te } = useI18n();
-    const translate = (text) => (te(text) ? t(text) : text);
+
     return {
       translate,
       orderedLogs,
+      LOG_TYPE,
     };
   },
 });
