@@ -15,11 +15,6 @@
         >
           <!--begin::Timeline-->
           <div class="timeline">
-            <!--begin::ChangeOPProcessTimelineMessage - First message-->
-            <ChangeOPProcessTimelineMessage
-              :changeOPProcessTimelineMessage="changeOPProcess"
-            ></ChangeOPProcessTimelineMessage>
-            <!--end::ChangeOPProcessTimelineMessage - First message-->
             <!--begin::Ordered Logs-->
             <template v-for="(item, index) in orderedLogs" :key="index">
               <!--begin::ChangeOPProcessTimelineMessages-->
