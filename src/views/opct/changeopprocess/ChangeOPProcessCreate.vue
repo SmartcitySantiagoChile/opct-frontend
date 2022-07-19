@@ -857,6 +857,12 @@ export default defineComponent({
         .dispatch(Actions.CHANGE_OP_PROCESSES.CREATE, formData.value)
         .then((data) => {
           messageParams.url = data.url;
+          let related_requests_to_send: Array<string> = [];
+          data.change_op_requests.forEach((el) => {
+            related_requests_to_send.push(el.id.toString());
+          });
+          messageParams.payload.params.append("related_requests", JSON.stringify(related_requests_to_send));
+
           store
             .dispatch(Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE, messageParams)
             .then((data) => {
