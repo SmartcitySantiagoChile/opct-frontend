@@ -7,7 +7,7 @@
         <!--begin::Header-->
         <div class="d-flex align-items-center">
           <!--begin::User-->
-          <div class="d-flex align-items-center flex-grow-1">
+          <div class="d-flex align-items-center flex-grow-1 pb-2">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px">
               <div class="symbol-label fs-2 fw-bold bg-primary text-inverse-primary">
@@ -18,7 +18,7 @@
 
             <!--begin::Info-->
             <div class="d-flex flex-column">
-              <a class="text-gray-800 text-hover-primary px-3 fs-6 fw-bolder" href="#">{{ userNameAndSurname }}</a>
+              <div class="text-gray-800 px-3 fs-6 fw-bolder">{{ userNameAndSurname }}</div>
             </div>
             <!--end::Info-->
           </div>
@@ -31,7 +31,7 @@
           <!--begin::Toolbar-->
           <div class="card-footer pt-4" id="kt_chat_messenger_footer">
             <!--begin::Editor-->
-            <div id="reply_editor" class="py-6 form-control form-control-flush mb-3"></div>
+            <div id="reply_editor" class="py-6 form-control form-control-flush mb-3 bg-light-primary rounded-3"></div>
             <!--end::Editor-->
             <!--begin:Toolbar-->
             <div id="reply_toolbar" class="ql-toolbar d-flex flex-stack py-2"></div>
