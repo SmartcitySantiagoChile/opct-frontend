@@ -20,9 +20,7 @@
       <!--begin::Timeline heading-->
       <div class="pe-3 mb-5">
         <!--begin::Title-->
-        <div class="fs-5 fw-bold mb-2">
-          {{ changeOPProcessTimelineMessage.message }}
-        </div>
+        <div class="fs-5 fw-bold mb-2">{{ changeOPProcessTimelineMessage.message }}</div>
         <!--end::Title-->
       </div>
       <!--end::Timeline heading-->
@@ -30,7 +28,7 @@
       <!--begin::Timeline details-->
       <div class="overflow-auto pb-5">
         <!--begin::Files Record-->
-        <template v-if="filesLength > 0">
+        <template v-if="files.length > 0">
           <div
             class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5"
           >
@@ -48,9 +46,8 @@
                     >{{ item.filename }}
                   </a>
                   <!--end::Desc-->
-
                   <!--begin::Number-->
-                  <!-- <div class="text-gray-400">1.9mb</div>-->
+                  <div class="text-gray-400">{{ (item.size / 1048576).toFixed(2) }} MB</div>
                   <!--end::Number-->
                 </div>
                 <!--begin::Info-->
@@ -60,6 +57,7 @@
             <!--end::Action-->
           </div>
         </template>
+        <!--end:: Files Record-->
         <!--begin::Description-->
         <div class="d-flex align-items-center mt-1 fs-6">
           <!--begin::Info-->
@@ -85,20 +83,20 @@
           <!--end::Info-->
 
           <!--begin::User-->
-          <a class="text-primary fw-bolder me-1" href="#">
-            {{
-              changeOPProcessTimelineMessage.creator
-                ? changeOPProcessTimelineMessage.creator.first_name +
-                  " " +
-                  changeOPProcessTimelineMessage.creator.last_name
-                : ""
-            }}
-          </a>
-        </div>
-        <!--end::User-->
-        <!--end::Description-->
+          <div class="text-primary fw-bolder me-1">{{ userName }}</div>
+          <!--end::User-->
+          <div class="text-muted me-2 fs-7">relacionado a las solicitudes:</div>
 
-        <!--end:: Files Record-->
+          <template v-for="(item, index) in changeOPProcessTimelineMessage.related_requests" :key="index">
+            <span class="badge badge-primary me-2 mb-2">
+              {{ `${item.id}` }}
+              <!-- {{
+                `id: ${item.id} | title: "${item.title}" | routes: ${item.related_routes} | ${item.get_reason_display}`
+              }}--></span
+            >
+          </template>
+        </div>
+        <!--end::Description-->
       </div>
       <!--end::Timeline details-->
     </div>
@@ -116,36 +114,28 @@ export default defineComponent({
   name: "ChangeOPProcessTimelineMessage",
   props: ["changeOPProcessTimelineMessage"],
   components: {},
-  data() {
+  setup(props) {
+    const { t, te } = useI18n();
+    const translate = (text) => (te(text) ? t(text) : text);
     const files = computed(() => {
-      if (this.changeOPProcessTimelineMessage.change_op_process_files) {
-        return this.changeOPProcessTimelineMessage.change_op_process_files;
-      }
-      if (this.changeOPProcessTimelineMessage.change_op_process_message_files) {
-        return this.changeOPProcessTimelineMessage.change_op_process_message_files;
+      if (props.changeOPProcessTimelineMessage.change_op_process_message_files) {
+        return props.changeOPProcessTimelineMessage.change_op_process_message_files;
       }
       return [];
     });
-    const filesLength = computed(() => {
-      if (this.changeOPProcessTimelineMessage.change_op_process_files) {
-        return this.changeOPProcessTimelineMessage.change_op_process_files.length;
+    const userName = computed(() => {
+      const creator = props.changeOPProcessTimelineMessage.creator;
+      if (creator) {
+        return `${creator.first_name} ${creator.last_name}`;
       }
-      if (this.changeOPProcessTimelineMessage.change_op_process_message_files) {
-        return this.changeOPProcessTimelineMessage.change_op_process_message_files.length;
-      }
-      return 0;
+      return "";
     });
-    return {
-      filesLength,
-      files,
-    };
-  },
-  setup() {
-    const { t, te } = useI18n();
-    const translate = (text) => (te(text) ? t(text) : text);
+
     return {
       translate,
       DateTime,
+      files,
+      userName,
     };
   },
 });
