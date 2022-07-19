@@ -63,6 +63,7 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import ChangeOPProcessTimelineMessage from "@/views/opct/changeopprocess/detail/timeline/Message.vue";
 import ChangeOPProcessTimelineMilestone from "@/views/opct/changeopprocess/detail/timeline/Milestone.vue";
+import ChangeOPProcessTimelineOperationProgramLog from "@/views/opct/changeopprocess/detail/timeline/OperationProgramLog.vue";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
