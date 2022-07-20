@@ -117,35 +117,37 @@ export default defineComponent({
           },
           allowOutsideClick: true,
         }).then((result) => {
-          if (!result.isDismissed) {
+          if (result.dismiss === "cancel" || result.isConfirmed) {
             if (result.isConfirmed) {
               params["update_deadlines"] = true;
             }
-            store.dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_OPERATION_PROGRAM, {
-              resource: changeOPProcessId,
-              params: params,
-            });
+            store
+              .dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_OPERATION_PROGRAM, {
+                resource: changeOPProcessId,
+                params: params,
+              })
+              .then(() => {
+                if (result.isConfirmed) {
+                  Swal.fire({
+                    title: translate("changeOPSuccess"),
+                    text: translate("deadlinesUpdated"),
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1000,
+                  });
+                } else {
+                  Swal.fire({
+                    title: translate("changeOPSuccess"),
+                    text: translate("deadlinesNotUpdated"),
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1000,
+                  });
+                }
 
-            if (result.isConfirmed) {
-              Swal.fire({
-                title: translate("changeOPSuccess"),
-                text: translate("deadlinesUpdated"),
-                icon: "success",
-                showConfirmButton: false,
-                timer: 1000,
+                emit("operation-program-updated");
+                hideModal(changeOPModalRef.value);
               });
-            } else {
-              Swal.fire({
-                title: translate("changeOPSuccess"),
-                text: translate("deadlinesNotUpdated"),
-                icon: "success",
-                showConfirmButton: false,
-                timer: 1000,
-              });
-            }
-
-            emit("operation-program-updated");
-            hideModal(changeOPModalRef.value);
           }
         });
       } else if (opId === "None") {
