@@ -262,16 +262,44 @@ export default defineComponent({
     };
 
     const updateRequests = () => {
+      let requestsArray: Array<Promise<any>> = [];
       requestsToEdit.value.forEach((request) => {
         if (request.id === null) {
-          store.dispatch(Actions.CHANGE_OP_PROCESSES.CREATE_CHANGE_OP_REQUEST, {
-            resource: changeOPProcessId.value,
-            params: { change_op_request: request },
-          });
+          requestsArray.push(
+            store.dispatch(Actions.CHANGE_OP_PROCESSES.CREATE_CHANGE_OP_REQUEST, {
+              resource: changeOPProcessId.value,
+              params: { change_op_request: request },
+            })
+          );
         } else {
           //store.dispatch(Actions.CHANGE_OP_REQUESTS, {resource: param.resourceId, param.params})
         }
       });
+
+      Promise.all(requestsArray)
+        .then(
+          Swal.fire({
+            text: "Se han realizado las modificaciones",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1000,
+            allowOutsideClick: false,
+          }).then(() => {
+            hideModal(editorModalRef.value);
+            emit("change-op-requests-updated");
+          })
+        )
+        .catch(() => {
+          Swal.fire({
+            text: translate("genericError"),
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: translate("tryAgain"),
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-danger",
+            },
+          });
+        });
     };
 
     return {
