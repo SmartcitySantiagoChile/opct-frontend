@@ -9,7 +9,7 @@
     <span class="svg-icon svg-icon-2"> <inline-svg src="/media/icons/duotune/arrows/arr064.svg" /> </span>
   </a>
   <!--begin::ChangeStatus-->
-  <div class="modal fade" tabindex="-1" id="change_request_status_modal">
+  <div class="modal fade" tabindex="-1" id="change_request_status_modal" ref="editorModalRef">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -151,8 +151,9 @@
 import { computed, defineComponent, onMounted, ref, Ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
+import { hideModal } from "@/core/helpers/dom";
 import { Actions } from "@/store/enums/StoreEnums";
-//import Swal from "sweetalert2/dist/sweetalert2.min.js";
+import Swal from "sweetalert2/dist/sweetalert2.min.js";
 //import { cloneDeep } from "lodash";
 import { OperationProgramOption, SelectOption } from "@/typings/globals.d.ts";
 //import { ChangeOPRequest } from "@/store/modules/ChangeOPRequestModule";
@@ -171,12 +172,13 @@ export default defineComponent({
   name: "changeOPRequestsStatus",
   props: ["widgetClasses", "enableEdition"],
   emits: ["change-op-requests-updated"],
-  setup(props) {
+  setup(props, { emit }) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
     const changeOPProcessId = computed(() => store.getters.getCurrentChangeOPProcessId);
     const requestsToEdit: Ref<Array<ChangeOPRequestToEdit>> = ref([]);
+    const editorModalRef = ref<HTMLElement | null>(null);
 
     const reasonOptions = computed(() => {
       const reasons: Array<Array<string>> = store.getters.getChangeOPRequestReason;
@@ -282,6 +284,7 @@ export default defineComponent({
       prepareModalData,
       requestsToEdit,
       addNewRow,
+      editorModalRef,
     };
   },
 });
