@@ -180,6 +180,7 @@ export default defineComponent({
                   uploader.value.clearFiles();
                   fileList = [];
                   quill.setContents([{ insert: "\n" }]);
+                  related_requests.value = [];
                   nextTick(() => {
                     setTimeout(function () {
                       //uploader.value.scrollIntoView({ behavior: "smooth" });
