@@ -36,7 +36,7 @@
               <!--begin::Item-->
               <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
                 <!--begin::Icon-->
-                <img alt="" class="w-30px me-3" src="/media/svg/files/doc.svg" />
+                <img alt="" class="w-30px me-3" :src="`/media/svg/files/${item.extension}.svg`" />
                 <!--end::Icon-->
 
                 <!--begin::Info-->
@@ -117,9 +117,22 @@ export default defineComponent({
   setup(props) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
+    const getExtension = (extension) => {
+      if (["xls", "xlsm"].indexOf(extension) !== -1) {
+        return "xls";
+      } else if (["ai", "css", "csv", "pdf", "ppt", "sql", "tif", "xml", "zip"].indexOf(extension) === -1) {
+        return "doc";
+      } else {
+        return extension;
+      }
+    };
     const files = computed(() => {
       if (props.changeOPProcessTimelineMessage.change_op_process_message_files) {
-        return props.changeOPProcessTimelineMessage.change_op_process_message_files;
+        const files = props.changeOPProcessTimelineMessage.change_op_process_message_files.map((el) => {
+          el.extension = getExtension(el.extension);
+          return el;
+        });
+        return files;
       }
       return [];
     });
