@@ -100,7 +100,7 @@
                 </td>
                 <td>
                   <span class="text-muted fw-bold d-block fs-5">
-                    {{ translate("requests") }}
+                    {{ translate("changeOPRequests") }}
                   </span>
                   <ChangeOPRequestsEditor
                     @change-op-requests-updated="$emit('change-op-requests-updated')"
