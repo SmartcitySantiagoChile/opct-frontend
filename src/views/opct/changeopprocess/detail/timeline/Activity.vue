@@ -142,7 +142,6 @@ export default defineComponent({
           props.changeOPProcess.change_op_requests.forEach((changeOPRequest) => {
             if (changeOPRequest.change_op_requests_logs) {
               changeOPRequest.change_op_requests_logs.forEach((changeOPRequestLog) => {
-                console.log(changeOPRequestLog);
                 let logData = {
                   dateTime: changeOPRequestLog.created_at,
                   type: LOG_TYPE.CHANGE_OP_REQUEST_CHANGE,
@@ -155,7 +154,6 @@ export default defineComponent({
         }
         if (props.changeOPProcess.change_op_process_logs) {
           props.changeOPProcess.change_op_process_logs.forEach((changeOPProcessLog) => {
-            console.log(changeOPProcessLog);
             let logData = {
               dateTime: changeOPProcessLog.created_at,
               type: LOG_TYPE.CHANGE_OP_PROCESS_CHANGE,
