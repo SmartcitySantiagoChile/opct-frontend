@@ -165,7 +165,7 @@ export default defineComponent({
 
       Swal.fire({
         title: translate("confirmMessageInsert"),
-        icon: "info",
+        icon: "question",
         showConfirmButton: true,
         showCancelButton: true,
         confirmButtonText: translate("save"),

@@ -45,13 +45,15 @@ export default class ChangeOPProcessMessageModule extends VuexModule implements 
 
   @Action
   [Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE](payload) {
-    return ApiService.postWithFiles(`${payload.url}add_message/`, payload.payload)
-      .then(({ data }) => {
-        console.log("message created!");
-        console.log(data);
-      })
-      .catch(({ response }) => {
-        this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_MESSAGE_ERROR, response.data);
-      });
+    return new Promise<void>((resolve, reject) => {
+      ApiService.postWithFiles(`${payload.url}add_message/`, payload.payload)
+        .then(({ data }) => {
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_MESSAGE_ERROR, response.data);
+          reject(response.data);
+        });
+    });
   }
 }
