@@ -166,7 +166,7 @@ interface ChangeOPRequestToEdit {
   id: number | null;
   title: string;
   status: string;
-  operation_program: string;
+  operation_program: string | null;
   reason: string;
   related_routes: Array<string>;
   related_requests: Array<string>;
@@ -267,7 +267,11 @@ export default defineComponent({
 
     const updateRequests = () => {
       let requestsArray: Array<Promise<any>> = [];
+      let forUpdate: Array<ChangeOPRequestToEdit> = [];
       requestsToEdit.value.forEach((request) => {
+        if (request.operation_program == "withoutOP") {
+          request.operation_program = null;
+        }
         if (request.id === null) {
           requestsArray.push(
             store.dispatch(Actions.CHANGE_OP_PROCESSES.CREATE_CHANGE_OP_REQUEST, {
@@ -276,12 +280,19 @@ export default defineComponent({
             })
           );
         } else {
-          //store.dispatch(Actions.CHANGE_OP_REQUESTS, {resource: param.resourceId, param.params})
+          forUpdate.push(request);
         }
       });
 
+      requestsArray.push(
+        store.dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_CHANGE_OP_REQUESTS, {
+          resource: changeOPProcessId.value,
+          params: { change_op_requests: forUpdate },
+        })
+      );
+
       Promise.all(requestsArray)
-        .then(
+        .then(() => {
           Swal.fire({
             text: "Se han realizado las modificaciones",
             icon: "success",
@@ -291,8 +302,8 @@ export default defineComponent({
           }).then(() => {
             hideModal(editorModalRef.value);
             emit("change-op-requests-updated");
-          })
-        )
+          });
+        })
         .catch(() => {
           Swal.fire({
             text: translate("genericError"),
@@ -321,4 +332,3 @@ export default defineComponent({
   },
 });
 </script>
-b

@@ -68,7 +68,7 @@
             <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
               <OperationProgramLogTable
                 :dataName="''"
-                :opData="pick(data.new_data, ['title', 'reason', 'stastus', 'related_routes'])"
+                :opData="pick(data.new_data, ['title', 'reason', 'related_routes'])"
               ></OperationProgramLogTable>
             </div>
           </div>
