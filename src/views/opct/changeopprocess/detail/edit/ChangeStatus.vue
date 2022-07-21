@@ -1,5 +1,6 @@
 <template>
   <a
+    @click="setModal"
     type="button"
     data-bs-toggle="modal"
     data-bs-target="#change_status_modal"
@@ -22,7 +23,7 @@
         </div>
 
         <div class="modal-body">
-          <el-select v-model="value" :placeholder="currentStatus" style="margin-left: 10px">
+          <el-select v-model="value" :placeholder="translate('selectPlaceholder')">
             <el-option v-for="item in changeStatusOptions" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -60,71 +61,55 @@ export default defineComponent({
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const store = useStore();
-    const currentStatus = computed(() => {
-      const status = store.getters.getCurrentChangeOPProcessStatus;
-      return status ? status.name : "";
-    });
+    const value = ref("");
     const statusModalRef = ref<HTMLElement | null>(null);
+    const currentStatus = computed(() => store.getters.getCurrentChangeOPProcessStatus);
+
+    const changeStatusOptions = computed(() => {
+      const statuses = store.getters.getCurrentChangeOPProcessStatuses;
+      return statuses.map((status) => ({ value: status.id, label: status.name }));
+    });
 
     onMounted(() => {
       const contractTypeName = store.getters.getCurrentChangeOPProcessContractTypeName;
       store.dispatch(Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS, contractTypeName);
     });
-    const changeStatusOptions = ref(
-      computed(() => {
-        const statuses = store.getters.getCurrentChangeOPProcessStatuses;
-        return statuses.flatMap((status) =>
-          status.name === currentStatus.value ? [] : [{ value: status.url, label: status.name }]
-        );
-      })
-    );
-    const value = ref("");
+
+    const setModal = () => {
+      value.value = currentStatus.value.id;
+    };
 
     const changeStatus = () => {
-      let status: Array<string> = value.value.split("/");
-      status.pop();
-      const statusId: number = parseInt(status.pop() as string);
       const changeOPProcessId = store.getters.getCurrentChangeOPProcessId;
       const params = {
-        status: statusId,
+        status: value.value,
       };
-      if (statusId) {
-        store
-          .dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_STATUS, {
-            resource: changeOPProcessId,
-            params: params,
-          })
-          .then(() => {
-            Swal.fire({
-              text: translate("changeStatusSuccess"),
-              icon: "success",
-              showConfirmButton: false,
-              timer: 1000,
-            })
-              .then(() => emit("status-updated"))
-              .then(() => hideModal(statusModalRef.value));
+
+      store
+        .dispatch(Actions.CHANGE_OP_PROCESSES.UPDATE_STATUS, {
+          resource: changeOPProcessId,
+          params: params,
+        })
+        .then(() => {
+          Swal.fire({
+            text: translate("changeStatusSuccess"),
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1000,
+          }).then(() => {
+            emit("status-updated");
+            hideModal(statusModalRef.value);
           });
-      } else {
-        Swal.fire({
-          text: translate("changeStatusError"),
-          icon: "error",
-          buttonsStyling: false,
-          confirmButtonText: translate("tryAgain"),
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-danger",
-          },
         });
-      }
     };
     return {
       translate,
       value,
       changeStatusOptions,
-      currentStatus,
       changeStatus,
       statusModalRef,
+      setModal,
     };
   },
 });
 </script>
-b

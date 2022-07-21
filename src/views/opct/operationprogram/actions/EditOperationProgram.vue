@@ -38,7 +38,11 @@
             </div>
             <div class="d-flex flex-row">
               <span class="m-4">{{ translate("changeOpType") }}</span>
-              <el-select v-model="changeOpTypeValue" :placeholder="opTypeName" style="margin-left: 10px">
+              <el-select
+                v-model="changeOpTypeValue"
+                :placeholder="translate('selectPlaceholder')"
+                style="margin-left: 10px"
+              >
                 <el-option v-for="item in opTypes" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>

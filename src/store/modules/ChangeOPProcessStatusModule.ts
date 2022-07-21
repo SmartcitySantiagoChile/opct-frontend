@@ -2,6 +2,7 @@ import { Module, VuexModule } from "vuex-module-decorators";
 import { Dictionary } from "@/store/modules/HelperModule";
 
 export interface ChangeOPProcessStatus {
+  id: number;
   url: string;
   name: string;
   contract_type: Dictionary<string>;

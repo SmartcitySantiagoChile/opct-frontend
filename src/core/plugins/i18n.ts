@@ -198,6 +198,7 @@ const messages = {
     actions: "Actions",
     implementationDate: "Implementation date",
     related_routes: "Related routes",
+    selectPlaceholder: "Select",
   },
   es: {
     dashboard: "Tablero",
@@ -396,6 +397,7 @@ const messages = {
     actions: "Acciones",
     implementationDate: "Fecha de implementación",
     related_routes: "Servicios relacionados",
+    selectPlaceholder: "Seleccionar",
   },
   de: {
     dashboard: "Instrumententafel",

@@ -59,7 +59,14 @@
                 <label for="exampleFormControlInput1" class="required"
                   >Solicitudes de modificación relacionadas al mensaje</label
                 ><br />
-                <el-select v-model="related_requests" multiple filterable collapse-tags collapse-tags-tooltip>
+                <el-select
+                  v-model="related_requests"
+                  multiple
+                  filterable
+                  collapse-tags
+                  collapse-tags-tooltip
+                  :placeholder="translate('selectPlaceholder')"
+                >
                   <el-option
                     v-for="option in relatedRequestsOptions"
                     :key="option.value"

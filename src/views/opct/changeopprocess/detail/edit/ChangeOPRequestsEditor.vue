@@ -47,9 +47,6 @@
                   <th class="ps-4 min-w-100px rounded-start">
                     {{ translate("status") }}
                   </th>
-                  <th class="ps-4 min-w-100px rounded-start">
-                    {{ translate("relatedRequests") }}
-                  </th>
                 </tr>
               </thead>
               <!--end::Table head-->
@@ -71,7 +68,7 @@
                         :disabled="!enableEdition"
                         collapse-tags
                         collapse-tags-tooltip
-                        style="width: 200px"
+                        :placeholder="translate('selectPlaceholder')"
                       >
                         <el-option
                           v-for="route in routeDefinitionsOption"
@@ -93,7 +90,11 @@
                       </el-select>
                     </td>
                     <td class="ps-4 min-w-50px rounded-start">
-                      <el-select v-model="item.reason" :disabled="!enableEdition">
+                      <el-select
+                        v-model="item.reason"
+                        :disabled="!enableEdition"
+                        :placeholder="translate('selectPlaceholder')"
+                      >
                         <el-option
                           v-for="reason in reasonOptions"
                           :key="reason.value"
@@ -104,7 +105,11 @@
                       </el-select>
                     </td>
                     <td>
-                      <el-select v-model="item.status" :disabled="!enableEdition">
+                      <el-select
+                        v-model="item.status"
+                        :disabled="!enableEdition"
+                        :placeholder="translate('selectPlaceholder')"
+                      >
                         <el-option
                           v-for="status in statusOption"
                           :key="status.value"
@@ -114,7 +119,6 @@
                         </el-option>
                       </el-select>
                     </td>
-                    <td></td>
                   </tr>
                 </template>
               </tbody>

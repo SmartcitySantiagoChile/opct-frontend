@@ -289,6 +289,7 @@
                                         :name="'relatedRoutes' + index"
                                         multiple
                                         filterable
+                                        :placeholder="translate('selectPlaceholder')"
                                       >
                                         <el-option
                                           v-for="route in routeDefinitionsOption"
@@ -300,7 +301,12 @@
                                       </el-select>
                                     </td>
                                     <td>
-                                      <el-select v-model="item.reason" :id="'reason' + index" :name="'reason' + index">
+                                      <el-select
+                                        v-model="item.reason"
+                                        :id="'reason' + index"
+                                        :name="'reason' + index"
+                                        :placeholder="translate('selectPlaceholder')"
+                                      >
                                         <el-option
                                           v-for="reason in reasonOptions"
                                           :key="reason.value"
