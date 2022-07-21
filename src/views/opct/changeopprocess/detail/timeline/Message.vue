@@ -85,15 +85,44 @@
           <!--begin::User-->
           <div class="text-primary fw-bolder me-1">{{ userName }}</div>
           <!--end::User-->
-          <div class="text-muted me-2 fs-7">relacionado a las solicitudes:</div>
+          <div v-if="changeOPProcessTimelineMessage.related_requests.length > 1" class="text-muted me-2 fs-7">
+            relacionado a las solicitudes:
+          </div>
+          <div v-else class="text-muted me-2 fs-7">relacionado a la solicitud:</div>
 
           <template v-for="(item, index) in changeOPProcessTimelineMessage.related_requests" :key="index">
-            <span class="badge badge-primary me-2 mb-2">
-              {{ `${item.id}` }}
-              <!-- {{
-                `id: ${item.id} | title: "${item.title}" | routes: ${item.related_routes} | ${item.get_reason_display}`
-              }}--></span
-            >
+            <el-popover placement="top-start" title="" :width="400" trigger="hover">
+              <template #reference>
+                <span class="badge badge-primary me-2 mb-2">
+                  {{ `${item.id}` }}
+                </span>
+              </template>
+              <table class="table table-row-dashed">
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <td>ID:</td>
+                    <td>{{ item.id }}</td>
+                  </tr>
+                  <tr>
+                    <td>Título:</td>
+                    <td>{{ item.title }}</td>
+                  </tr>
+                  <tr>
+                    <td>Motivo:</td>
+                    <td>{{ item.get_reason_display }}</td>
+                  </tr>
+                  <tr>
+                    <td>Servicios relacionados:</td>
+                    <td>{{ item.related_routes.join(", ") }}</td>
+                  </tr>
+                  <tr>
+                    <td>Programa de operación:</td>
+                    <td>{{ item.operation_program ? item.operation_program : "" }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </el-popover>
           </template>
         </div>
         <!--end::Description-->
