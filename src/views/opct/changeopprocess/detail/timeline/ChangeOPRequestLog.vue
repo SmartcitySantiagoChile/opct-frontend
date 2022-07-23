@@ -23,12 +23,12 @@
         <div class="fs-5 fw-bold mb-2">
           <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_CREATION">
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
-              {{ "Creación de solicitud de modificación" }}
+              {{ "Creación de solicitud de modificación " + data.change_op_request.id }}
             </span>
           </template>
           <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_UPDATE">
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
-              {{ "Edición de solicitud de modificación" }}
+              {{ "Edición de solicitud de modificación " + data.change_op_request.id }}
             </span>
           </template>
         </div>
@@ -41,7 +41,17 @@
         <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_CREATION">
           <div class="d-flex align-items-center border border-dashed border-gray-300 rounded mb-5">
             <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
-              <OperationProgramLogTable :dataName="''" :opData="creationData"></OperationProgramLogTable>
+              <OperationProgramLogTable :dataName="''" :opData="newData"></OperationProgramLogTable>
+            </div>
+          </div>
+        </template>
+        <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_UPDATE">
+          <div class="d-flex align-items-center border border-dashed border-gray-300 rounded mb-5">
+            <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
+              <OperationProgramLogTable :dataName="`previousData`" :opData="previousData"></OperationProgramLogTable>
+            </div>
+            <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
+              <OperationProgramLogTable :dataName="`newData`" :opData="newData"></OperationProgramLogTable>
             </div>
           </div>
         </template>
@@ -57,11 +67,6 @@
                 : ""
             }}
           </div>
-          <template v-if="data.type === LOG_TYPE.OP_CHANGE_WITH_DEADLINE_UPDATED">
-            <div class="badge badge-warning me-2 mb-2">
-              {{ translate("deadlinesUpdated") }}
-            </div>
-          </template>
           {{ translate("by") + "&nbsp;" }}
           <div class="text-primary fw-bolder me-1">{{ userName }}</div>
         </div>
@@ -78,7 +83,7 @@
 import { computed, defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
-import { pick } from "lodash";
+import { pick, isEqual } from "lodash";
 import OperationProgramLogTable from "@/views/opct/operationprogram/logs/OperationProgramLogTable.vue";
 
 export default defineComponent({
@@ -100,13 +105,35 @@ export default defineComponent({
       }
       return "";
     });
-    const creationData = computed(() => {
-      let creationData = { ...props.data.new_data };
-      const op = props.data.new_data.operation_program;
-      creationData.id = props.data.change_op_request.id;
-      creationData.operation_program = op.date !== "" ? `${op.date} (${op.type})` : "";
 
-      return creationData;
+    const parseData = (data, updatedKeys) => {
+      let parsedData = { ...data };
+      const op = data.operation_program;
+      parsedData.operation_program = op.date !== "" ? `${op.date} (${op.type})` : "";
+
+      return pick(parsedData, updatedKeys);
+    };
+
+    const attributesThatChanged = (previousData, newData) => {
+      let attributesThatChanged: Array<string> = [];
+      const keys = Object.keys(newData);
+      keys.forEach((key) => {
+        if (!isEqual(previousData[key], newData[key])) {
+          attributesThatChanged.push(key);
+        }
+      });
+      return attributesThatChanged;
+    };
+    const updatedKeys = computed(() => {
+      return attributesThatChanged(props.data.previous_data, props.data.new_data);
+    });
+
+    const previousData = computed(() => {
+      return parseData(props.data.previous_data, updatedKeys.value);
+    });
+
+    const newData = computed(() => {
+      return parseData(props.data.new_data, updatedKeys.value);
     });
 
     return {
@@ -114,8 +141,8 @@ export default defineComponent({
       DateTime,
       LOG_TYPE,
       userName,
-      pick,
-      creationData,
+      newData,
+      previousData,
     };
   },
 });
