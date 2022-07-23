@@ -21,92 +21,10 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
-          <!--begin:: Change OP Process and Request Status Case-->
-          <template v-if="changeOPProcessTimelineMilestone.new_status">
-            <template v-if="changeOPProcessTimelineMilestone.change_op_process">
-              {{ translate("changeStatusInfo") }}
-            </template>
-            <template v-if="changeOPProcessTimelineMilestone.change_op_request">
-              {{ translate("changeStatusRequestInfo") }}
-              "{{ changeOPProcessTimelineMilestone.change_op_request.title }}":
-            </template>
-            <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
-              {{ changeOPProcessTimelineMilestone.previous_status.name }}
-            </span>
-            {{ translate("to") }}
-            <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
-              {{ changeOPProcessTimelineMilestone.new_status.name }}
-            </span>
-          </template>
-          <!--end:: Change OP Process and Request Status Case-->
-          <!--begin:: Change OP Process and Request Reason Case-->
-          <template v-if="changeOPProcessTimelineMilestone.new_reason">
-            <template v-if="changeOPProcessTimelineMilestone.change_op_process">
-              {{ translate("changeReasonInfo") }}
-            </template>
-            <template v-if="changeOPProcessTimelineMilestone.change_op_request">
-              {{ translate("changeReasonRequestInfo") }}
-              "{{ changeOPProcessTimelineMilestone.change_op_request.title }}":
-            </template>
-            <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
-              {{ changeOPProcessTimelineMilestone.previous_reason }}
-            </span>
-            {{ translate("to") }}
-            <span :class="`badge-light-primary`" class="badge fs-4 fw-bolder">
-              {{ changeOPProcessTimelineMilestone.new_reason }}
-            </span>
-          </template>
-          <!--end:: Change OP Process and Request Reason Case-->
-          <!--begin:: Change OP Process and Request OP Case-->
-          <template v-if="changeOPProcessTimelineMilestone.previous_op || changeOPProcessTimelineMilestone.new_op">
-            <template v-if="changeOPProcessTimelineMilestone.change_op_process">
-              {{ translate("changeOPInfo") }}
-            </template>
-            <template v-if="changeOPProcessTimelineMilestone.change_op_request">
-              {{ translate("changeOPRequestInfo") }}
-              "{{ changeOPProcessTimelineMilestone.change_op_request.title }}":
-            </template>
-            <span class="badge badge-light-warning fs-4 fw-bolder">
-              <template v-if="changeOPProcessTimelineMilestone.previous_op">
-                {{
-                  DateTime.fromISO(changeOPProcessTimelineMilestone.previous_op.start_at)
-                    .setLocale(this.$i18n.locale)
-                    .toLocaleString()
-                }}
-                ({{ changeOPProcessTimelineMilestone.previous_op.op_type.name }})
-              </template>
-              <template v-else>
-                {{ translate("withoutAssign") }}
-              </template>
-            </span>
-            {{ translate("to") }}
-            <span class="badge badge-light-warning fs-4 fw-bolder">
-              <template v-if="changeOPProcessTimelineMilestone.new_op">
-                {{
-                  DateTime.fromISO(changeOPProcessTimelineMilestone.new_op.start_at)
-                    .setLocale(this.$i18n.locale)
-                    .toLocaleString()
-                }}
-                ({{ changeOPProcessTimelineMilestone.new_op.op_type.name }})
-              </template>
-              <template v-else>
-                {{ translate("withoutAssign") }}
-              </template>
-            </span>
-          </template>
-          <!--end:: Change OP Case-->
           <!--begin:: Time Threshold Case-->
-          <template
-            v-if="
-              changeOPProcessTimelineMilestone.time_threshold || changeOPProcessTimelineMilestone.time_threshold === 0
-            "
-          >
+          <template v-if="data.time_threshold || data.time_threshold === 0">
             <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
-              {{
-                changeOPProcessTimelineMilestone.time_threshold || changeOPProcessTimelineMilestone.time_threshold === 0
-                  ? translate("endOf") + " " + changeOPProcessTimelineMilestone.name
-                  : ""
-              }}
+              {{ data.time_threshold || data.time_threshold === 0 ? translate("endOf") + " " + data.name : "" }}
             </span>
           </template>
           <!--end:: Time Threshold Case-->
@@ -122,85 +40,19 @@
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
             <!--begin::Change OP Process Status Detail Case -->
-            <template
-              v-if="
-                changeOPProcessTimelineMilestone.time_threshold || changeOPProcessTimelineMilestone.time_threshold === 0
-              "
-            >
+            <template v-if="data.time_threshold || data.time_threshold === 0">
               {{
-                DateTime.now().diff(DateTime.fromISO(changeOPProcessTimelineMilestone.dead_line)) > 0
+                DateTime.now().diff(DateTime.fromISO(data.dead_line)) > 0
                   ? translate("finishedOn")
                   : translate("finishOn")
               }}
-              {{
-                changeOPProcessTimelineMilestone.dead_line
-                  ? DateTime.fromISO(changeOPProcessTimelineMilestone.dead_line)
-                      .setLocale(this.$i18n.locale)
-                      .toLocaleString()
-                  : ""
-              }}
+              {{ data.dead_line ? DateTime.fromISO(data.dead_line).setLocale(this.$i18n.locale).toLocaleString() : "" }}
               {{ translate("atTime") }} 23:59
             </template>
             <!--end::Change OP Process Status Detail Case -->
-            <!--begin::ChangeOPCase and ChangeStatusCase-->
-            <template
-              v-if="
-                changeOPProcessTimelineMilestone.new_op ||
-                changeOPProcessTimelineMilestone.previous_op ||
-                changeOPProcessTimelineMilestone.new_status ||
-                changeOPProcessTimelineMilestone.new_reason
-              "
-            >
-              {{ translate("addedAt") }}
-              {{
-                changeOPProcessTimelineMilestone.created_at
-                  ? DateTime.fromISO(changeOPProcessTimelineMilestone.created_at)
-                      .setLocale(this.$i18n.locale)
-                      .toLocaleString()
-                  : ""
-              }}
-              {{ translate("atTime") }}
-              {{
-                changeOPProcessTimelineMilestone.created_at
-                  ? DateTime.fromISO(changeOPProcessTimelineMilestone.created_at)
-                      .setLocale(this.$i18n.locale)
-                      .toLocaleString(DateTime.TIME_SIMPLE)
-                  : ""
-              }}
-            </template>
-            <!--end::ChangeOPCase and ChangeStatusCase-->
           </div>
-          <!--begin::OPStatus Deadline-->
-          <template v-if="changeOPProcessTimelineMilestone.update_deadlines">
-            <div class="text-muted me-2 fs-7">
-              -
-              {{ changeOPProcessTimelineMilestone.update_deadlines ? translate("deadlinesUpdated") : "" }}
-            </div>
-          </template>
-          <!--end::OPStatus Deadline-->
           <!--end::Info-->
-          <!--begin::User-->
-          <template v-if="changeOPProcessTimelineMilestone.new_status">
-            {{ translate("by") + "&nbsp;" }}
-            <a class="text-primary fw-bolder me-1" href="#">
-              {{
-                changeOPProcessTimelineMilestone.user
-                  ? changeOPProcessTimelineMilestone.user.first_name +
-                    " " +
-                    changeOPProcessTimelineMilestone.user.last_name
-                  : ""
-              }}
-              {{
-                changeOPProcessTimelineMilestone.creator
-                  ? changeOPProcessTimelineMilestone.creator.first_name +
-                    " " +
-                    changeOPProcessTimelineMilestone.creator.last_name
-                  : ""
-              }}
-            </a>
-          </template>
         </div>
-        <!--end::User-->
         <!--end::Description-->
       </div>
       <!--end::Timeline details-->
@@ -217,7 +69,7 @@ import { DateTime } from "luxon";
 
 export default defineComponent({
   name: "ChangeOPProcessTimelineMilestone",
-  props: ["changeOPProcessTimelineMilestone"],
+  props: ["data"],
   setup() {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);

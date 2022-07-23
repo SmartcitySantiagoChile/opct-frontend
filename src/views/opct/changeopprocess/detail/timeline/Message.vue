@@ -20,7 +20,7 @@
       <!--begin::Timeline heading-->
       <div class="pe-3 mb-5">
         <!--begin::Title-->
-        <div class="fs-5 fw-bold mb-2">{{ changeOPProcessTimelineMessage.message }}</div>
+        <div class="fs-5 fw-bold mb-2">{{ data.message }}</div>
         <!--end::Title-->
       </div>
       <!--end::Timeline heading-->
@@ -63,19 +63,11 @@
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
             {{ translate("addedAt") }}
-            {{
-              changeOPProcessTimelineMessage.created_at
-                ? DateTime.fromISO(changeOPProcessTimelineMessage.created_at)
-                    .setLocale(this.$i18n.locale)
-                    .toLocaleString()
-                : ""
-            }}
+            {{ data.created_at ? DateTime.fromISO(data.created_at).setLocale(this.$i18n.locale).toLocaleString() : "" }}
             {{ translate("atTime") }}
             {{
-              changeOPProcessTimelineMessage.created_at
-                ? DateTime.fromISO(changeOPProcessTimelineMessage.created_at)
-                    .setLocale(this.$i18n.locale)
-                    .toLocaleString(DateTime.TIME_SIMPLE)
+              data.created_at
+                ? DateTime.fromISO(data.created_at).setLocale(this.$i18n.locale).toLocaleString(DateTime.TIME_SIMPLE)
                 : ""
             }}
             {{ translate("by") }}
@@ -85,12 +77,10 @@
           <!--begin::User-->
           <div class="text-primary fw-bolder me-1">{{ userName }}</div>
           <!--end::User-->
-          <div v-if="changeOPProcessTimelineMessage.related_requests.length > 1" class="text-muted me-2 fs-7">
-            relacionado a las solicitudes:
-          </div>
+          <div v-if="data.related_requests.length > 1" class="text-muted me-2 fs-7">relacionado a las solicitudes:</div>
           <div v-else class="text-muted me-2 fs-7">relacionado a la solicitud:</div>
 
-          <template v-for="(item, index) in changeOPProcessTimelineMessage.related_requests" :key="index">
+          <template v-for="(item, index) in data.related_requests" :key="index">
             <el-popover placement="top-start" title="" :width="400" trigger="hover">
               <template #reference>
                 <span class="badge badge-primary me-2 mb-2">
@@ -131,7 +121,7 @@
     </div>
     <!--end::Timeline content-->
   </div>
-  <!--end::ChangeOPProcessTimelineMessage item-->
+  <!--end::data item-->
 </template>
 
 <script lang="ts">
@@ -140,8 +130,8 @@ import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
 
 export default defineComponent({
-  name: "ChangeOPProcessTimelineMessage",
-  props: ["changeOPProcessTimelineMessage"],
+  name: "changeOPProcessTimelineMessage",
+  props: ["data"],
   components: {},
   setup(props) {
     const { t, te } = useI18n();
@@ -156,17 +146,16 @@ export default defineComponent({
       }
     };
     const files = computed(() => {
-      if (props.changeOPProcessTimelineMessage.change_op_process_message_files) {
-        const files = props.changeOPProcessTimelineMessage.change_op_process_message_files.map((el) => {
+      if (props.data.change_op_process_message_files) {
+        return props.data.change_op_process_message_files.map((el) => {
           el.extension = getExtension(el.extension);
           return el;
         });
-        return files;
       }
       return [];
     });
     const userName = computed(() => {
-      const creator = props.changeOPProcessTimelineMessage.creator;
+      const creator = props.data.creator;
       if (creator) {
         return `${creator.first_name} ${creator.last_name}`;
       }

@@ -41,11 +41,6 @@
               </template>
             </span>
           </template>
-          <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_CREATION">
-            <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
-              {{ "Creación de solicitud de modificación" }}
-            </span>
-          </template>
           <template v-if="data.type === LOG_TYPE.STATUS_CHANGE">
             {{ translate("changeStatusInfo") }}
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
@@ -63,16 +58,6 @@
 
       <!--begin::Timeline details-->
       <div class="overflow-auto pb-5">
-        <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_CREATION">
-          <div class="d-flex align-items-center border border-dashed border-gray-300 rounded mb-5">
-            <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
-              <OperationProgramLogTable
-                :dataName="''"
-                :opData="pick(data.new_data, ['title', 'reason', 'related_routes'])"
-              ></OperationProgramLogTable>
-            </div>
-          </div>
-        </template>
         <!--begin::Description-->
         <div class="d-flex align-items-center mt-1 fs-6">
           <div class="text-muted me-2 fs-7">
@@ -107,12 +92,10 @@ import { computed, defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import { DateTime } from "luxon";
 import { pick } from "lodash";
-import OperationProgramLogTable from "@/views/opct/operationprogram/logs/OperationProgramLogTable.vue";
 
 export default defineComponent({
   name: "ChangeOPProcessTimelineMilestone",
   props: ["data"],
-  components: { OperationProgramLogTable },
   setup(props) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);

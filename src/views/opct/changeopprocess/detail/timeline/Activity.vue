@@ -19,31 +19,19 @@
             <template v-for="(item, index) in orderedLogs" :key="index">
               <!--begin::ChangeOPProcessTimelineMessages-->
               <template v-if="item.type === LOG_TYPE.USER_MESSAGE">
-                <ChangeOPProcessTimelineMessage
-                  v-bind:changeOPProcessTimelineMessage="item.data"
-                ></ChangeOPProcessTimelineMessage>
+                <TimelineMessage :data="item.data"></TimelineMessage>
               </template>
               <template v-else-if="item.type === LOG_TYPE.OPERATION_PROGRAM_CHANGE">
-                <ChangeOPProcessTimelineOperationProgramLog
-                  :data="item.data"
-                ></ChangeOPProcessTimelineOperationProgramLog>
+                <TimelineOperationProgramLog :data="item.data"></TimelineOperationProgramLog>
               </template>
               <template v-else-if="item.type === LOG_TYPE.OPERATION_PROGRAM_STAGE">
-                <ChangeOPProcessTimelineMilestone
-                  :changeOPProcessTimelineMilestone="item.data"
-                ></ChangeOPProcessTimelineMilestone>
+                <TimelineMilestone :data="item.data"></TimelineMilestone>
               </template>
               <template v-else-if="item.type === LOG_TYPE.CHANGE_OP_PROCESS_CHANGE">
-                <ChangeOPProcessTimelineChangeOPProcessLog
-                  :data="item.data"
-                ></ChangeOPProcessTimelineChangeOPProcessLog>
+                <TimelineChangeOPProcessLog :data="item.data"></TimelineChangeOPProcessLog>
               </template>
               <template v-else-if="item.type === LOG_TYPE.CHANGE_OP_REQUEST_CHANGE">
-                <!--
-                <ChangeOPProcessTimelineMilestone
-                  :changeOPProcessTimelineMilestone="item.data"
-                ></ChangeOPProcessTimelineMilestone>
-                -->
+                <TimelineChangeOPRequestLog :data="item.data"></TimelineChangeOPRequestLog>
               </template>
             </template>
             <!--end::Ordered Logs-->
@@ -63,10 +51,11 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
-import ChangeOPProcessTimelineMessage from "@/views/opct/changeopprocess/detail/timeline/Message.vue";
-import ChangeOPProcessTimelineMilestone from "@/views/opct/changeopprocess/detail/timeline/Milestone.vue";
-import ChangeOPProcessTimelineOperationProgramLog from "@/views/opct/changeopprocess/detail/timeline/OperationProgramLog.vue";
-import ChangeOPProcessTimelineChangeOPProcessLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPProcessLog.vue";
+import TimelineMessage from "@/views/opct/changeopprocess/detail/timeline/Message.vue";
+import TimelineMilestone from "@/views/opct/changeopprocess/detail/timeline/Milestone.vue";
+import TimelineOperationProgramLog from "@/views/opct/changeopprocess/detail/timeline/OperationProgramLog.vue";
+import TimelineChangeOPProcessLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPProcessLog.vue";
+import TimelineChangeOPRequestLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPRequestLog.vue";
 import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
@@ -74,10 +63,11 @@ export default defineComponent({
   name: "ChangeOPProcessActivity",
   props: ["changeOPProcess"],
   components: {
-    ChangeOPProcessTimelineMessage,
-    ChangeOPProcessTimelineMilestone,
-    ChangeOPProcessTimelineOperationProgramLog,
-    ChangeOPProcessTimelineChangeOPProcessLog,
+    TimelineMessage,
+    TimelineMilestone,
+    TimelineOperationProgramLog,
+    TimelineChangeOPProcessLog,
+    TimelineChangeOPRequestLog,
   },
   setup(props) {
     const { t, te } = useI18n();
