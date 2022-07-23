@@ -18,10 +18,12 @@
     <!--begin::Timeline content-->
     <div class="timeline-content mb-10 mt-n1">
       <!--begin::Timeline heading-->
-      <div class="pe-3 mb-5">
-        <!--begin::Title-->
-        <div class="fs-5 fw-bold mb-2">{{ data.message }}</div>
-        <!--end::Title-->
+      <div class="d-flex align-items-center border border-dashed border-gray-300 rounded mb-5 px-7 py-3">
+        <div class="pe-3 mb-5">
+          <!--begin::Title-->
+          <div class="fs-5 fw-bold mb-2" style="white-space: pre">{{ data.message }}</div>
+          <!--end::Title-->
+        </div>
       </div>
       <!--end::Timeline heading-->
 
