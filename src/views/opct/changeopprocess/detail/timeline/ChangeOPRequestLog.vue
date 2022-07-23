@@ -21,39 +21,14 @@
       <div class="pe-3 mb-5">
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
-          <template v-if="data.type === LOG_TYPE.OP_CHANGE || data.type === LOG_TYPE.OP_CHANGE_WITH_DEADLINE_UPDATED">
-            {{ translate("changeOPInfo") }}
-            <span class="badge badge-light-warning fs-4 fw-bolder">
-              <template v-if="data.previous_data.date !== ''">
-                {{ `${data.previous_data.date} (${data.previous_data.type})` }}
-              </template>
-              <template v-else>
-                {{ translate("withoutAssign") }}
-              </template>
-            </span>
-            {{ translate("to") }}
-            <span class="badge badge-light-warning fs-4 fw-bolder">
-              <template v-if="data.new_data.date !== ''">
-                {{ `${data.new_data.date} (${data.new_data.type})` }}
-              </template>
-              <template v-else>
-                {{ translate("withoutAssign") }}
-              </template>
-            </span>
-          </template>
           <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_CREATION">
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
               {{ "Creación de solicitud de modificación" }}
             </span>
           </template>
-          <template v-if="data.type === LOG_TYPE.STATUS_CHANGE">
-            {{ translate("changeStatusInfo") }}
+          <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_UPDATE">
             <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
-              {{ data.previous_data.value }}
-            </span>
-            {{ translate("to") }}
-            <span :class="`badge-light-warning`" class="badge fs-4 fw-bolder">
-              {{ data.new_data.value }}
+              {{ "Edición de solicitud de modificación" }}
             </span>
           </template>
         </div>
@@ -66,10 +41,7 @@
         <template v-if="data.type === LOG_TYPE.CHANGE_OP_REQUEST_CREATION">
           <div class="d-flex align-items-center border border-dashed border-gray-300 rounded mb-5">
             <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
-              <OperationProgramLogTable
-                :dataName="''"
-                :opData="pick(data.new_data, ['title', 'reason', 'stastus', 'related_routes'])"
-              ></OperationProgramLogTable>
+              <OperationProgramLogTable :dataName="''" :opData="creationData"></OperationProgramLogTable>
             </div>
           </div>
         </template>
@@ -117,10 +89,8 @@ export default defineComponent({
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
     const LOG_TYPE = {
-      OP_CHANGE: "op_change",
-      OP_CHANGE_WITH_DEADLINE_UPDATED: "op_change_with_deadline_updated",
       CHANGE_OP_REQUEST_CREATION: "change_op_request_creation",
-      STATUS_CHANGE: "status_change",
+      CHANGE_OP_REQUEST_UPDATE: "change_op_request_update",
     };
 
     const userName = computed(() => {
@@ -130,6 +100,14 @@ export default defineComponent({
       }
       return "";
     });
+    const creationData = computed(() => {
+      let creationData = { ...props.data.new_data };
+      const op = props.data.new_data.operation_program;
+      creationData.id = props.data.change_op_request.id;
+      creationData.operation_program = op.date !== "" ? `${op.date} (${op.type})` : "";
+
+      return creationData;
+    });
 
     return {
       translate,
@@ -137,6 +115,7 @@ export default defineComponent({
       LOG_TYPE,
       userName,
       pick,
+      creationData,
     };
   },
 });
