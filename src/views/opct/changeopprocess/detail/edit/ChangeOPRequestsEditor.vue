@@ -10,7 +10,7 @@
   </a>
   <!--begin::ChangeStatus-->
   <div class="modal fade" tabindex="-1" id="change_request_status_modal" ref="editorModalRef">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
           <div>
@@ -245,7 +245,7 @@ export default defineComponent({
             title: el.title,
             status: el.status.url,
             related_routes: el.related_routes,
-            operation_program: el.operation_program ? el.operation_program.url : null,
+            operation_program: el.operation_program ? el.operation_program.url : "withoutOP",
             reason: el.reason,
             related_requests: el.related_requests,
           });
@@ -257,11 +257,11 @@ export default defineComponent({
       requestsToEdit.value.push({
         id: null,
         title: "",
-        status: "",
+        status: statusOption.value[0].value,
         related_routes: [],
         related_requests: [],
-        operation_program: "",
-        reason: "",
+        operation_program: "withoutOP",
+        reason: reasonOptions.value[0].value,
       });
     };
 
