@@ -128,7 +128,7 @@ export default defineComponent({
       let options: Array<SelectOption> = [];
       if (requests && requests.length) {
         requests.forEach((request) => {
-          options.push({ value: request.id, label: request.title });
+          options.push({ value: request.id, label: `(${request.id}) ${request.title}` });
         });
       }
       return options;
