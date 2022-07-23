@@ -10,7 +10,7 @@
   </a>
   <!--begin::ChangeStatus-->
   <div class="modal fade" tabindex="-1" id="change_request_status_modal" ref="editorModalRef">
-    <div class="modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <div>
