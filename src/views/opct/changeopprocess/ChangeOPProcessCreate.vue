@@ -567,7 +567,7 @@ interface Step3Form {
 }
 
 interface Step4Form {
-  operation_program?: string;
+  operation_program: string | undefined;
 }
 
 interface Step2FormPresentation {
@@ -728,12 +728,14 @@ export default defineComponent({
       Yup.object({
         change_op_requests: Yup.array(
           Yup.object().shape({
-            title: Yup.string().required(),
+            title: Yup.string().required(translate("titleRequired")),
             related_routes: Yup.array().of(Yup.string()),
-            reason: Yup.string().required(),
+            //related_requests: Yup.array().of(Yup.string()).ensure(),
+            reason: Yup.string().required(translate("reasonRequired")),
           })
         )
           .required(translate("changeOPRequestRequired"))
+          .min(1, translate("changeOPRequestRequired"))
           .label("changeOPRequest"),
       }),
       Yup.object({
@@ -753,7 +755,9 @@ export default defineComponent({
       return !_stepperObj.value ? null : _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<ChangeOPProcessCreationForm>({}); //{ validationSchema: currentSchema });
+    const { resetForm, handleSubmit } = useForm<Step1Form | Step2Form | Step3Form | Step4Form>({
+      validationSchema: currentSchema,
+    });
 
     const previousStep = () => {
       if (!_stepperObj.value) {
