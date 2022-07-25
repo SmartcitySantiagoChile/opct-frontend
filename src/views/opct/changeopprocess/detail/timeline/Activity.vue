@@ -33,6 +33,9 @@
               <template v-else-if="item.type === LOG_TYPE.CHANGE_OP_REQUEST_CHANGE">
                 <TimelineChangeOPRequestLog :data="item.data"></TimelineChangeOPRequestLog>
               </template>
+              <template v-else-if="item.type === LOG_TYPE.CHANGE_OP_PROCESS_CREATION">
+                <TimelineChangeOPProcessCreation :data="item.data"></TimelineChangeOPProcessCreation>
+              </template>
             </template>
             <!--end::Ordered Logs-->
           </div>
@@ -55,6 +58,7 @@ import TimelineMessage from "@/views/opct/changeopprocess/detail/timeline/Messag
 import TimelineMilestone from "@/views/opct/changeopprocess/detail/timeline/Milestone.vue";
 import TimelineOperationProgramLog from "@/views/opct/changeopprocess/detail/timeline/OperationProgramLog.vue";
 import TimelineChangeOPProcessLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPProcessLog.vue";
+import TimelineChangeOPProcessCreation from "@/views/opct/changeopprocess/detail/timeline/ChangeOPProcessCreation.vue";
 import TimelineChangeOPRequestLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPRequestLog.vue";
 import { Actions } from "@/store/enums/StoreEnums";
 
@@ -68,6 +72,7 @@ export default defineComponent({
     TimelineOperationProgramLog,
     TimelineChangeOPProcessLog,
     TimelineChangeOPRequestLog,
+    TimelineChangeOPProcessCreation,
   },
   setup(props) {
     const { t, te } = useI18n();
@@ -79,6 +84,7 @@ export default defineComponent({
       OPERATION_PROGRAM_CHANGE: "operationProgramChange",
       CHANGE_OP_REQUEST_CHANGE: "changeOPRequestChange",
       CHANGE_OP_PROCESS_CHANGE: "changeOPProcessChange",
+      CHANGE_OP_PROCESS_CREATION: "changeOPProcessCreation",
     };
     store.dispatch(Actions.GET_OPERATION_PROGRAM_STATUSES);
 
@@ -106,6 +112,13 @@ export default defineComponent({
       }
 
       if (props.changeOPProcess) {
+        let changeOPProcessCreation = {
+          dateTime: props.changeOPProcess.created_at,
+          type: LOG_TYPE.CHANGE_OP_PROCESS_CREATION,
+          data: props.changeOPProcess,
+        };
+        orderedLogsData.push(changeOPProcessCreation);
+
         if (props.changeOPProcess.change_op_process_messages) {
           props.changeOPProcess.change_op_process_messages.forEach((message) => {
             let changeOPProcessData = {
