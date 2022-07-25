@@ -44,9 +44,9 @@ export default class ChangeOPProcessMessageModule extends VuexModule implements 
   }
 
   @Action
-  [Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE](payload) {
+  [Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE](data) {
     return new Promise<void>((resolve, reject) => {
-      ApiService.postWithFiles(`${payload.url}add_message/`, payload.payload)
+      ApiService.postWithFiles(`/change-op-processes/${data.resource}/add_message/`, data.payload)
         .then(({ data }) => {
           resolve(data);
         })

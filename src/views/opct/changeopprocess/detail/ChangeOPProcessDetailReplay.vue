@@ -154,7 +154,7 @@ export default defineComponent({
       formData.append("related_requests", JSON.stringify(related_requests_to_send));
       formData.append("change_op_process", store.getters.getCurrentChangeOPProcessUrl);
       const messageParams = {
-        url: props.changeOPProcess.url,
+        resource: props.changeOPProcess.id,
         payload: {
           params: formData,
           headers: {
