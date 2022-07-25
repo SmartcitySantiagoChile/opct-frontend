@@ -137,16 +137,16 @@ export default defineComponent({
     const createMessage = () => {
       const container = document.querySelector("#reply_editor");
       const quill = Quill.find(container);
-      let text: string = quill.getText();
-      if (text === "\n") {
-        text = "";
+      let quillContent: string = quill.getText();
+      if (quillContent === "\n") {
+        quillContent = "";
       }
       let formData = new FormData();
       fileList.forEach((file) => {
         const file_raw = file["raw"];
         formData.append("files", file_raw, file["name"]);
       });
-      formData.append("message", text);
+      formData.append("message", quillContent);
       let related_requests_to_send: Array<string> = [];
       related_requests.value.forEach((el) => {
         related_requests_to_send.push(el.toString());
@@ -186,7 +186,7 @@ export default defineComponent({
                 .then(() => {
                   uploader.value.clearFiles();
                   fileList = [];
-                  quill.setContents([{ insert: "\n" }]);
+                  quill.setContents([{ insert: "\r\n" }]);
                   related_requests.value = [];
                   nextTick(() => {
                     setTimeout(function () {
