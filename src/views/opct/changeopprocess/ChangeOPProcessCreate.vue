@@ -218,113 +218,158 @@
                     <div class="row mb-10">
                       <!--begin::Card-->
                       <div :class="widgetClasses" class="card">
-                        <!--begin::Header-->
-                        <div class="card-header border-0 pt-5">
-                          <!--begin::Card Title-->
-                          <h3 class="card-title align-items-start flex-column">
-                            <!--begin::Label-->
-                            <label class="required fs-6 fw-bold form-label mb-2">{{
-                              translate("changeOPRequests")
-                            }}</label>
-                            <!--end::Label-->
-                          </h3>
-                          <!--end::Card Title-->
-                          <!--begin::Add Button-->
-                          <div class="card-toolbar">
-                            <button class="btn btn-primary btn-success" type="button" @click="addChangeOPRequest">
-                              {{ translate("add") }}
-                            </button>
-
-                            <a
-                              @click="deleteChangeOPRequest(index)"
-                              class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary ml-1"
-                              type="button"
-                            >
-                              <span class="svg-icon svg-icon-2">
-                                <inline-svg src="/media/icons/duotune/general/gen027.svg" />
-                              </span>
-                            </a>
+                        <FieldArray name="change_op_requests" v-slot="{ fields, push, remove }">
+                          <!--begin::Header-->
+                          <div class="card-header border-0 pt-5">
+                            <!--begin::Card Title-->
+                            <h3 class="card-title align-items-start flex-column">
+                              <!--begin::Label-->
+                              <label class="required fs-6 fw-bold form-label mb-2">{{
+                                translate("changeOPRequests")
+                              }}</label>
+                              <!--end::Label-->
+                              <ErrorMessage
+                                class="fv-plugins-message-container invalid-feedback"
+                                :name="`change_op_requests`"
+                              />
+                            </h3>
+                            <!--end::Card Title-->
+                            <!--begin::Add Button-->
+                            <div class="card-toolbar">
+                              <button
+                                class="btn btn-primary btn-success"
+                                type="button"
+                                @click="
+                                  push({
+                                    title: '',
+                                    related_routes: [],
+                                    related_requests: [],
+                                    reason: '',
+                                  })
+                                "
+                              >
+                                {{ translate("add") }}
+                              </button>
+                            </div>
+                            <!--end::Add Button-->
                           </div>
-                          <!--end::Add Button-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body py-3">
-                          <!--begin::Table container-->
-                          <div class="table-responsive">
-                            <!--begin::Table-->
-                            <table
-                              class="table align-middle gs-0 gy-4 table-rounded table-striped border"
-                              id="changeOPRequestsTable"
-                            >
-                              <!--begin::Table head-->
-                              <thead>
-                                <tr class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200">
-                                  <th class="ps-4 rounded-start">{{ translate("title") }}</th>
-                                  <th class="ps-4 min-w-125px rounded-start">{{ translate("relatedRoutes") }}</th>
-                                  <th class="ps-4 min-w-125px rounded-start">{{ translate("reason") }}</th>
-                                  <th class="ps-4 rounded-start"></th>
-                                </tr>
-                              </thead>
-                              <!--end::Table head-->
-
-                              <!--begin::Table body-->
-                              <tbody>
-                                <template v-for="(item, index) in addedChangeOPRequest" :key="index">
-                                  <tr>
-                                    <td>
-                                      <input
-                                        class="form-control form-control-lg form-control-solid"
-                                        v-model="item.title"
-                                        :name="'changeoprequest' + index"
-                                        placeholder="Título"
-                                        type="text"
-                                        :id="'changeoprequest' + index"
-                                      />
-                                    </td>
-                                    <td>
-                                      <el-select
-                                        v-model="item.related_routes"
-                                        :id="'relatedRoutes' + index"
-                                        :name="'relatedRoutes' + index"
-                                        multiple
-                                        filterable
-                                        :placeholder="translate('selectPlaceholder')"
-                                      >
-                                        <el-option
-                                          v-for="route in routeDefinitionsOption"
-                                          :key="route.value"
-                                          :label="route.label"
-                                          :value="route.value"
-                                        >
-                                        </el-option>
-                                      </el-select>
-                                    </td>
-                                    <td>
-                                      <el-select
-                                        v-model="item.reason"
-                                        :id="'reason' + index"
-                                        :name="'reason' + index"
-                                        :placeholder="translate('selectPlaceholder')"
-                                      >
-                                        <el-option
-                                          v-for="reason in reasonOptions"
-                                          :key="reason.value"
-                                          :label="reason.label"
-                                          :value="reason.value"
-                                        >
-                                        </el-option>
-                                      </el-select>
-                                    </td>
+                          <!--end::Header-->
+                          <!--begin::Body-->
+                          <div class="card-body py-3">
+                            <!--begin::Table container-->
+                            <div class="table-responsive">
+                              <!--begin::Table-->
+                              <table
+                                class="table align-middle gs-0 gy-4 table-rounded table-striped border"
+                                id="changeOPRequestsTable"
+                              >
+                                <!--begin::Table head-->
+                                <thead>
+                                  <tr class="fw-bold fs-5 text-gray-800 border-bottom-2 border-gray-200">
+                                    <th class="ps-4 rounded-start">{{ translate("title") }}</th>
+                                    <th class="ps-4 min-w-125px rounded-start">{{ translate("relatedRoutes") }}</th>
+                                    <th class="ps-4 min-w-125px rounded-start">{{ translate("reason") }}</th>
+                                    <th class="ps-4 rounded-start"></th>
                                   </tr>
-                                </template>
-                              </tbody>
-                              <!--end::Table body-->
-                            </table>
-                            <!--end::Table-->
+                                </thead>
+                                <!--end::Table head-->
+
+                                <!--begin::Table body-->
+                                <tbody>
+                                  <template v-for="(item, index) in fields" :key="item.key">
+                                    <tr>
+                                      <td>
+                                        <Field
+                                          :id="`title_${index}`"
+                                          :name="`change_op_requests[${index}].title`"
+                                          v-slot="{ value, field }"
+                                        >
+                                          <el-input
+                                            v-bind="field"
+                                            :model-value="value"
+                                            :validate-event="false"
+                                            class="form-control form-control-lg form-control-solid"
+                                            :placeholder="translate('title')"
+                                          ></el-input>
+                                        </Field>
+                                        <ErrorMessage
+                                          class="fv-plugins-message-container invalid-feedback"
+                                          :name="`change_op_requests[${index}].title`"
+                                        />
+                                      </td>
+                                      <td>
+                                        <Field
+                                          :id="`related_routes_${index}`"
+                                          :name="`change_op_requests[${index}].related_routes`"
+                                          v-slot="{ value, field }"
+                                        >
+                                          <el-select
+                                            v-bind="field"
+                                            :model-value="value"
+                                            :validate-event="false"
+                                            multiple
+                                            filterable
+                                            :placeholder="translate('selectPlaceholder')"
+                                          >
+                                            <el-option
+                                              v-for="route in routeDefinitionsOption"
+                                              :key="route.value"
+                                              :label="route.label"
+                                              :value="route.value"
+                                            ></el-option>
+                                          </el-select>
+                                        </Field>
+                                        <ErrorMessage
+                                          class="fv-plugins-message-container invalid-feedback"
+                                          :name="`change_op_requests[${index}].related_routes`"
+                                        />
+                                      </td>
+                                      <td>
+                                        <Field
+                                          :id="`reason_${index}`"
+                                          :name="`change_op_requests[${index}].reason`"
+                                          v-slot="{ value, field }"
+                                        >
+                                          <el-select
+                                            v-bind="field"
+                                            :model-value="value"
+                                            :validate-event="false"
+                                            :placeholder="translate('selectPlaceholder')"
+                                          >
+                                            <el-option
+                                              v-for="reason in reasonOptions"
+                                              :key="reason.value"
+                                              :label="reason.label"
+                                              :value="reason.value"
+                                            ></el-option>
+                                          </el-select>
+                                        </Field>
+                                        <ErrorMessage
+                                          class="fv-plugins-message-container invalid-feedback"
+                                          :name="`change_op_requests[${index}].reason`"
+                                        />
+                                      </td>
+                                      <td>
+                                        <a
+                                          @click="remove(index)"
+                                          class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary ml-1"
+                                          type="button"
+                                        >
+                                          <span class="svg-icon svg-icon-2">
+                                            <inline-svg src="/media/icons/duotune/general/gen027.svg" />
+                                          </span>
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </template>
+                                </tbody>
+                                <!--end::Table body-->
+                              </table>
+                              <!--end::Table-->
+                            </div>
+                            <!--end::Table container-->
                           </div>
-                          <!--end::Table container-->
-                        </div>
+                        </FieldArray>
                       </div>
                       <!--end::Card-->
                     </div>
@@ -536,10 +581,10 @@
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, Ref, ref, watch } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { StepperComponent } from "@/assets/ts/components/_StepperComponent";
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
-import { ErrorMessage, Field, useForm } from "vee-validate";
+import { ErrorMessage, Field, useForm, FieldArray } from "vee-validate";
 import * as Yup from "yup";
 import { hideModal } from "@/core/helpers/dom";
 import { useI18n } from "vue-i18n";
@@ -574,14 +619,13 @@ interface Step2FormPresentation {
   change_op_requests: Array<Array<string>>;
 }
 
-interface ChangeOPProcessCreationForm extends Step1Form, Step2Form, Step3Form, Step4Form {}
-
 interface ChangeOPProcessPresentationForm extends Step1Form, Step2FormPresentation, Step3Form, Step4Form {}
 
 export default defineComponent({
   name: "ChangeOPProcessCreate",
   components: {
     Field,
+    FieldArray,
     ErrorMessage,
   },
   props: {
@@ -601,10 +645,8 @@ export default defineComponent({
     const createAppModalRef = ref<HTMLElement | null>(null);
     const currentStepIndex = ref(0);
     const isAdminOrganization = computed(() => store.getters.hasChangeStatusOption);
-    let relatedChangeOPRequests: Array<string> = [];
-    let relatedChangeOPRequestsInfo: Array<string> = [];
 
-    const formData = ref<ChangeOPProcessCreationForm>({
+    const formData = ref<Step1Form | Step2Form | Step3Form | Step4Form>({
       title: "",
       change_op_requests: [],
       counterpart: "",
@@ -693,15 +735,6 @@ export default defineComponent({
       return options;
     });
 
-    // TODO: no se usa, se debería usar para relacionar solicitudes
-    const searchChangeOpRequest = (filter) => {
-      if (filter.length > 3 && filter.length < 11) {
-        store.dispatch(Actions.GET_CHANGE_OP_REQUESTS_WITH_PARAMS, {
-          search: filter,
-        });
-      }
-    };
-
     onMounted(() => {
       _stepperObj.value = StepperComponent.createInsance(createChangeOPRef.value as HTMLElement);
       const editorId = "message_editor";
@@ -755,7 +788,7 @@ export default defineComponent({
       return !_stepperObj.value ? null : _stepperObj.value.totatStepsNumber;
     });
 
-    const { resetForm, handleSubmit } = useForm<Step1Form | Step2Form | Step3Form | Step4Form>({
+    const { handleSubmit } = useForm<Step1Form | Step2Form | Step3Form | Step4Form>({
       validationSchema: currentSchema,
     });
 
@@ -768,52 +801,46 @@ export default defineComponent({
     };
 
     const handleStep = handleSubmit((values) => {
-      formData.value = {
-        ...formData.value,
-        ...values,
-      };
+      formData.value = values;
 
       formDataInfo.value["title"] = formData.value["title"];
-      //formDataInfo.value["relatedChangeOPRequests"] =
-      //  relatedChangeOPRequestsInfo;
-
       formDataInfo.value["change_op_requests"] = [];
-      formData.value["change_op_requests"] = [];
-      addedChangeOPRequest.value.forEach((changeOPRequest) => {
-        let reasonLabel: string | undefined = reasonOptions?.value?.find(
-          (el) => el.value === changeOPRequest.reason
-        )?.label;
-        reasonLabel = reasonLabel === undefined ? "" : reasonLabel;
-        formDataInfo.value["change_op_requests"].push([
-          changeOPRequest.title,
-          `(${changeOPRequest.related_routes.join(", ")})`,
-          reasonLabel,
-        ]);
-        formData.value["change_op_requests"].push({
-          title: changeOPRequest.title,
-          related_routes: changeOPRequest.related_routes,
-          related_requests: [],
-          reason: changeOPRequest.reason,
+      if (formData.value["change_op_requests"]) {
+        formData.value["change_op_requests"].forEach((changeOPRequest) => {
+          let reasonLabel: string | undefined = reasonOptions?.value?.find(
+            (el) => el.value === changeOPRequest.reason
+          )?.label;
+          reasonLabel = reasonLabel === undefined ? "" : reasonLabel;
+          formDataInfo.value["change_op_requests"].push([
+            changeOPRequest.title,
+            `(${changeOPRequest.related_routes.join(", ")})`,
+            reasonLabel,
+          ]);
         });
-      });
-
-      const counterPartSelector: HTMLSelectElement = document.querySelector("#counterpart") as HTMLSelectElement;
-      if (counterPartSelector && counterPartSelector.selectedIndex >= 0) {
-        let selectedOption = counterPartSelector.options[counterPartSelector.selectedIndex];
-        formData.value["counterpart"] = counterPartSelector.value;
-        formDataInfo.value["counterpart"] = selectedOption.label;
       }
 
-      const operationProgramSelector: HTMLSelectElement = document.querySelector("#op") as HTMLSelectElement;
-      if (operationProgramSelector) {
-        let selectedOption = operationProgramSelector.options[operationProgramSelector.selectedIndex];
-        formDataInfo.value["operation_program"] = selectedOption.label;
+      if (formData.value["counterpart"]) {
+        let counterpartLabel: string | undefined = organizationOptions?.value?.find(
+          (el) => el.value === formData.value["counterpart"]
+        )?.label;
+        formDataInfo.value["counterpart"] = counterpartLabel ? counterpartLabel : "";
+      }
+
+      if (formData.value["operation_program"]) {
+        let operationProgramLabel: string | undefined = OPOptions?.value?.find(
+          (el) => el.value === formData.value["operation_program"]
+        )?.label;
+        formDataInfo.value["operation_program"] = operationProgramLabel ? operationProgramLabel : "";
       }
 
       const container: HTMLSelectElement = document.querySelector("#message_editor") as HTMLSelectElement;
       const quill = Quill.find(container);
-      messageData.value.message = quill.getText();
-      formDataInfo.value["message"] = quill.getText();
+      let quillContent: string = quill.getText();
+      if (quillContent === "\n") {
+        quillContent = "";
+      }
+      messageData.value.message = quillContent;
+      formDataInfo.value["message"] = quillContent;
 
       currentStepIndex.value++;
 
@@ -837,7 +864,7 @@ export default defineComponent({
       });
 
       const messageParams = {
-        url: null,
+        resource: null,
         payload: {
           params: messageFormData,
           headers: {
@@ -863,91 +890,59 @@ export default defineComponent({
         });
       };
 
+      const processSucessResponse = () => {
+        Swal.fire({
+          text: translate("createChangeOPRequestSuccess"),
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1000,
+        }).then(() => {
+          hideModal(createAppModalRef.value);
+          emit("change-op-process-created");
+        });
+      };
+
       store
         .dispatch(Actions.CHANGE_OP_PROCESSES.CREATE, formData.value)
         .then((data) => {
-          messageParams.url = data.url;
-          let related_requests_to_send: Array<string> = [];
-          data.change_op_requests.forEach((el) => {
-            related_requests_to_send.push(el.id.toString());
-          });
-          messageParams.payload.params.append("related_requests", JSON.stringify(related_requests_to_send));
-
-          store
-            .dispatch(Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE, messageParams)
-            .then((data) => {
-              console.log(data);
-              Swal.fire({
-                text: translate("createChangeOPRequestSuccess"),
-                icon: "success",
-                showConfirmButton: false,
-                timer: 1000,
-              })
-                .then(() => hideModal(createAppModalRef.value))
-                .then(() => emit("change-op-process-created"));
-            })
-            .catch((response) => {
-              processErrorResponse(response);
+          if (messageData.value.message === "" && messageData.value.files.length === 0) {
+            processSucessResponse();
+          } else {
+            messageParams.resource = data.id;
+            let related_requests_to_send: Array<string> = [];
+            data.change_op_requests.forEach((el) => {
+              related_requests_to_send.push(el.id.toString());
             });
+            messageParams.payload.params.append("related_requests", JSON.stringify(related_requests_to_send));
+
+            store
+              .dispatch(Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE, messageParams)
+              .then(() => {
+                processSucessResponse();
+              })
+              .catch((response) => {
+                processErrorResponse(response);
+              });
+          }
         })
         .catch((response) => {
           processErrorResponse(response);
         });
     };
 
-    resetForm({
-      values: {
-        ...formData.value,
-      },
-    });
-
     const handleChange = (file, fileListData) => {
       messageData.value.files = fileListData;
       formDataInfo.value["files"] = fileListData;
     };
-
-    const onChangeSelectedChangeOPRequests = (changeOPRequests) => {
-      relatedChangeOPRequests = [];
-      relatedChangeOPRequestsInfo = [];
-      for (let key in changeOPRequests.value) {
-        let value = changeOPRequests.value[key];
-        const info = `${key}: ${value["title"]}`;
-        relatedChangeOPRequestsInfo.push(info);
-        relatedChangeOPRequests.push(value["url"]);
-      }
-    };
-
-    let addedChangeOPRequest: Ref<Array<ChangeOPRequest>> = ref([]);
-    const mutableSelectedChangeOPRequests = computed(() => {
-      return addedChangeOPRequest.value;
-    });
-    const addChangeOPRequest = () => {
-      addedChangeOPRequest.value.push({ title: "", related_routes: [], related_requests: [], reason: "" });
-    };
-
-    const deleteChangeOPRequest = (e) => {
-      addedChangeOPRequest.value.forEach((element, index) => {
-        const title: HTMLInputElement = document.getElementById(`changeoprequest` + index) as HTMLInputElement;
-        const reason: HTMLSelectElement = document.getElementById(`reason` + index) as HTMLSelectElement;
-        if (title && reason) {
-          addedChangeOPRequest[index] = [title.value, reason.value];
-        }
-      });
-      addedChangeOPRequest.value.splice(0);
-    };
-    watch(addedChangeOPRequest, (currentValue, oldValue) => {
-      console.log(currentValue);
-      console.log(oldValue);
-    });
 
     return {
       handleStep,
       formSubmit,
       previousStep,
       createChangeOPRef,
+      createAppModalRef,
       currentStepIndex,
       totalSteps,
-      createAppModalRef,
       translate,
       handleChange,
       messageData,
@@ -957,14 +952,7 @@ export default defineComponent({
       routeDefinitionsOption,
       formData,
       formDataInfo,
-      searchChangeOpRequest,
-      onChangeSelectedChangeOPRequests,
-      relatedChangeOPRequestsInfo,
-      addChangeOPRequest,
-      mutableSelectedChangeOPRequests,
       reasonOptions,
-      deleteChangeOPRequest,
-      addedChangeOPRequest,
     };
   },
 });
