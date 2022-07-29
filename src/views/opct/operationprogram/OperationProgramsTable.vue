@@ -117,7 +117,7 @@
       </div>
       <!--end::Table container-->
     </div>
-    <!--begin::Body-->
+    <!--end::Body-->
   </div>
   <!--end::Tables Widget 12-->
 </template>
