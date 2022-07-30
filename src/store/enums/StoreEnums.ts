@@ -100,7 +100,6 @@ const Mutations = {
   SET_CHANGE_OP_PROCESS_STATUSES_ERRORS: "setChangeOPProcessStatusesErrors",
   SET_CHANGE_OP_PROCESS_MESSAGE_ERROR: "setChangeOPProcessMessageError",
   SET_ROUTE_DEFINITIONS: "setRouteDefinitions",
-  SET_ROUTE_DEFINITIONS_ERROR: "setRouteDefinitionsError",
 };
 
 export { Actions, Mutations };

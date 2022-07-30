@@ -125,11 +125,6 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     this.errors = errors;
   }
 
-  @Mutation
-  [Mutations.SET_ROUTE_DEFINITIONS_ERROR](errors) {
-    this.errors = errors;
-  }
-
   @Action
   [Actions.GET_CHANGE_OP_REQUEST](changeOPRequestId) {
     ApiService.get("change-op-requests", changeOPRequestId)
