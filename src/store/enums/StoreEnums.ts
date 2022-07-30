@@ -78,7 +78,6 @@ const Mutations = {
   SET_CHANGE_OP_REQUEST: "setChangeOPRequest",
   SET_CHANGE_OP_REQUESTS: "setChangeOPRequests",
   SET_CHANGE_OP_REQUESTS_ERRORS: "setChangeOPRequestsErrors",
-  SET_CHANGE_OP_REQUEST_MESSAGE_ERROR: "setChangeOPRequestMessageError",
   SET_CHANGE_OP_REQUEST_STATUSES: "setChangeOPRequestStatuses",
   SET_CHANGE_OP_REQUEST_STATUSES_ERRORS: "setChangeOPRequestStatusesErrors",
   SET_OPERATION_PROGRAMS: "setOperationPrograms",

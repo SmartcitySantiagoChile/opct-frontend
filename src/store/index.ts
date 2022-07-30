@@ -7,7 +7,6 @@ import BreadcrumbsModule from "@/store/modules/BreadcrumbsModule";
 import ConfigModule from "@/store/modules/ConfigModule";
 import ChangeOPRequestModule from "@/store/modules/ChangeOPRequestModule";
 import ChangeOPRequestsModule from "@/store/modules/ChangeOPRequestsModule";
-import ChangeOPRequestMessageModule from "@/store/modules/ChangeOPRequestMessageModule";
 import ChangeOPRequestStatusModule from "@/store/modules/ChangeOPRequestStatusModule";
 import ChangeOPRequestStatusesModule from "@/store/modules/ChangeOPRequestStatusesModule";
 import OperationProgramModule from "@/store/modules/OperationProgramModule";
@@ -35,7 +34,6 @@ const store = createStore({
     ConfigModule,
     ChangeOPRequestModule,
     ChangeOPRequestsModule,
-    ChangeOPRequestMessageModule,
     ChangeOPRequestStatusesModule,
     ChangeOPRequestStatusModule,
     OperationProgramModule,
