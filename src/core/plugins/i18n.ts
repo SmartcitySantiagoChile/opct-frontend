@@ -199,6 +199,7 @@ const messages = {
     implementationDate: "Implementation date",
     related_routes: "Related routes",
     selectPlaceholder: "Select",
+    routeDefinitions: "Route Definitions",
   },
   es: {
     dashboard: "Tablero",
@@ -398,6 +399,7 @@ const messages = {
     implementationDate: "Fecha de implementación",
     related_routes: "Servicios relacionados",
     selectPlaceholder: "Seleccionar",
+    routeDefinitions: "Diccionario de servicios",
   },
   de: {
     dashboard: "Instrumententafel",
