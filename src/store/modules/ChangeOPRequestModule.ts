@@ -7,15 +7,6 @@ export interface ChangeOPRequestReasons {
   options: Array<Array<string>>;
 }
 
-export interface RouteDefinition {
-  auth_route_code: string;
-  user_route_code: string;
-}
-
-export interface RouteDefinitions {
-  options: Array<RouteDefinition>;
-}
-
 export interface ChangeOPRequest {
   url: string;
   created_at: string;
@@ -40,7 +31,6 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
   errors = {};
   changeOPRequest = {} as ChangeOPRequest;
   reasons = {} as ChangeOPRequestReasons;
-  routeDefinitions = {} as RouteDefinitions;
 
   /**
    * Get change op request errors
@@ -120,14 +110,6 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     return this.changeOPRequest.related_requests;
   }
 
-  /**
-   * Get all route definitions
-   * @returns RouteDefinitions
-   */
-  get getAllRouteDefinitions(): RouteDefinitions {
-    return this.routeDefinitions;
-  }
-
   @Mutation
   [Mutations.SET_CHANGE_OP_REQUEST](changeOPRequest) {
     this.changeOPRequest = changeOPRequest;
@@ -141,11 +123,6 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
   @Mutation
   [Mutations.SET_CREATE_CHANGE_OP_REQUEST_ERRORS](errors) {
     this.errors = errors;
-  }
-
-  @Mutation
-  [Mutations.SET_ROUTE_DEFINITIONS](routeDefinitions) {
-    this.routeDefinitions = routeDefinitions;
   }
 
   @Mutation
@@ -251,17 +228,5 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
           reject();
         });
     });
-  }
-
-  @Action
-  [Actions.GET_ROUTE_DEFINITIONS]() {
-    return ApiService.get("route-definitions")
-      .then(({ data }) => {
-        this.context.commit(Mutations.SET_ROUTE_DEFINITIONS, data);
-      })
-      .catch(({ response }) => {
-        console.log(response);
-        this.context.commit(Mutations.SET_ROUTE_DEFINITIONS_ERROR, [response.data.error]);
-      });
   }
 }

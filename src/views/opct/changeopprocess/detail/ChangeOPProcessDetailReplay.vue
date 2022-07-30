@@ -233,7 +233,7 @@ export default defineComponent({
       // Init editor
       new Quill("#" + editorId, options);
 
-      store.dispatch(Actions.GET_ROUTE_DEFINITIONS);
+      store.dispatch(Actions.ROUTE_DEFINITIONS.LIST);
     });
 
     return {

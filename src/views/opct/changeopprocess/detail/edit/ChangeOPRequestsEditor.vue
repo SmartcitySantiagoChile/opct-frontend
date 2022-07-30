@@ -209,7 +209,7 @@ export default defineComponent({
     });
 
     const routeDefinitionsOption = computed(() => {
-      const routeDefinitions = store.getters.getAllRouteDefinitions;
+      const routeDefinitions = store.getters.getRouteDefinitions;
       let options: Array<SelectOption> = [];
       if (routeDefinitions.length) {
         routeDefinitions.forEach((routeDefinition) => {
@@ -228,7 +228,7 @@ export default defineComponent({
 
     onMounted(() => {
       // Call actions to get all selector data to use in modal
-      store.dispatch(Actions.GET_ROUTE_DEFINITIONS);
+      store.dispatch(Actions.ROUTE_DEFINITIONS.LIST);
       store.dispatch(Actions.GET_CHANGE_OP_REQUEST_STATUSES);
       store.dispatch(Actions.GET_OPERATION_PROGRAMS);
       store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);

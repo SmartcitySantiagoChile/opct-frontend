@@ -671,7 +671,7 @@ export default defineComponent({
     store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
     store.dispatch(Actions.GET_ORGANIZATIONS);
     store.dispatch(Actions.GET_OPERATION_PROGRAMS);
-    store.dispatch(Actions.GET_ROUTE_DEFINITIONS);
+    store.dispatch(Actions.ROUTE_DEFINITIONS.LIST);
 
     const reasonOptions = computed(() => {
       const reasons: Array<Array<string>> = store.getters.getChangeOPRequestReason;
@@ -727,7 +727,7 @@ export default defineComponent({
     });
 
     const routeDefinitionsOption = computed(() => {
-      const routeDefinitions = store.getters.getAllRouteDefinitions;
+      const routeDefinitions = store.getters.getRouteDefinitions;
       let options: Array<SelectOption> = [];
       routeDefinitions.forEach((routeDefinition) => {
         options.push({ value: routeDefinition.auth_route_code, label: routeDefinition.auth_route_code });

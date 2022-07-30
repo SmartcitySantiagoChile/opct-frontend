@@ -47,6 +47,10 @@ const Actions = {
     LIST: "",
     LIST_WITH_PARAMS: "",
   },
+  ROUTE_DEFINITIONS: {
+    LIST: "route_definitions_list",
+    BULK_UPDATE: "route_definitions_bulk_update",
+  },
 
   GET_CHANGE_OP_PROCESS_STATUSES: "getChangeOPProcessStatuses",
   GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS: "getChangeOPProcessStatusesWithParams",
@@ -56,7 +60,6 @@ const Actions = {
   GET_CHANGE_OP_REQUEST_REASONS: "getChangeOPRequestReasons",
   GET_ORGANIZATIONS: "getOrganizations",
   GET_OPERATION_PROGRAMS: "getOperationPrograms",
-  GET_ROUTE_DEFINITIONS: "getRouteDefinitions",
 };
 
 const Mutations = {
