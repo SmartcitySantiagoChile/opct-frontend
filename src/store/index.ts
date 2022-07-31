@@ -21,7 +21,6 @@ import ChangeOPProcessModule from "@/store/modules/ChangeOPProcessModule";
 import ChangeOPProcessesModule from "@/store/modules/ChangeOPProcessesModule";
 import ChangeOPProcessStatusModule from "@/store/modules/ChangeOPProcessStatusModule";
 import ChangeOPProcessStatusesModule from "@/store/modules/ChangeOPProcessStatusesModule";
-import ChangeOPProcessMessageModule from "@/store/modules/ChangeOPProcessMessageModule";
 import RouteDefinitionsModule from "@/store/modules/RouteDefinitionsModule";
 
 config.rawError = true;
@@ -48,7 +47,6 @@ const store = createStore({
     ChangeOPProcessesModule,
     ChangeOPProcessStatusModule,
     ChangeOPProcessStatusesModule,
-    ChangeOPProcessMessageModule,
     RouteDefinitionsModule,
   },
 });
