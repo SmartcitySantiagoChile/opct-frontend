@@ -189,6 +189,9 @@ export default defineComponent({
       if (store.getters.currentUserHasOPsAccess) {
         access_list.push("ops");
       }
+      if (store.getters.currentUserHasAccessToUploadRouteDictionary) {
+        access_list.push("upload-route-dictionary");
+      }
       // TODO: Uncomment to add organizations admin and users organizations
       // if (store.getters.currentUserHasOrganizationsAccess) {
       //   access_list.push("organizations");

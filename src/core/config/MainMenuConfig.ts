@@ -29,6 +29,13 @@ const DocMenuConfig = [
         svgIcon: "/media/icons/duotune/general/gen019.svg",
         fontIcon: "bi-layers",
       },
+      {
+        access: "upload-route-dictionary",
+        heading: "routeDefinitions",
+        route: "/route-definitions",
+        svgIcon: "/media/icons/duotune/general/gen019.svg",
+        fontIcon: "bi-layers",
+      },
     ],
   },
 ];

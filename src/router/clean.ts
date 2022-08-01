@@ -28,6 +28,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/opct/operationprogram/OperationPrograms.vue"),
         props: true,
       },
+      {
+        path: "/route-definitions",
+        name: "routeDefinitions",
+        component: () => import("@/views/opct/routedefinition/RouteDefinitions.vue"),
+        props: true,
+      },
     ],
   },
   {

@@ -17,6 +17,7 @@ export interface User {
   access_to_ops: boolean;
   access_to_organizations: boolean;
   access_to_users: boolean;
+  access_to_upload_route_dictionary: boolean;
 }
 
 export interface UserAuthInfo {
@@ -69,6 +70,14 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    */
   get currentUserHasOrganizationsAccess(): boolean {
     return this.user.access_to_organizations;
+  }
+
+  /**
+   * Get if current user has access to upload route dictionary
+   * @returns string
+   */
+  get currentUserHasAccessToUploadRouteDictionary(): boolean {
+    return this.user.access_to_upload_route_dictionary;
   }
 
   /**
