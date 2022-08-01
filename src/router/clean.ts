@@ -80,14 +80,12 @@ router.beforeEach(async (to, from, next) => {
   // check user session
   await store.dispatch(Actions.USERS.VERIFY_AUTH);
 
-  if (store.getters.isUserAuthenticated) {
+  if (store.getters.isUserAuthenticated || to.name === "sign-in") {
     next();
     // Scroll page to top on every route change
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 100);
-  } else if (to.name === "sign-in") {
-    next();
   } else {
     next({ name: "sign-in" });
   }
