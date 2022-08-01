@@ -74,16 +74,23 @@ const router = createRouter({
   routes,
 });
 
-router.beforeResolve(async (to) => {
+router.beforeEach(async (to, from, next) => {
   // reset config to initial state
   await store.commit(Mutations.RESET_LAYOUT_CONFIG);
-
+  // check user session
   await store.dispatch(Actions.USERS.VERIFY_AUTH);
 
-  // Scroll page to top on every route change
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 100);
+  if (store.getters.isUserAuthenticated) {
+    next();
+    // Scroll page to top on every route change
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+  } else if (to.name === "sign-in") {
+    next();
+  } else {
+    next({ name: "sign-in" });
+  }
 });
 
 export default router;
