@@ -200,6 +200,7 @@ const messages = {
     related_routes: "Related routes",
     selectPlaceholder: "Select",
     routeDefinitions: "Route Definitions",
+    uploadedRouteFileSuccess: "File updated successfully. {created} records created and {updated} records updated.",
   },
   es: {
     dashboard: "Tablero",
@@ -400,6 +401,8 @@ const messages = {
     related_routes: "Servicios relacionados",
     selectPlaceholder: "Seleccionar",
     routeDefinitions: "Diccionario de servicios",
+    uploadedRouteFileSuccess:
+      "Archivo actualizado exitosamente. Se creación {created} registros y se actualizaron {updated} registros.",
   },
   de: {
     dashboard: "Instrumententafel",
