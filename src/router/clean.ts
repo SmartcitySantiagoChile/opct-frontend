@@ -43,17 +43,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/sign-in",
         name: "sign-in",
-        component: () => import("@/views/crafted/authentication/basic-flow/SignIn.vue"),
-      },
-      {
-        path: "/sign-up",
-        name: "sign-up",
-        component: () => import("@/views/crafted/authentication/basic-flow/SignUp.vue"),
-      },
-      {
-        path: "/password-reset",
-        name: "password-reset",
-        component: () => import("@/views/crafted/authentication/basic-flow/PasswordReset.vue"),
+        component: () => import("@/views/opct/authentication/SignIn.vue"),
       },
     ],
   },
@@ -61,7 +51,7 @@ const routes: Array<RouteRecordRaw> = [
     // the 404 route, when none of the above matches
     path: "/404",
     name: "404",
-    component: () => import("@/views/crafted/authentication/Error404.vue"),
+    component: () => import("@/views/opct/authentication/Error404.vue"),
   },
   {
     path: "/:pathMatch(.*)*",

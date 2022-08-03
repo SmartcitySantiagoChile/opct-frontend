@@ -18,7 +18,7 @@
               >Pro</span
             >-->
           </div>
-          <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ currentUserEmail }}</a>
+          <div class="fw-bold text-muted fs-7">{{ currentUserEmail }}</div>
         </div>
         <!--end::Username-->
       </div>

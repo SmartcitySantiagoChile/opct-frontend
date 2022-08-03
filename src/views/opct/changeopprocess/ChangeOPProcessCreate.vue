@@ -665,14 +665,6 @@ export default defineComponent({
       files: [],
     });
 
-    /********************************************************************
-     // Call actions to get selectors data.
-     //*******************************************************************/
-    store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
-    store.dispatch(Actions.GET_ORGANIZATIONS);
-    store.dispatch(Actions.GET_OPERATION_PROGRAMS);
-    store.dispatch(Actions.ROUTE_DEFINITIONS.LIST);
-
     const reasonOptions = computed(() => {
       const reasons: Array<Array<string>> = store.getters.getChangeOPRequestReason;
       if (reasons.length) {
@@ -713,7 +705,7 @@ export default defineComponent({
         });
       } else {
         organizations.some((organization) => {
-          if (organization.url === currentUser.organization.default_counterpart) {
+          if (currentUser.organization && organization.url === currentUser.organization.default_counterpart) {
             options.push({
               value: organization.url,
               label: organization.name,
@@ -751,6 +743,11 @@ export default defineComponent({
 
       // Init editor
       new Quill("#" + editorId, options);
+
+      store.dispatch(Actions.GET_CHANGE_OP_REQUEST_REASONS);
+      store.dispatch(Actions.GET_ORGANIZATIONS);
+      store.dispatch(Actions.GET_OPERATION_PROGRAMS);
+      store.dispatch(Actions.ROUTE_DEFINITIONS.LIST);
     });
 
     // Set form validators

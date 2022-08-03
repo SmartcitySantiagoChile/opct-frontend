@@ -117,7 +117,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
    * @returns boolean
    */
   get hasChangeStatusOption(): boolean {
-    return this.user.organization.can_change_counterpart;
+    return this.user.organization ? this.user.organization.can_change_counterpart : false;
   }
 
   /**
