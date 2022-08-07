@@ -67,7 +67,10 @@ export default defineComponent({
 
     const changeStatusOptions = computed(() => {
       const statuses = store.getters.getCurrentChangeOPProcessStatuses;
-      return statuses.map((status) => ({ value: status.id, label: status.name }));
+      if (statuses) {
+        return statuses.map((status) => ({ value: status.id, label: status.name }));
+      }
+      return [];
     });
 
     onMounted(() => {
