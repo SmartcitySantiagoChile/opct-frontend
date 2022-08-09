@@ -31,7 +31,7 @@
 
     <!--begin::Menu item-->
     <div class="menu-item px-5">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
+      <router-link :to="{ name: 'profile' }" class="menu-link px-5">
         {{ translate("profile") }}
       </router-link>
     </div>

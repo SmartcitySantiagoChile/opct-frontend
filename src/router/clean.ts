@@ -34,6 +34,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/opct/routedefinition/RouteDefinitions.vue"),
         props: true,
       },
+      {
+        path: "/profile",
+        name: "profile",
+        component: () => import("@/views/opct/profile/Profile.vue"),
+      },
     ],
   },
   {

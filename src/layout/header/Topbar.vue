@@ -12,7 +12,7 @@
           data-kt-menu-placement="bottom-end"
           data-kt-menu-flip="bottom"
         >
-          <img src="/media/avatars/150-25.jpg" alt="metronic" class="h-25px w-25px rounded" />
+          <img src="/media/avatars/blank.png" alt="metronic" class="h-25px w-25px rounded" />
         </div>
         <KTUserMenu></KTUserMenu>
         <!--end::Menu-->
