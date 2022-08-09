@@ -53,7 +53,7 @@ export default class ChangeOPProcessStatusesModule extends VuexModule implements
 
   @Action
   [Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS](params) {
-    ApiService.query("change-op-process-statuses", { params: params })
+    ApiService.query("change-op-process-statuses/", { params: params })
       .then(({ data }) => {
         this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_STATUSES, data);
       })
