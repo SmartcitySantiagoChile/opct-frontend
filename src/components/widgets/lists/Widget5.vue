@@ -44,9 +44,7 @@
           <!--end::Badge-->
 
           <!--begin::Text-->
-          <div class="fw-mormal timeline-content text-muted ps-3">
-            Outlines keep you honest. And keep structure
-          </div>
+          <div class="fw-mormal timeline-content text-muted ps-3">Outlines keep you honest. And keep structure</div>
           <!--end::Text-->
         </div>
         <!--end::Item-->
@@ -185,9 +183,7 @@
           <!--end::Badge-->
 
           <!--begin::Text-->
-          <div class="timeline-content fw-mormal text-muted ps-3">
-            Finance KPI Mobile app launch preparion meeting
-          </div>
+          <div class="timeline-content fw-mormal text-muted ps-3">Finance KPI Mobile app launch preparion meeting</div>
           <!--end::Text-->
         </div>
         <!--end::Item-->

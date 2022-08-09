@@ -15,9 +15,7 @@
 
           <!--begin::Info-->
           <div class="d-flex flex-column">
-            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder"
-              >Nick Logan</a
-            >
+            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Nick Logan</a>
 
             <span class="text-gray-400 fw-bold">PHP, SQLite, Artisan CLI</span>
           </div>
@@ -29,9 +27,7 @@
         <div class="my-0">
           <button
             type="button"
-            class="
-              btn btn-sm btn-icon btn-color-primary btn-active-light-primary
-            "
+            class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
             data-kt-menu-trigger="click"
             data-kt-menu-placement="bottom-end"
             data-kt-menu-flip="top-end"
@@ -50,37 +46,21 @@
       <div class="mb-5">
         <!--begin::Text-->
         <p class="text-gray-800 fw-normal mb-5">
-          Outlines keep you honest. They stop you from indulging in poorly
-          thought-out metaphors about driving and keep you focused on the
-          overall structure of your post
+          Outlines keep you honest. They stop you from indulging in poorly thought-out metaphors about driving and keep
+          you focused on the overall structure of your post
         </p>
         <!--end::Text-->
 
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center mb-5">
-          <a
-            href="#"
-            class="
-              btn btn-sm btn-light btn-color-muted btn-active-light-success
-              px-4
-              py-2
-              me-4
-            "
-          >
+          <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
             <span class="svg-icon svg-icon-3">
               <inline-svg src="/media/icons/duotune/communication/com012.svg" />
             </span>
             120
           </a>
 
-          <a
-            href="#"
-            class="
-              btn btn-sm btn-light btn-color-muted btn-active-light-danger
-              px-4
-              py-2
-            "
-          >
+          <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2">
             <span class="svg-icon svg-icon-3">
               <inline-svg src="/media/icons/duotune/general/gen030.svg" />
             </span>

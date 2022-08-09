@@ -23,11 +23,7 @@
 
           <!--begin::Action-->
           <div class="text-center py-7">
-            <a
-              href="#"
-              class="btn btn-primary fs-6 px-6"
-              data-bs-toggle="modal"
-              data-bs-target="#kt_modal_create_app"
+            <a href="#" class="btn btn-primary fs-6 px-6" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app"
               >Get Started</a
             >
           </div>
@@ -37,15 +33,7 @@
 
         <!--begin::Image-->
         <div
-          class="
-            flex-grow-1
-            bgi-no-repeat
-            bgi-size-contain
-            bgi-position-x-center
-            bgi-position-y-bottom
-            card-rounded-bottom
-            h-200px
-          "
+          class="flex-grow-1 bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom card-rounded-bottom h-200px"
           style="background-image: url('/media/illustrations/sketchy-1/8.png')"
         ></div>
         <!--end::Image-->

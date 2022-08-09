@@ -15,9 +15,7 @@
 
           <!--begin::Info-->
           <div class="d-flex flex-column">
-            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder"
-              >Grace Green</a
-            >
+            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Grace Green</a>
 
             <span class="text-gray-400 fw-bold">PHP, SQLite, Artisan CLI</span>
           </div>
@@ -29,9 +27,7 @@
         <div class="my-0">
           <button
             type="button"
-            class="
-              btn btn-sm btn-icon btn-color-primary btn-active-light-primary
-            "
+            class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
             data-kt-menu-trigger="click"
             data-kt-menu-placement="bottom-end"
             data-kt-menu-flip="top-end"
@@ -55,10 +51,7 @@
         <div class="separator"></div>
 
         <!--begin::Toolbar-->
-        <div
-          id="kt_forms_widget_1_editor_toolbar"
-          class="ql-toolbar d-flex flex-stack py-2"
-        >
+        <div id="kt_forms_widget_1_editor_toolbar" class="ql-toolbar d-flex flex-stack py-2">
           <div class="me-2">
             <span class="ql-formats ql-size ms-0">
               <select class="ql-size w-75px"></select>
