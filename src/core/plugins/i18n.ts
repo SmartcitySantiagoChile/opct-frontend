@@ -201,6 +201,7 @@ const messages = {
     selectPlaceholder: "Select",
     routeDefinitions: "Route Definitions",
     uploadedRouteFileSuccess: "File updated successfully. {created} records created and {updated} records updated.",
+    creatorOrganization: "Creator organization",
   },
   es: {
     dashboard: "Tablero",
@@ -403,6 +404,7 @@ const messages = {
     routeDefinitions: "Diccionario de servicios",
     uploadedRouteFileSuccess:
       "Archivo actualizado exitosamente. Se creación {created} registros y se actualizaron {updated} registros.",
+    creatorOrganization: "Organización creadora",
   },
   de: {
     dashboard: "Instrumententafel",

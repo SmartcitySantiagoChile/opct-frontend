@@ -44,10 +44,11 @@
                 {{ translate("creationDate") }}
               </th>
               <th class="min-w-150px">{{ translate("operationProgram") }}</th>
+              <th class="min-w-100px">{{ translate("creator") }}</th>
+              <th class="max-w-100px">{{ translate("creatorOrganization") }}</th>
+              <th class="max-w-100px">{{ translate("counterpart") }}</th>
               <th class="min-w-100px">{{ translate("contractType") }}</th>
               <th class="min-w-100px">{{ translate("title") }}</th>
-              <th class="min-w-100px">{{ translate("creator") }}</th>
-              <th class="max-w-100px">{{ translate("counterpart") }}</th>
               <th class="min-w-80px">{{ translate("status") }}</th>
               <th class="max-w-80px">{{ translate("change_op_requests") }}</th>
               <th class="min-w-80px"></th>
@@ -92,19 +93,22 @@
                 </td>
                 <td>
                   <div class="text-dark fw-bolder d-block mb-1 fs-6">
+                    {{ item.creator.first_name + " " + item.creator.last_name }}
+                  </div>
+                </td>
+                <td>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.creator.organization.name }}</div>
+                </td>
+                <td>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.counterpart.name }}</div>
+                </td>
+                <td>
+                  <div class="text-dark fw-bolder d-block mb-1 fs-6">
                     {{ item.contract_type ? item.contract_type.name : "" }}
                   </div>
                 </td>
                 <td>
                   <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.title }}</div>
-                </td>
-                <td>
-                  <div class="text-dark fw-bolder d-block mb-1 fs-6">
-                    {{ item.creator.first_name + " " + item.creator.last_name }}
-                  </div>
-                </td>
-                <td>
-                  <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.counterpart.name }}</div>
                 </td>
                 <td>
                   <div class="text-dark fw-bolder d-block mb-1 fs-6">{{ item.status.name }}</div>
