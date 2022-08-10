@@ -35,9 +35,7 @@ class ApiService {
    * @returns Promise<AxiosResponse>
    */
   public static query(resource: string, params: AxiosRequestConfig): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios.get(resource, params).catch((error) => {
-      throw new Error(`[KT] ApiService ${error}`);
-    });
+    return ApiService.vueInstance.axios.get(resource, params);
   }
 
   /**
@@ -47,9 +45,7 @@ class ApiService {
    * @returns Promise<AxiosResponse>
    */
   public static get(resource: string, slug = "" as string): Promise<AxiosResponse> {
-    return ApiService.vueInstance.axios.get(`${resource}/${slug}`).catch((error) => {
-      throw new Error(`[KT] ApiService ${error}`);
-    });
+    return ApiService.vueInstance.axios.get(`${resource}/${slug}`);
   }
 
   /**

@@ -31,7 +31,7 @@ export default class OrganizationsModule extends VuexModule implements Organizat
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_ORGANIZATIONS]() {
     return ApiService.get("organizations")
       .then(({ data }) => {

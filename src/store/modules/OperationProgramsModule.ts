@@ -48,7 +48,7 @@ export default class OperationProgramsModule extends VuexModule implements Opera
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_OPERATION_PROGRAMS]() {
     return ApiService.get("operation-programs")
       .then(({ data }) => {
