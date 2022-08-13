@@ -14,7 +14,7 @@ OPCT comes from `Operation Program Change Tracker`. Web app to track operation p
 npm install
 ```
 
-Create virtual environement file at root place with name `.env.development` with content:
+Create virtual environment file at root place with name `.env.development` with content:
 ```
 NODE_ENV=development
 
