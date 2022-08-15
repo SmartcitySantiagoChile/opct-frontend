@@ -203,7 +203,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.ADD_MESSAGE](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.postWithFiles(`/change-op-processes/${data.resource}/add_message/`, data.payload)

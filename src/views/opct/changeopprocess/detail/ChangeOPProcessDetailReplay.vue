@@ -196,11 +196,9 @@ export default defineComponent({
                   });
                 });
             })
-            .catch(() => {
+            .catch((data) => {
               Swal.fire({
-                text: store.getters.getChangeOPProcessMessageErrors.map((error) => {
-                  return `${translate(error[0])} : ${translate(error[1])}`;
-                }),
+                text: data[0],
                 icon: "error",
                 buttonsStyling: false,
                 confirmButtonText: translate("tryAgain"),
