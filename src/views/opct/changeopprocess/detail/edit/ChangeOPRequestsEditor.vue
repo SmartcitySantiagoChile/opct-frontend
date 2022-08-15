@@ -213,7 +213,7 @@ export default defineComponent({
       let options: Array<SelectOption> = [];
       if (routeDefinitions.length) {
         routeDefinitions.forEach((routeDefinition) => {
-          options.push({ value: routeDefinition.auth_route_code, label: routeDefinition.auth_route_code });
+          options.push({ value: routeDefinition.ts_code, label: routeDefinition.ts_code });
         });
       }
       return options;

@@ -403,7 +403,7 @@ const messages = {
     selectPlaceholder: "Seleccionar",
     routeDefinitions: "Diccionario de servicios",
     uploadedRouteFileSuccess:
-      "Archivo actualizado exitosamente. Se creación {created} registros y se actualizaron {updated} registros.",
+      "Archivo actualizado exitosamente. Se crearon {created} registros y se actualizaron {updated} registros.",
     creatorOrganization: "Organización creadora",
   },
   de: {

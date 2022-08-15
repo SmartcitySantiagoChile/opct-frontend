@@ -3,8 +3,7 @@ import { Actions, Mutations } from "@/store/enums/StoreEnums";
 import { Action, Module, Mutation, VuexModule } from "vuex-module-decorators";
 
 export interface RouteDefinition {
-  auth_route_code: string;
-  user_route_code: string;
+  ts_code: string;
 }
 
 export interface RouteDefinitions {

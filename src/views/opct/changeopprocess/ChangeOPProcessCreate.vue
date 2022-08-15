@@ -722,7 +722,7 @@ export default defineComponent({
       const routeDefinitions = store.getters.getRouteDefinitions;
       let options: Array<SelectOption> = [];
       routeDefinitions.forEach((routeDefinition) => {
-        options.push({ value: routeDefinition.auth_route_code, label: routeDefinition.auth_route_code });
+        options.push({ value: routeDefinition.ts_code, label: routeDefinition.ts_code });
       });
       return options;
     });
