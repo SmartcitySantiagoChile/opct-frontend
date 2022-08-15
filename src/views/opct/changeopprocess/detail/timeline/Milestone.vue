@@ -22,11 +22,9 @@
         <!--begin::Title-->
         <div class="fs-5 fw-bold mb-2">
           <!--begin:: Time Threshold Case-->
-          <template v-if="data.time_threshold || data.time_threshold === 0">
-            <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
-              {{ data.time_threshold || data.time_threshold === 0 ? translate("endOf") + " " + data.name : "" }}
-            </span>
-          </template>
+          <span :class="`badge-light-danger`" class="badge fs-4 fw-bolder">
+            {{ translate("endOf") + " " + data.name }}
+          </span>
           <!--end:: Time Threshold Case-->
         </div>
         <!--end::Title-->
@@ -40,15 +38,12 @@
           <!--begin::Info-->
           <div class="text-muted me-2 fs-7">
             <!--begin::Change OP Process Status Detail Case -->
-            <template v-if="data.time_threshold || data.time_threshold === 0">
-              {{
-                DateTime.now().diff(DateTime.fromISO(data.dead_line)) > 0
-                  ? translate("finishedOn")
-                  : translate("finishOn")
-              }}
-              {{ data.dead_line ? DateTime.fromISO(data.dead_line).setLocale(this.$i18n.locale).toLocaleString() : "" }}
-              {{ translate("atTime") }} 23:59
-            </template>
+            {{
+              DateTime.now().diff(DateTime.fromISO(data.deadline)) > 0 ? translate("finishedOn") : translate("finishOn")
+            }}
+            {{ DateTime.fromISO(data.deadline).setLocale(this.$i18n.locale).toLocaleString() }}
+            {{ translate("atTime") }}
+            {{ DateTime.fromISO(data.deadline).setLocale(this.$i18n.locale).toLocaleString(DateTime.TIME_SIMPLE) }}
             <!--end::Change OP Process Status Detail Case -->
           </div>
           <!--end::Info-->

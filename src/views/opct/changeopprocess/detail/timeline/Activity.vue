@@ -51,8 +51,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { useStore } from "vuex";
+import { computed, defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import TimelineMessage from "@/views/opct/changeopprocess/detail/timeline/Message.vue";
 import TimelineMilestone from "@/views/opct/changeopprocess/detail/timeline/Milestone.vue";
@@ -60,7 +59,6 @@ import TimelineOperationProgramLog from "@/views/opct/changeopprocess/detail/tim
 import TimelineChangeOPProcessLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPProcessLog.vue";
 import TimelineChangeOPProcessCreation from "@/views/opct/changeopprocess/detail/timeline/ChangeOPProcessCreation.vue";
 import TimelineChangeOPRequestLog from "@/views/opct/changeopprocess/detail/timeline/ChangeOPRequestLog.vue";
-import { Actions } from "@/store/enums/StoreEnums";
 
 export default defineComponent({
   inheritAttrs: false,
@@ -77,7 +75,6 @@ export default defineComponent({
   setup(props) {
     const { t, te } = useI18n();
     const translate = (text) => (te(text) ? t(text) : text);
-    const store = useStore();
     const LOG_TYPE = {
       USER_MESSAGE: "changeOPProcessMessage",
       OPERATION_PROGRAM_STAGE: "operationProgramStage",
@@ -86,30 +83,9 @@ export default defineComponent({
       CHANGE_OP_PROCESS_CHANGE: "changeOPProcessChange",
       CHANGE_OP_PROCESS_CREATION: "changeOPProcessCreation",
     };
-    store.dispatch(Actions.GET_OPERATION_PROGRAM_STATUSES);
 
-    const opStatuses = ref(computed(() => store.getters.getCurrentOperationProgramStatuses));
     const orderedLogs = computed(() => {
       let orderedLogsData = [] as any;
-      if (opStatuses.value) {
-        opStatuses.value.forEach((opStatus) => {
-          if (props.changeOPProcess.contract_type && props.changeOPProcess.op_release_date) {
-            const releaseDate = new Date(props.changeOPProcess.op_release_date + " 00:00");
-            if (opStatus.contract_type.name === props.changeOPProcess.contract_type.name) {
-              let deadLineDate = new Date(JSON.parse(JSON.stringify(releaseDate)));
-              deadLineDate.setDate(deadLineDate.getDate() - opStatus.time_threshold);
-              const deadLineStringDate = JSON.parse(JSON.stringify(deadLineDate));
-              opStatus["dead_line"] = deadLineStringDate;
-              let opStatusData = {
-                dateTime: JSON.parse(JSON.stringify(deadLineStringDate)),
-                type: LOG_TYPE.OPERATION_PROGRAM_STAGE,
-                data: opStatus,
-              };
-              orderedLogsData.push(opStatusData);
-            }
-          }
-        });
-      }
 
       if (props.changeOPProcess) {
         let changeOPProcessCreation = {
@@ -118,6 +94,17 @@ export default defineComponent({
           data: props.changeOPProcess,
         };
         orderedLogsData.push(changeOPProcessCreation);
+
+        if (props.changeOPProcess.deadlines) {
+          props.changeOPProcess.deadlines.forEach((deadline) => {
+            let deadlineData = {
+              dateTime: deadline.deadline,
+              type: LOG_TYPE.OPERATION_PROGRAM_STAGE,
+              data: deadline,
+            };
+            orderedLogsData.push(deadlineData);
+          });
+        }
 
         if (props.changeOPProcess.change_op_process_messages) {
           props.changeOPProcess.change_op_process_messages.forEach((message) => {
