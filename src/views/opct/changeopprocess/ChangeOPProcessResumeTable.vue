@@ -196,12 +196,12 @@ export default defineComponent({
     // Events
     const onFilterChange = (event) => {
       const filter = String(event.target.value);
-      if (filter.length > 3 && filter.length < 11) {
+      if (filter.length === 0) {
+        store.dispatch(Actions.CHANGE_OP_PROCESSES.LIST);
+      } else {
         store.dispatch(Actions.CHANGE_OP_PROCESSES.LIST_WiTH_PARAMS, {
           search: filter,
         });
-      } else if (filter.length === 0) {
-        store.dispatch(Actions.CHANGE_OP_PROCESSES.LIST);
       }
     };
 
