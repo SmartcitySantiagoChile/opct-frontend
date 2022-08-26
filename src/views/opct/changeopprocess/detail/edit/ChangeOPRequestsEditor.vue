@@ -64,7 +64,6 @@
                       <el-select
                         v-model="item.related_routes"
                         multiple
-                        filterable
                         :disabled="!enableEdition"
                         collapse-tags
                         collapse-tags-tooltip

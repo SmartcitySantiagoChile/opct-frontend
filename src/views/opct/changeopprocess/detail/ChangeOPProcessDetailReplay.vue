@@ -62,7 +62,6 @@
                 <el-select
                   v-model="related_requests"
                   multiple
-                  filterable
                   collapse-tags
                   collapse-tags-tooltip
                   :placeholder="translate('selectPlaceholder')"

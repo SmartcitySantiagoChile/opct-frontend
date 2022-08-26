@@ -308,7 +308,6 @@
                                             :model-value="value"
                                             :validate-event="false"
                                             multiple
-                                            filterable
                                             :placeholder="translate('selectPlaceholder')"
                                           >
                                             <el-option
@@ -759,7 +758,7 @@ export default defineComponent({
         change_op_requests: Yup.array(
           Yup.object().shape({
             title: Yup.string().required(translate("titleRequired")),
-            related_routes: Yup.array().of(Yup.string()),
+            related_routes: Yup.array().of(Yup.string()).ensure(),
             //related_requests: Yup.array().of(Yup.string()).ensure(),
             reason: Yup.string().required(translate("reasonRequired")),
           })
