@@ -40,7 +40,7 @@ export default class ChangeOPProcessStatusesModule extends VuexModule implements
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_CHANGE_OP_PROCESS_STATUSES]() {
     ApiService.get("change-op-process-statuses")
       .then(({ data }) => {
@@ -51,7 +51,7 @@ export default class ChangeOPProcessStatusesModule extends VuexModule implements
       });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_CHANGE_OP_PROCESS_STATUSES_WITH_PARAMS](params) {
     ApiService.query("change-op-process-statuses/", { params: params })
       .then(({ data }) => {

@@ -52,7 +52,7 @@ export default class BreadcrumbsModule extends VuexModule implements StoreInfo {
     this.breadcrumbs = payload;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.SET_BREADCRUMB_ACTION](payload) {
     this.context.commit(Mutations.SET_BREADCRUMB_MUTATION, payload);
   }

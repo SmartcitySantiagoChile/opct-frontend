@@ -27,7 +27,7 @@ export default class RouteDefinitionsModule extends VuexModule implements RouteD
     this.routeDefinitions = routeDefinitions;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.ROUTE_DEFINITIONS.LIST]() {
     return ApiService.get("route-definitions")
       .then(({ data }) => {

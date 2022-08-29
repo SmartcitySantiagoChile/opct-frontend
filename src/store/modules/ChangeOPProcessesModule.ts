@@ -56,7 +56,7 @@ export default class ChangeOPProcessesModule extends VuexModule implements Chang
     this.errors = changeOPProcessesList;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.LIST]() {
     ApiService.get("change-op-processes")
       .then(({ data }) => {
@@ -67,7 +67,7 @@ export default class ChangeOPProcessesModule extends VuexModule implements Chang
       });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.LIST_WiTH_PARAMS](params) {
     ApiService.query("change-op-processes", { params: params })
       .then(({ data }) => {

@@ -40,7 +40,7 @@ export default class OperationProgramTypesModule extends VuexModule implements O
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_OPERATION_PROGRAM_TYPES]() {
     ApiService.get("operation-program-types")
       .then(({ data }) => {

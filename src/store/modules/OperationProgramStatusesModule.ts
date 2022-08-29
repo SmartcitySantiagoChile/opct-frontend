@@ -40,7 +40,7 @@ export default class OperationProgramStatusesModule extends VuexModule implement
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_OPERATION_PROGRAM_STATUSES]() {
     ApiService.get("operation-program-statuses")
       .then(({ data }) => {
@@ -52,7 +52,7 @@ export default class OperationProgramStatusesModule extends VuexModule implement
       });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_OPERATION_PROGRAM_STATUSES_WITH_PARAMS](params) {
     ApiService.query("operation-program-statuses", { params: params })
       .then(({ data }) => {

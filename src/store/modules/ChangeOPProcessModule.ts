@@ -121,7 +121,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.DETAIL](changeOPProcessId) {
     ApiService.get("change-op-processes", changeOPProcessId + "/")
       .then(({ data }) => {
@@ -132,7 +132,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
       });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.CREATE](params) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post("change-op-processes/", params)
@@ -147,7 +147,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.UPDATE_STATUS](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-processes/${data.resource}/change-status/`, data.params)
@@ -161,7 +161,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.UPDATE_OPERATION_PROGRAM](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-processes/${data.resource}/change-op/`, data.params)
@@ -175,7 +175,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.CREATE_CHANGE_OP_REQUEST](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post(`change-op-processes/${data.resource}/create-change-op-request/`, data.params)
@@ -189,7 +189,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_OP_PROCESSES.UPDATE_CHANGE_OP_REQUESTS](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-processes/${data.resource}/update-change-op-requests/`, data.params)

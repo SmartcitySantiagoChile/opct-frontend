@@ -125,7 +125,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_CHANGE_OP_REQUEST](changeOPRequestId) {
     ApiService.get("change-op-requests", changeOPRequestId)
       .then(({ data }) => {
@@ -137,7 +137,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
       });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CREATE_CHANGE_OP_REQUEST](params) {
     return new Promise<void>((resolve, reject) => {
       ApiService.postWithFiles("change-op-requests/", params)
@@ -152,7 +152,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_CHANGE_OP_REQUEST_STATUS](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-requests/${data.resource}/change-status/`, data.params)
@@ -167,7 +167,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_CHANGE_OP_REQUEST_REASON](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-requests/${data.resource}/change-reason/`, data.params)
@@ -182,7 +182,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_CHANGE_OP_REQUEST_OP](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-requests/${data.resource}/change-op/`, data.params)
@@ -197,7 +197,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.GET_CHANGE_OP_REQUEST_REASONS]() {
     return ApiService.get("change-op-request-reasons")
       .then(({ data }) => {
@@ -209,7 +209,7 @@ export default class ChangeOPRequestModule extends VuexModule implements ChangeO
       });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CHANGE_CHANGE_OP_REQUEST_RELATED_REQUESTS](data) {
     return new Promise<void>((resolve, reject) => {
       ApiService.put(`change-op-requests/${data.resource}/change-related-requests/`, data.params)

@@ -33,7 +33,7 @@ export default class OperationProgramModule extends VuexModule implements Operat
     this.errors = errors;
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.CREATE_OPERATION_PROGRAM](params) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post("operation-programs/", params)
@@ -49,7 +49,7 @@ export default class OperationProgramModule extends VuexModule implements Operat
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.UPDATE_OPERATION_PROGRAM](params) {
     return new Promise<void>((resolve, reject) => {
       ApiService.patch(params["url"], params["params"])
@@ -65,7 +65,7 @@ export default class OperationProgramModule extends VuexModule implements Operat
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.DELETE_OPERATION_PROGRAM](url) {
     return new Promise<void>((resolve, reject) => {
       ApiService.delete(url)

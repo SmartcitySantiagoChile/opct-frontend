@@ -159,7 +159,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     JwtService.destroyToken();
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.USERS.LOGIN](credentials) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post("login", credentials)
@@ -174,12 +174,12 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.USERS.LOGOUT]() {
     this.context.commit(Mutations.PURGE_AUTH);
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.USERS.REGISTER](credentials) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post("registration", credentials)
@@ -194,7 +194,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.USERS.FORGOT_PASSWORD](payload) {
     return new Promise<void>((resolve, reject) => {
       ApiService.post("forgot_password", payload)
@@ -209,7 +209,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     });
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.USERS.VERIFY_AUTH]() {
     if (JwtService.getToken()) {
       ApiService.setHeader();
@@ -225,7 +225,7 @@ export default class AuthModule extends VuexModule implements UserAuthInfo {
     }
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.USERS.UPDATE](payload) {
     ApiService.setHeader();
     return new Promise<void>((resolve, reject) => {

@@ -46,29 +46,29 @@ export default class BodyModule extends VuexModule implements StoreInfo {
     this.classes[position].push(className);
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.ADD_BODY_CLASSNAME](className) {
     document.body.classList.add(className);
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.REMOVE_BODY_CLASSNAME](className) {
     document.body.classList.remove(className);
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.ADD_BODY_ATTRIBUTE](payload) {
     const { qulifiedName, value } = payload;
     document.body.setAttribute(qulifiedName, value);
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.REMOVE_BODY_ATTRIBUTE](payload) {
     const { qulifiedName } = payload;
     document.body.removeAttribute(qulifiedName);
   }
 
-  @Action
+  @Action({ rawError: true })
   [Actions.ADD_CLASSNAME](payload) {
     this.context.commit(Mutations.SET_CLASSNAME_BY_POSITION, payload);
   }
