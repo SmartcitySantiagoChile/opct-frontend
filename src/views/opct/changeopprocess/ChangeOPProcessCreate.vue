@@ -752,12 +752,17 @@ export default defineComponent({
     // Set form validators
     const createAppSchema = [
       Yup.object({
-        title: Yup.string().required(translate("titleRequired")).label("Title"),
+        title: Yup.string()
+          .required(translate("titleRequired"))
+          .max(70, t("maxLength", { maxLength: 70 }))
+          .label("Title"),
       }),
       Yup.object({
         change_op_requests: Yup.array(
           Yup.object().shape({
-            title: Yup.string().required(translate("titleRequired")),
+            title: Yup.string()
+              .required(translate("titleRequired"))
+              .max(50, t("maxLength", { maxLength: 50 })),
             related_routes: Yup.array().of(Yup.string()).ensure(),
             //related_requests: Yup.array().of(Yup.string()).ensure(),
             reason: Yup.string().required(translate("reasonRequired")),

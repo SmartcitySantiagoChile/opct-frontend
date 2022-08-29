@@ -202,6 +202,7 @@ const messages = {
     routeDefinitions: "Route Definitions",
     uploadedRouteFileSuccess: "File updated successfully. {created} records created and {updated} records updated.",
     creatorOrganization: "Creator organization",
+    maxLength: "Sorry, you are exceeding the limit of characters ({maxLength})",
   },
   es: {
     dashboard: "Tablero",
@@ -405,6 +406,7 @@ const messages = {
     uploadedRouteFileSuccess:
       "Archivo actualizado exitosamente. Se crearon {created} registros y se actualizaron {updated} registros.",
     creatorOrganization: "Organización creadora",
+    maxLength: "Lo sentimos, estás excediendo el máximo número de caracteres permitidos ({maxLength})",
   },
   de: {
     dashboard: "Instrumententafel",
