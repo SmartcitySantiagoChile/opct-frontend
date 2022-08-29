@@ -142,7 +142,7 @@ export default class ChangeOPProcessModule extends VuexModule implements ChangeO
         .catch(({ response }) => {
           console.log(response);
           this.context.commit(Mutations.SET_CHANGE_OP_PROCESS_ERRORS, response.data);
-          reject();
+          reject(response);
         });
     });
   }
