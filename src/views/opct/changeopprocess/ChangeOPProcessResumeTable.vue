@@ -59,7 +59,7 @@
           <!--begin::Table body-->
           <tbody>
             <template v-for="(item, index) in changeOPProcesses" :key="index">
-              <tr>
+              <tr @click="redirectLink(item.url.split('api')[1])">
                 <td>
                   <div class="d-flex align-items-center">
                     <div class="symbol symbol-10px me-5"></div>
@@ -240,6 +240,10 @@ export default defineComponent({
         previousItem.setAttribute("class", "page-item previous");
       }
     };
+
+    const redirectLink = (link) => {
+      window.location = link;
+    };
     return {
       changeOPProcesses,
       changeOPProcessesCount,
@@ -248,6 +252,7 @@ export default defineComponent({
       onPageChange,
       DateTime,
       updateData,
+      redirectLink,
     };
   },
 });
